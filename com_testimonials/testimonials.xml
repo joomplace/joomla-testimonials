@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+    <name>COM_TESTIMONIALS</name>
+    <creationDate>December 2012</creationDate>
+    <author>Joomplace Team</author>
+    <authorEmail>support@joomplace.com</authorEmail>
+    <authorUrl>www.joomplace.com</authorUrl>
+    <copyright>(C) JoomPlace, www.joomplace.com</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <version>1.7.5.002</version>
+    <description>COM_TESTIMONIALS_DESC</description>
+        
+    <scriptfile>script.php</scriptfile>
+    <install> 
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall> 
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update> 
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+		
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>testimonials.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <filename>metadata.xml</filename>
+        <folder>assets</folder>
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>views</folder>
+        <folder>layouts</folder>
+    </files>
+    <languages folder="site">
+        <language tag="en-GB">language/en-GB/en-GB.com_testimonials.ini</language>
+    </languages>
+	
+    <administration>
+        <menu>COM_TESTIMONIALS_MENU</menu>
+        <submenu>
+            <menu link="option=com_testimonials&amp;view=topics" view="topics" alt="COM_TESTIMONIALS_MANAGE_TESTIM">COM_TESTIMONIALS_MANAGE_TESTIM</menu>
+            <menu class="devided" link="option=com_categories&amp;extension=com_testimonials" view="categories" alt="COM_TESTIMONIALS_MANAGE_CATEGORIES">COM_TESTIMONIALS_MANAGE_CATEGORIES</menu>
+            <menu link="option=com_testimonials&amp;view=customs" view="customs" alt="COM_TESTIMONIALS_MANAGE_CUSTOM">COM_TESTIMONIALS_MANAGE_CUSTOM</menu>
+            <menu link="option=com_testimonials&amp;view=tags" view="tags" alt="COM_TESTIMONIALS_MANAGE_TAGS">COM_TESTIMONIALS_MANAGE_TAGS</menu>
+        </submenu>
+				
+        <languages folder="admin">
+            <language tag="en-GB">language/en-GB/en-GB.com_testimonials.ini</language>
+            <language tag="en-GB">language/en-GB/en-GB.com_testimonials.sys.ini</language>
+							
+        </languages>
+			
+        <files folder="admin">
+            <filename>index.html</filename>
+            <filename>testimonials.php</filename>
+            <filename>controller.php</filename>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>assets</folder>
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>views</folder>
+        </files>
+    </administration> 
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" priority="1" name="Testimonials Update Site">http://www.joomplace.com/updates/updates.xml</server>
+    </updateservers>
+</extension>

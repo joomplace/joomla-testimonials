@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="COM_TESTIMONIALS_TESTIMONIALS_VIEW_DEFAULT_TITLE">
+                <message>COM_TESTIMONIALS_TESTIMONIALS_VIEW_DEFAULT_DESC2</message>
+        </layout>
+
+	<fieldset name="basic" label="COM_TESTIMONIALS_MENU_PARAMS" addfieldpath="/administrator/components/com_testimonials/models/fields">
+	</fieldset>
+	
+	<fields name="params" >
+		<fieldset name="basic" label="COM_TESTIMONIALS_MENU_PARAMS" addfieldpath="/administrator/components/com_testimonials/models/fields">
+			<field 
+				name="testimonials_category" 
+				type="category" 
+				extension="com_testimonials"
+				label="JCATEGORY"
+				labelclass="control-label"
+				required="true" 
+				/>
+			<field 
+				name="layout" 
+				type="list" 
+				multiple="false"
+				required="true" 
+				label="COM_TESTIMONIALS_SETTINGS_TEMPLATE" 
+				description="COM_TESTIMONIALS_SETTINGS_TEMPLATE_DESC">
+				<option value="default">Default</option>
+				<option value="2columns">2 columns</option>
+				<option value="black">Black</option>
+				<option value="black2">Black 2</option>
+				<option value="blacktip">Black Tip</option>
+				<option value="business">Business</option>
+				<option value="classic">Classic</option>
+				<option value="gray">Gray</option>
+			</field>
+			<field
+					name="tm_intro_text"
+					type="editor"
+			width="80%"
+					label="COM_TESTIMONIALS_INTRO_TEXT_LABEL"
+					description="COM_TESTIMONIALS_INTRO_TEXT_DESC"
+					filter="safehtml"
+					/>
+			<field name="all_tags" type="radio" default="1"
+				label="COM_TESTIMONIALS_ADMINISTRATION_TAGS" 
+				description="COM_TESTIMONIALS_ADMINISTRATION_TAGS">
+				<option	value="1">All tags</option>
+				<option	value="0">Selected</option>
+			</field>
+			<field name="tags" type="tags" label="" multiple="multiple" 
+			description=""	class="inputbox" size="10" />
+		</fieldset>
+	</fields>
+</metadata>

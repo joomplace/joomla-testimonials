@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL" 
+			readonly="true" class="readonly" />
+
+		<field name="tag_name" type="text" class="inputbox"
+			size="40" label="COM_TESTIMONIALS_TAG_NAME"
+			labelclass="control-label" required="true" />
+
+		<field name="menu" type="menutag"
+			size="10" label="COM_TESTIMONIALS_TAG_MENU_ASSINGS"
+			description="COM_TESTIMONIALS_TAG_MENU_ASSINGS_DESC" multiple="true" />
+		
+		<field name="categories" type="categorytag" extension="com_content" label="COM_TESTIMONIALS_TAG_CATEGORY_ASSINGS"
+			size="10" description="COM_TESTIMONIALS_TAG_CATEGORY_ASSINGS_DESC" multiple="true" />
+		
+		<field name="articles" type="articles" label="COM_TESTIMONIALS_TAG_ARTICLES_ASSINGS"
+			size="10" description="COM_TESTIMONIALS_TAG_ARTICLES_ASSINGS_DESC" multiple="true" />
+			
+		<field
+			name="published"
+			type="radio"
+			label="JGLOBAL_STATE"
+			description="COM_TESTIMONIALS_TOPIC_PUBLISH_DESC"
+			class="btn-group"
+			default="1">
+			<option	value="1">JPUBLISHED</option>
+			<option	value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="rules" type="rules" label="JFIELD_RULES_LABEL"
+			translate_label="false" class="inputbox" filter="rules"
+			component="com_testimonials" section="tags" validate="rules"
+		/>	
+	</fieldset>
+
+
+</form>

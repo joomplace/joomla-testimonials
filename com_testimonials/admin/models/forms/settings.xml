@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="settings"
+		label="COM_TESTIMONIALS_SETTINGS_GLOBAL"
+		description="COM_TESTIMONIALS_SETTINGS_GLOBAL_DESC"
+		>
+		
+		<field name="asset_id" type="hidden" filter="unset" />
+		
+		<field name="show_avatar" type="radio"	default="1"	
+			label="COM_TESTIMONIALS_SETTINGS_SHOWAVATAR" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWAVATAR_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_avatar_module" type="radio"	default="1"	
+			label="COM_TESTIMONIALS_SETTINGS_SHOWAVATAR" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWAVATAR_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_tags" type="radio"	default="1"	
+			label="COM_TESTIMONIALS_SETTINGS_SHOWTAGS" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWTAGS_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="use_cb" type="radio" default="0" 
+				label="COM_TESTIMONIALS_SETTINGS_CBILDER" 
+				description="COM_TESTIMONIALS_SETTINGS_CBILDER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="use_jsoc" type="radio" default="0" 
+				label="COM_TESTIMONIALS_SETTINGS_JOMSOC" 
+				description="COM_TESTIMONIALS_SETTINGS_JOMSOC_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="thumb_width" type="text" default="110" size="5"
+				label="COM_TESTIMONIALS_SETTINGS_COM_TH_WIDTH" 
+				description="COM_TESTIMONIALS_SETTINGS_COM_TH_WIDTH_DESC">
+		</field>
+		
+		<field name="show_authorname" type="radio"	default="1"	
+				label="COM_TESTIMONIALS_SETTINGS_SHOWAUTHOR" 
+				description="COM_TESTIMONIALS_SETTINGS_SHOWAUTHOR_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_authordesc" type="radio"	default="1"	
+				label="COM_TESTIMONIALS_SETTINGS_SHOWAUTHORDESCR" 
+				description="COM_TESTIMONIALS_SETTINGS_SHOWAUTHORDESCR_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+				
+		<field name="template" type="templates" default="default" 
+			label="COM_TESTIMONIALS_SETTINGS_TEMPLATE" 
+			description="COM_TESTIMONIALS_SETTINGS_TEMPLATE_DESC">
+		</field>
+		
+		<field name="show_title" type="radio"	default="0"	
+			label="COM_TESTIMONIALS_SETTINGS_SHOWTITLE" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWTITLE_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="texttitle" type="text"	size="30"	
+			label="COM_TESTIMONIALS_SETTINGS_TEXTTITLE" 
+			description="COM_TESTIMONIALS_SETTINGS_TEXTTITLE_DESC">
+		</field>
+		
+		<field name="show_caption" type="radio"	default="1"	
+			label="COM_TESTIMONIALS_SETTINGS_SHOWCAPTION" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWCAPTION_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_captcha" type="radio"	default="1"	
+				label="COM_TESTIMONIALS_SETTINGS_SHOWCAPTCHA" 
+				description="COM_TESTIMONIALS_SETTINGS_SHOWCAPTCHA_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_lasttofirst" type="radio" default="0" 
+			label="COM_TESTIMONIALS_SETTINGS_SHOWLASTFIRST" 
+			description="COM_TESTIMONIALS_SETTINGS_SHOWLASTFIRST_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="addingbyuser" type="radio"	default="1"	
+		label="COM_TESTIMONIALS_SETTINGS_ADDINGBYUSER" 
+		description="COM_TESTIMONIALS_SETTINGS_ADDINGBYUSER_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_DISABLE</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_ENABLE</option>
+		</field>
+		
+		<field name="addingbyunreg" type="radio" default="0" 
+		label="COM_TESTIMONIALS_SETTINGS_UNREGTM" 
+		description="COM_TESTIMONIALS_SETTINGS_UNREGTM_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_DISABLE</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_ENABLE</option>
+		</field>
+				
+		<field name="allow_photo" type="radio" default="0" 
+		label="COM_TESTIMONIALS_SETTINGS_PHOTO" 
+		description="COM_TESTIMONIALS_SETTINGS_PHOTO_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_DISABLE</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_ENABLE</option>
+		</field>
+				
+		<field name="autoapprove" type="radio"	default="0"	
+			label="COM_TESTIMONIALS_SETTINGS_AUTOAPPROVE" 
+			description="COM_TESTIMONIALS_SETTINGS_AUTOAPPROVE_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_DISABLE</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_ENABLE</option>
+		</field>
+		
+		<field name="use_editor" type="radio" default="0" 
+		label="COM_TESTIMONIALS_SETTINGS_USE_EDITOR" 
+		description="COM_TESTIMONIALS_SETTINGS_USE_EDITOR_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>		
+
+
+		<field name="show_tagsforusers" type="radio" default="1" 
+		label="COM_TESTIMONIALS_SETTINGS_SHOWTAGSFORUSERS" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWTAGSFORUSERS_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_DISABLE</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_ENABLE</option>
+		</field>	
+				
+		
+		
+		<field name="ajax_check_captcha" type="radio"	default="0"	label="COM_TESTIMONIALS_SETTINGS_AJAX_CHECK_CAPTCHA" 
+		description="COM_TESTIMONIALS_SETTINGS_AJAX_CHECK_CAPTCHA_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+
+		<field name="show_b" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_SHOW_B" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOW_B_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		
+
+		<field name="brand" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_BRAND" 
+		description="COM_TESTIMONIALS_SETTINGS_BRAND_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
+	
+	<fieldset name="module"
+		label="COM_TESTIMONIALS_SETTINGS_MODULE"
+		description="COM_TESTIMONIALS_SETTINGS_MODULE_DESC"
+	>
+		<field name="timeout" type="text" default="0" label="COM_TESTIMONIALS_SETTINGS_TIMEOUT" 
+		description="COM_TESTIMONIALS_SETTINGS_TIMEOUT_DESC">
+		</field>
+		
+		<field name="symb_qty" type="text" default="0" label="COM_TESTIMONIALS_SETTINGS_SYMB_QTY" 
+		description="COM_TESTIMONIALS_SETTINGS_SYMB_QTY_DESC">
+		</field>
+		
+		<field name="th_width" type="text" default="0" label="COM_TESTIMONIALS_SETTINGS_TH_WIDTH" 
+		description="COM_TESTIMONIALS_SETTINGS_TH_WIDTH_DESC">
+		</field>
+		
+		<field name="show_avatar_module" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_SHOWAVATARMODULE" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWAVATARMODULE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="show_readmore" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_SHOWREADMORE" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWREADMORE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="show_add_new" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_SHOWADDNEW" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWADDNEW_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="show_first" type="radio" default="0" label="COM_TESTIMONIALS_SETTINGS_SHOWFIRST" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWFIRST_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
+		<field name="tag_options" type="list" default="0" label="COM_TESTIMONIALS_SETTINGS_TAG_OPTIONS" 
+		description="COM_TESTIMONIALS_SETTINGS_TAG_OPTIONS_DESC">
+			<option value="0">COM_TESTIMONIALS_SETTINGS_TAG_OPTION1</option>
+			<option value="1">COM_TESTIMONIALS_SETTINGS_TAG_OPTION2</option>
+			<option value="2">COM_TESTIMONIALS_SETTINGS_TAG_OPTION3</option>
+		</field>
+		
+		<field name="show_author_module" type="radio" default="1" 
+		label="COM_TESTIMONIALS_SETTINGS_SHOWAUTHOR" 
+		description="COM_TESTIMONIALS_SETTINGS_SHOWAUTHOR_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		
+	</fieldset>
+	
+	<fields name="params" >
+		<fieldset name="permissions"
+			description="JCONFIG_PERMISSIONS_DESC"
+			label="JCONFIG_PERMISSIONS_LABEL"
+		>
+
+		<field name="rules" type="rules"
+				component="com_testimonials"
+				filter="rules"
+				validate="rules"
+				label="JCONFIG_PERMISSIONS_LABEL"
+				section="component" />
+		</fieldset>
+	</fields>
+</form>

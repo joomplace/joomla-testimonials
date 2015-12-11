@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+			readonly="true" class="readonly" />
+
+		<field name="name" type="text" class="inputbox"
+			size="40" label="COM_TESTIMONIALS_CUSTOMS_NAME"
+			required="true" labelclass="control-label" />
+
+		<field	name="required" type="radio" label="COM_TESTIMONIALS_CUSTOMS_REQUIRED"
+			class="btn-group" default="1" required="true" labelclass="control-label" >
+			<option	value="1">JYES</option>
+			<option	value="0">JNO</option>
+		</field>
+
+		<field name="published" type="radio" label="JGLOBAL_STATE"
+			class="btn-group" default="1" >
+			<option	value="1">JPUBLISHED</option>
+			<option	value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="type" type="list" label="COM_TESTIMONIALS_CUSTOMS_TYPE"
+			class="inputbox" default="1" labelclass="control-label" >
+			<option	value="text">COM_TESTEMONIALS_SINGLE_INPUT_FIELD</option>
+			<option	value="textemail">COM_TESTEMONIALS_EMAIL_INPUT_FIELD</option>
+			<option	value="url">COM_TESTEMONIALS_URL_LINK</option>
+			<option	value="rating">COM_TESTEMONIALS_RATING_FIELD</option>
+		</field>
+
+		<field name="ordering" type="Orderingcustoms" class="inputbox"
+			label="COM_TESTIMONIALS_TOPIC_ORDER" />
+
+		<field name="descr" type="text" 
+			class="inputbox" label="COM_TESTIMONIALS_CUTOMS_DESC_LABEL" 
+			labelclass="control-label" 
+		/>
+
+		<field name="rules" type="rules" label="JFIELD_RULES_LABEL"
+			translate_label="false" class="inputbox" filter="rules"
+			component="com_testimonials" section="customs" validate="rules"
+		/>
+	</fieldset>
+
+
+</form>

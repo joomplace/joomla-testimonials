@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL" 
+			readonly="true" class="readonly" />
+
+		<field name="t_caption" type="text" class="input-xlarge" size="30"
+			label="COM_TESTIMONIALS_TOPIC_CAPTION"
+			required="true" labelclass="control-label" />
+
+		<field name="t_author" type="text" class="input-xlarge" size="30"
+			label="COM_TESTIMONIALS_TOPIC_AUTHOR"
+			required="true" labelclass="control-label" />
+
+		<field name="catid" 
+			type="category" 
+			extension="com_testimonials"
+			label="JCATEGORY"
+			required="true" labelclass="control-label" />
+		
+		<field name="user_id_t" type="user" class="input-medium"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL" description="JGLOBAL_FIELD_CREATED_BY_Desc" />
+
+		<field name="author_description" type="editor" buttons="false"
+			class="inputbox"
+			filter="safehtml"
+			label="COM_TESTIMONIALS_TOPIC_AUTHOR_DESCR" />
+
+		<field name="testimonial" type="editor" buttons="true" hide="pagebreak,readmore,testimonial"
+			class="inputbox"
+			filter="safehtml"
+			label="COM_TESTIMONIALS_TOPIC_TESTIMONIAL" required="true" />
+
+		<field name="photo" type="media" directory="testimonials" hide_default="yes"
+			label="COM_TESTIMONIALS_TOPIC_PHOTO" class="input-medium"
+			description="COM_TESTIMONIALS_TOPIC_PHOTO_DESC" />
+
+		<field
+			name="date_added"
+			type="calendar"
+			label="COM_TESTIMONIALS_FORM_PUBLISH_DATE"
+			description=""
+			format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"
+			class="input-medium"
+			/>
+			
+		<field
+			name="published"
+			type="radio"
+			label="JGLOBAL_STATE"
+			description="COM_TESTIMONIALS_TOPIC_PUBLISH_DESC"
+			class="btn-group"
+			default="1">
+			<option	value="1">JPUBLISHED</option>
+			<option	value="0">JUNPUBLISHED</option>
+		</field>
+
+        <field
+                name="is_approved"
+                type="radio"
+                label="COM_TESTIMONIALS_TOPIC_ISAPPROVED"
+                description="COM_TESTIMONIALS_TOPIC_ISAPPROVED_DESC"
+                class="btn-group"
+                default="0">
+            <option	value="1">JYES</option>
+            <option	value="0">JNO</option>
+        </field>
+		<field name="ordering" type="Ordering" class="input-medium"
+			label="COM_TESTIMONIALS_TOPIC_ORDER" />
+
+		<field name="ip_addr" type="text" class="input-medium" label="COM_TESTIMONIALS_TOPIC_IP" readonly="true" />
+			
+		<field name="tags" 	type="tags" label="COM_TESTIMONIALS_ADMINISTRATION_TAGS" class="input-medium" size="10" multiple="multiple"/>
+		
+		<field name="rules" type="rules" label="JFIELD_RULES_LABEL"
+			translate_label="false" class="inputbox" filter="rules"
+			component="com_testimonials" section="topics" validate="rules"
+		/>	
+	</fieldset>
+
+
+</form>

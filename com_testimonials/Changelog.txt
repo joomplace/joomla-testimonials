@@ -1,0 +1,39 @@
+-------------------- 1.7.5 [December-2015] ---------------
+- categories for testimonials added
+- brand new script added to module
+- new content plugin code
+
+-------------------- 1.7.4 [October-2015] ---------------
+- template design flexibility added
+- template override possibility added
+- each custom field override possibility added
+- code improvements
+
+-------------------- 1.7.3 [September-2015] ---------------
+- admin UI updates
+
+-------------------- 1.7.2 [May-2015] ---------------
+- SEO improvements
+- package size decreased
+- major bugs fixed
+- minor bugs fixed
+- security updates
+
+-------------------- next update [December-2014] ---------------
+- major bugs fixed
+- minor bugs fixed
+- e-mail notifications override possibility added
+
+-------------------- next update [July-2014] ---------------
+- template design flexibility added
+- template override possibility added
+
+-------------------- 1.7.2 [May-2015] ---------------
+- SEO improvements
+- package size decreased
+- major bugs fixed
+- minor bugs fixed
+- security updates
+
+-------------------- 1.7.1 [January-2013] ---------------
+- release for Joomla! 3

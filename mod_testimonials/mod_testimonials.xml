@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension	type="module"	version="3.0"	client="site"	method="upgrade">
+    <name>Testimonials</name>    
+    <creationDate>January 2011</creationDate>
+    <author>JoomPlace Team</author>
+    <authorEmail>support@joomplace.com</authorEmail>
+    <authorUrl>www.joomplace.com</authorUrl>
+    <copyright>(C) JoomPlace, www.joomplace.com</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <version>1.7.5</version>
+    <description>Show random testimonials.</description>
+    <files>
+        <filename module="mod_testimonials">mod_testimonials.php</filename>
+        <folder>models</folder> 
+        <folder>js</folder>
+        <folder>css</folder>
+        <folder>tmpl</folder>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <filename>mod_testimonials.xml</filename>
+    </files>
+    <languages>
+        <language tag="en-GB">en-GB.mod_testimonials.ini</language>
+    </languages>
+    <config>
+        <fields name="params" addfieldpath="/modules/mod_testimonials/models/fields">
+            <fieldset name="basic">
+                <field 
+					name="moduleclass_sfx" 
+					type="text" 
+					default="" 
+					label="MOD_TESTIMONIALS_SETTINGS_SUFFIX" 
+					description="MOD_TESTIMONIALS_SETTINGS_SUFFIX_DESC" 
+				/>
+                <field 
+					name="autoItemid" 
+					type="radio" 
+					default="1" 
+					label="MOD_TESTIMONIALS_AUTOITEMID" 
+					description="MOD_TESTIMONIALS_AUTOITEMID_DESC"
+					>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field 
+					name="Itemid" 
+					type="text" 
+					default="" 
+					label="MOD_TESTIMONIALS_ITEMID" 
+				/>
+                <field 
+					name="ismodal" 
+					type="list" 
+					default="0" 
+					label="MOD_TESTIMONIALS_MODAL" 
+					description="MOD_TESTIMONIALS_MODAL_DESC"
+					>
+                    <option value="0">MOD_TESTIMONIALS_MODAL_NEW_PAGE</option>
+                    <option value="1">MOD_TESTIMONIALS_MODAL_LITEBOX_PAGE</option>
+                </field>
+                <field 
+					name="all_tags" 
+					type="radio" 
+					default="1"
+					label="MOD_TESTIMONIALS_ADMINISTRATION_TAGS" 
+                    description="MOD_TESTIMONIALS_ADMINISTRATION_TAGS"
+					>
+                    <option	value="1">All tags</option>
+                    <option	value="0">Selected</option>
+                </field>
+                <field 
+					name="tags" 
+					type="tags" 
+					label="" 
+					multiple="multiple"
+					description=""	
+					class="inputbox" 
+					size="10" 
+				/>
+                <field 
+					name="isstatic" 
+					type="list" 
+					default="0" 
+					label="MOD_TESTIMONIALS_STATIC" 
+					description="MOD_TESTIMONIALS_STATIC_DESC"
+					>
+                    <option value="0">MOD_TESTIMONIALS_STATIC_NO</option>
+                    <option value="1">MOD_TESTIMONIALS_STATIC_YES</option>
+                </field>
+            </fieldset>
+            <fieldset name="styling" label="MOD_TESTIMONIALS_SETTINGS_STYLING_CAPTION">
+                <field 
+					name="chars_count" 
+					type="text" 
+					default="200" 
+					label="MOD_TESTIMONIALS_SETTINGS_HEIGHT"
+					description="MOD_TESTIMONIALS_SETTINGS_HEIGHT_DESC"
+				/>
+                <field 
+					name="timeout" 
+					type="text" 
+					default="5" 
+					label="MOD_TESTIMONIALS_SETTINGS_TIMEOUT" 
+					description="MOD_TESTIMONIALS_SETTINGS_TIMEOUT_DESC"
+				/>
+                <field 
+					name="th_width" 
+					type="text" 
+					default="110" 
+					label="MOD_TESTIMONIALS_SETTINGS_TH_WIDTH" 
+					description="MOD_TESTIMONIALS_SETTINGS_TH_WIDTH_DESC"
+				/>
+                <field 
+					name="show_author_module" 
+					type="radio" 
+					default="1" 
+					class="btn-group"
+					label="MOD_TESTIMONIALS_SETTINGS_SHOWAUTHOR"
+					>
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field 
+					name="show_avatar_module" 
+					type="radio" 
+					default="1" 
+					label="MOD_TESTIMONIALS_SETTINGS_SHOWAVATARMODULE" 
+					class="btn-group"
+					>
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field 
+					name="show_readmore" 
+					type="radio" 
+					default="1" 
+					label="MOD_TESTIMONIALS_SETTINGS_SHOWREADMORE" 
+                    class="btn-group"
+					>
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field 
+					name="show_add_new" 
+					type="radio" 
+					default="0" 
+					label="MOD_TESTIMONIALS_SETTINGS_SHOWADDNEW" 
+					class="btn-group"
+					>
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field 
+					name="show_first" 
+					type="radio" 
+					default="0" 
+					label="MOD_TESTIMONIALS_SETTINGS_SHOWFIRST" 
+					class="btn-group"
+					description="MOD_TESTIMONIALS_SETTINGS_SHOWFIRST_DESC"
+					>
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field 
+					name="tag_options" 
+					type="list" 
+					default="0" 
+					label="MOD_TESTIMONIALS_SETTINGS_TAG_OPTIONS"
+					class="btn-group"
+					>
+                    <option value="0">MOD_TESTIMONIALS_SETTINGS_TAG_OPTION1</option>
+                    <option value="1">MOD_TESTIMONIALS_SETTINGS_TAG_OPTION2</option>
+                    <option value="2">MOD_TESTIMONIALS_SETTINGS_TAG_OPTION3</option>
+                </field>
+				<!--
+                <field 
+					name="slideshow_effect" 
+					type="list" 
+					default="slide" 
+					label="MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_EFFECT" 
+					class="btn-group"
+					>
+                    <option value="blind">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_BLIND</option>
+                    <option value="clip">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_CLIP</option>
+                    <option value="drop">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_DROP</option>
+                    <option value="explode">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_EXPLODE</option>
+                    <option value="fade">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_FADE</option>
+                    <option value="fold">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_FOLD</option>
+                    <option value="puff">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_PUFF</option>
+                    <option value="pulsate">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_PULSATE</option>
+                    <option value="scale">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_SCALE</option>
+                    <option value="slide">MOD_TESTIMONIALS_SETTINGS_SLIDESHOW_SLIDE</option>
+                </field>
+				-->
+            </fieldset>
+        </fields>
+    </config>
+</extension>
