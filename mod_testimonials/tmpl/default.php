@@ -20,7 +20,7 @@ JFactory::getDocument()->addStyleDeclaration('
 ');
 JFactory::getDocument()->addScript(JUri::root(true).'/modules/mod_testimonials/js/swiper.min.js');
 ?>
-<div id="testom_module_<?php echo $module->id; ?>" class="swiper-container<?php echo $moduleclass_sfx ?>">
+<div id="testom_module_<?php echo $module->id; ?>" class="swiper-container swiper-container<?php echo $moduleclass_sfx ?>">
 	<div class="swiper-wrapper">
 		<?php foreach ($list as $key => $value) { ?>
 			<div class="swiper-slide"><?php  require(JModuleHelper::getLayoutPath('mod_testimonials', $params->get('layout', 'default_body'))); ?></div>

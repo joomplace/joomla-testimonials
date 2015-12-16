@@ -31,6 +31,11 @@ foreach($this->items as $item){
 				<small class="testimonial_author" itemprop="author"><?php echo $item->author; ?></small>
 			</blockquote>
 		</div>
+		<?php if($item->images){ ?>
+			<div class="row row-fluid image-list">
+				<?php echo $item->images; ?>
+			</div>
+		<?php } ?>
 		<div class="testimonial_tags text-right"><?php echo $item->tags; ?></div>
 	</div>
 <?php 

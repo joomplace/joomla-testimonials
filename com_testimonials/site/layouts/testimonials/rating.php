@@ -10,7 +10,9 @@
 defined('_JEXEC') or die;
 
 $value = $displayData->value;
+$title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayData->system_name)))?JText::_(strtoupper($displayData->system_name)):$displayData->name;
 ?>
+<?php echo $title; ?>
 <span class="tm_stars">
 <?php
 	for($a=1;$a<6;$a++){

@@ -113,6 +113,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
 			// adding specific fields to render
 			// render avatar
 			$item->avatar = $this->renderLayout('testimonials.avatar',(object)array('value' => $item->avatar));
+			// render images
+			$item->images = $this->renderLayout('testimonials.images',(object)array('value' => $item->images));
 			// render tags
 			$item->tags = $this->renderLayout('testimonials.tags',(object)array('value' => $item->tags));
         }

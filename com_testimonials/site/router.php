@@ -52,11 +52,17 @@ function TestimonialsBuildRoute( &$query ) {
 		unset($query['id']);
 	}
 	/* deprecated? SEO content duplicates // fixed with "noindex,follow" robots, but still can cause troubles for ArtioSef for example */
+	/*
 	if (isset($query['anc'])) {
 		$segments[] = $query['anc'].'-more-about';
 		unset($query['anc']);
 	}
+	*/
 	/* --------------- */
+	/* will terminate duplicating links */
+	if (isset($query['start'])) {
+		unset($query['anc']);
+	}
 
     return $segments;
 }
