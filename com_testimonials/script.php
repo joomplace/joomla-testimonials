@@ -62,26 +62,6 @@ class com_testimonialsInstallerScript {
 			$db->execute();
 		}
 
-        $query = 'SELECT `params` FROM `#__tm_testimonials_settings` WHERE `id`=1 LIMIT 1';
-        $db->setQuery($query);
-        $params = $db->loadResult();
-        if ($params) {
-            $query = 'UPDATE `#__extensions` SET `params`=\'' . $params . '\' WHERE `name`="com_testimonials"';
-            $db->setQuery($query);
-            $db->execute();
-        }
-        
-        $params = JComponentHelper::getParams("com_testimonials");
-        if(!$params->get('tm_version'))
-            $params->set('tm_version','1.7.1 (build 006)');
-        if(!$params->get('curr_date'))
-            $params->set('curr_date','');
-
-
-        $query = 'DROP TABLE IF EXISTS `#__tm_version`;';
-        $db->setQuery($query);
-        $errors = $db->execute();
-
         if ($errors) {
             echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_UPDATE_TEXT') . '</font><br/><br/>';
             $this->greetingText();
