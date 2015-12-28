@@ -263,8 +263,8 @@ class modTestimonialsHelper {
         }
     }
 	
-	function generateTestimModuleLink($url, $text, $suf_class=' btn btn-default'){
-		return '<a href="'.$url.'" class="modtm_iframe'.$suf_class.'">'.$text.'</a>';
+	function generateTestimModuleLink($url, $text, $modal = true, $suf_class=' btn btn-default'){
+		return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'">'.$text.'</a>';
 	}
 
 }

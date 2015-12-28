@@ -65,6 +65,7 @@ $document = JFactory::getDocument();
 //JHtml::script('components/com_testimonials/assets/jquery-ui/jquery-ui.js');
 //JHtml::stylesheet('components/com_testimonials/assets/jquery-ui/jquery-ui.css');
 if (($show_add_new && JFactory::getUser()->authorise('core.create', 'com_testimonials')) || $modal) {
+	JHtml::_('behavior.modal','a.modtm_modal');
     //JHtml::stylesheet(JURI::root() . 'components/com_testimonials/assets/jquery.fancybox-1.3.4.css');
     //JHtml::script(JURI::base() . 'components/com_testimonials/assets/jquery.fancybox-1.3.4.js');
 }

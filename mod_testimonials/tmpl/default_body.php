@@ -4,7 +4,7 @@
 $link = '';
 $addnew = '';
 if ($params->get('show_readmore') == 1) {
-	$link 	= $helper->generateTestimModuleLink(JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'&'.(($modal)?'tmpl=component':'').'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'));
+	$link 	= $helper->generateTestimModuleLink(JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'),false);
 	
 }
 
