@@ -49,27 +49,39 @@ class TestimonialsViewForm extends JViewLegacy
 		}
 		
 		if ($authorised !== true) {
-			JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-			return false;
+			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$helper = new TestimonialsHelper();
+			$params = $helper->getParams();
+			if($params->get('modal_on_new')){
+				?>
+				<script type="text/javascript">
+					setTimeout(function(){ parent.location.href=parent.location.href; }, 3000);
+				</script>
+				<?php
+			}else{
+				$Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
+				JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_testimonials&view=testimonials&Itemid='.$Itemid));
+			}
+			
+		}else{		
+			$document = JFactory::getDocument();
+			JHTML::stylesheet('components/com_testimonials/assets/submit-form/css/template_testimonials.css');
+			JHtml::_('jquery.framework');
+			$document->addScript('components/com_testimonials/assets/submit-form/js/main.js');
+			if($params->get('allow_photo') || $params->get('show_addimage')){
+				$document->addScript('components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
+				$document->addScript('components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
+				$document->addScript('components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
+				$document->addCustomTag('<!--[if gte IE 8]><script src="/components/com_testimonials/assets/file-upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->');
+			}
+			$document->addCustomTag('<!--[if lt IE 9]><script src="/components/com_testimonials/assets/html5.js"></script><![endif]-->');
+			if($params->get('use_editor')){
+				$document->addScript('components/com_testimonials/assets/wysihtml/advanced.js');
+				$document->addScript('components/com_testimonials/assets/wysihtml/wysihtml5-0.3.0_rc2.js');
+			}
+			$document->addCustomTag('<meta http-equiv="X-UA-Compatible" content="IE=Edge" />');
+			parent::display($tpl);
 		}
-		
-		$document = JFactory::getDocument();
-		JHTML::stylesheet('components/com_testimonials/assets/submit-form/css/template_testimonials.css');
-        JHtml::_('jquery.framework');
-        $document->addScript('components/com_testimonials/assets/submit-form/js/main.js');
-		if($params->get('allow_photo') || $params->get('show_addimage')){
-            $document->addScript('components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
-            $document->addScript('components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
-            $document->addScript('components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
-		    $document->addCustomTag('<!--[if gte IE 8]><script src="/components/com_testimonials/assets/file-upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->');
-		}
-		$document->addCustomTag('<!--[if lt IE 9]><script src="/components/com_testimonials/assets/html5.js"></script><![endif]-->');
-		if($params->get('use_editor')){
-            $document->addScript('components/com_testimonials/assets/wysihtml/advanced.js');
-            $document->addScript('components/com_testimonials/assets/wysihtml/wysihtml5-0.3.0_rc2.js');
-		}
-		$document->addCustomTag('<meta http-equiv="X-UA-Compatible" content="IE=Edge" />');
-		parent::display($tpl);
 	}
 }
 ?>

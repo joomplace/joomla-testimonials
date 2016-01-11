@@ -74,164 +74,166 @@ class com_testimonialsInstallerScript {
 
     function preflight($type, $parent) {
 		
-		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_testimonials/testimonials.xml');
-		$this->version_from = $version = preg_split( '/(\s|\.)/', $xml->version );
-		if($version[0]){
-			if($version[2]<2){
-				// update default template
-				$templates = array(
-					'default' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_caption\"><p class=\"h3\" itemprop=\"name\">[caption]</p></div>\r\n<div class=\"row row-fluid\">\r\n<div class=\"span3 col-xs-12 col-sm-3\">\r\n<div class=\"testimonial_image\" itemprop=\"image\"><a href=\"javascript:void(0);\" class=\"thumbnail\">[avatar]</a></div>\r\n</div>\r\n<blockquote class=\"span9 col-xs-12 col-sm-9\">\r\n<p class=\"testimonial_text\" itemprop=\"reviewBody\">\r\n[testimonial]\r\n</p>\r\n<p>[rating]</p>\r\n<small class=\"testimonial_author\" itemprop=\"author\">[author]</small>\r\n</blockquote>\r\n</div>\r\n<div class=\"testimonial_tags text-right\">[tags]</div>\r\n</div>',
-					'black' => '<div class=\"testimonial_inner\">\\r\\n<div class=\"testimonial_caption \"><h4>[caption]<!--x--></h4></div>	\\r\\n<div class=\"testimonial_image\">[avatar]</div>\\r\\n<div class=\"testimonial_text\">[testimonial]\\r\\n<div class=\"testimonial_text_separator \"><!--x--></div>			\\r\\n</div>			\\r\\n<div class=\"testimonial_author \">[author]<!--x--></div>\\r\\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\\r\\n<div class=\"tm_clr\"><!--x--></div>\\r\\n</div>',
-					'black2' => '<div class=\"testimonial_inner\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>\r\n<div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>\r\n<div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]\r\n<div class=\"testimonial_text_separator \"><!--x--></div>\r\n</div>\r\n<div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>\r\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\r\n<div class=\"tm_clr\"><!--x--></div>\r\n</div>',
-					'blacktip' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_inner\">\r\n<div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>\r\n<div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]</div>\r\n</div> 	\r\n</div>\r\n<div class=\"avatar_on\">\r\n<div class=\"testimonial_steam \"><!--x--></div>\r\n<div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>\r\n<div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>\r\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\r\n<div class=\"tm_clr\"><!--x--></div> 	\r\n</div>',
-					'classic' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">		\r\n<div class=\"testimonial_caption\" itemprop=\"name\">[caption]</div>\r\n<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td width=\"61\" valign=\"top\" class=\"testimonial_text\" itemprop=\"reviewBody\">[avatar][testimonial]</td>		\r\n</tr>		\r\n<tr>			\r\n<td align=\"right\" valign=\"top\" class=\"testimonial_author\" itemprop=\"author\">[author]</td>		\r\n</tr>		\r\n<tr>			\r\n<td align=\"right\" valign=\"top\" class=\"testimonial_author\">[author_descr]</td>		\r\n</tr>	\r\n</tbody>\r\n</table>	\r\n</div>',
-					'gray' => '<div class=\"testimonial_inner\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">			\r\n   <div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>			\r\n   <div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>			\r\n   <div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]				\r\n     <div class=\"testimonial_text_separator \"><!--x--></div>			\r\n   </div>	\r\n   <div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>			\r\n   <div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>			\r\n   <div class=\"tm_clr\"><!--x--></div>		\r\n</div>',
-					'business' => '<span itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_text\">\r\n<h4 class=\"testimonial_caption\" itemprop=\"name\">[caption]</h4>\r\n<blockquote>\r\n<p itemprop=\"reviewBody\">[testimonial]</p>\r\n</blockquote>\r\n</div>\r\n<div class=\"testimonial_sign\" itemprop=\"image\">\r\n[avatar]\r\n<cite>\r\n<span class=\"testimonial_author\" itemprop=\"author\">[author]</span>\r\n<span class=\"testimonial_author_descr\">[author_descr][Website]</span>\r\n</cite>\r\n</div>\r\n</span>'
-				);
-				
-				$db = JFactory::getDbo();
-				$query = 'DELETE FROM `#__tm_testimonials_templates` WHERE `temp_name` = "default";';
-				$db->setQuery($query); 
-				$errors = $db->execute();
+		if(file_exists(JPATH_ADMINISTRATOR .'/components/com_testimonials/testimonials.xml')){
+			$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_testimonials/testimonials.xml');
+			$this->version_from = $version = preg_split( '/(\s|\.)/', $xml->version );
+			if($version[0]){
+				if($version[2]<2){
+					// update default template
+					$templates = array(
+						'default' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_caption\"><p class=\"h3\" itemprop=\"name\">[caption]</p></div>\r\n<div class=\"row row-fluid\">\r\n<div class=\"span3 col-xs-12 col-sm-3\">\r\n<div class=\"testimonial_image\" itemprop=\"image\"><a href=\"javascript:void(0);\" class=\"thumbnail\">[avatar]</a></div>\r\n</div>\r\n<blockquote class=\"span9 col-xs-12 col-sm-9\">\r\n<p class=\"testimonial_text\" itemprop=\"reviewBody\">\r\n[testimonial]\r\n</p>\r\n<p>[rating]</p>\r\n<small class=\"testimonial_author\" itemprop=\"author\">[author]</small>\r\n</blockquote>\r\n</div>\r\n<div class=\"testimonial_tags text-right\">[tags]</div>\r\n</div>',
+						'black' => '<div class=\"testimonial_inner\">\\r\\n<div class=\"testimonial_caption \"><h4>[caption]<!--x--></h4></div>	\\r\\n<div class=\"testimonial_image\">[avatar]</div>\\r\\n<div class=\"testimonial_text\">[testimonial]\\r\\n<div class=\"testimonial_text_separator \"><!--x--></div>			\\r\\n</div>			\\r\\n<div class=\"testimonial_author \">[author]<!--x--></div>\\r\\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\\r\\n<div class=\"tm_clr\"><!--x--></div>\\r\\n</div>',
+						'black2' => '<div class=\"testimonial_inner\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>\r\n<div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>\r\n<div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]\r\n<div class=\"testimonial_text_separator \"><!--x--></div>\r\n</div>\r\n<div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>\r\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\r\n<div class=\"tm_clr\"><!--x--></div>\r\n</div>',
+						'blacktip' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_inner\">\r\n<div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>\r\n<div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]</div>\r\n</div> 	\r\n</div>\r\n<div class=\"avatar_on\">\r\n<div class=\"testimonial_steam \"><!--x--></div>\r\n<div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>\r\n<div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>\r\n<div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>\r\n<div class=\"tm_clr\"><!--x--></div> 	\r\n</div>',
+						'classic' => '<div class=\"testimonial\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">		\r\n<div class=\"testimonial_caption\" itemprop=\"name\">[caption]</div>\r\n<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td width=\"61\" valign=\"top\" class=\"testimonial_text\" itemprop=\"reviewBody\">[avatar][testimonial]</td>		\r\n</tr>		\r\n<tr>			\r\n<td align=\"right\" valign=\"top\" class=\"testimonial_author\" itemprop=\"author\">[author]</td>		\r\n</tr>		\r\n<tr>			\r\n<td align=\"right\" valign=\"top\" class=\"testimonial_author\">[author_descr]</td>		\r\n</tr>	\r\n</tbody>\r\n</table>	\r\n</div>',
+						'gray' => '<div class=\"testimonial_inner\" itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">			\r\n   <div class=\"testimonial_caption \"><h4 itemprop=\"name\">[caption]<!--x--></h4></div>			\r\n   <div class=\"testimonial_image\" itemprop=\"image\">[avatar]</div>			\r\n   <div class=\"testimonial_text\" itemprop=\"reviewBody\">[testimonial]				\r\n     <div class=\"testimonial_text_separator \"><!--x--></div>			\r\n   </div>	\r\n   <div class=\"testimonial_author \" itemprop=\"author\">[author]<!--x--></div>			\r\n   <div class=\"testimonial_author_descr \">[author_descr]<!--x--></div>			\r\n   <div class=\"tm_clr\"><!--x--></div>		\r\n</div>',
+						'business' => '<span itemprop=\"reviews\" itemscope itemtype=\"http://schema.org/Review\">\r\n<div class=\"testimonial_text\">\r\n<h4 class=\"testimonial_caption\" itemprop=\"name\">[caption]</h4>\r\n<blockquote>\r\n<p itemprop=\"reviewBody\">[testimonial]</p>\r\n</blockquote>\r\n</div>\r\n<div class=\"testimonial_sign\" itemprop=\"image\">\r\n[avatar]\r\n<cite>\r\n<span class=\"testimonial_author\" itemprop=\"author\">[author]</span>\r\n<span class=\"testimonial_author_descr\">[author_descr][Website]</span>\r\n</cite>\r\n</div>\r\n</span>'
+					);
+					
+					$db = JFactory::getDbo();
+					$query = 'DELETE FROM `#__tm_testimonials_templates` WHERE `temp_name` = "default";';
+					$db->setQuery($query); 
+					$errors = $db->execute();
 
-				foreach ($templates as $temp_name => $temp_html) {
-					$query = 'SELECT id FROM `#__tm_testimonials_templates` WHERE `temp_name` = "' . $temp_name . '";';
-					$db->setQuery($query);
-					if (!$db->loadResult()) {
-						$query = 'INSERT INTO `#__tm_testimonials_templates` (`temp_name`, `html`) VALUES (\'' . $temp_name . '\',\'' . $temp_html . '\')';
+					foreach ($templates as $temp_name => $temp_html) {
+						$query = 'SELECT id FROM `#__tm_testimonials_templates` WHERE `temp_name` = "' . $temp_name . '";';
 						$db->setQuery($query);
-						$errors = $db->execute();
+						if (!$db->loadResult()) {
+							$query = 'INSERT INTO `#__tm_testimonials_templates` (`temp_name`, `html`) VALUES (\'' . $temp_name . '\',\'' . $temp_html . '\')';
+							$db->setQuery($query);
+							$errors = $db->execute();
+						}
 					}
 				}
-			}
-			if($version[2]<4){
-				// move template to file
-				$db = JFactory::getDbo();
-				$query = $db->getQuery(true);
-				$query->select('*')
-					->from('`#__tm_testimonials_templates`');
-				$db->setQuery($query);
-				$tmpls = $db->loadObjectList();
-				$main_tmpl_file = file_get_contents(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/default.php');
-				foreach($tmpls as $tmpl){
-					if(!strpos(trim($tmpl->temp_name),' ')){
-						$template = trim($tmpl->temp_name);
-						$css = file_get_contents(JPATH_SITE .'/components/com_testimonials/templates/'.$template.'/css/style.css');
-						$css_declaration = '<?php JFactory::getDocument()->addStyleDeclaration("'.addcslashes($css,'\'"').'"); ?>';
-						$tmpl->html = preg_replace('/\[(.*?)\]/','<?php echo \$item->$1; ?>',$tmpl->html);
-						preg_match_all('/\[(.*?)\]/','<?php echo \$item->$1; ?>', $tmpl->html, $matches, PREG_SET_ORDER);
-						// No matches, skip this
-						if ($matches)
-						{
-							foreach ($matches as $match)
+				if($version[2]<4){
+					// move template to file
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query->select('*')
+						->from('`#__tm_testimonials_templates`');
+					$db->setQuery($query);
+					$tmpls = $db->loadObjectList();
+					$main_tmpl_file = file_get_contents(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/default.php');
+					foreach($tmpls as $tmpl){
+						if(!strpos(trim($tmpl->temp_name),' ')){
+							$template = trim($tmpl->temp_name);
+							$css = file_get_contents(JPATH_SITE .'/components/com_testimonials/templates/'.$template.'/css/style.css');
+							$css_declaration = '<?php JFactory::getDocument()->addStyleDeclaration("'.addcslashes($css,'\'"').'"); ?>';
+							$tmpl->html = preg_replace('/\[(.*?)\]/','<?php echo \$item->$1; ?>',$tmpl->html);
+							preg_match_all('/\[(.*?)\]/','<?php echo \$item->$1; ?>', $tmpl->html, $matches, PREG_SET_ORDER);
+							// No matches, skip this
+							if ($matches)
 							{
-								$output = '<?php echo $item->'.$db->escape( str_replace(' ','',strtolower($match[1]))).'; ?>';
-								// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
-								$tmpl->html = preg_replace("|$match[0]|", addcslashes($output, '\\$'), $tmpl->html, 1);
+								foreach ($matches as $match)
+								{
+									$output = '<?php echo $item->'.$db->escape( str_replace(' ','',strtolower($match[1]))).'; ?>';
+									// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
+									$tmpl->html = preg_replace("|$match[0]|", addcslashes($output, '\\$'), $tmpl->html, 1);
+								}
+							}
+							
+							$php = '<?php foreach($this->items as $item){ ?>'."\r\n".$tmpl->html."\r\n".'<?php } ?>';
+							
+							$tmpl_id = $tmpl->id;
+							
+							$tmpl = fopen(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/'.$template.'.php', "w+");
+							if($tmpl){
+								fwrite($tmpl, $main_tmpl_file."\r\n".$css_declaration);
+								fclose($tmpl);
+							}else{
+								echo "can`t create file for ".$template." layout";
+							}
+							
+							$tmpl = fopen(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/'.$template.'_items.php', "w+");
+							if($tmpl){
+								fwrite($tmpl, $php);
+								fclose($tmpl);
+								$query->clear()
+									->update('`#__tm_testimonials_templates`')
+									->where('`id`="'.$tmpl_id.'"')
+									->set('`temp_name` = concat("migrated( ",`temp_name`," )")');
+								$db->setQuery($query)->execute();
+							}else{
+								echo "can`t create _items file for ".$template." layout";
 							}
 						}
-						
-						$php = '<?php foreach($this->items as $item){ ?>'."\r\n".$tmpl->html."\r\n".'<?php } ?>';
-						
-						$tmpl_id = $tmpl->id;
-						
-						$tmpl = fopen(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/'.$template.'.php', "w+");
-						if($tmpl){
-							fwrite($tmpl, $main_tmpl_file."\r\n".$css_declaration);
-							fclose($tmpl);
-						}else{
-							echo "can`t create file for ".$template." layout";
-						}
-						
-						$tmpl = fopen(JPATH_SITE .'/components/com_testimonials/views/testimonials/tmpl/'.$template.'_items.php', "w+");
-						if($tmpl){
-							fwrite($tmpl, $php);
-							fclose($tmpl);
-							$query->clear()
-								->update('`#__tm_testimonials_templates`')
-								->where('`id`="'.$tmpl_id.'"')
-								->set('`temp_name` = concat("migrated( ",`temp_name`," )")');
-							$db->setQuery($query)->execute();
-						}else{
-							echo "can`t create _items file for ".$template." layout";
-						}
 					}
-				}
-				$db = JFactory::getDbo();
-				$columns = $db->getTableColumns('#__tm_testimonials_custom');
-				if(empty($columns['system_name'])){
-					$query = 'ALTER TABLE `#__tm_testimonials_custom` ADD  `system_name` VARCHAR( 255 ) NOT NULL AFTER  `id`';
-					$db->setQuery($query)->execute();
-				}
-				$query = $db->getQuery(true);
-				$query->select('`id`, `name`')
-					->from('`#__tm_testimonials_custom`');
-				$customs = $db->setQuery($query)->loadObjectList();
-				foreach($customs as $c){
-					$c->sys_name = $db->escape( str_replace(' ','',strtolower($c->name)) );
-					$query->clear();
-					$query->update('`#__tm_testimonials_custom`')
-						->set('`system_name` = '.$db->q($c->sys_name).'')
-						->where('`id` = '.$db->q($c->id).'');
-					$db->setQuery($query)->execute();
-				}
-				
-				$query->clear();
-				$query->select('*')
-					->from('`#__menu`')
-					->where('`link` LIKE "%com_testimonials%"');
-				$db->setQuery($query);
-				$menu_items = $db->loadObjectList();
-				foreach($menu_items as $mi){
-					$mi->params = json_decode($mi->params);
-					if(!$mi->params->layout){
-						$mi->params->layout = $mi->params->template;
-						$mi->params = json_encode($mi->params);
+					$db = JFactory::getDbo();
+					$columns = $db->getTableColumns('#__tm_testimonials_custom');
+					if(empty($columns['system_name'])){
+						$query = 'ALTER TABLE `#__tm_testimonials_custom` ADD  `system_name` VARCHAR( 255 ) NOT NULL AFTER  `id`';
+						$db->setQuery($query)->execute();
+					}
+					$query = $db->getQuery(true);
+					$query->select('`id`, `name`')
+						->from('`#__tm_testimonials_custom`');
+					$customs = $db->setQuery($query)->loadObjectList();
+					foreach($customs as $c){
+						$c->sys_name = $db->escape( str_replace(' ','',strtolower($c->name)) );
 						$query->clear();
-						$query->update('`#__menu`')
-							->where('`id` = '.$mi->id)
-							->set('`params` = '.$db->q($mi->params).'');
-						$db->setQuery($query);
-						$db->execute();
+						$query->update('`#__tm_testimonials_custom`')
+							->set('`system_name` = '.$db->q($c->sys_name).'')
+							->where('`id` = '.$db->q($c->id).'');
+						$db->setQuery($query)->execute();
+					}
+					
+					$query->clear();
+					$query->select('*')
+						->from('`#__menu`')
+						->where('`link` LIKE "%com_testimonials%"');
+					$db->setQuery($query);
+					$menu_items = $db->loadObjectList();
+					foreach($menu_items as $mi){
+						$mi->params = json_decode($mi->params);
+						if(!$mi->params->layout){
+							$mi->params->layout = $mi->params->template;
+							$mi->params = json_encode($mi->params);
+							$query->clear();
+							$query->update('`#__menu`')
+								->where('`id` = '.$mi->id)
+								->set('`params` = '.$db->q($mi->params).'');
+							$db->setQuery($query);
+							$db->execute();
+						}
 					}
 				}
-			}
-			if($version[2]<5){
-				// creating default category in com_categories
-				$extension = 'com_testimonials';
-				$title     = 'Uncategorised';
-				$desc      = 'A default category for the testimonials.';
-				$parent_id = 1;
+				if($version[2]<5){
+					// creating default category in com_categories
+					$extension = 'com_testimonials';
+					$title     = 'Uncategorised';
+					$desc      = 'A default category for the testimonials.';
+					$parent_id = 1;
+					
+					// skip if exists
+					$db = JFactory::getDBO();
+					$query = $db->getQuery(true);
+					$query->select('id')
+						->from('#__categories')
+						->where('`extension`="'.$extension.'"')
+						->where('`parent_id`="'.$parent_id.'"');
+					$exists = count($db->setQuery($query)->loadObjectList());
+					
+					if(!$exists)
+						$category = $this->createCategory($extension, $title, $desc, $parent_id);
+					else
+						$category = $db->setQuery($query)->loadObject();
 				
-				// skip if exists
-				$db = JFactory::getDBO();
-				$query = $db->getQuery(true);
-				$query->select('id')
-					->from('#__categories')
-					->where('`extension`="'.$extension.'"')
-					->where('`parent_id`="'.$parent_id.'"');
-				$exists = count($db->setQuery($query)->loadObjectList());
-				
-				if(!$exists)
-					$category = $this->createCategory($extension, $title, $desc, $parent_id);
-				else
-					$category = $db->setQuery($query)->loadObject();
-			
-				$columns = $db->getTableColumns('#__tm_testimonials');
-				if(empty($columns['catid'])){
-					$query = 'ALTER TABLE `#__tm_testimonials` ADD  `catid` INT( 11 ) NOT NULL DEFAULT "'.$category->id.'" AFTER `id`';
-					$db->setQuery($query)->execute();
-					$query = 'UPDATE `#__tm_testimonials` SET  `catid` = "'.$category->id.'" ';
-					$db->setQuery($query)->execute();
+					$columns = $db->getTableColumns('#__tm_testimonials');
+					if(empty($columns['catid'])){
+						$query = 'ALTER TABLE `#__tm_testimonials` ADD  `catid` INT( 11 ) NOT NULL DEFAULT "'.$category->id.'" AFTER `id`';
+						$db->setQuery($query)->execute();
+						$query = 'UPDATE `#__tm_testimonials` SET  `catid` = "'.$category->id.'" ';
+						$db->setQuery($query)->execute();
+					}
+					
+					/* custom filds update logics */
+					$columns = $db->getTableColumns('#__tm_testimonials_custom');
+					if(empty($columns['display'])){
+						$query = 'ALTER TABLE `#__tm_testimonials_custom` ADD  `display` INT( 2 ) NOT NULL DEFAULT "1" AFTER `required`';
+						$db->setQuery($query)->execute();
+					}
+					
 				}
-				
-				/* custom filds update logics */
-				$columns = $db->getTableColumns('#__tm_testimonials_custom');
-				if(empty($columns['display'])){
-					$query = 'ALTER TABLE `#__tm_testimonials_custom` ADD  `display` INT( 2 ) NOT NULL DEFAULT "1" AFTER `required`';
-					$db->setQuery($query)->execute();
-				}
-				
 			}
 		}
 		
