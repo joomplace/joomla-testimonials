@@ -40,7 +40,7 @@ class TestimonialsModelTopic extends JModelAdmin
 		    $result[$i]['status'] = 'ok';
 		    $result[$i]['name'] = $image;
 		    $result[$i]['size'] = filesize(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image);
-		    $result[$i]['url'] = JUri::root().'images/testimonials/' . $image;
+		    $result[$i]['url'] = JUri::root(true).'/images/testimonials/' . $image;
 		    $result[$i]['thumbnail_url'] = 'index.php?option=com_testimonials&task=images.imageThumb&id='.$id.'&image='.urldecode($image);
 		    $result[$i]['delete_url'] = 'index.php?option=com_testimonials&task=images.deleteImage&id='.$id.'&image='.urldecode($image);
 		    $result[$i]['delete_type'] = 'DELETE';

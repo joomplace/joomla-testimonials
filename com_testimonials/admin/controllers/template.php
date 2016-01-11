@@ -43,9 +43,9 @@ class TestimonialsControllerTemplate extends JControllerForm
 	       		$tmpl = $template->temp_name?$template->temp_name:'default';
 				$body = $template->html;
 
-			$document->addStyleSheet(JURI::root(). '/components/com_testimonials/templates/'.$tmpl.'/css/style.css');
+			$document->addStyleSheet(JURI::root(true). '/components/com_testimonials/templates/'.$tmpl.'/css/style.css');
 
-			$avatar = JURI::root()."/components/com_testimonials/templates/".$tmpl."/images/tnnophoto.jpg";
+			$avatar = JURI::root(true)."/components/com_testimonials/templates/".$tmpl."/images/tnnophoto.jpg";
 
 			$replace_fields = $new_fields = array();
 			$replace_fields [] = '[caption]';

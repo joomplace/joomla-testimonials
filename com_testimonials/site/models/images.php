@@ -52,7 +52,7 @@ class TestimonialsModelImages extends JModelList
 				$return[$i]['status'] = 'ok';
 				$return[$i]['name'] = $new_name;
 				$return[$i]['size'] = filesize(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name);
-				$return[$i]['url'] = JUri::root().'images/testimonials/' . $new_name;
+				$return[$i]['url'] = JUri::root(true).'/images/testimonials/' . $new_name;
 				$return[$i]['thumbnail_url'] = 'index.php?option=com_testimonials&task=images.imageThumb&id='.$id.'&image='.urlencode($new_name);
 				$return[$i]['delete_url'] = 'index.php?option=com_testimonials&task=images.deleteImage&id='.$id.'&image='.urlencode($new_name);
 				$return[$i]['delete_type'] = 'DELETE';

@@ -87,7 +87,7 @@ class TestimonialsControllerRating extends JControllerForm {
 		echo '<response>' . "\n";
 		if(!$exist){
 			echo "\t" . "<text></text>". "\n";
-			echo "\t" . "<html_exists><![CDATA[<div class='owner_comment'><span class='comment_user_name'><strong>".JText::_('COM_TESTIMONIALS_OWNER_REPLY')."</strong></span><span class='dlt-comment'><img src='".JURI::root()."components/com_testimonials/assets/images/stop.png' alt='".JText::_('COM_TESTIMONIALS_COMMENT_DELETE')."' title='".JText::_('COM_TESTIMONIALS_COMMENT_DELETE')."' onclick='javascript:deleteComment(".$id.");' /></span><br><span class='comment_text'>".$text."</span></div>]]></html_exists>"."\n";
+			echo "\t" . "<html_exists><![CDATA[<div class='owner_comment'><span class='comment_user_name'><strong>".JText::_('COM_TESTIMONIALS_OWNER_REPLY')."</strong></span><span class='dlt-comment'><img src='".JURI::root(true)."/components/com_testimonials/assets/images/stop.png' alt='".JText::_('COM_TESTIMONIALS_COMMENT_DELETE')."' title='".JText::_('COM_TESTIMONIALS_COMMENT_DELETE')."' onclick='javascript:deleteComment(".$id.");' /></span><br><span class='comment_text'>".$text."</span></div>]]></html_exists>"."\n";
 		} else {
 			echo "\t" . "<text><![CDATA[".$text."]]></text>". "\n";
 			echo "\t" . "<html_exists></html_exists>"."\n";

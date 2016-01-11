@@ -93,7 +93,7 @@ class TestimonialsController extends JControllerLegacy
 	{
 		$params =  TestimonialHelper::getSettings();
 		$img 	 = JURI::base().'index.php?option=com_testimonials&task=captcha.show&unique='.  time();
-		$img_ref = JURI::root().'components/com_testimonials/templates/black/images/refresh.png';
+		$img_ref = JURI::root(true).'/components/com_testimonials/templates/black/images/refresh.png';
 		@ob_end_clean();
 		header ('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
 		header ('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');

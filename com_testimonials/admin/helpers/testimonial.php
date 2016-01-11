@@ -156,7 +156,7 @@ class TestimonialHelper
              $document->addScriptDeclaration($js);*/
              
              //CSS
-             $document->addStyleSheet(JURI::root().'administrator/components/com_testimonials/assets/css/testimonials.css');
+             $document->addStyleSheet(JURI::root(true).'/administrator/components/com_testimonials/assets/css/testimonials.css');
          }
          
        public static function getLeftMenu()  
@@ -209,19 +209,19 @@ class TestimonialHelper
 	 
 	 public static function addFileUploadFull($uploadHandler='server/php/', $fileInputId='fileupload', $preloadImages = array()){
                 $document = JFactory::getDocument();
-                JHTML::stylesheet(JURI::root().'components/com_testimonials/assets/bootstrap/css/font-awesome.css');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/jplace.jquery.js');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/bootstrap/js/bootstrap.min.js');
-                JHTML::stylesheet(JURI::root().'components/com_testimonials/assets/file-upload/css/jquery.fileupload-ui.css');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
-                JHTML::script(JURI::root().'administrator/components/com_testimonials/assets/js/tmpl.min.js');
-                JHTML::script(JURI::root().'administrator/components/com_testimonials/assets/js/load-image.min.js');
-                JHTML::script(JURI::root().'administrator/components/com_testimonials/assets/js/canvas-to-blob.min.js');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/file-upload/js/jquery.fileupload-fp.js');
-                JHTML::script(JURI::root().'components/com_testimonials/assets/file-upload/js/jquery.fileupload-ui.js');
-                $document->addCustomTag('<!--[if gte IE 8]><script src="'.JURI::root().'components/com_testimonials/assets/file-upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->');
+                JHTML::stylesheet(JURI::root(true).'/components/com_testimonials/assets/bootstrap/css/font-awesome.css');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/jplace.jquery.js');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/bootstrap/js/bootstrap.min.js');
+                JHTML::stylesheet(JURI::root(true).'/components/com_testimonials/assets/file-upload/css/jquery.fileupload-ui.css');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
+                JHTML::script(JURI::root(true).'/administrator/components/com_testimonials/assets/js/tmpl.min.js');
+                JHTML::script(JURI::root(true).'/administrator/components/com_testimonials/assets/js/load-image.min.js');
+                JHTML::script(JURI::root(true).'/administrator/components/com_testimonials/assets/js/canvas-to-blob.min.js');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/file-upload/js/jquery.fileupload-fp.js');
+                JHTML::script(JURI::root(true).'/components/com_testimonials/assets/file-upload/js/jquery.fileupload-ui.js');
+                $document->addCustomTag('<!--[if gte IE 8]><script src="'.JURI::root(true).'/components/com_testimonials/assets/file-upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->');
                 $uploadInit = "
                                 <script type='text/javascript'>
                                 (function($) {

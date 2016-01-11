@@ -7,7 +7,7 @@
 * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
 */
 defined('_JEXEC') or die('Restricted Access');
-$imgpath = JURI::root().'/administrator/components/com_testimonials/assets/images/';
+$imgpath = JURI::root(true).'/administrator/components/com_testimonials/assets/images/';
 ?>
 <tr>
 	<td valign="top" class="lefmenutd">
@@ -104,7 +104,7 @@ $imgpath = JURI::root().'/administrator/components/com_testimonials/assets/image
 							</td>
 						</tr>
 						<tr>
-							<th colspan="2" class="about_news"><strong><img src="<?php echo JURI::root();?>/administrator/components/com_testimonials/assets/images/tick.png" />Joomplace news/campaigns</strong></th>
+							<th colspan="2" class="about_news"><strong><img src="<?php echo JURI::root(true);?>/administrator/components/com_testimonials/assets/images/tick.png" />Joomplace news/campaigns</strong></th>
 						</tr>
 						<tr>
 							<td colspan="2" style="padding-left:20px" align="justify">

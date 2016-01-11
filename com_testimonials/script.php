@@ -385,7 +385,7 @@ class com_testimonialsInstallerScript {
         <table border="1" cellpadding="5" width="100%" style="background-color: #F7F8F9; border: solid 1px #d5d5d5; width: 100%; padding: 10px; border-collapse: collapse;">
             <tr>
                 <td colspan="2" style="background-color: #e7e8e9;text-align:left; font-size:16px; font-weight:400; line-height:18px ">
-                    <strong><img src="<?php echo JURI::root(); ?>/administrator/components/com_testimonials/assets/images/tick.png"> Getting started.</strong> Helpfull links:
+                    <strong><img src="<?php echo JURI::root(true); ?>/administrator/components/com_testimonials/assets/images/tick.png"> Getting started.</strong> Helpfull links:
                 </td>
             </tr>
             <tr>
@@ -403,7 +403,7 @@ class com_testimonialsInstallerScript {
             </tr>
             <tr>
                 <td colspan="2" style="background-color: #e7e8e9;text-align:left; font-size:16px; font-weight:400; line-height:18px ">
-                    <strong><img src="<?php echo JURI::root(); ?>/administrator/components/com_testimonials/assets/images/tick.png"> Say your "Thank you" to Joomla community</strong>
+                    <strong><img src="<?php echo JURI::root(true); ?>/administrator/components/com_testimonials/assets/images/tick.png"> Say your "Thank you" to Joomla community</strong>
                 </td>
             </tr>
             <tr>
@@ -418,7 +418,7 @@ class com_testimonialsInstallerScript {
             </tr>
             <tr>
                 <td colspan="2" style="background-color: #e7e8e9;text-align:left; font-size:14px; font-weight:400; line-height:18px ">
-                    <strong><img src="<?php echo JURI::root(); ?>/administrator/components/com_testimonials/assets/images/tick.png">Latest changes: </strong>
+                    <strong><img src="<?php echo JURI::root(true); ?>/administrator/components/com_testimonials/assets/images/tick.png">Latest changes: </strong>
                 </td>
             </tr>
             <tr>

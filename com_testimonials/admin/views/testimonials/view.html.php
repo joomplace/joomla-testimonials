@@ -21,7 +21,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
         	$this->addTemplatePath(JPATH_BASE.'/components/com_testimonials/helpers/html');
 			
         	$document = JFactory::getDocument();
-        	$document->addScript(JURI::root().'administrator/components/com_testimonials/assets/js/js.js');
+        	$document->addScript(JURI::root(true).'/administrator/components/com_testimonials/assets/js/js.js');
         	$this->version = TestimonialHelper::getVersion();
 			$this->addToolbar();
 			TestimonialsHelper::addSubmenu('topics');

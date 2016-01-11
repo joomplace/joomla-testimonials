@@ -91,7 +91,7 @@ abstract class JHtmlThumbler
 		
 		$thumb_rel_path = "images" . DIRECTORY_SEPARATOR . $component . DIRECTORY_SEPARATOR . "thumbs" . DIRECTORY_SEPARATOR . $width."x". $height . DIRECTORY_SEPARATOR;
 		$thumb_path = JPATH_SITE . DIRECTORY_SEPARATOR . $thumb_rel_path;
-		$thumb_rel_url = JURI::root().$thumb_rel_path;
+		$thumb_rel_url = JURI::root(true).'/'.$thumb_rel_path;
 		
 		if(is_file($image) || is_file(JPATH_SITE.$image)){
 			$image = (is_file($image))?$image:JPATH_SITE.$image;

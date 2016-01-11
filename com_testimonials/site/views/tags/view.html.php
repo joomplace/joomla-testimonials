@@ -34,7 +34,7 @@ class TestimonialsViewTags extends JViewLegacy
                 }
 		$this->items = $items;
 		$this->state = $state;
-		JHTML::stylesheet(JURI::root().'components/com_testimonials/assets/bootstrap/css/bootstrap.min.css');
+		JHTML::stylesheet(JURI::root(true).'/components/com_testimonials/assets/bootstrap/css/bootstrap.min.css');
  		parent::display($tpl);
         }
 

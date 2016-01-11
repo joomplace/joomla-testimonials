@@ -215,7 +215,7 @@ class TestimonialsHelper
 
     public static function enableCaptcha()
     {
-        JFactory::getDocument()->addScript(JURI::root().'components/com_testimonials/assets/captcha/scripts.js');
+        JFactory::getDocument()->addScript(JURI::root(true).'/components/com_testimonials/assets/captcha/scripts.js');
         ob_start();
         ?>
         captcha_params = new Object();

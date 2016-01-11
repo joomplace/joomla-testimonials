@@ -264,7 +264,7 @@ if($params->get('show_addimage') == 1){
                     },
                     done: function (e, data) {
                         if(data.result.status == 'ok'){
-                            $('#uploadedImages').append('<a href=\"javascript:void(0)\" class=\"testim-img\"><img src=\"".JURI::root().'/images/testimonials/'."'+data.result.image+'\" alt=\"'+data.result.image+'\"/><span class=\"testim-del-img\" image=\"'+data.result.image+'\" onclick=\"deleteImage(this);\"></span></a>');
+                            $('#uploadedImages').append('<a href=\"javascript:void(0)\" class=\"testim-img\"><img src=\"".JURI::root(true).'/images/testimonials/'."'+data.result.image+'\" alt=\"'+data.result.image+'\"/><span class=\"testim-del-img\" image=\"'+data.result.image+'\" onclick=\"deleteImage(this);\"></span></a>');
                             $('#uploadedImages a:last-child > img').load(function(){
                                 if($('#uploadedImages a:last-child > img').height() < $('#uploadedImages a:last-child > img').width()){
                                     $('#uploadedImages a:last-child > img').css('height','100%');
