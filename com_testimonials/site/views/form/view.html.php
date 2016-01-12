@@ -50,19 +50,6 @@ class TestimonialsViewForm extends JViewLegacy
 		
 		if ($authorised !== true) {
 			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
-			$helper = new TestimonialsHelper();
-			$params = $helper->getParams();
-			if($params->get('modal_on_new')){
-				?>
-				<script type="text/javascript">
-					setTimeout(function(){ parent.location.href=parent.location.href; }, 3000);
-				</script>
-				<?php
-			}else{
-				$Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
-				JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_testimonials&view=testimonials&Itemid='.$Itemid));
-			}
-			
 		}else{		
 			$document = JFactory::getDocument();
 			JHTML::stylesheet('components/com_testimonials/assets/submit-form/css/template_testimonials.css');
