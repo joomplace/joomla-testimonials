@@ -82,26 +82,26 @@ $sortFields = $this->getSortFields();
         <div class="clearfix"> </div>
         <table class="table table-striped" id="testimonialsList">
             		<thead>
-				<tr>
-					<th width="1%" class="nowrap center">
+				<tr">
+					<th width="1%" class="nowrap">
 						<?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
 					</th>
 					<th width="1%" class="hidden-phone">
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 					</th>
-					<th width="1%" class="nowrap center">
+					<th width="1%" class="nowrap">
 						<?php echo JHtml::_('grid.sort', 'COM_TESTIMONIALS_NAME', 't_caption', $listDirn, $listOrder); ?> 
 					</th>
-					<th width="1%" class="nowrap center">
+					<th width="1%" class="nowrap">
 						<?php echo JHtml::_('grid.sort', 'JCATEGORY', 'category', $listDirn, $listOrder); ?> 
 					</th>
 					<th>
 						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CREATED_BY', 't_author', $listDirn, $listOrder); ?>
 					</th>
-					<th width="1%" class="nowrap center">
+					<th width="1%" class="nowrap">
                         <?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'published', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="1%" class="nowrap center">
+                    <th width="1%" class="nowrap">
                         <?php echo JHtml::_('grid.sort', 'COM_TESTIMONIALS_TOPIC_ISAPPROVED', 'is_approved', $listDirn, $listOrder); ?>
                     </th>
 					<!--th width="10%" class="nowrap">
@@ -113,7 +113,7 @@ $sortFields = $this->getSortFields();
 					<th width="10%" class="nowrap">
 						<?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_TAGS'); ?>
 					</th>
-					<th width="10%" class="nowrap center">
+					<th width="10%" class="nowrap">
 						<?php echo JHtml::_('grid.sort', 'COM_TESTIMONIALS_ID', 'id', $listDirn, $listOrder); ?>
 					</th>
 				</tr>

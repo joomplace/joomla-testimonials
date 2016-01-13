@@ -18,13 +18,13 @@ if($user->authorise('core.publish', 'com_testimonials') || $user->authorise('cor
 	<div class="testim-manage-block">
 		<?php if($user->authorise('core.admin', 'com_testimonials')){ ?>
 			<a class="btn btn-xs btn-default" href="<?php echo JRoute::_('index.php?option=com_testimonials&task=topic.approve&id='.$displayData->id); ?>" title="<?php echo ($displayData->is_approved? JText::_('COM_TESTIMONIALS_UNAPPROVE'):JText::_('COM_TESTIMONIALS_APPROVE')); ?>" >
-				<i class="icon-<?php echo $displayData->is_approved?'cancel':'checkmark'; ?> fa fa-<?php echo $displayData->is_approved?'times':'check-square-o'; ?>" alt="<?php echo ($displayData->is_approved?JText::_('COM_TESTIMONIALS_UNAPPROVE'):JText::_('COM_TESTIMONIALS_APPROVE')); ?>" ></i>
+				<i class="fa fa-<?php echo $displayData->is_approved?'times':'check-square-o'; ?>" alt="<?php echo ($displayData->is_approved?JText::_('COM_TESTIMONIALS_UNAPPROVE'):JText::_('COM_TESTIMONIALS_APPROVE')); ?>" ></i>
 			</a>
 		<?php } ?>
 		
 		<?php if($user->authorise('core.publish', 'com_testimonials')){ ?>
 			<a class="btn btn-xs btn-default" href="<?php echo JRoute::_('index.php?option=com_testimonials&task=topic.state&id='.$displayData->id); ?>" title="<?php echo ($displayData->published? JText::_('COM_TESTIMONIALS_UNPUBLISH'):JText::_('COM_TESTIMONIALS_PUBLISH')); ?>" >
-				<i class="icon-<?php echo $displayData->published?'minus-circle':'plus-circle'; ?> fa fa-<?php echo $displayData->is_approved?'minus-circle':'check-circle'; ?>" alt="<?php echo ($displayData->published?JText::_('COM_TESTIMONIALS_UNPUBLISH'):JText::_('COM_TESTIMONIALS_PUBLISH')); ?>" ></i>
+				<i class="fa fa-<?php echo $displayData->published?'minus-circle':'check-circle'; ?>" alt="<?php echo ($displayData->published?JText::_('COM_TESTIMONIALS_UNPUBLISH'):JText::_('COM_TESTIMONIALS_PUBLISH')); ?>" ></i>
 			</a>
 		<?php } ?>
 
