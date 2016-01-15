@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
     <name>COM_TESTIMONIALS</name>
-    <creationDate>December 2012</creationDate>
+    <creationDate>January 2012</creationDate>
     <author>Joomplace Team</author>
     <authorEmail>support@joomplace.com</authorEmail>
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.5.002</version>
+    <version>1.7.5.003</version>
     <description>COM_TESTIMONIALS_DESC</description>
         
     <scriptfile>script.php</scriptfile>
