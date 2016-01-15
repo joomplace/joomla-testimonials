@@ -49,9 +49,10 @@
         <menu>COM_TESTIMONIALS_MENU</menu>
         <submenu>
             <menu link="option=com_testimonials&amp;view=topics" view="topics" alt="COM_TESTIMONIALS_MANAGE_TESTIM">COM_TESTIMONIALS_MANAGE_TESTIM</menu>
-            <menu class="devided" link="option=com_categories&amp;extension=com_testimonials" view="categories" alt="COM_TESTIMONIALS_MANAGE_CATEGORIES">COM_TESTIMONIALS_MANAGE_CATEGORIES</menu>
+            <menu link="option=com_categories&amp;extension=com_testimonials" view="categories" alt="COM_TESTIMONIALS_MANAGE_CATEGORIES">COM_TESTIMONIALS_MANAGE_CATEGORIES</menu>
             <menu link="option=com_testimonials&amp;view=customs" view="customs" alt="COM_TESTIMONIALS_MANAGE_CUSTOM">COM_TESTIMONIALS_MANAGE_CUSTOM</menu>
             <menu link="option=com_testimonials&amp;view=tags" view="tags" alt="COM_TESTIMONIALS_MANAGE_TAGS">COM_TESTIMONIALS_MANAGE_TAGS</menu>
+            <menu link="option=com_config&amp;view=component&amp;component=com_testimonials&amp;return=aHR0cDovL3d3dy5uaWhhZGMuY29tL2FkbWluaXN0cmF0b3IvaW5kZXgucGhwP29wdGlvbj1jb21fdGVzdGltb25pYWxz" view="settings" alt="COM_TESTIMONIALS_MANAGE_SETTINGS">COM_TESTIMONIALS_MANAGE_SETTINGS</menu>
         </submenu>
 				
         <languages folder="admin">
