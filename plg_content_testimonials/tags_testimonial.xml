@@ -7,7 +7,7 @@
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.1 (build 005)</version>
+    <version>1.7.5.002</version>
 	<description>PLG_CONTENT_TAGS_TESTIMONIALS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="tags_testimonial">tags_testimonial.php</filename>
@@ -25,12 +25,14 @@
 
 	<config>
 		<fields name="params">
+			<!-- 
 			<fieldset name="basic" addfieldpath="/administrator/components/com_testimonials/models/fields">
 				<field name="template" type="templates"
 					description="PLG_CONTENT_TAGS_TESTIMONIALS_LABEL_TEMPLATE_DESC"
 					label="PLG_CONTENT_TAGS_TESTIMONIALS_LABEL_TEMPLATE"
 				/>
 			</fieldset>
+			-->
 		</fields>
 	</config>
 </extension>
