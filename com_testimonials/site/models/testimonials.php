@@ -54,7 +54,7 @@ class TestimonialsModelTestimonials extends JModelList
 		$limit = $app->getUserStateFromRequest('com_testimonials.list.limit', 'limit', $params->get('list_limit'), 'uint');
 		//$app->setUserState('com_testimonials.list.limit', $limit);
 		$this->setState('list.limit', $limit);
-		$start = $app->input->get('start', 0, 'uint');
+		$start = $app->input->get('start', $app->input->get('limitstart', 0, 'uint'), 'uint');
 		$this->setState('list.start', $start);
 		
 		$this->setState('catid', $app->input->get('testimonials_category', $layout));
