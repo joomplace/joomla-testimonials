@@ -15,6 +15,7 @@ class plgContentTags_testimonial extends JPlugin
 	
 		$regex = '/{testimonial\s(.*?)}/i';
 		preg_match_all($regex, $article->text, $matches, PREG_SET_ORDER);
+		
 		// No matches, skip this
 		if ($matches)
 		{
@@ -31,9 +32,9 @@ class plgContentTags_testimonial extends JPlugin
 			}
 			foreach ($matches as $match)
 			{
-				$output = '{testimonials default}';
+				$output = '{testimonials default|tag:'.str_replace(' ','|',$match[1]).'}';
 				// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
-				$article->text = preg_replace("|$match[0]|", addcslashes($output, '\\$'), $article->text, 1);
+				$article->text = preg_replace("|".addcslashes($match[0],'|')."|", addcslashes($output, '\\$'), $article->text, 1);
 				
 			}
 		}
@@ -62,6 +63,31 @@ class plgContentTags_testimonial extends JPlugin
 				$view = new TestimonialsViewTestimonials();
 				$model = new TestimonialsModelTestimonials();
 				$model->layout = $matcheslist[0];
+				/* category or tag */
+				if(strpos($matcheslist[1],'tag:')!==null){
+					/* set tag */
+					$matcheslist[1] = str_replace('tag:','',$matcheslist[1]);
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query->select($db->qn('id'))
+						->from($db->qn('#__tm_testimonials_tags'))
+						->where($db->qn('tag_name').' = '.$db->q($matcheslist[1]));
+					$tag_id = $db->setQuery($query)->loadResult();
+					$model->setTag($tag_id);
+				}else{
+					/* set category to model */
+					$categories = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$language_tag),'filter.access' =>array(1)));
+					$category = array_filter(
+						$categories,
+						function ($e) {
+							return $e->text == $matcheslist[1];
+						}
+					);
+					$category->id = $category->value;
+					$model->category = $category;
+				}
+				/* list limit */
+				$model->setListLimit($matcheslist[2]);
 				
 				$view->setModel($model, true);
 				
@@ -69,7 +95,7 @@ class plgContentTags_testimonial extends JPlugin
 				$view->assignData();
 				$output = $view->loadTemplate();
 				// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
-				$article->text = preg_replace("|$match[0]|", addcslashes($output, '\\$'), $article->text, 1);
+				$article->text = preg_replace("|".addcslashes($match[0],'|')."|", addcslashes($output, '\\$'), $article->text, 1);
 				
 			}
 		}

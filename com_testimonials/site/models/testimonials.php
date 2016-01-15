@@ -16,6 +16,7 @@ jimport('joomla.application.component.modellist');
 class TestimonialsModelTestimonials extends JModelList
 {
 	protected 	$tag;
+	protected 	$limit;
 	public 		$layout;
 	public 		$category='';
 	public 		$categories='';
@@ -43,21 +44,24 @@ class TestimonialsModelTestimonials extends JModelList
 		parent::populateState($ordering, $direction);
 		$app = JFactory::getApplication();
 		$menuitem = $app->getMenu()->getActive();
+		$category = 0;
 		if($menuitem){
 			if($menuitem->params){
-				$layout = $menuitem->params->get('testimonials_category',0);
+				$category = $menuitem->params->get('testimonials_category',0);
 			}
 		}
+		$category = $app->input->get('testimonials_category', $category);
+		if($this->category){
+			$category = $this->category->id;
+		}
 		
-		$params = TestimonialsHelper::getParams();
-		
-		$limit = $app->getUserStateFromRequest('com_testimonials.list.limit', 'limit', $params->get('list_limit'), 'uint');
+		$limit = $this->getListLimit();
 		//$app->setUserState('com_testimonials.list.limit', $limit);
 		$this->setState('list.limit', $limit);
 		$start = $app->input->get('start', $app->input->get('limitstart', 0, 'uint'), 'uint');
 		$this->setState('list.start', $start);
 		
-		$this->setState('catid', $app->input->get('testimonials_category', $layout));
+		$this->setState('catid', $category);
 	}
 	
 	protected function getListQuery()
@@ -166,10 +170,23 @@ class TestimonialsModelTestimonials extends JModelList
 		
         return $db->loadObjectList('system_name');
     }
-
-    public function  setTag($tag){
-        $this->tag = $tag;
-    }
+	
+	public function setListLimit($limit){
+		return $this->limit = $limit;
+	}
+	
+	public function setTag($tag){
+		return $this->tag = $tag;
+	}
+	
+	protected function getListLimit(){
+		if(!$this->limit){
+			$app = JFactory::getApplication();
+			$params = TestimonialsHelper::getParams();
+			$this->limit = $app->getUserStateFromRequest('com_testimonials.list.limit', 'limit', $params->get('list_limit'), 'uint');
+		}
+		return $this->limit;
+	}
 	
 	public function getCategory(){
 		return $this->category;
