@@ -18,6 +18,7 @@ class TestimonialsModelTestimonials extends JModelList
 	protected 	$tag;
 	protected 	$limit;
 	public 		$layout;
+	public 		$random = false;
 	public 		$category='';
 	public 		$categories='';
 	
@@ -85,6 +86,7 @@ class TestimonialsModelTestimonials extends JModelList
 			$order_tapper = '`tap_order` DESC,';
 			/* SEO prevent duplicates */
 			$doc = JFactory::getDocument();
+			$doc->addHeadLink(JURI::root(true).JUri::getInstance()->getPath(), 'canonical');
 			if (!$doc->_metaTags['standard']['robots'])
 			{
 				$doc->setMetadata('robots', 'noindex, follow');
@@ -127,6 +129,17 @@ class TestimonialsModelTestimonials extends JModelList
         {
             if($tag) $tags = array($tag);
             $query->where('tc.`id_tag` IN ('.implode(',',$tags).')');
+			if(JFactory::getApplication()->input->get->get('tag')){
+				/* SEO prevent duplicates */
+				$doc = JFactory::getDocument();
+				$doc->addHeadLink(JURI::root(true).JUri::getInstance()->getPath(), 'canonical');
+				if (!$doc->_metaTags['standard']['robots'])
+				{
+					$doc->setMetadata('robots', 'noindex, follow');
+				}else{
+					$doc->_metaTags['standard']['robots'] = 'noindex, follow';
+				}
+			}
         }
 
         if ($params->get('use_cb'))
@@ -148,10 +161,14 @@ class TestimonialsModelTestimonials extends JModelList
             $query->where('t.`published`=1');
         }
 
-		if ($params->get('show_lasttofirst')==0)
-		{
-            $query->order($order_tapper.'t.ordering DESC');
-		} else $query->order($order_tapper.'t.ordering ASC');
+		if(!$this->random){
+			if ($params->get('show_lasttofirst')==0)
+			{
+				$query->order($order_tapper.'t.ordering DESC');
+			} else $query->order($order_tapper.'t.ordering ASC');
+		}else{
+			$query->order($order_tapper.' RAND()');
+		}
 		
 		return $query;
 	}

@@ -32,10 +32,18 @@ class plgContentTags_testimonial extends JPlugin
 			}
 			foreach ($matches as $match)
 			{
-				$output = '{testimonials default|tag:'.str_replace(' ','|',$match[1]).'}';
-				// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
-				$article->text = preg_replace("|".addcslashes($match[0],'|')."|", addcslashes($output, '\\$'), $article->text, 1);
-				
+				$match[1] = explode(' ',$match[1]);
+				$limit_pos = count($match[1])-1;
+				$change_str = array(0=>array(),1=>$match[1][$limit_pos],2=>'random');
+				foreach($match[1] as $key => $value){
+					if( $key != $limit_pos){
+						$change_str[0][] = $value;
+					}
+				}
+				$change_str[0] = implode(' ',$change_str[0]);
+				$change_str = implode('|',$change_str);
+				$output = '{testimonials default|tag:'.$change_str.'}';
+				$this->replace($article,$match[0],$output);
 			}
 		}
 		
@@ -64,7 +72,7 @@ class plgContentTags_testimonial extends JPlugin
 				$model = new TestimonialsModelTestimonials();
 				$model->layout = $matcheslist[0];
 				/* category or tag */
-				if(strpos($matcheslist[1],'tag:')!==null){
+				if(strpos($matcheslist[1],'tag:')!==false){
 					/* set tag */
 					$matcheslist[1] = str_replace('tag:','',$matcheslist[1]);
 					$db = JFactory::getDbo();
@@ -73,7 +81,13 @@ class plgContentTags_testimonial extends JPlugin
 						->from($db->qn('#__tm_testimonials_tags'))
 						->where($db->qn('tag_name').' = '.$db->q($matcheslist[1]));
 					$tag_id = $db->setQuery($query)->loadResult();
-					$model->setTag($tag_id);
+					
+					if($tag_id){
+						$model->setTag($tag_id);
+					}else{
+						$this->replace($article,$match[0]);
+						continue;
+					}
 				}else{
 					/* set category to model */
 					$categories = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$language_tag),'filter.access' =>array(1)));
@@ -83,22 +97,38 @@ class plgContentTags_testimonial extends JPlugin
 							return $e->text == $matcheslist[1];
 						}
 					);
-					$category->id = $category->value;
-					$model->category = $category;
+					
+					if($category[0]){
+						$category[0]->id = $category[0]->value;
+						$model->category = $category[0];
+					}else{
+						$this->replace($article,$match[0]);
+						continue;
+					}
 				}
 				/* list limit */
 				$model->setListLimit($matcheslist[2]);
+				if($matcheslist[3]=='random'){
+					$model->random = true;
+				}
 				
 				$view->setModel($model, true);
 				
 				$view->definePath();
 				$view->assignData();
 				$output = $view->loadTemplate();
-				// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
-				$article->text = preg_replace("|".addcslashes($match[0],'|')."|", addcslashes($output, '\\$'), $article->text, 1);
+				$this->replace($article,$match[0],$output);
 				
 			}
 		}
+	}
+	
+	protected function replace($article, $from, $to = ''){
+		
+		// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
+		$article->text = preg_replace("|".addcslashes($from,'|')."|", addcslashes($to, '\\$'), $article->text, 1);
+		
+		return true;
 	}
 	
 	protected function prepareClasses(){
