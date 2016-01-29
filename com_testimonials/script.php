@@ -132,6 +132,9 @@ class com_testimonialsInstallerScript {
 								}
 							}
 							
+							if(is_array($tmpl->html)){
+								$tmpl->html = implode('',$tmpl->html);
+							}
 							$php = '<?php foreach($this->items as $item){ ?>'."\r\n".$tmpl->html."\r\n".'<?php } ?>';
 							
 							$tmpl_id = $tmpl->id;
