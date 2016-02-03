@@ -155,7 +155,7 @@ class TestimonialsModelTestimonials extends JModelList
             $query->select('jsoc.thumb as avatar');
             $query->join('LEFT', '#__community_users AS jsoc ON jsoc.userid = t.user_id_t');
         }
-        if(!JFactory::getUser()->authorise('core.admin','com_testimonials'))
+        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials'))
             $query->where('t.is_approved=1');
         $query->group('t.id');
 
