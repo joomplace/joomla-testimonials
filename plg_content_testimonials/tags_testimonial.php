@@ -72,7 +72,7 @@ class plgContentTags_testimonial extends JPlugin
 				$model = new TestimonialsModelTestimonials();
 				$model->layout = $matcheslist[0];
 				/* category or tag */
-				if(strpos($matcheslist[1],'tag:')!==false){
+				if(strpos($matcheslist[1],'tag:')===0){
 					/* set tag */
 					$matcheslist[1] = str_replace('tag:','',$matcheslist[1]);
 					$db = JFactory::getDbo();
@@ -88,19 +88,22 @@ class plgContentTags_testimonial extends JPlugin
 						$this->replace($article,$match[0]);
 						continue;
 					}
+				}elseif(strpos($matcheslist[1],'id:')===0){
+					$matcheslist[1] = str_replace('id:','',$matcheslist[1]);
+					$model->anc = $matcheslist[1];
 				}else{
 					/* set category to model */
 					$categories = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$language_tag),'filter.access' =>array(1)));
 					$category = array_filter(
 						$categories,
-						function ($e) {
+						function ($e) use ($matcheslist) {
 							return $e->text == $matcheslist[1];
 						}
 					);
-					
-					if($category[0]){
-						$category[0]->id = $category[0]->value;
-						$model->category = $category[0];
+					$category = array_shift($category);
+					if($category){
+						$category->id = $category->value;
+						$model->category = $category;
 					}else{
 						$this->replace($article,$match[0]);
 						continue;
@@ -108,7 +111,7 @@ class plgContentTags_testimonial extends JPlugin
 				}
 				/* list limit */
 				$model->setListLimit($matcheslist[2]);
-				if($matcheslist[3]=='random'){
+				if(isset($matcheslist[3]) && $matcheslist[3]=='random'){
 					$model->random = true;
 				}
 				
@@ -126,6 +129,8 @@ class plgContentTags_testimonial extends JPlugin
 	protected function replace($article, $from, $to = ''){
 		
 		// We should replace only first occurrence in order to allow positions with the same name to regenerate their content:
+		$article->introtext = preg_replace("|".addcslashes($from,'|')."|", addcslashes($to, '\\$'), $article->introtext, 1);
+		$article->fulltext = preg_replace("|".addcslashes($from,'|')."|", addcslashes($to, '\\$'), $article->fulltext, 1);
 		$article->text = preg_replace("|".addcslashes($from,'|')."|", addcslashes($to, '\\$'), $article->text, 1);
 		
 		return true;

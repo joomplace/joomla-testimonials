@@ -231,7 +231,7 @@ class TestimonialsTableTestimonials extends JTable
 					$mailfrom	= $config->get('mailfrom');
 					$sitename	= $config->get('sitename');
 					
-					$id = JFactory::getApplication()->input->getInt('id');
+					$id = $this->id
 					$subject = stripslashes(JText::_($id?'COM_TESTIMONIALS_MAIL_EDIT_SUBJECT':'COM_TESTIMONIALS_MAIL_NEW_SUBJECT'));
 					$message = nl2br(sprintf(stripslashes($id?JText::_('COM_TESTIMONIALS_MAIL_EDIT_MESSAGE'):JText::_('COM_TESTIMONIALS_MAIL_NEW_MESSAGE')), JURI::base(), $this->t_caption, $this->t_author, $this->testimonial));
 					
@@ -243,7 +243,7 @@ class TestimonialsTableTestimonials extends JTable
                             $mailer->setSender(array($mailfrom,$fromname));
                             $mailer->addRecipient($email);
                             $mailer->setSubject($subject);
-                            $mailer->setBody($message);
+                            $mailer->setBody(JHtml::_('content.prepare',str_replace('{testimonial}','{testimonials email|id:'.$id.'|1}',$message)));
                             $send = $mailer->Send();
                             if ( $send !== true ) {
                                 echo 'Error sending email: ' . $send->__toString();

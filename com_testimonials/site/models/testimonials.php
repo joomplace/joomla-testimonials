@@ -19,6 +19,7 @@ class TestimonialsModelTestimonials extends JModelList
 	protected 	$limit;
 	public 		$layout;
 	public 		$random = false;
+	public 		$anc = false;
 	public 		$category='';
 	public 		$categories='';
 	
@@ -55,6 +56,8 @@ class TestimonialsModelTestimonials extends JModelList
 		if($this->category){
 			$category = $this->category->id;
 		}
+		if(!$this->anc)
+			$this->anc = JFactory::getApplication()->input->get('anc',0,'INT');
 		
 		$limit = $this->getListLimit();
 		//$app->setUserState('com_testimonials.list.limit', $limit);
@@ -81,8 +84,8 @@ class TestimonialsModelTestimonials extends JModelList
         $query = $db->getQuery(true);
 		$select_tapper = '';
 		$order_tapper = '';
-		if(JFactory::getApplication()->input->get('anc',0,'INT')){
-			$select_tapper = ', IF( `t`.`id` = '.$db->quote(JFactory::getApplication()->input->get('anc',0,'INT')).', 1, 0 ) AS  `tap_order`';
+		if($this->anc){
+			$select_tapper = ', IF( `t`.`id` = '.$db->quote($this->anc).', 1, 0 ) AS  `tap_order`';
 			$order_tapper = '`tap_order` DESC,';
 			/* SEO prevent duplicates */
 			$doc = JFactory::getDocument();
@@ -152,7 +155,7 @@ class TestimonialsModelTestimonials extends JModelList
             $query->select('jsoc.thumb as avatar');
             $query->join('LEFT', '#__community_users AS jsoc ON jsoc.userid = t.user_id_t');
         }
-        if(!JFactory::getUser()->authorise('core.admin','com_testimonials'))
+        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials'))
             $query->where('t.is_approved=1');
         $query->group('t.id');
 

@@ -16,7 +16,7 @@ if($user->authorise('core.publish', 'com_testimonials') || $user->authorise('cor
 ?>
 <div class="testim-manage-block-wrap">
 	<div class="testim-manage-block">
-		<?php if($user->authorise('core.admin', 'com_testimonials')){ ?>
+		<?php if($user->authorise('core.moderate', 'com_testimonials')){ ?>
 			<a class="btn btn-xs btn-default" href="<?php echo JRoute::_('index.php?option=com_testimonials&task=topic.approve&id='.$displayData->id); ?>" title="<?php echo ($displayData->is_approved? JText::_('COM_TESTIMONIALS_UNAPPROVE'):JText::_('COM_TESTIMONIALS_APPROVE')); ?>" >
 				<i class="fa fa-<?php echo $displayData->is_approved?'times':'check-square-o'; ?>" alt="<?php echo ($displayData->is_approved?JText::_('COM_TESTIMONIALS_UNAPPROVE'):JText::_('COM_TESTIMONIALS_APPROVE')); ?>" ></i>
 			</a>
@@ -34,7 +34,7 @@ if($user->authorise('core.publish', 'com_testimonials') || $user->authorise('cor
 		$tmpl = $params->get('modal_on_new')?'&tmpl=component':'';
 		if($params->get('modal_on_new')) JHtml::_('behavior.modal', 'a.modal_com_testim');
 		
-		if ($user->authorise('core.edit', 'com_testimonials')){ ?>
+		if ($user->authorise('core.create', 'com_testimonials')){ ?>
 			<a class="modal_com_testim btn btn-xs btn-default"  href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form')).'&id='.$displayData->id; ?>" rel="{handler:'iframe',size:{x: (0.8*((jQuery('main').width())?jQuery('main').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}" title="<?php echo JText::_('COM_TESTIMONIALS_EDIT'); ?>">
 				<i class="icon-pencil-2 fa fa-pencil" alt="<?php echo JText::_('COM_TESTIMONIALS_EDIT'); ?>"></i>
 			</a>
