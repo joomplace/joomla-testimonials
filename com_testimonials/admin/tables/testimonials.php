@@ -231,7 +231,7 @@ class TestimonialsTableTestimonials extends JTable
 					$mailfrom	= $config->get('mailfrom');
 					$sitename	= $config->get('sitename');
 					
-					$id = $this->id
+					$id = $this->id;
 					$subject = stripslashes(JText::_($id?'COM_TESTIMONIALS_MAIL_EDIT_SUBJECT':'COM_TESTIMONIALS_MAIL_NEW_SUBJECT'));
 					$message = nl2br(sprintf(stripslashes($id?JText::_('COM_TESTIMONIALS_MAIL_EDIT_MESSAGE'):JText::_('COM_TESTIMONIALS_MAIL_NEW_MESSAGE')), JURI::base(), $this->t_caption, $this->t_author, $this->testimonial));
 					
