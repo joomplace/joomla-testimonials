@@ -30,7 +30,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
 		$this->assignData();
 		
 		// retrieving pagination
-        $this->pagination	= $this->get('Pagination');
+		if(!JFactory::getApplication()->input->get('embed',''))
+			$this->pagination	= $this->get('Pagination');
 		
         parent::display($tpl);
 		

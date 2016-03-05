@@ -77,6 +77,7 @@ abstract class JHtmlThumbler
 	static function getThumb($image, $settings = array()){
         // avoid strict
         $keys = array('width', 'height', 'sizing' , 'square' , 'fill_color' , 'compression');
+		
         foreach($keys as $key){
             if(!array_key_exists($key,$settings)) $settings[$key] = '';
         }
@@ -87,7 +88,7 @@ abstract class JHtmlThumbler
 		if($settings['width']) $width = $settings['width']; else $width = $params->get('thmbl_width', 100); 
 		if($settings['height']) $height = $settings['height']; else $height = $params->get('thmbl_height', false);
 		if($settings['noimage']) $noimage = $settings['noimage']; else $noimage = $params->get('thmbl_noimage', false);
-		if($noimage) $noimage = JUri::base().$noimage;
+		if($noimage) $noimage = JUri::root(true).'/'.$noimage;
 		
 		$thumb_rel_path = "images" . DIRECTORY_SEPARATOR . $component . DIRECTORY_SEPARATOR . "thumbs" . DIRECTORY_SEPARATOR . $width."x". $height . DIRECTORY_SEPARATOR;
 		$thumb_path = JPATH_SITE . DIRECTORY_SEPARATOR . $thumb_rel_path;
@@ -96,7 +97,7 @@ abstract class JHtmlThumbler
 		if(is_file($image) || is_file(JPATH_SITE.$image)){
 			$image = (is_file($image))?$image:JPATH_SITE.$image;
 		}else{
-			return $noimage;
+			$image = JPATH_SITE.$noimage;
 		}
 		$image_name = basename($image);
 		if(!$image_name){

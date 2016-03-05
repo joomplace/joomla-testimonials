@@ -215,7 +215,7 @@ class TestimonialsControllerTopic extends JControllerForm
 				$msg = JText::_('JLIB_APPLICATION_SUBMIT_SAVE_SUCCESS');
 			}
 
-            TestimonialsHelper::notifyAdmin($caption, $author, $isEdited);
+            TestimonialsHelper::notifyAdmin($caption, $author, $isEdited, $t_id);
 
 			/*
 			$help = new TestimonialsHelper();

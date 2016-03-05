@@ -103,7 +103,7 @@ class TestimonialsHelper
     }
 
 
-    public static function notifyAdmin($caption, $author, $isEdited){
+    public static function notifyAdmin($caption, $author, $isEdited, $id){
 
         $params = self::getParams();
         switch($params->get('enable_email')){
@@ -115,12 +115,17 @@ class TestimonialsHelper
                 $mailer = JFactory::getMailer();
                 if($isEdited == true){
                     $body = 'Greetings! A testimonial ( "'.$caption.'" ) was edited on the site by user "'.$author.'". Please review the testimonial.';
+                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&tmpl=component&limit=1&embed=1&anc='.$id);
                 }else{
                     $body = 'Greetings! A new testimonial ( "'.$caption.'" ) was added on the site by user "'.$author.'". Please review the testimonial.';
+                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&tmpl=component&limit=1&embed=1&anc='.$id);
                 }
+				$body = str_replace(array('="/'),array('="'.JUri::root().JUri::root(true)),$body);
                 $subject = 'Administrator notification';
                 $mailer->setSubject($subject);
                 $mailer->setBody($body);
+				$mailer->isHTML(true);
+				//$mailer->Encoding = 'base64';
                 $mailer->addRecipient($boxes);
                 $mailer->send();
                 break;
