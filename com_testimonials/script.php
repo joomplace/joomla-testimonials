@@ -19,8 +19,8 @@ class com_testimonialsInstallerScript {
         @mkdir(JPATH_SITE . "/images/com_testimonials");
         @chmod(JPATH_SITE . "/images/com_testimonials", 0757);
 
-        echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_INSTALL_TEXT') . '</font><br/><br/>';
-        $this->greetingText();
+        //echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_INSTALL_TEXT') . '</font><br/><br/>';
+        //$this->greetingText();
     }
 
     function uninstall($parent) {
@@ -63,8 +63,8 @@ class com_testimonialsInstallerScript {
 		}
 
         if ($errors) {
-            echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_UPDATE_TEXT') . '</font><br/><br/>';
-            $this->greetingText();
+            //echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_UPDATE_TEXT') . '</font><br/><br/>';
+           // $this->greetingText();
         } else {
             JError::raiseError(500, implode('<br />', $errors));
             return false;
@@ -239,8 +239,6 @@ class com_testimonialsInstallerScript {
 				}
 			}
 		}
-		
-		$this->defaultCategoryCheck();
         
     }
 	
@@ -381,9 +379,12 @@ class com_testimonialsInstallerScript {
             $db->setQuery($query);
             $db->execute();
         }
+		
+		$this->defaultCategoryCheck();
     }
 
     function greetingText() {
+		/*
         ?>
         <table border="1" cellpadding="5" width="100%" style="background-color: #F7F8F9; border: solid 1px #d5d5d5; width: 100%; padding: 10px; border-collapse: collapse;">
             <tr>
@@ -432,6 +433,7 @@ class com_testimonialsInstallerScript {
             </tr>
         </table>
         <?php
+		*/
     }
 	
 	function defaultCategoryCheck()
