@@ -13,6 +13,9 @@ defined('_JEXEC') or die;
 $value = $displayData->value;
 
 if($value){
+	if(file_exists(JPATH_SITE.'/images/comprofiler/'.$value)){
+		$value = '/images/comprofiler/'.$value;
+	}
 ?>
 <?php echo JHtml::_('thumbler.renderthumb', $value); ?>
 <?php

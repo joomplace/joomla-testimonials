@@ -192,8 +192,8 @@ class TestimonialHelper
                         <li'.($task=='customs' || $task == 'custom' ? ' class="active"' : '').'>
                             <a href="index.php?option=com_testimonials&view=customs">'.JText::_('COM_TESTIMONIALS_SUBMENU_CUSTOMS').'</a>
                         </li>
-                        <li'.($task=='templates' || $task == 'template' ? ' class="active"' : '').'>
-                            <a href="index.php?option=com_testimonials&view=templates">'.JText::_('COM_TESTIMONIALS_SUBMENU_TEMPL').'</a>
+                        <li'.($task=='categories' || $task == 'categories' ? ' class="active"' : '').'>
+                            <a href="index.php?option=com_categories&extension=com_testimonials">'.JText::_('COM_TESTIMONIALS_SUBMENU_CATEGORIES').'</a>
                         </li>
                         <li'.($task=='tags' || $task == 'tag' ? ' class="active"' : '').'>
                             <a href="index.php?option=com_testimonials&view=tags">'.JText::_('COM_TESTIMONIALS_SUBMENU_TAGS').'</a>
