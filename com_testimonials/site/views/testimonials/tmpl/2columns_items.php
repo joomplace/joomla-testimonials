@@ -38,6 +38,7 @@ foreach($this->items as $item){
 		<?php } ?>
 		<div class="testimonial_tags text-right"><?php echo $item->tags; ?></div>
 	</div>
+	<?php echo $this->renderLayout('testimonials.comments',$item); ?>
 <?php 
 	$i++;
 }
