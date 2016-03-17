@@ -1,0 +1,43 @@
+.testimonials-list .comments .comment .comment{
+	box-shadow: -2px 1px 1px #D0D0D0;
+}
+.testimonials-list .initial-comment{
+	padding: 20px 0px 10px 20px;
+}
+.testimonials-list .comment form{
+	padding: 20px 20px 0px 20px;
+}
+.testimonials-list .comments .comment form{
+	padding: 20px 20px 0px 0px;
+}
+.testimonials-list .comments .comment{
+	padding: 0px 0px 10px 20px;
+	margin-left: 20px;
+	margin-top: 0px;
+	position: relative;
+	z-index: 10;
+	background: #FFF;
+}
+.testimonials-list .comment .abs-pos.add-reply {
+	position: absolute;
+	z-index: 100;
+	top: 5px;
+	right: 5px;
+	padding: 5px;
+	display: none;
+}
+.testimonials-list .abs-pos.add-reply {
+	color: #FFF!important;
+	text-decoration: none!important;
+}
+.testimonials-list .comments .comment:hover{
+	background: rgba(0, 0, 0, 0.02);
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAECAYAAADmrJ2uAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxODcyMTc5MDgyNTcxMUUyQjZBMkJGNjIxMDQ1MTk2NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxODcyMTc5MTgyNTcxMUUyQjZBMkJGNjIxMDQ1MTk2NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE4NzIxNzhFODI1NzExRTJCNkEyQkY2MjEwNDUxOTY1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjE4NzIxNzhGODI1NzExRTJCNkEyQkY2MjEwNDUxOTY1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+B1JSCAAAADVJREFUeNpiXL16dSgDA0M2AwRMDQkJWc0wgIAF6hh7JLEBdRATwyADoBCaisSfOtAOAggwAPxWB4hhXsHbAAAAAElFTkSuQmCC);
+
+}
+.testimonials-list .comments .comment > div:not(.comment){
+	padding-top: 20px;
+}
+.testimonials-list .comments .comment > div:hover > .abs-pos.add-reply {
+	display: inline-block!important;
+}

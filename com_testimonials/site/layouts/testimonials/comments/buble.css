@@ -1,0 +1,42 @@
+.testimonials-list .comments .comment-level-dot {
+    display: inline-block;
+    background: #888;
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin: 5px 10px;
+	opacity: 0;
+}
+
+.testimonials-list .comment_wrap{
+	position: relative;
+}
+.testimonials-list .comment{
+	padding: 10px 20px 0px 10px;
+}
+.testimonials-list .comment .abs-pos.add-reply {
+	position: absolute;
+	z-index: 100;
+	top: 5px;
+	right: 5px;
+	padding: 5px;
+	display: none;
+}
+.testimonials-list .comments .comment > div:hover > .abs-pos.add-reply {
+	display: inline-block!important;
+}
+
+.testimonials-list .comments .comment_wrap:hover .comment-level-dot {
+	opacity: 0.3;
+}
+.testimonials-list .comment_wrap > div {
+    display: table-cell;
+    vertical-align: middle;
+    width: 1%;
+}
+.testimonials-list .comment_wrap > div.comment {
+    width: 99%!important;
+}
+.testimonials-list .comment_wrap {
+    display: table;
+}
