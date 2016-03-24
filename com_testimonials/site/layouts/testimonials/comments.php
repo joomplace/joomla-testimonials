@@ -57,7 +57,7 @@ $document->addStyleSheet($css_file);
 ?>
 <div class="comment initial-comment">
 	<div class="text-right">
-		<p><span class="btn btn-xs btn-default toggle-comments <?php if(!$comments_count){ ?>hidden<?php } ?>">show comment(<?php echo $comments_count; ?>)</span> <?php if($can_comment){ ?><a class="btn btn-xs btn-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id); ?>">Add comment</a> <?php } ?></p>
+		<p><span class="btn btn-xs btn-default hide-comments toggle-comments hidden">hide comment</span> <span class="btn btn-xs btn-default toggle-comments show-comments <?php if(!$comments_count){ ?>hidden<?php } ?>">show comments (<span class="count"><?php echo $comments_count; ?></span>)</span> <?php if($can_comment){ ?><a class="btn btn-xs btn-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id); ?>">Add comment</a> <?php } ?></p>
 	</div>
 </div>
 <div class="collapse comments">

@@ -25,6 +25,6 @@
 			<span class="testimonials-post"><?php echo $item->author_description; ?></span>
 		</div>
 	</div>
+	<?php echo $this->renderLayout('testimonials.comments',$item); ?>
 </div>
-<?php echo $this->renderLayout('testimonials.comments',$item); ?>
 <?php } ?>
