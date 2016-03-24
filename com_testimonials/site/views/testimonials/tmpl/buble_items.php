@@ -23,6 +23,6 @@
 	</div>
 	<div class="testimonial_tags text-right"><?php echo $item->tags; ?></div>
 	<?php echo $this->renderLayout('testimonials.actions',$item); ?>
-	<?php echo $this->renderLayout('testimonials.comments',$item); ?>
 </div>
+<?php echo $this->renderLayout('testimonials.comments',$item); ?>
 <?php } ?>

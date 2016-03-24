@@ -58,9 +58,15 @@ class TestimonialsViewTestimonials extends JViewLegacy
         $this->items	    = $this->get('Items');
 		
 		// getting additional data
+		$controller = TestimonialsController::getInstance('');
+		$comments_model = $controller->getModel('Comment');
+		//$this->setModel($comments_model);
+        //$comments	    = $this->get('CommentsTree','Comment');
+		
+		// getting additional data
         $this->category	    = $this->get('Category');
 		// categories model
-        $this->categories	    = $this->get('Categories');
+        $this->categories	= $this->get('Categories');
 
 		// check for DB errors
         if (count($errors = $this->get('Errors'))) { 
@@ -70,9 +76,10 @@ class TestimonialsViewTestimonials extends JViewLegacy
 		$layout = $this->get('UserLayout');
 		$this->setLayout($layout);
 		
-		// merging custom fields data to items data
+		// merging custom fields data to items data + getting comments
         foreach($this->items as &$item){
-		
+			$item->comments = $comments_model->getComments($item->id);
+			
 			$model = $this->getModel();
             $item = (object)array_merge((array)$item, (array)$model->getCustomFields($item->id));
 			/**

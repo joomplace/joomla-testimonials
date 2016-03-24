@@ -10,8 +10,7 @@
 defined('_JEXEC') or die;
 
 $value = $displayData->value;
-// index.php?option=com_testimonials&view=comment&testimonial=$value->id&comment=3
-$comments_count = 3;
+$comments_count = count($displayData->comments);
 
 $document = JFactory::getDocument();
 // need to prettyfy
@@ -27,65 +26,64 @@ if(file_exists(JPATH_SITE.'/'.$current_folder.'/'.$file_name.'.css')){
 }else{
 	$css_file = 'components/com_testimonials/layouts/testimonials/comments.css';
 }
+
+$user = JFactory::getUser();
+$can_comment = $user->authorise('core.comment', 'com_testimonials');
+$can_reply = $user->authorise('core.reply', 'com_testimonials');
+$can_delete_commentnreply = $user->authorise('core.delete_comments', 'com_testimonials');
+
+if(!$GLOBALS['testimonials']['comments']['template_default']){
+/* need to add html tempalte to JS */
+/* and do it only once */
+ob_start();
+?>
+	<div>
+		<p>{{text}}</p>
+		<p class="text-right"><small><?php echo ($user->id)?$user->name.' on ':''; ?><?php echo JHtml::_('date'); ?></small></p>
+		<div class="label-bar abs-pos">
+			<?php if(1 /* as I can quickly delete mine */){ ?><a class="label label-warning delete-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials'); ?>" data-id="{{comment}}">Delete</a> <?php } ?>
+			<?php if($can_reply){ ?><a class="label label-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial={{testimonial}}&comment={{comment}}'); ?>">Add reply</a> <?php } ?>
+		</div>
+	</div>
+<?php
+$js_templ = ob_get_contents();
+ob_end_clean();
+$document->addScriptDeclaration('var template_default = "'.addcslashes(str_replace(array("\r","\n"),'',$js_templ),'"').'"');
+$GLOBALS['testimonials']['comments']['template_default'] = 1;
+}
+
 $document->addScript($js_file);
 $document->addStyleSheet($css_file);
-$can_comment = 1;
-$can_reply = 1;
 ?>
 <div class="comment initial-comment">
 	<div class="text-right">
-		<p><span class="btn btn-xs btn-default toggle-comments">show comment(<?php echo $comments_count; ?>)</span> <?php if($can_comment){ ?><a class="btn btn-xs btn-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add comment</a> <?php } ?></p>
+		<p><span class="btn btn-xs btn-default toggle-comments <?php if(!$comments_count){ ?>hidden<?php } ?>">show comment(<?php echo $comments_count; ?>)</span> <?php if($can_comment){ ?><a class="btn btn-xs btn-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id); ?>">Add comment</a> <?php } ?></p>
 	</div>
 </div>
 <div class="collapse comments">
 	<?php if($comments_count){ ?>
-	<div class="comment">	
-		<div>
-			<p>This is boutgh review, don`t believe it everyone!</p>
-			<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-		</div>
-		<div class="comment">
-			<div>
-			<p>We never boutgh any reviews, so stay off</p>
-			<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-			</div>
+		<?php $lvl = 0; ?>
+		<?php foreach($displayData->comments as $comment){ ?>
+			<?php if($comment->level <= $lvl){ ?>
+				<?php for($i=0;$i <= $lvl - $comment->level; $i++){ ?>
+				</div>
+				<?php } ?>
+			<?php } ?>
+			<?php $lvl = $comment->level; ?>
 			<div class="comment">
 				<div>
-					<p>Ohh, how rude</p>
-					<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
+					<p><?php echo $comment->text; ?></p>
+					<p class="text-right"><small><?php echo ($comment->user)?JFactory::getUser($comment->user)->name.' on ':''; ?><?php echo JHtml::_('date',strtotime($comment->date)); ?></small></p>
+					<div class="label-bar abs-pos">
+						<?php if($can_delete_commentnreply || ($user->id == $comment->user && $user->id)){ ?><a class="label label-warning delete-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials'); ?>" data-id="<?php echo $comment->id; ?>">Delete</a> <?php } ?>
+						<?php if($can_reply){ ?><a class="label label-default add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment='.$comment->id); ?>">Add reply</a> <?php } ?>
+					</div>
 				</div>
+		<?php } ?>
+		<?php if(1 <= $lvl){ ?>
+			<?php for($i=0;$i <= $lvl - 1; $i++){ ?>
 			</div>
-			<div class="comment">
-				<div>
-					<p>Yes? then how can any one be happy with your services?</p>
-					<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-				</div>
-			</div>
-		</div>
-		<div class="comment">
-			<div>
-				<p>Don`t say anything unless you can prove it...</p>
-				<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-			</div>
-			<div class="comment">
-				<div>
-					<p>Say it with your chest!</p>
-					<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-				</div>
-			</div>
-		</div>
-		<div class="comment">
-			<div>
-				<p>Well, I never get anything for this review.</p>
-				<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-			</div>
-		</div>
-	</div>
-	<div class="comment">
-		<div>
-			<p>I think so too!..</p>
-			<?php if($can_reply){ ?><a class="label label-default abs-pos add-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials&view=comment&testimonial='.$displayData->id.'&comment=3'); ?>">Add reply</a> <?php } ?>
-		</div>
-	</div>
+			<?php } ?>
+		<?php } ?>
 	<?php } ?>
 </div>

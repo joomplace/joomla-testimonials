@@ -167,8 +167,8 @@ class TestimonialsModelTestimonials extends JModelList
 		if(!$this->random){
 			if ($params->get('show_lasttofirst')==0)
 			{
-				$query->order($order_tapper.'t.ordering DESC');
-			} else $query->order($order_tapper.'t.ordering ASC');
+				$query->order($order_tapper.'t.t_caption DESC');
+			} else $query->order($order_tapper.'t.t_caption ASC');
 		}else{
 			$query->order($order_tapper.' RAND()');
 		}

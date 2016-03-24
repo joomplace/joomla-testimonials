@@ -12,7 +12,7 @@ $user = JFactory::getUser();
 ?>
 <div id="comment_form_wrap">
 	<div class="comment">
-		<form>
+		<form action="<?php echo JRoute::_('index.php?option=com_testimonials&task=comment.save'); ?>">
 			<?php echo $form->getInput('id'); ?>
 			<?php echo $form->getInput('testimonial'); ?>
 			<?php echo $form->getInput('user'); ?>
@@ -22,7 +22,7 @@ $user = JFactory::getUser();
 			</div>
 			<div class="form-group">
 				<div class="text-right">
-					<a href="#" class="btn btn-primary">Submit reply as <?php echo ($user->id)?$user->name:'Annonymous'; ?></a>
+					<button type="submit" class="btn btn-xs btn-primary">Submit reply as <?php echo ($user->id)?$user->name:'Annonymous'; ?></button>
 				</div>
 			</div>
 		</form>
