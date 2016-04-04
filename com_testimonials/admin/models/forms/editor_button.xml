@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+<fieldset>
+
+    <!--
+    <field name="layers" type="list" label="COM_TESTIMONIALS_EDITOR_BUTTON_LAYERS" id="tst_modal_layout"
+           class="inputbox" default="1" labelclass="control-label" >
+        <option>default</option>
+    </field>
+    -->
+
+
+
+    <field name="layouts" type="componentlayout" extension="com_testimonials" view="testimonials"
+           label="COM_TESTIMONIALS_EDITOR_BUTTON_LAYOUTS" useglobal="true" description="JFIELD_ALT_COMPONENT_LAYOUT"/>
+
+    <field name="TagOrCat" type="radio" label="Tags or Categories"
+           class="btn-group btn-group-yesno" default="0" >
+        <option class="tst_toggle tst_cats" value="0">COM_TESTIMONIALS_EDITOR_BUTTON_CATEGORIES</option>
+        <option class="tst_toggle tst_tags">COM_TESTIMONIALS_EDITOR_BUTTON_TAGS</option>
+    </field>
+
+
+    <field name="tags" type="sql" default="10" label="COM_TESTIMONIALS_EDITOR_BUTTON_TAGS" id="tst_modal_tags"
+           labelclass="control-label" query="SELECT * FROM #__tm_testimonials_tags WHERE published = 1"
+           key_field="id" value_field="tag_name" >
+    </field>
+
+    <field id="tst_modal_categories" name="cats" type="sql" label="COM_TESTIMONIALS_EDITOR_BUTTON_CATEGORIES"
+           default="1" labelclass="control-label" key_field="id" value_field="title"
+           query="SELECT id, title FROM #__categories WHERE published = 1 AND title !='ROOT' GROUP BY title">
+
+    </field>
+
+    <field name="numbers" type="text" class="tst_numbers"
+           size="40" label="COM_TESTIMONIALS_EDITOR_BUTTON_COUNT"
+           labelclass="control-label" default="5" />
+
+</fieldset>
+</form>

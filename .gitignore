@@ -12,3 +12,7 @@ carnelius.zip
 plg_editors_xsd_testimonials/plg_editors_xsd_testimonials.zip
 >>>>>>> 478b00e409e18917571103df3b21a99fbc436f78
 *.zip
+.idea/
+com_testimonials/admin/script.php
+com_testimonials/admin/views/editor_button/tmpl/default.php
+com_testimonials/admin/views/editor_button/tmpl/index.html

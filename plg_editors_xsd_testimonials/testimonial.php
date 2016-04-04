@@ -27,20 +27,23 @@ class plgButtonTestimonial extends JPlugin
 
 	function onDisplay($name, $asset, $author)
 	{
-		$js = "function insertTestimonials() { jInsertEditorText('{testimonials default}', '".$name."'); }";
+		//$js = "function insertTestimonials() { jInsertEditorText('{testimonials default}', '".$name."'); }";
 
 		$doc = JFactory::getDocument();
-		$doc->addScriptDeclaration($js);
-
-		$link = 'index.php?option=com_testimonials&amp;view=tags&amp;layout=modal&amp;tmpl=component';
+		//$doc->addScriptDeclaration($js);
+		
+		$link = 'index.php?option=com_testimonials&amp;view=tags&amp;layout=button&amp;tmpl=component';
 
 		$button = new JObject();
-		$button->set('modal', false);
-		$button->set('link', '#');
+		$button->set('modal', true);
+		$button->set('link', $link);
+		//$button->set('link', '#');
 		$button->set('text', JText::_('PLG_TESTIMONIAL_BUTTON_TEXT'));
 		$button->set('name', 'list-2');
 		$button->set('class', 'btn');
-		$button->onclick = 'insertTestimonials(); return false;';
+		//$button->onclick = 'insertTestimonials(); return false;';
+		$button->onclick = 'return false;';
+		$button->set('options', "{handler: 'iframe', size: {x: 570, y: 400}}");
 		//$button->set('options', "{handler: 'iframe', size: {x: 770, y: 400}}");
 		//if (JRequest::getVar('option')=='com_content')
 		return $button; 
