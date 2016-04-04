@@ -34,7 +34,7 @@
 
     <field name="numbers" type="text" class="tst_numbers"
            size="40" label="COM_TESTIMONIALS_EDITOR_BUTTON_COUNT"
-           labelclass="control-label" />
+           labelclass="control-label" default="5" />
 
 </fieldset>
 </form>
