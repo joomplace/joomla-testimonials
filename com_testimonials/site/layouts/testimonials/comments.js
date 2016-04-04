@@ -11,10 +11,10 @@ jQuery(document).ready(function($){
 				/* add to end */
 				var scroll_to = form.closest('.initial-comment').next('.comments').append('<div class="comment">'+html+'</div>');
 				/* open up comments */
-				form.closest('.initial-comment').find('.show-comments').toggleClass('hidden');
 				if(form.closest('.initial-comment').next('.comments').find('.comment').length > 1){
 					form.closest('.initial-comment').find('.show-comments:not(.hidden)').click();
 				}else{
+					form.closest('.initial-comment').find('.show-comments').toggleClass('hidden');
 					form.closest('.initial-comment').find('.show-comments').click();
 				}
 				/* remove form */
