@@ -7,7 +7,7 @@
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.5</version>
+    <version>1.7.6</version>
 	<description>PLG_CONTENT_TAGS_TESTIMONIALS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="tags_testimonial">tags_testimonial.php</filename>
