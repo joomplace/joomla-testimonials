@@ -131,29 +131,6 @@
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
 		</field>
-		<field name="show_recaptcha" type="radio" default="0"	
-			class="btn-group"
-				label="COM_TESTIMONIALS_SETTINGS_SHOWRECAPTCHA" 
-				description="COM_TESTIMONIALS_SETTINGS_SHOWRECAPTCHA_DESC">
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
-		</field>
-
-		<field name="recaptcha_publickey" type="text" default=""	
-				label="COM_TESTIMONIALS_SETTINGS_RECAPTCHA_PUBLIC" 
-				description="COM_TESTIMONIALS_SETTINGS_RECAPTCHA_PUBLIC" />
-
-		<field name="recaptcha_privatekey" type="text" default=""	
-				label="COM_TESTIMONIALS_SETTINGS_RECAPTCHA_PRIVATE" 
-				description="COM_TESTIMONIALS_SETTINGS_RECAPTCHA_PRIVATE" />
-
-		<field name="show_captcha" type="radio"	default="1"	
-			class="btn-group"
-				label="COM_TESTIMONIALS_SETTINGS_SHOWCAPTCHA" 
-				description="COM_TESTIMONIALS_SETTINGS_SHOWCAPTCHA_DESC">
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
-		</field>
 	</fieldset>
 	<fieldset name="userinfo"
 		label="COM_TESTIMONIALS_SETTINGS_USERINFO"

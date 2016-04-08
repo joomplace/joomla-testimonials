@@ -27,7 +27,7 @@
 				<option value="default">Default</option>
 				<option value="black">Black</option>
 				<option value="flipped_corner">Flipped corner</option>
-				<option value="buble">Buble</option>
+				<option value="bubble">Bubble</option>
 				<option value="2columns">2 columns</option>
 				<!--
 				<option value="blacktip">Black Tip</option>

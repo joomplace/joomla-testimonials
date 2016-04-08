@@ -135,28 +135,6 @@ class TestimonialsControllerTopic extends JControllerForm
         $caption = $data['t_caption'];
         $author = $data['t_author'];
         $isEdited = array_key_exists('user_id_t',$data);
-		require_once(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'recaptchalib.php');
-		if(!JFactory::getUser()->authorise('core.edit', 'com_testimonials')){
-			if ($params->get('show_recaptcha')) {
-				$resp = recaptcha_check_answer ($params->get('recaptcha_privatekey'), $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
-				if (!$resp->is_valid) {
-					$this->saveInputFields();
-					$id = JFactory::getApplication()->input->getInt('id', 0);
-					$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=form'.$urlAppends.'&id='.$id.'&error=true'), JText::_('COM_TESTIMONIALS_CHECK_CAPTCHA'), 'error');
-					return NULL;
-				}
-			} else {
-				if ($params->get('show_captcha') && !$params->get('show_recaptcha')) {
-				$sessions = JFactory::getSession();
-				if ($sessions->get("captcha") && $sessions->get("captcha")!=JFactory::getApplication()->input->getVar('captcha_value','','post')) {
-					$this->saveInputFields();
-					$id = JFactory::getApplication()->input->getInt('id', 0);
-					$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=form'.$urlAppends.'&id='.$id.'&error=true'), JText::_('COM_TESTIMONIALS_CHECK_CAPTCHA'), 'error');
-					return NULL;
-				}
-				}
-			}
-		}
 
 		if (parent::save()) {
 			JFactory::getApplication()->setUserState('com_testimonials.edit.form.data', array());
