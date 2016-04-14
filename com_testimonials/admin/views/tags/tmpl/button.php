@@ -40,14 +40,14 @@ $function	= JFactory::getApplication()->input->getCmd('function', 'jSelectTestim
                 
                 if (layout || tag || cat || count) {
                     if (flag == "tags") {
-                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+tag+"|"+count+"}");                    
+                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+tag+"|"+count+"}", "jform_articletext");                    
                     }
                     if (flag == "cats") {
-                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+cat+"|"+count+"}");   
+                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+cat+"|"+count+"}", "jform_articletext");   
                     }
                 }
                 else {
-                    parent.window.jInsertEditorText("{testimonials}");
+                    parent.window.jInsertEditorText("{testimonials}", "jform_articletext");
                 }
                 parent.window.jModalClose();
             };
