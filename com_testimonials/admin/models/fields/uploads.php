@@ -10,12 +10,7 @@ jimport('joomla.form.formfield');
 
 class JFormFieldUploads extends JFormField {
 
-    protected $formId = 1;
-
-    // getLabel() left out
-    public function idUp() {
-
-    }
+    //protected $type = 'UploadThumbs';
 
     public function getInput()
     {
@@ -23,6 +18,8 @@ class JFormFieldUploads extends JFormField {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             ob_clean();
             $max_file_size = 2000000;
+            $width = 150;
+            $height = 150;
             require_once JPATH_COMPONENT_SITE . '/helpers/html/thumbler.php';
 
             //Check file
@@ -54,8 +51,8 @@ class JFormFieldUploads extends JFormField {
                         die();
                 }
                 $settings = [
-                    'width' => 150,
-                    'height' => 150,
+                    'width' => $width ,
+                    'height' => $height,
                     '',
                     '',
                     '',
@@ -63,7 +60,7 @@ class JFormFieldUploads extends JFormField {
                 ];
                 $url = JHtmlThumbler::getThumb($path, $settings);
                 imagedestroy($source);
-                // FCLOSE ???
+                // FCLOSE ERROR ???
                 echo $url;//*JPATH_SITE.*/'/tmp/' . $name;
                 die();
             }
@@ -96,7 +93,6 @@ class JFormFieldUploads extends JFormField {
           </div>
         </div>
         ';
-            $this->formId++;
             return $text;
         }
     }
