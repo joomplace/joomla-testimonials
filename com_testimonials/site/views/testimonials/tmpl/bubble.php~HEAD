@@ -77,6 +77,10 @@ JFactory::getDocument()->addStyleDeclaration("
     margin-top: 3px;
     text-decoration: underline;
 }
+.tl".$uid." .person-text img {
+    display: inline-block;
+    border-radius: 100px;
+}
 .tl".$uid." .person-text i {
     font-family: Georgia;
     font-size: 13px;
@@ -114,7 +118,7 @@ JFactory::getDocument()->addStyleDeclaration("
 		<?php
 	}
 
-	if($helper->can("Create"))
+	if($helper->can("Create") && $this->show_button)
 	{
 		$tmpl = '';
 		if($params->get('modal_on_new')){
@@ -123,7 +127,7 @@ JFactory::getDocument()->addStyleDeclaration("
 		}
 		?>
 		<div class="text-right">
-			<a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.($cat_id?'&catid='.$cat_id:'').'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form'.($cat_id?'&catid='.$cat_id:''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('.testimonials-layout').width())?jQuery('.testimonials-layout').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br />
+			<a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.($cat_id?'&catid='.$cat_id:'').'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form'.($cat_id?'&catid='.$cat_id:''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('.testimonials-layout').width())?jQuery('.testimonials-layout').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br /><br/>
 		</div>
 	<?php
 	}

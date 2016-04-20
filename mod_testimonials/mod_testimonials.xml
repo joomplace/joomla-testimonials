@@ -7,7 +7,7 @@
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.5</version>
+    <version>1.7.6</version>
     <description>Show random testimonials.</description>
     <files>
         <filename module="mod_testimonials">mod_testimonials.php</filename>
