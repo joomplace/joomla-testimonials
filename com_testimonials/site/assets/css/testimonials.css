@@ -1,4 +1,3 @@
-.testimonial q:before,.testimonial q:after,.testimonial blockquote:before,.testimonial blockquote:after,.testimonial q,.testimonial blockquote{content:""}.testimonial q:before *:before,.testimonial q:after *:before,.testimonial blockquote:before *:before,.testimonial blockquote:after *:before,.testimonial q *:before,.testimonial blockquote *:before,.testimonial q:before *:after,.testimonial q:after *:after,.testimonial blockquote:before *:after,.testimonial blockquote:after *:after,.testimonial q *:after,.testimonial blockquote *:after{content:'"'}
 /*FE*/
 .brand {
     float: left !important;
@@ -96,7 +95,7 @@ input:focus,select:focus,textarea:focus
 {
 	border:1px solid #ccc;
 }
-
+/*
 .control-label{
     width: 250px !important;
     padding-top: 0px !important;
@@ -105,7 +104,7 @@ input:focus,select:focus,textarea:focus
 .form-horizontal .controls{
     margin-left: 260px !important;
 }
-
+*/
 .form-horizontal .controls textarea {
     width: 90% !important;
 }
@@ -620,4 +619,8 @@ margin-left: 24px;
 
 #tm-navbar {
 	margin-bottom: 18px !important;
+}
+
+article.testimonials-layout img{
+	width:auto!important;
 }

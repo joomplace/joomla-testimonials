@@ -45,26 +45,12 @@ $script[] = "
                 $(this).parent().parent().find('fieldset').toggleClass('slided-in');
             });
         });
-		var show_captcha = '".$params->get('show_captcha')."';
-		var show_recaptcha = '".$params->get('show_recaptcha')."';
-        ";
-$script[] = "
-	    (function($) {
-		submit_form = function(task) {
-		    if (validateFields(true)) {
-                        if (show_captcha && !show_recaptcha) {
-                            check_and_submit(captcha_params);
-                        }else {
-			    $('input[name=task]', $('#adminForm')).val(task);
-			    $('#adminForm').submit();
-			}
-		    }
-		}
         ";
 /*
  * form valitation
  */
 $script[] ="
+(function($) {
 		validateFields = function(msg) {
 			var error_message = [];
 			var error = false;
@@ -175,20 +161,6 @@ foreach($custom_fields as $field){
     }
 }
 
-/*
- * glitch coded?
- */
-/*
-if(!JFactory::getUser()->authorise('core.edit', 'com_testimonials')) : ?>
-  <?php if ($params->get('show_captcha') && !$params->get('show_recaptcha')) : ?>
-      $('#captcha_value').removeClass('invalid');
-      if (document.getElementById('captcha_value').value == '') {
-          $('#captcha_value').addClass('invalid');
-          error_message.push('<?php echo (JText::_('COM_TESTIMONIALS_EDIT_CAPTCHA_ERROR_EMPTY')); ?>');
-          error = true;
-      }
-  <?php endif; ?>
-<?php endif; */
 $script[]="
         if(!error) return true;
             else{
@@ -222,7 +194,13 @@ $script[]="
     ";
 
 $script[]="
-        (function($) {
+	(function($) {
+		submit_form = function(task) {
+		    if (validateFields(true)) {
+				$('input[name=task]', $('#adminForm')).val(task);
+				$('#adminForm').submit();
+		    }
+		}
             $(document).ready(function () {
                 /*
                 if ($(\"[rel=tooltip]\").length) {
@@ -320,11 +298,11 @@ $script[] ="
     ";
 
 $script = implode("",$script);
-JFactory::getDocument()->addScriptDeclaration($script);
+JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->addStyleDeclaration('.controls textarea#jform_testimonial{	width:100%!important;}');
 
 ?>
-<div class="item-page">
-<form action="<?php echo JRoute::_('index.php?option=com_testimonials&view=form&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="testim-adminform form-horizontal"  enctype="multipart/form-data">
+<div class="item-page" style="padding-top: 20px;">
+<form action="<?php echo JRoute::_('index.php?option=com_testimonials&view=form&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal"  enctype="multipart/form-data">
 		<?php
             $form = $this->form;
             $item = $this->item;
@@ -359,7 +337,6 @@ JFactory::getDocument()->addScriptDeclaration($script);
                 <input type="hidden" name="jform[user_id_t]" value="<?php echo($item->user_id_t);?>" />
             <?php endif; ?>
             <fieldset class="testim-required">
-                <hr class="testim-line testim-top-line"/>
                 <?php if ($params->get('show_caption')) : ?>
                     <div class="testim-field-group control-group form-group">
                         <label class="testim-label testim-required control-label" for="jform_t_caption" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('t_caption', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('t_caption', 'label')); ?>:</label>
@@ -493,13 +470,43 @@ JFactory::getDocument()->addScriptDeclaration($script);
                 <?php endif; ?>
 
             </fieldset>
+            <?php if($settings->get('show_tags') && !empty($tags->tags)) : ?>
+                <fieldset>
+                    <div class="testim-field-group control-group form-group testim-tags-container">
+						<label class="testim-label control-label" for="tags" rel="tooltip" title="<?php echo JText::_('COM_TESTIMONIALS_TTAGS'); ?>" ><?php echo JText::_('COM_TESTIMONIALS_TTAGS'); ?>:</label>
+                        <div class="controls">
+                            <ul class="testim-tags">
+                                <?php foreach($tags->tags as $tag) : ?>
+                                    <li>
+                                        <span class="label label-default<?php echo (in_array($tag->value, $tags->selected) ? ' label-success' : '')?>" tag="<?php echo $tag->value?>"><?php echo $tag->text?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <select name="jform[tags][]" id="jform_tags" multiple="multiple" style="display: none;">
+                        <?php foreach($tags->tags as $tag) : ?>
+                            <option value="<?php echo $tag->value?>"<?php echo (in_array($tag->value, $tags->selected) ? ' selected="selected"' : '')?>><?php echo $tag->text?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </fieldset>
+            <?php endif; ?>
+			<fieldset>
+				<div class="testim-field-group testim-field-group control-group form-group">
+					<div class="controls">
+						<?php echo $form->getInput('captcha'); ?>
+					</div>
+				</div>
+			</fieldset>
             <?php if($settings->get('show_testimmore')){ ?>
                 <hr class="testim-line"/>
                 <?php if($unrequiredFields>0 || $settings->get('allow_photo') || $settings->get('show_authordesc')) : ?>
                     <div class="testim-field-group control-group form-group testim-field-more">
                         <div class="testim-label control-label"></div>
                         <div class="controls">
-                            <i class="icon-caret-right" id="testim-more-label"></i><a href="javascript:void(0);" class="testim-more"><?php echo JText::_('COM_TESTIMONIALS_TELL_MORE');?></a>
+							<p>
+								<i class="icon-caret-right" id="testim-more-label"></i><a href="javascript:void(0);" class="testim-more"><?php echo JText::_('COM_TESTIMONIALS_TELL_MORE');?></a>
+							</p>
                         </div>
                         <fieldset>
                             <div class="testim-notrequired testim-hide" style="display: none;">
@@ -568,27 +575,27 @@ JFactory::getDocument()->addScriptDeclaration($script);
                                 $url = array();
                                 $url = explode('|', $custom_field->value);
                                 ?>
-                                <div class="testim-field-group form-group">
+                                <div class="testim-field-group control-group form-group">
                                     <label class="testim-label control-label" for="customs_link_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name." ";?><?php echo JText::_('COM_TESTIMONIALS_CUSTOMS_URL_LINK');?>:</label>
-                                  
+									<div class="controls">
                                         <input type="text" class="inputbox form-control" id="customs_link_<?php echo $custom_field->id?>" name="customs_link[<?php echo $custom_field->id?>]" value="<?php echo htmlspecialchars(isset($url[0])?$url[0]:'');?>" />
-                          
+									</div>
                                 </div>
                                 <?php
                                 break;
                             case 'textarea':
                                 ?>
-                                <div class="testim-field-group form-group">
+                                <div class="testim-field-group control-group form-group">
                                     <label class="testim-label control-label" for="customs_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name;?>:</label>
-                                    
+                                    <div class="controls">
                                         <textarea cols="30" rows="10" class="inputbox form-control" id="customs_<?php echo $custom_field->id?>" name="customs[<?php echo $custom_field->id;?>]"><?php echo htmlspecialchars(isset($custom_field->value)?$custom_field->value:'');?></textarea>
-                                    
+									</div>
                                 </div>
                                 <?php
                                 break;
                             case 'rating':
                                 ?>
-                                <div class="testim-field-group form-group">
+                                <div class="testim-field-group control-group form-group">
                                     <label class="testim-label control-label" for="customs_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name;?>:</label>
                                     <input type="hidden" name="customs[<?php echo $custom_field->id?>]" class="inputbox form-control" id="customs_<?php echo $custom_field->id?>" value="<?php echo (isset($custom_field->value) ? $custom_field->value : '')?>" />
                                     <div class="rating controls">
@@ -601,11 +608,11 @@ JFactory::getDocument()->addScriptDeclaration($script);
                                 break;
                             default:
                                 ?>
-                                    <div class="testim-field-group form-group">
+                                    <div class="testim-field-group control-group form-group">
                                         <label class="testim-label control-label" for="customs_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name;?>:</label>
-                                       
+                                       <div class="controls">
                                             <input type="text" class="inputbox form-control" id="customs_<?php echo $custom_field->id?>" name="customs[<?php echo $custom_field->id?>]" value="<?php echo htmlspecialchars(isset($custom_field->value)?$custom_field->value:'');?>" />
-                                      
+										</div>
                                     </div>
                                 <?php
                                 break;
@@ -618,61 +625,6 @@ JFactory::getDocument()->addScriptDeclaration($script);
                     </div>
                 <?php endif; ?>
             <?php } ?>
-            <?php if($settings->get('show_tags') && !empty($tags->tags)) : ?>
-                <fieldset>
-                    <hr class="testim-line testim-bottom-line"/>
-                    <div class="testim-field-group control-group form-group testim-tags-container">
-						<label class="testim-label control-label" for="tags" rel="tooltip" title="<?php echo JText::_('COM_TESTIMONIALS_TTAGS'); ?>" ><?php echo JText::_('COM_TESTIMONIALS_TTAGS'); ?>:</label>
-                        <div class="controls">
-                            <ul class="testim-tags">
-                                <?php foreach($tags->tags as $tag) : ?>
-                                    <li>
-                                        <span class="label label-default<?php echo (in_array($tag->value, $tags->selected) ? ' label-success' : '')?>" tag="<?php echo $tag->value?>"><?php echo $tag->text?></span>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                    <select name="jform[tags][]" id="jform_tags" multiple="multiple" style="display: none;">
-                        <?php foreach($tags->tags as $tag) : ?>
-                            <option value="<?php echo $tag->value?>"<?php echo (in_array($tag->value, $tags->selected) ? ' selected="selected"' : '')?>><?php echo $tag->text?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <hr class="testim-line testim-bottom-line"/>
-                </fieldset>
-            <?php endif; ?>
-            <?php
-            if(!JFactory::getUser()->authorise('core.edit', 'com_testimonials')){
-                if ($params->get('show_recaptcha')) {
-                    require_once(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'recaptchalib.php');
-                    ?>
-                    <fieldset>
-                        <hr class="testim-line testim-bottom-line"/>
-                        <div class="testim-field-group  control-group form-group testim-images-container">
-                            <div class="testim-label control-label">&nbsp;</div>
-                            <div class="testim-add-image controls clearfix">
-                                <?php echo recaptcha_get_html($this->params->get('recaptcha_publickey'));?>
-                            </div>
-                        </div>
-                    </fieldset>
-                <?php
-                }elseif ($params->get('show_captcha')){
-                    ?>
-                    <fieldset>
-                        <hr class="testim-line testim-bottom-line"/>
-                        <div class="testim-field-group control-group form-group">
-                            <div class="testim-label control-label testim-images-container"><img src="<?php echo JURI::base();?>index.php?option=com_testimonials&task=captcha.show" alt="<?php echo JText::_('COM_TESTIMONIALS_RELOAD_SECURITY_CODE');?>" title="<?php echo JText::_('COM_TESTIMONIALS_RELOAD_SECURITY_CODE');?>" onclick="javascript: refresh_captcha( captcha_params );" style="cursor:pointer;" id="captcha_code" /></div>
-
-                            <div class="controls">
-                                <input type="text" name="captcha_value" id="captcha_value" value="" class="inputbox" style="margin-bottom: 10px;" autocomplete="off" />
-
-                            </div>
-                        </div>
-                    </fieldset>
-                <?php
-                }
-            }
-            ?>
         <?php
         }
 
@@ -687,15 +639,16 @@ JFactory::getDocument()->addScriptDeclaration($script);
 				<?php
 			}
 		?>
-    <div class="testim-buttoms contol-group">
+		
+    <div class="testim-buttoms testim-field-group testim-field-group control-group form-group">
 		<div class="controls">
-		<button class="btn" type="button" onclick="submit_form('topic.save');"> 
-			<?php echo JText::_('COM_TESTIMONIALS_SAVE') ; ?>
-		</button>
-		<?php /*<a href="javascript:void(0)" class="btn" onclick='window.parent.document.getElementById("sbox-btn-close").click();'> */ ?>
-		<a href="javascript:void(0)" class="btn" onclick='window.history.back();'>
-			<?php echo JText::_('COM_TESTIMONIALS_CLOSE') ;?>
-		</a>
+			<button class="btn" type="button" onclick="submit_form('topic.save');"> 
+				<?php echo JText::_('COM_TESTIMONIALS_SAVE') ; ?>
+			</button>
+			<?php /*<a href="javascript:void(0)" class="btn" onclick='window.parent.document.getElementById("sbox-btn-close").click();'> */ ?>
+			<a href="javascript:void(0)" class="btn" onclick='window.history.back();'>
+				<?php echo JText::_('COM_TESTIMONIALS_CLOSE') ;?>
+			</a>
 		</div>
     </div>
     <?php echo JHTML::_( 'form.token' ); ?>

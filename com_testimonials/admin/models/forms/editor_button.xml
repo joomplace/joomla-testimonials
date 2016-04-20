@@ -26,11 +26,15 @@
            key_field="id" value_field="tag_name" >
     </field>
 
-    <field id="tst_modal_categories" name="cats" type="sql" label="COM_TESTIMONIALS_EDITOR_BUTTON_CATEGORIES"
-           default="1" labelclass="control-label" key_field="id" value_field="title"
-           query="SELECT id, title FROM #__categories WHERE published = 1 AND title !='ROOT' GROUP BY title">
-
-    </field>
+    <field 
+		id="tst_modal_categories" 
+		name="cats" 
+		type="category" 
+		extension="com_testimonials"
+		label="COM_TESTIMONIALS_EDITOR_BUTTON_CATEGORIES"
+		default="1" 
+		labelclass="control-label" 
+	/>
 
     <field name="numbers" type="text" class="tst_numbers"
            size="40" label="COM_TESTIMONIALS_EDITOR_BUTTON_COUNT"

@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
 					form.closest('.initial-comment').find('.show-comments').click();
 				}
 				/* remove form */
-				form.closest('.testimonial').find('.show-comments .count').html(form.closest('.testimonial .comments .comment').length);
+				form.closest('.testimonial').find('.show-comments .count').html(form.closest('.testimonial').find('.comments .comment').length);
 				form.closest('.comment').remove();
 				/* scroll to added comment */
 				$('html, body').animate({

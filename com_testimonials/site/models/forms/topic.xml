@@ -55,11 +55,12 @@
 		<field name="tags" 	type="tags" label="COM_TESTIMONIALS_ADMINISTRATION_TAGS"
 		description="COM_TESTIMONIALS_ADMINISTRATION_TAGS"	class="inputbox form-control" size="10" multiple="true"/>
 		
-		<field name="rules" type="rules" label="JFIELD_RULES_LABEL"
-			translate_label="false" class="inputbox form-control" filter="rules"
-			component="com_testimonials" section="topics" validate="rules"
-		/>	
+		<field 
+			name="captcha" 
+			type="captcha" 
+			validate="captcha"
+			label="COM_TESTIMONIALS_CAPTCHA_LABEL"
+			description="COM_TESTIMONIALS_CAPTCHA_DESC" >
+		</field>
 	</fieldset>
-
-
 </form>

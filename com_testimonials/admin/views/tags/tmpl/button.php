@@ -33,18 +33,17 @@ $function	= JFactory::getApplication()->input->getCmd('function', 'jSelectTestim
                 var tag = "tag:"+getInputOption("jform_tst_modal_tags", true);               
                 var cat = getInputOption("jform_tst_modal_categories", true);                              
                       
-                //Ненадежно выходит
-                if (layout == " ") layout = "default";
+                if (layout == "") layout = "default";
                 else layout = layout;
                 
                 if (layout.charAt(0)+layout.charAt(1) == "_:") layout = layout.slice(2);
                 
                 if (layout || tag || cat || count) {
                     if (flag == "tags") {
-                        parent.window.jInsertEditorText("{testimonials "+layout+" | "+tag+" | "+count+"}");                    
+                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+tag+"|"+count+"}");                    
                     }
                     if (flag == "cats") {
-                        parent.window.jInsertEditorText("{testimonials "+layout+" | "+cat+" | "+count+"}");   
+                        parent.window.jInsertEditorText("{testimonials "+layout+"|"+cat+"|"+count+"}");   
                     }
                 }
                 else {
@@ -58,8 +57,8 @@ $function	= JFactory::getApplication()->input->getCmd('function', 'jSelectTestim
                 select = document.getElementById(id);
                 if (!getText) value = jQuery("#"+id).find(":selected").val();
                 else value = jQuery("#"+id).find(":selected").text();
-                if (value != null) return value+" ";
-                else return " ";
+                if (value != null) return value+"";
+                else return "";
             };   
            
            
