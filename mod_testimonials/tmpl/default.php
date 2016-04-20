@@ -35,6 +35,20 @@ var swiper = new Swiper('#testom_module_<?php echo $module->id; ?>.swiper-contai
 	paginationClickable: true,
 	loop: true,
 	keyboardControl: true,
+	<?php if(strpos($moduleclass_sfx,'_batch')){ ?>
+	grabCursor: true,
+	spaceBetween: 30,
+	effect: 'coverflow',
+	centeredSlides: true,
+	slidesPerView: 3,
+	coverflow: {
+		rotate: 00,
+		stretch: 0,
+		depth: 00,
+		modifier: 0,
+		slideShadows : false
+	},
+	<?php } ?>
 	autoplay: <?php echo $params->get('timeout', 5)*1000; ?>,
 	autoplayDisableOnInteraction: false
 });

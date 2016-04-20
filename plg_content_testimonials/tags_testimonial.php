@@ -119,6 +119,7 @@ class plgContentTags_testimonial extends JPlugin
 				
 				$view->definePath();
 				$view->assignData();
+				$view->show_button = false;
 				$output = $view->loadTemplate();
 				$this->replace($article,$match[0],$output);
 				
@@ -139,9 +140,12 @@ class plgContentTags_testimonial extends JPlugin
 	protected function prepareClasses(){
 		JHtml::addIncludePath(JPATH_SITE.'/components/com_testimonials/helpers/html');
 		JLoader::register('TestimonialsHelper', JPATH_SITE.'/components/com_testimonials/helpers/testimonials.php');
+		JLoader::register('TestimonialsController', JPATH_SITE.'/components/com_testimonials/controller.php');
+		JLoader::register('TestimonialsModelComment', JPATH_SITE.'/components/com_testimonials/models/comment.php');
 		JLoader::register('TestimonialsModelTestimonials', JPATH_SITE.'/components/com_testimonials/models/testimonials.php');
 		JLoader::register('TestimonialsViewTestimonials', JPATH_SITE.'/components/com_testimonials/views/testimonials/view.html.php');
 		JLoader::register('TestimonialsHelper', JPATH_SITE.'/components/com_testimonials/helpers/testimonials.php');
+		JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_testimonials/tables');
 	}
 	
 }
