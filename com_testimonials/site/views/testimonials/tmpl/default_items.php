@@ -15,7 +15,7 @@
 			<p class="testimonial_text">
 			<?php echo $item->author_description; ?>
 			</p>
-			<?php if($item->custom_fields){ ?>
+			<?php if(isset($item->custom_fields) && $item->custom_fields){ ?>
 				<table class="customs-table">
 				<?php foreach($item->custom_fields as $field){ ?>
 					<?php echo $field; ?>

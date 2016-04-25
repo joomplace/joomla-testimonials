@@ -69,7 +69,8 @@ class TestimonialsModelComment extends JModelAdmin
 		}
 	}
 	
-	public function delete($id){
+	public function delete(&$pks){
+		$id = $pks;
 		$table = $this->getTable();
 		return $table->delete($id);
 	}

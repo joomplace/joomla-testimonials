@@ -113,12 +113,13 @@ class TestimonialsModelTestimonials extends JModelList
 			$input = JFactory::getApplication()->input;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
-			$subs = $cur_cat->getChildren(true);
 			$rel_level = $cur_cat->level;
-			
 			$ids = array($cur_cat->id);
-			foreach($subs as $s){
-				$ids[] = $s->id;
+			if($cur_cat){
+				$subs = $cur_cat->getChildren(true);
+				foreach($subs as $s){
+					$ids[] = $s->id;
+				}
 			}
 			
             $query->where('`t`.`catid` IN('.implode(',',$ids).')')

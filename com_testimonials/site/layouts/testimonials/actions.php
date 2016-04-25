@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 $user = JFactory::getUser();
-$user->authorise('core.'.$action, 'com_testimonials');
+//$user->authorise('core.'.$action, 'com_testimonials');
 
 if($user->authorise('core.publish', 'com_testimonials') || $user->authorise('core.publish', 'com_testimonials') || $user->authorise('core.edit', 'com_testimonials') || $user->authorise('core.delete', 'com_testimonials')){
 ?>
