@@ -3,7 +3,7 @@
 -- Table structure for table `#__tm_comments`
 --
 
-CREATE TABLE IF NOT EXISTS `#__tm_comments` (
+CREATE TABLE `#__tm_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `testimonial` int(11) NOT NULL,
   `text` text NOT NULL,
