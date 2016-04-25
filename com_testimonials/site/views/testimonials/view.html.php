@@ -13,6 +13,7 @@ defined('_JEXEC') or die('Restricted access');
  */
 class TestimonialsViewTestimonials extends JViewLegacy
 {
+	public $show_button = true;
 	protected $state = null;
 	protected $item = null;
 	protected $items = null;
@@ -58,8 +59,9 @@ class TestimonialsViewTestimonials extends JViewLegacy
         $this->items	    = $this->get('Items');
 		
 		// getting additional data
-		$controller = TestimonialsController::getInstance('');
-		$comments_model = $controller->getModel('Comment');
+		$controller = new TestimonialsController();
+		JLoader::register('TestimonialsModelComment', JPATH_SITE.'/components/com_testimonials/models/comment.php');
+		$comments_model = new TestimonialsModelComment();/* new - caused by can`t get needed instance in other component */
 		//$this->setModel($comments_model);
         //$comments	    = $this->get('CommentsTree','Comment');
 		
@@ -180,7 +182,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
                 $data = $db->loadObject();
                 if($data->total_votes>0){
                     $rating = round($data->votes_summary/$data->total_votes);
-                    $replace = $this->renderLayout('testimonials.rating',(object)array('value' => $rating));
+                    $replace = $this->renderLayout('testimonials.agg_rating',(object)array('value' => $rating));
                     $text = str_ireplace('['.$fieldTag.'_summary]', $replace, $text);
                 }else{
                     $text = str_ireplace('['.$fieldTag.'_summary]', '', $text);

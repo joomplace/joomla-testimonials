@@ -21,7 +21,7 @@ class TestimonialsModelComment extends JModelAdmin
 	}
 	
 	public function getTable($type = 'Comments', $prefix = 'TestimonialsTable', $config = array())
-	{
+	{	
 		return JTable::getInstance($type, $prefix, $config);
 	}
 	

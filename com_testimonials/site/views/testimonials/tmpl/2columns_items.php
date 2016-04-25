@@ -1,24 +1,24 @@
 <?php $i = 0; ?>
-<div class="row-fluid">
+<div class="row">
 <?php 
 foreach($this->items as $item){ 
 	if($i%2==0 && $i!=0){
 ?>
 </div>
-<div class="row-fluid">
+<div class="row">
 <?php
 	}
 ?>
 	<div class="testimonial col-xs-12 col-sm-6" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 		<?php echo $this->renderLayout('testimonials.actions',$item); ?>
 		<div class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
-		<div class="row row-fluid">
-			<div class="span3 col-xs-12 col-sm-6">
+		<div class="row">
+			<div class="col-xs-12">
 			<?php if($item->avatar){ ?>
 				<div class="testimonial_image" itemprop="image"><a href="javascript:void(0);" class="thumbnail"><?php echo $item->avatar; ?></a></div>
 			<?php } ?>
 			</div>
-			<blockquote class="span9 col-xs-12 col-sm-6">
+			<blockquote class="col-xs-12">
 				<p class="testimonial_text" itemprop="reviewBody">
 				<?php echo $item->testimonial; ?>
 				</p>
@@ -32,7 +32,7 @@ foreach($this->items as $item){
 			</blockquote>
 		</div>
 		<?php if($item->images){ ?>
-			<div class="row row-fluid image-list">
+			<div class="row image-list">
 				<?php echo $item->images; ?>
 			</div>
 		<?php } ?>

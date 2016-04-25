@@ -59,7 +59,6 @@
 			name="captcha" 
 			type="captcha" 
 			validate="captcha"
-			namespace="contact"
 			label="COM_TESTIMONIALS_CAPTCHA_LABEL"
 			description="COM_TESTIMONIALS_CAPTCHA_DESC" >
 		</field>

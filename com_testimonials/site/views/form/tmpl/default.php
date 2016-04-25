@@ -491,11 +491,13 @@ JFactory::getDocument()->addScriptDeclaration($script);
                     </select>
                 </fieldset>
             <?php endif; ?>
-            <div class="testim-field-group form-group">
-				<div class="controls">
-					<?php echo $form->getInput('captcha'); ?>
+			<fieldset>
+				<div class="testim-field-group testim-field-group control-group form-group">
+					<div class="controls">
+						<?php echo $form->getInput('captcha'); ?>
+					</div>
 				</div>
-			</div>
+			</fieldset>
             <?php if($settings->get('show_testimmore')){ ?>
                 <hr class="testim-line"/>
                 <?php if($unrequiredFields>0 || $settings->get('allow_photo') || $settings->get('show_authordesc')) : ?>
@@ -637,15 +639,16 @@ JFactory::getDocument()->addScriptDeclaration($script);
 				<?php
 			}
 		?>
-    <div class="testim-buttoms contol-group">
+		
+    <div class="testim-buttoms testim-field-group testim-field-group control-group form-group">
 		<div class="controls">
-		<button class="btn" type="button" onclick="submit_form('topic.save');"> 
-			<?php echo JText::_('COM_TESTIMONIALS_SAVE') ; ?>
-		</button>
-		<?php /*<a href="javascript:void(0)" class="btn" onclick='window.parent.document.getElementById("sbox-btn-close").click();'> */ ?>
-		<a href="javascript:void(0)" class="btn" onclick='window.history.back();'>
-			<?php echo JText::_('COM_TESTIMONIALS_CLOSE') ;?>
-		</a>
+			<button class="btn" type="button" onclick="submit_form('topic.save');"> 
+				<?php echo JText::_('COM_TESTIMONIALS_SAVE') ; ?>
+			</button>
+			<?php /*<a href="javascript:void(0)" class="btn" onclick='window.parent.document.getElementById("sbox-btn-close").click();'> */ ?>
+			<a href="javascript:void(0)" class="btn" onclick='window.history.back();'>
+				<?php echo JText::_('COM_TESTIMONIALS_CLOSE') ;?>
+			</a>
 		</div>
     </div>
     <?php echo JHTML::_( 'form.token' ); ?>

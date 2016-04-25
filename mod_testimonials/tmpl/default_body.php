@@ -10,7 +10,7 @@ if ($params->get('show_readmore') == 1) {
 
 /* generating 'add new' link */
 if ($show_add_new && JFactory::getUser()->authorise('core.create', 'com_testimonials')) {
-	$addnew = $helper->generateTestimModuleLink(JRoute::_("index.php?option=com_testimonials&view=form&".(($modal)?'tmpl=component':'')."&Itemid=$tm_itemid"), JText::_('MOD_TESTIMONIALS_NEW'));
+	$addnew = $helper->generateTestimModuleLink(JRoute::_("index.php?option=com_testimonials&view=form&".(($modal)?'tmpl=component':'')."&Itemid=$tm_itemid"), JText::_('MOD_TESTIMONIALS_NEW'), $modal);
 	
 }
 

@@ -17,8 +17,8 @@ if (!class_exists('JModel')) {
 
 JModelLegacy::addIncludePath(JPATH_SITE . DIRECTORY_SEPARATOR . 'administrator' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_testimonials' . DIRECTORY_SEPARATOR . 'models');
 
-if (!class_exists('TestimonialHelper')) {
-    require_once(JPATH_SITE . DIRECTORY_SEPARATOR . 'administrator' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_testimonials' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonial.php');
+if (!class_exists('TestimonialsHelper')) {
+    require_once(JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_testimonials' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
 }
 if (!class_exists('JHtmlThumbler')) {
     JHtml::addIncludePath(JPATH_SITE . DIRECTORY_SEPARATOR .'components/com_testimonials/helpers/html');
@@ -149,14 +149,7 @@ class modTestimonialsHelper {
     }
 
     public function tmItemId() {
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->select('id');
-        $query->from('`#__menu` AS `m`');
-        $query->where('m.link="index.php?option=com_testimonials&view=testimonials" AND m.type="component" AND m.published<>-2 ');
-        $query->order('m.id');
-        $db->setQuery($query);
-        $tmItemId = $db->loadResult();
+        $tmItemId = TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=testimonials');
         return $tmItemId;
     }
 

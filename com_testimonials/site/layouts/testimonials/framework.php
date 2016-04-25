@@ -29,4 +29,8 @@ JFactory::getDocument()->addStyleDeclaration('
 	div#sbox-window {
 		top: 10%!important;
 	}
+	.customs-table td, .customs-table tr td {
+		border-top: 0px solid #dddddd;
+		padding-right: 25px;
+	}
 ');

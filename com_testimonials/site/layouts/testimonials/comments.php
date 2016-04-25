@@ -30,7 +30,7 @@ if(file_exists(JPATH_SITE.'/'.$current_folder.'/'.$file_name.'.css')){
 $user = JFactory::getUser();
 $can_comment = $user->authorise('core.comment', 'com_testimonials');
 $can_reply = $user->authorise('core.reply', 'com_testimonials');
-$can_delete_commentnreply = $user->authorise('core.delete_comments', 'com_testimonials');
+$can_delete_commentnreply = $user->authorise('core.deletecomments', 'com_testimonials');
 
 if(!$GLOBALS['testimonials']['comments']['template_default']){
 /* need to add html tempalte to JS */
@@ -72,7 +72,7 @@ $document->addStyleSheet($css_file);
 			<?php $lvl = $comment->level; ?>
 			<div class="comment">
 				<div>
-					<p><?php echo $comment->text; ?></p>
+					<p><?php echo nl2br($comment->text); ?></p>
 					<p class="text-right"><small><?php echo ($comment->user)?JFactory::getUser($comment->user)->name.' on ':''; ?><?php echo JHtml::_('date',strtotime($comment->date)); ?></small></p>
 					<div class="label-bar abs-pos">
 						<?php if($can_delete_commentnreply || ($user->id == $comment->user && $user->id)){ ?><a class="label label-warning delete-reply" href="<?php echo JRoute::_('index.php?option=com_testimonials'); ?>" data-id="<?php echo $comment->id; ?>">Delete</a> <?php } ?>
