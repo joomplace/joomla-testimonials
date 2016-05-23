@@ -56,7 +56,7 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
             <ul class="nav nav-tabs" id="configTabs">
                 <li><a href="#topic-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_DETAILS'); ?></a></li>
                 <li><a href="#customs-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_CUSTOMS'); ?></a></li>
-                <li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>
+                <!--<li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>-->
             </ul>
             <div class="tab-content">
                 <div class="tab-pane" id="topic-details">

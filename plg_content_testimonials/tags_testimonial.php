@@ -141,10 +141,7 @@ class plgContentTags_testimonial extends JPlugin
 		JHtml::addIncludePath(JPATH_SITE.'/components/com_testimonials/helpers/html');
 		JLoader::register('TestimonialsHelper', JPATH_SITE.'/components/com_testimonials/helpers/testimonials.php');
 		JLoader::register('TestimonialsController', JPATH_SITE.'/components/com_testimonials/controller.php');
-<<<<<<< HEAD
-=======
 		JLoader::register('TestimonialsModelComment', JPATH_SITE.'/components/com_testimonials/models/comment.php');
->>>>>>> de5feed1035670d237b25de5a0533a91abc97f1d
 		JLoader::register('TestimonialsModelTestimonials', JPATH_SITE.'/components/com_testimonials/models/testimonials.php');
 		JLoader::register('TestimonialsViewTestimonials', JPATH_SITE.'/components/com_testimonials/views/testimonials/view.html.php');
 		JLoader::register('TestimonialsHelper', JPATH_SITE.'/components/com_testimonials/helpers/testimonials.php');

@@ -52,7 +52,7 @@ class TestimonialsModelTestimonials extends JModelList
 				$category = $menuitem->params->get('testimonials_category',0);
 			}
 		}
-		$category = $app->input->get('testimonials_category', $category);
+		$category = $app->input->get('catid', $app->input->get('testimonials_category', $category));
 		if($this->category){
 			$category = $this->category->id;
 		}

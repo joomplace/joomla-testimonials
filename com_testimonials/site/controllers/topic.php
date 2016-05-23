@@ -202,7 +202,7 @@ class TestimonialsControllerTopic extends JControllerForm
 			if($item->id) $this->setRedirect(JRoute::_('index.php?option=com_testimonials&itemid='.$item->id, false),$msg);	
 			else $this->setRedirect(JRoute::_('index.php?option=com_testimonials', false),$msg);	
 			*/
-			$this->setRedirect(JRoute::_('index.php?option=com_testimonials&task=succesfully'.$urlAppends.'', false),$msg);
+			$this->setRedirect(JRoute::_('index.php?option=com_testimonials&catid='.$data['catid'].'&task=succesfully'.$urlAppends.'', false),$msg);
 		}		
 	}
 	

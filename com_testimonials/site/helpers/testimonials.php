@@ -218,20 +218,6 @@ class TestimonialsHelper
         return JFactory::getUser()->authorise('core.'.$action, 'com_testimonials');
     }
 
-    public static function enableCaptcha()
-    {
-        JFactory::getDocument()->addScript(JURI::root(true).'/components/com_testimonials/assets/captcha/scripts.js');
-        ob_start();
-        ?>
-        captcha_params = new Object();
-        captcha_params.mosConfig_live_site = '<?php echo JURI::root(); ?>';
-        captcha_params.msg_invalid_code = '<?php echo JText::_('COM_TESTIMONIALS_ADD_INVALIDCODE'); ?>';
-        <?php
-        $js = ob_get_contents();
-        ob_get_clean();
-        JFactory::getDocument()->addScriptDeclaration($js);
-    }
-
     public static function uriToArray($url_params){
         if(!is_array($url_params)){
             $url = str_replace(array(JUri::base(),"index.php","?"),'',$url_params);

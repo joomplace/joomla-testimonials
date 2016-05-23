@@ -336,6 +336,16 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
             <?php if($item->id) : ?>
                 <input type="hidden" name="jform[user_id_t]" value="<?php echo($item->user_id_t);?>" />
             <?php endif; ?>
+				<?php if(!strpos($form->getInput('catid'),'hidden')){ ?>
+				<div class="testim-field-group control-group form-group">
+					<label class="testim-label testim-required control-label" for="jform_t_caption" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('catid', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('catid', 'label')); ?>:</label>
+					<div class="controls">
+						<?php echo $form->getInput('catid'); ?>
+					</div>
+				</div>
+				<?php }else{ ?>
+					<?php echo $form->getInput('catid'); ?>
+				<?php } ?>
             <fieldset class="testim-required">
                 <?php if ($params->get('show_caption')) : ?>
                     <div class="testim-field-group control-group form-group">
@@ -629,7 +639,6 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
         }
 
         ?>
-		<?php echo $form->getInput('catid'); ?>
 		<input type="hidden" name="task" value="" />
 		<?php
 			if(JFactory::getApplication()->input->getVar('tmpl')=='component')
