@@ -46,10 +46,6 @@ class TestimonialsViewForm extends JViewLegacy
 		
 		$Gparams = JFactory::getApplication()->getParams();
 		
-		if($params->get('show_captcha') && !$params->get('show_recaptcha'))
-		{
-			TestimonialsHelper::enableCaptcha();
-		}
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
