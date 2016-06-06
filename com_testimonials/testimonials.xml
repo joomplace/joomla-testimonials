@@ -7,7 +7,7 @@
   <authorUrl>www.joomplace.com</authorUrl>
   <copyright>(C) JoomPlace, www.joomplace.com</copyright>
   <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-  <version>1.7.6.009</version>
+  <version>1.7.6.010</version>
   <description>COM_TESTIMONIALS_DESC</description>
   <scriptfile>script.php</scriptfile>
   <install>
