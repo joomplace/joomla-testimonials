@@ -20,6 +20,7 @@ class TestimonialsModelTestimonials extends JModelList
 	public 		$layout;
 	public 		$random = false;
 	public 		$anc = false;
+	public 		$avoidacl = false;
 	public 		$category='';
 	public 		$categories='';
 	
@@ -52,6 +53,7 @@ class TestimonialsModelTestimonials extends JModelList
 				$category = $menuitem->params->get('testimonials_category',0);
 			}
 		}
+		$this->avoidacl = $app->input->get('avoidacl', false);
 		$category = $app->input->get('catid', $app->input->get('testimonials_category', $category));
 		if($this->category){
 			$category = $this->category->id;
@@ -156,11 +158,11 @@ class TestimonialsModelTestimonials extends JModelList
             $query->select('jsoc.thumb as avatar');
             $query->join('LEFT', '#__community_users AS jsoc ON jsoc.userid = t.user_id_t');
         }
-        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials'))
+        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials') && !$this->avoidacl)
             $query->where('t.is_approved=1');
         $query->group('t.id');
 
-        if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials'))
+        if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials') && !$this->avoidacl)
         {
             $query->where('t.`published`=1');
         }
