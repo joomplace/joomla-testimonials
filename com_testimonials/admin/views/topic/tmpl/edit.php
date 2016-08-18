@@ -327,7 +327,7 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
 								?>
 								<div id="clr" class="clr"></div>
 								<div style="text-align:center;">
-									<img class="ti_photo" src="<?php echo JURI::base().'index.php?option=com_testimonials&task=showpicture&image='.$photo.'&width=114';?>" alt="<?php echo $this->item->t_author;?>" />
+                                    <img style=" width: 114px" class="ti_photo" src="<?php echo JURI::root().$photo;?>" alt="<?php echo $this->item->t_author;?>" />
 								</div>
 								<?php
 							}
