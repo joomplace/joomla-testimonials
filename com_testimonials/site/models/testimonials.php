@@ -122,11 +122,11 @@ class TestimonialsModelTestimonials extends JModelList
 				foreach($subs as $s){
 					$ids[] = $s->id;
 				}
+
+				$query->where('`t`.`catid` IN('.implode(',',$ids).')')
+					->select('`c`.`title`')
+					->leftJoin('`#__categories` as `c` ON `t`.`catid` = `c`.`id`');
 			}
-			
-            $query->where('`t`.`catid` IN('.implode(',',$ids).')')
-				->select('`c`.`title`')
-				->leftJoin('`#__categories` as `c` ON `t`.`catid` = `c`.`id`');
 		}
 
         if($this->tag) $tag = $this->tag;
