@@ -1,18 +1,27 @@
 <?php
 /**
-* Testimonials Component for Joomla 3
-* @package Testimonials
-* @author JoomPlace Team
-* @Copyright Copyright (C) JoomPlace, www.joomplace.com
-* @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
-*/
+ * @package     Joomla.Administrator
+ * @subpackage  com_users
+ *
+ * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
-defined('_JEXEC') or die('Restricted access');
+namespace Joomplace\Component\Testimonials\Admin;
 
-JLoader::register('TestimonialsHelper', JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
-JLoader::register('TestimonialHelper', JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonial.php');
-JLoader::register('TimgHelper', JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'Timg.php');
- 
-$controller = JControllerLegacy::getInstance('Testimonials');
-$controller->execute(JFactory::getApplication()->input->getCmd('task'));
-$controller->redirect();
+defined('_JEXEC') or die;
+define('DS',DIRECTORY_SEPARATOR);
+
+jimport('controller',JPATH_ADMINISTRATOR.DS.'components/com_testimonials/');
+jimport('framework.controller',JPATH_ADMINISTRATOR.DS.'components/com_testimonials/');
+jimport('framework.model',JPATH_ADMINISTRATOR.DS.'components/com_testimonials/');
+jimport('framework.view',JPATH_ADMINISTRATOR.DS.'components/com_testimonials/');
+
+$component = new Controller();
+$component->execute();
+
+//Joomla\Component\Content\Admin\View\Article();
+
+/*$controller = JController::getInstance('Users');
+$controller->execute(JFactory::getApplication()->input->get('action'));
+$controller->redirect();*/
