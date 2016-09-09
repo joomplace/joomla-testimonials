@@ -32,14 +32,13 @@ class Controller extends \JControllerBase{
 
 		$app = $this->getApplication();
 		$input = $this->getInput();
-		$namespace = 'Joomplace\\Component\\Testimonials\\Admin';
 
 		$controller = $input->getString('controller','dashboard');
 		$action = $input->getString('action','index');
 
 		jimport('controller.'.$controller,JPATH_ADMINISTRATOR.DS.'components/com_testimonials/');
 
-		$controllerClass     = $this->getController($namespace.'\\Controller\\'.$controller);
+		$controllerClass     = $this->getController(__NAMESPACE__.'\\Controller\\'.$controller);
 
 
 		$arguments = array();
