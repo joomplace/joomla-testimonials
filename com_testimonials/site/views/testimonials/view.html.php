@@ -18,6 +18,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
 	protected $item = null;
 	protected $items = null;
 	protected $pagination = null;
+	protected $order = array();
 	
    function definePath()
    {
@@ -28,11 +29,14 @@ class TestimonialsViewTestimonials extends JViewLegacy
    
    function display($tpl = null)
    {
-		$this->assignData();
+	   $this->assignData();
+	   $jinput = JFactory::getApplication()->input;
+
 		
-		// retrieving pagination
-		if(!JFactory::getApplication()->input->get('embed',''))
-			$this->pagination	= $this->get('Pagination');
+	   // retrieving pagination
+	   if(!$jinput->get('embed','')) $this->pagination	= $this->get('Pagination');
+	   $order = $jinput->get('ordering', '');
+	   $this->SelectedOrder($order, 'btn-success');
 		
         parent::display($tpl);
 		
@@ -193,25 +197,15 @@ class TestimonialsViewTestimonials extends JViewLegacy
 
         return $text;
     }
-        
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+	public function SelectedOrder($order, $value) {
+		switch ($order) {
+			case ('ordering'): $this->order['order'] = $value;
+				break;
+			default: $this->order['name'] = $value;
+		}
+	}
+
 	/* move this to layouts */	
     public function adminForm($id=0, $published=0, $approved = 0)
     {
