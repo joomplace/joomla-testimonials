@@ -106,8 +106,9 @@ class TestimonialsModelTestimonials extends JModelList
             ->leftJoin('#__tm_testimonials_conformity as tc ON t.id = tc.id_ti')
             ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
             ->group('t.id');
-			
-		$catid = $this->getState('catid');
+
+		$catid = $this->category->id;
+
 		if($catid){
 		
 			jimport('joomla.application.categories');
