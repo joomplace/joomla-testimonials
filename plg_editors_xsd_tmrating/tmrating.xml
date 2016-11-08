@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.0" type="plugin" group="editors-xtd"  method="upgrade">
+<extension version="3.0" type="plugin" group="editors-xtd" method="upgrade">
 	<name>plg_editors-xtd_tmrating</name>
 	<creationDate>January 2012</creationDate>
 	<author>Joomplace Team</author>
@@ -7,7 +7,7 @@
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.6</version>
+    <version>1.7.7.001</version>
 	<description>PLG_TMRATING_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="tmrating">tmrating.php</filename>
