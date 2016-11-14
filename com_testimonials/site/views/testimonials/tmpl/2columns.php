@@ -63,6 +63,7 @@ JFactory::getDocument()->addStyleDeclaration("
 }
 ");
 ?>
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 <article class="testimonials-layout tl<?php echo $uid; ?>">
     <?php 
 	if($helper->getActiveItem()->params){
@@ -104,6 +105,14 @@ JFactory::getDocument()->addStyleDeclaration("
 	<?php
 	}
 ?>
+	<div class="text-right">
+		<fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
+			<input type="hidden" id="order" name="ordering" value="t_caption">
+			<label for="order" class="btn <?php echo $this->order['name'] ?>" onclick="document.adminForm.ordering.value='t_caption'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_NAME'); ?></label>
+			<label for="order" class="btn <?php echo $this->order['order'] ?>" onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
+		</fieldset>
+	</div>
+	
 	<div class="testimonials-list">
 		<?php
 			echo $this->loadTemplate('items');
@@ -111,9 +120,8 @@ JFactory::getDocument()->addStyleDeclaration("
 	</div>
 </article>
 <?php if($this->pagination){ ?>
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
     <div class="pagination">
         <?php echo $this->pagination->getListFooter();?>
     </div>
-</form>
 <?php } ?>
+</form>

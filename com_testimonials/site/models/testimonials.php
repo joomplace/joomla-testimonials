@@ -74,6 +74,7 @@ class TestimonialsModelTestimonials extends JModelList
 	{
         $params = TestimonialsHelper::getParams();
         $menuitem = JFactory::getApplication()->getMenu()->getActive();
+		$input = JFactory::getApplication()->input;
         $tags = "";
         $alltags = "";
         if($menuitem){
@@ -105,14 +106,14 @@ class TestimonialsModelTestimonials extends JModelList
             ->leftJoin('#__tm_testimonials_conformity as tc ON t.id = tc.id_ti')
             ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
             ->group('t.id');
-			
-		$catid = $this->getState('catid');
+
+		$catid = $this->category->id;
+
 		if($catid){
 		
 			jimport('joomla.application.categories');
 			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
 			$this->categories = $categories;
-			$input = JFactory::getApplication()->input;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
 			$rel_level = $cur_cat->level;
@@ -166,12 +167,12 @@ class TestimonialsModelTestimonials extends JModelList
         {
             $query->where('t.`published`=1');
         }
-
 		if(!$this->random){
+			$orderBy = $input->get('ordering', 't_caption', 'WORD');
 			if ($params->get('show_lasttofirst')==0)
 			{
-				$query->order($order_tapper.'t.t_caption DESC');
-			} else $query->order($order_tapper.'t.t_caption ASC');
+				$query->order($order_tapper.'t.'.$orderBy.' DESC');
+			} else $query->order($order_tapper.'t.'.$orderBy.' ASC');
 		}else{
 			$query->order($order_tapper.' RAND()');
 		}
