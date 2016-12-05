@@ -7,7 +7,7 @@
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.6</version>
+    <version>1.7.7.001</version>
 	<description>PLG_TESTIMONIAL_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="testimonial">testimonial.php</filename>
