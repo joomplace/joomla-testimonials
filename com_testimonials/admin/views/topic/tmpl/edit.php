@@ -56,7 +56,7 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
             <ul class="nav nav-tabs" id="configTabs">
                 <li><a href="#topic-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_DETAILS'); ?></a></li>
                 <li><a href="#customs-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_CUSTOMS'); ?></a></li>
-                <!--<li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>-->
+                <li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane" id="topic-details">
@@ -327,7 +327,7 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
 								?>
 								<div id="clr" class="clr"></div>
 								<div style="text-align:center;">
-                                    <img style=" width: 114px" class="ti_photo" src="<?php echo JURI::root().$photo;?>" alt="<?php echo $this->item->t_author;?>" />
+									<img class="ti_photo" src="<?php echo JURI::base().'index.php?option=com_testimonials&task=showpicture&image='.$photo.'&width=114';?>" alt="<?php echo $this->item->t_author;?>" />
 								</div>
 								<?php
 							}

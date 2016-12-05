@@ -24,8 +24,9 @@ class TestimonialsTableCustoms extends JTable
         {
 			$db = JFactory::getDbo();
 			// creating system(programmatic) name
-			$this->system_name =  $db->escape( str_replace(' ','',strtolower($this->name)) );
 			
+			$lang = JFactory::getLanguage();
+			$this->system_name = $db->escape(str_replace(' ','-',$lang->transliterate($this->name)));
 			//storing data
         	$res = parent::store($updateNulls);
         	//$this->reorder();

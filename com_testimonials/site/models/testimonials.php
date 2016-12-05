@@ -20,7 +20,6 @@ class TestimonialsModelTestimonials extends JModelList
 	public 		$layout;
 	public 		$random = false;
 	public 		$anc = false;
-	public 		$avoidacl = false;
 	public 		$category='';
 	public 		$categories='';
 	
@@ -53,8 +52,8 @@ class TestimonialsModelTestimonials extends JModelList
 				$category = $menuitem->params->get('testimonials_category',0);
 			}
 		}
-		$this->avoidacl = $app->input->get('avoidacl', false);
-		$category = $app->input->get('catid', $app->input->get('testimonials_category', $category));
+		$category = $app->input->get('catid', $category);
+		$category = $app->input->get('testimonials_category', $category);
 		if($this->category){
 			$category = $this->category->id;
 		}
@@ -63,7 +62,9 @@ class TestimonialsModelTestimonials extends JModelList
 		
 		$limit = $this->getListLimit();
 		//$app->setUserState('com_testimonials.list.limit', $limit);
-		$this->setState('list.limit', $limit);
+		if($limit){
+			$this->setState('list.limit', $limit);
+		}
 		$start = $app->input->get('start', $app->input->get('limitstart', 0, 'uint'), 'uint');
 		$this->setState('list.start', $start);
 		
@@ -115,18 +116,17 @@ class TestimonialsModelTestimonials extends JModelList
 			$input = JFactory::getApplication()->input;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
+			$subs = $cur_cat->getChildren(true);
 			$rel_level = $cur_cat->level;
+			
 			$ids = array($cur_cat->id);
-			if($cur_cat){
-				$subs = $cur_cat->getChildren(true);
-				foreach($subs as $s){
-					$ids[] = $s->id;
-				}
-
-				$query->where('`t`.`catid` IN('.implode(',',$ids).')')
-					->select('`c`.`title`')
-					->leftJoin('`#__categories` as `c` ON `t`.`catid` = `c`.`id`');
+			foreach($subs as $s){
+				$ids[] = $s->id;
 			}
+			
+            $query->where('`t`.`catid` IN('.implode(',',$ids).')')
+				->select('`c`.`title`')
+				->leftJoin('`#__categories` as `c` ON `t`.`catid` = `c`.`id`');
 		}
 
         if($this->tag) $tag = $this->tag;
@@ -158,20 +158,21 @@ class TestimonialsModelTestimonials extends JModelList
             $query->select('jsoc.thumb as avatar');
             $query->join('LEFT', '#__community_users AS jsoc ON jsoc.userid = t.user_id_t');
         }
-        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials') && !$this->avoidacl)
-            $query->where('t.is_approved=1');
+        if(!JFactory::getUser()->authorise('core.moderate','com_testimonials')){
+	        $query->where('t.is_approved=1');
+        }
         $query->group('t.id');
 
-        if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials') && !$this->avoidacl)
+        if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials'))
         {
-            $query->where('t.`published`=1');
+            $query->where('(t.`published`=1 OR t.`ip_addr`='.$db->q($_SERVER['REMOTE_ADDR']).')');
         }
 
 		if(!$this->random){
 			if ($params->get('show_lasttofirst')==0)
 			{
-				$query->order($order_tapper.'t.t_caption DESC');
-			} else $query->order($order_tapper.'t.t_caption ASC');
+				$query->order($order_tapper.'t.id DESC');
+			} else $query->order($order_tapper.'t.id ASC');
 		}else{
 			$query->order($order_tapper.' RAND()');
 		}

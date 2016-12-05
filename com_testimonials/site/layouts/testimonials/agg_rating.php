@@ -9,13 +9,12 @@
 
 defined('_JEXEC') or die;
 
+$count = $displayData->count;
 $value = $displayData->value;
 $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayData->system_name)))?JText::_(strtoupper($displayData->system_name)):$displayData->name;
 ?>
-<span itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-	<span itemtype="http://data-vocabulary.org/Rating" itemscope itemprop="rating">
-		<meta itemprop="average" content="<?php echo $value; ?>" />
-		<meta itemprop="best" content="5.0" />
+<span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+	<span>
 		<span class="tm_stars">
 		<?php
 			for($a=1;$a<6;$a++){
@@ -26,6 +25,9 @@ $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayDat
 			}
 		?>
 		</span>
+		(<span itemprop="ratingValue"><?php echo $value; ?></span>/<span itemprop="bestRating">5.0</span>)
+        <meta itemprop="worstRating" content="0"/>
+		by <span class="clients" itemprop="ratingCount"><?php echo $count ?></span> clients
 	</span>
 	<meta itemprop="itemreviewed" content="Services" />
 </span>

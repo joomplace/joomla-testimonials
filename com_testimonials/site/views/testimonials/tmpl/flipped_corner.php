@@ -111,7 +111,7 @@ JFactory::getDocument()->addStyleDeclaration("
 		<?php
 	}
 
-	if($helper->can("Create") && $this->show_button)
+	if($helper->can("Create"))
 	{
 		$tmpl = '';
 		if($params->get('modal_on_new')){

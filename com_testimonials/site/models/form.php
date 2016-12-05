@@ -34,7 +34,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		$db = JFactory::getDBO();
         $query = $db->getQuery(true);
         
-        $query->select('c.id, c.name, c.type, eif.value, c.required, c.descr');
+        $query->select('c.id, c.name, c.system_name, c.type, eif.value, c.required, c.descr');
 		$query->from('`#__tm_testimonials_custom` AS `c`');
 		$query->join('LEFT', '#__tm_testimonials_items_fields AS eif ON eif.field_id = c.id AND eif.item_id='.$id);
 		$query->where('c.published=1');	
@@ -46,16 +46,24 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		if($error){
 		    $posted_data = JFactory::getApplication()->getUserState('com_testimonials.edit.form.data', array());
 		    foreach($fields as &$field){
-			if($field->type == 'url'){
-			    $field->value = array('', '');
-			    if(!empty($posted_data['customs_link'][$field->id])) $field->value[0] = $posted_data['customs_link'][$field->id];
-			    if(!empty($posted_data['customs_name'][$field->id])) $field->value[1] = $posted_data['customs_name'][$field->id];
-			    $field->value = implode('|', $field->value);
-			}else{
-			    if(!empty($posted_data['customs'][$field->id])) $field->value = $posted_data['customs'][$field->id];
-			}
+				if($field->type == 'url'){
+					$field->value = array('', '');
+					if(!empty($posted_data['customs_link'][$field->id])) $field->value[0] = $posted_data['customs_link'][$field->id];
+					if(!empty($posted_data['customs_name'][$field->id])) $field->value[1] = $posted_data['customs_name'][$field->id];
+					$field->value = implode('|', $field->value);
+				}else{
+					if(!empty($posted_data['customs'][$field->id])) $field->value = $posted_data['customs'][$field->id];
+				}
 		    }
 		    unset($field);
+		}
+		
+		$user = JFactory::getUser();
+		foreach($fields as &$field){
+			if($field->type != 'url'){
+				$property = $field->system_name;
+				if(!$field->value) $field->value = $user->$property;
+			}
 		}
 		return $fields;
 	}
@@ -85,6 +93,9 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 	    }
 		
 		$data->catid = $this->getState('catid');
+		if(!$data->t_author){
+			$data->t_author = JFactory::getUser()->name;
+		}
 		
 	    return $data;
 	}

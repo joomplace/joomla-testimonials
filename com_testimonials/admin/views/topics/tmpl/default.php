@@ -218,12 +218,5 @@ $sortFields = $this->getSortFields();
 		<?php echo JHtml::_('form.token'); ?>
         
     </div>
-    <?php
-    /*
-    else if (!$this->state->get('filter.search'))
-    {
-            echo '<tr><td colspan="7" align="center">You have no any testimonials – <a onclick="javascript:Joomla.submitbutton(\'topic.add\')" href="javascript:void(0)">Create new one?</a></td></tr>'; 
-    }else echo '<tr><td colspan="7" align="center">Items not found</a></td></tr>';*/
-    ?>
 
 </form>

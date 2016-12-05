@@ -11,54 +11,45 @@ defined( '_JEXEC' ) or die;
 
 function TestimonialsBuildRoute( &$query ) {
 	$segments = array();
-
-	if (isset($query['view']) && isset($query['tmpl']) && isset($query['id'])) {
-		$segments[] = $query['id'].'-edit-topic';
-		unset($query['view']);
-		unset($query['tmpl']);
-		unset($query['id']);
-	}
-	if (isset($query['tmpl']) && isset($query['id']) && isset($query['task'])) {
-		if ($query['task'] == 'topic.state') {
-			$segments[] = $query['id'].'-topic-state';
+	
+	$app =& JFactory::getApplication();
+	$menu =& $app->getMenu();
+	
+	foreach($menu->getMenu() as $id => $item){
+		if(!array_diff_assoc($item->query,$query) && !empty($item->query)){
+			$query['Itemid'] = $id;
+			break;
 		}
-		unset($query['task']);
-		unset($query['tmpl']);
-		unset($query['id']);
 	}
-	if (isset($query['view']) && isset($query['tmpl'])) {
-		$segments[] = 'add-testimonial';
-		unset($query['view']);
-		unset($query['tmpl']);
-	}
-	if (isset($query['tmpl']) && isset($query['id'])) {
-		$segments[] = $query['id'].'-read-topic';
-	    unset($query['tmpl']);
-	    unset($query['id']);
-	}
-	if (isset($query['task']) && isset($query['id'])) {
-		if ($query['task'] == 'topic.state') {
-			$segments[] = $query['id'].'-topic-state';
-		} elseif ($query['task'] == 'topic.delete') {
-			$segments[] = $query['id'].'-topic-delete';
-		} elseif ($query['task'] == 'topic.approve') {
-			$segments[] = $query['id'].'-topic-approve';
+	
+	$menu_item = $menu->getItem($query['Itemid']);
+	
+	foreach($query as $key => $val){
+		if($key=='option'){
+			continue;
 		}
-		unset($query['task']);
-		unset($query['id']);
+		if($query[$key] == $menu_item->query[$key]){
+			unset($query[$key]);
+		}
 	}
-	if (isset($query['id'])) {
-		$segments[] = $query['id'].'-topic-page';
-		unset($query['id']);
+	$query = array_filter($query);
+	
+	if(isset($query['catid'])){
+		jimport('joomla.application.categories');
+		$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
+		$cat = $categories->get($query['catid']);
+		/* 
+		 * removing root from path path
+		 * only needed of there only one root 
+		 */
+		 /*
+			$path = explode('/',$cat->path);
+			unset($path[0]);
+		*/
+		$segments[] = $cat->alias;
+		unset($query['catid']);
 	}
-	/* deprecated? SEO content duplicates // fixed with "noindex,follow" robots, but still can cause troubles for ArtioSef for example */
-	/*
-	if (isset($query['anc'])) {
-		$segments[] = $query['anc'].'-more-about';
-		unset($query['anc']);
-	}
-	*/
-	/* --------------- */
+	
 	/* will terminate duplicating links */
 	if (isset($query['start'])) {
 		unset($query['anc']);
@@ -68,45 +59,25 @@ function TestimonialsBuildRoute( &$query ) {
 }
 
 function TestimonialsParseRoute($segments) {
-	$segment = explode(':', $segments[0]);
-	$vars = array();
-
-	switch ($segments[0]) {
-		case 'add:testimonial':
-			$vars['view'] = 'form';
-			$vars['tmpl'] = 'component';
-			break;
-	}
-	switch ($segment[1]) {
-		case 'edit-topic':
-			$vars['view'] = 'form';
-			$vars['tmpl'] = 'component';
-			$vars['id'] = $segment[0];
-			break;
-		case 'topic-page':
-			$vars['id'] = $segment[0];
-			break;
-		/* deprecated? SEO content duplicates // fixed with "noindex,follow" robots, but still can cause troubles for ArtioSef for example */
-		case 'more-about':
-			$vars['anc'] = $segment[0];
-			break;
-		/* --------------- */
-		case 'read-topic':
-			$vars['tmpl'] = 'component';
-			$vars['id'] = $segment[0];
-			break;
-		case 'topic-state':
-			$vars['task'] = 'topic.state';
-			$vars['id'] = $segment[0];
-			break;
-		case 'topic-delete':
-			$vars['task'] = 'topic.delete';
-			$vars['id'] = $segment[0];
-			break;
-		case 'topic-approve':
-			$vars['task'] = 'topic.approve';
-			$vars['id'] = $segment[0];
-			break;
+	
+	$app = JFactory::getApplication();
+	$menu = $app->getMenu();
+	$item = $menu->getActive();
+	$vars = $item->query;
+	$option = $item->query['option'];
+	if(!$option) $option = 'com_testimonials';
+	
+	$segments = array_reverse($segments);
+	$segment = str_replace(':','-',$segments[0]);
+	$db = JFactory::getDbo();
+	$query = $db->getQuery(true);
+	$query->select($db->qn('id'))
+		->from($db->qn('#__categories'))
+		->where($db->qn('extension').' = '.$db->q('com_testimonials'))
+		->where($db->qn('alias').' = '.$db->q($segment));
+	$db->setQuery($query,0,1);
+	if($vars['catid']=$db->loadResult()){
+		unset($segments[0]);
 	}
 
     return $vars;

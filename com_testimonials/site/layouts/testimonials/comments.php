@@ -9,6 +9,7 @@
  
 defined('_JEXEC') or die;
 
+$value = $displayData->value;
 $comments_count = count($displayData->comments);
 
 $document = JFactory::getDocument();
@@ -31,7 +32,7 @@ $can_comment = $user->authorise('core.comment', 'com_testimonials');
 $can_reply = $user->authorise('core.reply', 'com_testimonials');
 $can_delete_commentnreply = $user->authorise('core.deletecomments', 'com_testimonials');
 
-if(!isset($GLOBALS['testimonials']) || !$GLOBALS['testimonials']['comments']['template_default']){
+if(!$GLOBALS['testimonials']['comments']['template_default']){
 /* need to add html tempalte to JS */
 /* and do it only once */
 ob_start();

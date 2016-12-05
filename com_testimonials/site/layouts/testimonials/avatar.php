@@ -12,11 +12,13 @@ defined('_JEXEC') or die;
 
 $value = $displayData->value;
 
-if($value){
-	if(file_exists(JPATH_SITE.'/images/comprofiler/'.$value)){
-		$value = '/images/comprofiler/'.$value;
-	}
-?>
-<?php echo JHtml::_('thumbler.renderthumb', $value); ?>
-<?php
+//if ($_SERVER['REMOTE_ADDR'] == '172.68.11.174') {
+//echo "<pre>";
+//print_r($value);
+//echo "</pre>";
+//}
+if(JHtml::_('thumbler.getthumb', $value)){
+	echo JHtml::_('thumbler.renderthumb', $value);
+}else{
+	echo '';
 }

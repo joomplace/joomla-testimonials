@@ -30,6 +30,8 @@ class TestimonialsTableTestimonials extends JTable
        	public function store($updateNulls = false)
 		{
 
+			$this->testimonial = preg_replace(array('/^(<br\W*?>)*/i','/(<br\W*?>)*$/i'),'',$this->testimonial);
+
 			if(!$this->catid){
 				$tag = JFactory::getLanguage()->getTag();
 				$options = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$tag),'filter.access' =>array(1)));
@@ -41,16 +43,16 @@ class TestimonialsTableTestimonials extends JTable
 				if (JFactory::getUser()->authorise('core.edit', 'com_testimonials'))
 				{
 					if ($this->id && $this->photo)
-						   		{
-						   			$path = JPATH_SITE.DIRECTORY_SEPARATOR.$this->photo;
-						   			
-						   			if (is_file($path) && file_exists($path))
-						   			{
-						   				unlink($path);
-						   				$this->photo='';
-						   			}
-						   			
-						   		}
+						{
+							$path = JPATH_SITE.DIRECTORY_SEPARATOR.$this->photo;
+							
+							if (is_file($path) && file_exists($path))
+							{
+								unlink($path);
+								$this->photo='';
+							}
+							
+						}
 				}
 			}
 			jimport( 'joomla.filesystem.file' );
@@ -145,7 +147,7 @@ class TestimonialsTableTestimonials extends JTable
 				{	$tags = $_POST['jform']['tags'];}
 				else
 				{
-					$tags=array(1);
+					$tags=array();
 				}
 					if (is_array($tags))
 					{
@@ -183,10 +185,13 @@ class TestimonialsTableTestimonials extends JTable
 				$custom_link = array(JFactory::getApplication()->input->getVar('customs_link', array()));
 				$custom_name = array(JFactory::getApplication()->input->getVar('customs_name', array()));
 				$url_array = array();
+
 				foreach($custom_link[0] as $key=>$val){
-						
-						$url_array[$key] = $val.'|'.$custom_name[0][$key];
-						if ($url_array[$key] == '|') unset($url_array[$key]);
+					if(!$val){
+						$custom_name[0][$key] = $val;
+					}
+					$url_array[$key] = $val.'|'.$custom_name[0][$key];
+					if ($url_array[$key] == '|') unset($url_array[$key]);
 				}
 				if (is_array($custom[0]) && is_array($url_array)) $custom[0] = $custom[0] + $url_array;
 

@@ -37,12 +37,6 @@ $document->addStyleSheet(JURI::root(true).'/administrator/components/com_testimo
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?option=com_testimonials&view=tags"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_TAGS');?></a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" id="drop-questions-manage" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo  JText::_('COM_TESTIMONIALS_MENU_SAMPLEDATA') ?><b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop-questions-manage">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?option=com_testimonials&task=sample_data"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_INSTALL_SAMPLE_DATA');?></a></li>
-                    </ul>
-                </li>
 				
 				<li class="dropdown">
 					<a role="menuitem" tabindex="-1" href="index.php?option=com_config&view=component&component=com_testimonials&return=<?php echo urlencode(base64_encode((string)JUri::getInstance())) ?>"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_SETTINGS')?></a>

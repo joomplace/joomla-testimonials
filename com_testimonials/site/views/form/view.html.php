@@ -31,7 +31,7 @@ class TestimonialsViewForm extends JViewLegacy
 	}
 	
 	public function display($tpl = null) {
-		
+
 		$this->renderLayout('testimonials.framework');
 		
 		$user		= JFactory::getUser();
@@ -39,14 +39,15 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
 		$this->form			= $this->get('Form');
-		$this->tags			= $this->get('Tags');
-		$this->custom_fields = $this->get('CustomFields');
+        $this->tags			= $this->get('Tags');
+        $this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsHelper();
-		$this->params		= $params =  $this->helper->getParams();
-		
-		$Gparams = JFactory::getApplication()->getParams();
-		
-		// Check for errors.
+        $this->params		= $params =  $this->helper->getParams();
+
+        $Gparams = JFactory::getApplication()->getParams();
+
+
+        // Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;

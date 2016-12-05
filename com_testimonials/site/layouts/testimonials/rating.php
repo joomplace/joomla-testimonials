@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 $value = $displayData->value;
 $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayData->system_name)))?JText::_(strtoupper($displayData->system_name)):$displayData->name;
+if($value){
 ?>
 <tr itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
 	<td >
@@ -30,3 +31,5 @@ $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayDat
 		</span>
 	</td>
 </tr>
+<?php
+}

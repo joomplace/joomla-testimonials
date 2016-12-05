@@ -213,6 +213,13 @@ class TestimonialsController extends JControllerLegacy
 				$version = substr( $version_info, 0, $version_info_pos );
 				$info = substr( $version_info, $version_info_pos + 1 );
 			}
+	        $version = explode('.',$version,4);
+	        $tm_version = explode('.',$tm_version,4);
+	        unset($version[3]);
+	        unset($tm_version[3]);
+	        $version = implode('.',$version);
+	        $tm_version = implode('.',$tm_version);
+
 			if($s->error || $s->status != 200){
 		    	echo '<font color="red">Connection to update server failed: ERROR: ' . $s->error . ($s->status == -100 ? 'Timeout' : $s->status).'</font>';
 		    } else if($version == $tm_version){

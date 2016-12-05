@@ -39,8 +39,8 @@ abstract class JHtmlThumbler
 		if($settings['width']) $width = $settings['width']; else $width = $params->get('thmbl_width', 100); 
 		if($settings['height']) $height = $settings['height']; else $height = $params->get('thmbl_height', false);
 		
-		if(is_file($image) || is_file(JPATH_SITE.str_replace(JUri::root(true),'/',$image))){
-			$image = (is_file($image))?$image:JPATH_SITE.str_replace(JUri::root(true),'/',$image);
+		if(is_file($image) || is_file(JPATH_SITE.$image)){
+			$image = (is_file($image))?$image:JPATH_SITE.$image;
 			$output .= $outsrc = self::getThumb($image, $settings);
 		}else{
 			if($settings['noimage']) $noimage = $settings['noimage']; else $noimage = $params->get('thmbl_noimage', false);

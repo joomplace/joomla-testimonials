@@ -28,6 +28,7 @@ if($params->get('fontawesome',1)){
 JFactory::getDocument()->addStyleDeclaration('
 	div#sbox-window {
 		top: 10%!important;
+        position: fixed;
 	}
 	.customs-table td, .customs-table tr td {
 		border-top: 0px solid #dddddd;

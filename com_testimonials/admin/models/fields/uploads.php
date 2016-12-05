@@ -10,7 +10,7 @@ jimport('joomla.form.formfield');
 
 class JFormFieldUploads extends JFormField {
 
-    protected $type = 'Uploads';
+    //protected $type = 'UploadThumbs';
 
     public function getInput()
     {
@@ -47,7 +47,7 @@ class JFormFieldUploads extends JFormField {
                         imagegif($source, $newFile);
                         break;
                     default:
-                        echo /*JPATH_ADMINISTRATOR.*/_pathToRelURLToRoot(getcwd()).'/assets/images/not_found.gif'; 
+                        echo /*JPATH_ADMINISTRATOR.*/'/administrator/components/com_testimonials/assets/images/not_found.gif';
                         die();
                 }
                 $settings = [
@@ -64,13 +64,13 @@ class JFormFieldUploads extends JFormField {
                 echo $url;//*JPATH_SITE.*/'/tmp/' . $name;
                 die();
             }
-            echo _pathToRelURLToRoot(getcwd()).'/assets/images/not_found.gif';
+            echo /*JPATH_ADMINISTRATOR.*/'/administrator/components/com_testimonials/assets/images/not_found.gif';
             die();
         } else {
 
             $document = JFactory::getDocument();
-            $document->addStyleSheet(_pathToRelURLToRoot(getcwd()).'/assets/css/DaD.css');
-            $document->addScript(_pathToRelURLToRoot(getcwd()).'/assets/js/DaD.js');
+            $document->addStyleSheet('/administrator/components/com_testimonials/assets/css/DaD.css');
+            $document->addScript('/administrator/components/com_testimonials/assets/js/DaD.js');
 
             $text = '';
             
@@ -96,10 +96,4 @@ class JFormFieldUploads extends JFormField {
             return $text;
         }
     }
-	
-	protected function _pathToRelURLToRoot($path){
-		$string = trim(str_replace(array(JPATH_SITE,'models','//'),array('/'.JUri::root(true),'','/'),$path),'/');
-		$string = substr($string, 0, strrpos($string, "/"));
-		return $string;
-	}
 }

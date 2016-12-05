@@ -181,8 +181,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
                 $db->setQuery($query2);
                 $data = $db->loadObject();
                 if($data->total_votes>0){
-                    $rating = round($data->votes_summary/$data->total_votes);
-                    $replace = $this->renderLayout('testimonials.agg_rating',(object)array('value' => $rating));
+                    $rating = round($data->votes_summary/$data->total_votes,1);
+                    $replace = $this->renderLayout('testimonials.agg_rating',(object)array('value' => $rating, 'count' => $data->total_votes));
                     $text = str_ireplace('['.$fieldTag.'_summary]', $replace, $text);
                 }else{
                     $text = str_ireplace('['.$fieldTag.'_summary]', '', $text);
