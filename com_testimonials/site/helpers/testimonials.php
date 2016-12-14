@@ -121,7 +121,8 @@ class TestimonialsHelper
                     //$body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
                 }
 				$body = str_replace(array('="/'),array('="'.JUri::root().JUri::root(true)),$body);
-                $subject = 'Administrator notification';
+	            $username = JFactory::getUser()->id?JFactory::getUser()->username:'Guest';
+	            $subject = 'Administrator notification: New testimonial added to '.str_replace('http://','',JUri::root()).' by '.$username.'';
                 $mailer->setSubject($subject);
                 $mailer->setBody($body);
 				$mailer->isHTML(true);
