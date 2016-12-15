@@ -308,6 +308,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
             $item = $this->item;
             $custom_fields = $this->custom_fields;
             $tags = $this->tags;
+            $images = $item->images;
 
         $user		= JFactory::getUser();
         if ($helper->can("create")){

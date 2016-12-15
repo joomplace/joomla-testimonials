@@ -102,7 +102,7 @@ input:focus,select:focus,textarea:focus
 }
 
 .form-horizontal .controls{
-    margin-left: 260px !important;
+    margin-left: 0 !important;
 }
 
 .form-horizontal .controls textarea {
