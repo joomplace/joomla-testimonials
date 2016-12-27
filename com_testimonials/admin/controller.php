@@ -240,4 +240,44 @@ class TestimonialsController extends JControllerLegacy
 		    }
 		    exit();
         }
+
+    public function new_image(){
+        $rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
+        $return = array('image'=>'', 'status'=>'bad', 'message'=>'');
+        if(!empty($_FILES['image']['tmp_name'])) {
+            $id = (int)JFactory::getApplication()->input->getInt('id');
+            $user = JFactory::getUser();
+            $return['create'] = $user->authorise('core.create', 'com_testimonials');
+            $return['edit'] = $user->authorise('core.edit', 'com_testimonials');
+            if(!$user->authorise('core.create', 'com_testimonials') && !$user->authorise('core.edit', 'com_testimonials')){
+                $return['message'] = JText::_('COM_TESTIMONIALS_ERROR_UPLOADING');
+                echo(json_encode($return));
+                die();
+            }
+            if(!$user->authorise('core.edit', 'com_testimonials') && $id != 0){
+                $return['message'] = JText::_('COM_TESTIMONIALS_ERROR_UPLOADING');
+                echo(json_encode($return));
+                die();
+            }
+            jimport( 'joomla.filesystem.file' );
+            $ext = JFile::getExt($_FILES['image']['name']);
+            $new_name = md5(time() . $_FILES['image']['name']) . '.' . $ext;
+            if (preg_match($rEFileTypes, strrchr($new_name, '.'))) {
+                if(JFile::upload($_FILES['image']['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
+                    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
+                        $return['image'] = $new_name;
+                        $return['status'] = 'ok';
+                    }else{
+                        $return['message'] = JText::_('COM_TESTIMONIALS_ERROR_UPLOADING');
+                    }
+                }else{
+                    $return['message'] = JText::_('COM_TESTIMONIALS_CHECK_PERMITIONS');
+                }
+            }else{
+                $return['message'] = JText::_('COM_TESTIMONIALS_WRONG_FILE_TYPE');
+            }
+        }else $return['message'] = JText::_('COM_TESTIMONIALS_NO_FILE');
+        echo(json_encode($return));
+        die();
+    }
 }

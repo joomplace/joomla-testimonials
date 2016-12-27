@@ -11,7 +11,8 @@ JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.formvalidation');
 jimport('joomla.filesystem.file');
 $images = (!empty($this->item->images)) ? explode("|", $this->item->images) : '';
-TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=images.addImage&id=' . (int) $this->item->id, 'topic-form', $this->item->preloadImages);
+//TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=images.addImage&id=' . (int) $this->item->id, 'topic-form', $this->item->preloadImages);
+$testimonial_id= $this->item->id;
 ?>
 <?php echo $this->loadTemplate('menu'); ?>
 <script type="text/javascript">
@@ -51,12 +52,12 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_testimonials&layout=edit&id=' . (int) $this->item->id); ?>" enctype="multipart/form-data" method="post" name="adminForm" id="topic-form" class="form-validate">
     <input type="hidden" name="jform[date_added]" value="<?php echo date('Y-m-d H:i:s', time()); ?>" />
-    <div class="row-fluid">	   
+    <div class="row-fluid" id="adminForm">
         <div id="j-main-container" class="span7 form-horizontal">
             <ul class="nav nav-tabs" id="configTabs">
                 <li><a href="#topic-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_DETAILS'); ?></a></li>
                 <li><a href="#customs-details" data-toggle="tab"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_CUSTOMS'); ?></a></li>
-                <!--<li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>-->
+                <li><a href="#images-details" data-toggle="tab"><?php echo JText::_('ADD_IMAGES'); ?></a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane" id="topic-details">
@@ -186,50 +187,30 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
                     </div>
                 </div>
                 <div class="tab-pane" id="images-details">
-                    <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images; ?>" />
-                    <input type="hidden" name="remove_image" id="remove_image" value="" />
 
                     <div class="span12" style="padding-right: 15px;">
-                        <!-- The file upload form used as target for the file upload widget -->
-                        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                        <div class="row fileupload-buttonbar" style="padding-left: 30px;">
-                            <div class="span7">
-                                <!-- The fileinput-button span is used to style the file input field as button -->
-                                <span class="btn btn-success fileinput-button">
-                                    <i class="icon-plus icon-white"></i>
-                                    <span>Add files...</span>
-                                    <input type="file" name="files[]" multiple>
-                                </span>
-                                <button type="submit" class="btn btn-primary start">
-                                    <i class="icon-upload icon-white"></i>
-                                    <span>Start upload</span>
-                                </button>
-                                <button type="reset" class="btn btn-warning cancel">
-                                    <i class="icon-ban-circle icon-white"></i>
-                                    <span>Cancel upload</span>
-                                </button>
-                                <button type="button" class="btn btn-danger delete">
-                                    <i class="icon-trash icon-white"></i>
-                                    <span>Delete</span>
-                                </button>
-                                <input type="checkbox" class="toggle">
-                            </div>
-                            <!-- The global progress information -->
-                            <div class="span5 fileupload-progress fade">
-                                <!-- The global progress bar -->
-                                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="bar" style="width:0%;"></div>
-                                </div>
-                                <!-- The extended global progress information -->
-                                <div class="progress-extended">&nbsp;</div>
-                            </div>
-                        </div>
                         <!-- The loading indicator is shown during file processing -->
                         <div class="fileupload-loading"></div>
-                        <br>
-                        <!-- The table listing the files available for upload/download -->
-                        <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
 
+                        <div class="testim-field-group control-group form-group testim-images-container">
+                            <div class="testim-add-image controls clearfix">
+<!--                                <div id="imageProgressContainer" class="imageProgressContainer"><div id="imageProgress" class="imageProgress"></div></div>-->
+                                <span id="uploadedImages" >
+                                    <?php
+                                    foreach($images as $image){
+                                        if(!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
+                                            ?>
+                                            <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root().'/images/testimonials/'.$image;?>" alt="<?php echo $image?>"/><span class="testim-del-img" image="<?php echo $image?>" onclick="deleteImage(this);"></span></a>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </span>
+                                <div class="testim-add-img2" onclick="document.getElementById('imageUpload').click();"><span class="testim-add-img-label"><?php echo JText::_('COM_TESTIMONIALS_ADD_IMAGE'); ?></span><input type="file" name="image" onclick="event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);" id="imageUpload" data-url="<?php echo JRoute::_('index.php?option=com_testimonials&task=new_image'); ?>" class="file-input-button"></div>
+                                <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images;?>" />
+                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo $form_data['remove_image'];?>" />
+                            </div>
+                        </div>
                     </div>
                     <!-- The template to display files available for upload -->
                     <script id="template-upload" type="text/x-tmpl">
@@ -413,3 +394,69 @@ TestimonialHelper::addFileUploadFull('index.php?option=com_testimonials&task=ima
 <?php echo JHtml::_('form.token'); ?>	
     </div>
 </form>
+<?php
+$script="
+(function($) {
+	submit_form = function(task) {
+		if (validateFields(true)) {
+			$('input[name=task]', $('#adminForm')).val(task);
+			$('#adminForm').submit();
+		}
+	}
+	$(document).ready(function () {
+		$(\"[rel=rating]\").click(function (){
+			$(this).parent().children().html('<i class=\"fa fa-star-o\"></i>');
+			var rate_val=$(this).attr('rating');
+			$('#customs_'+$(this).attr('field_id')).val(rate_val);
+			$(this).parent().children().each(function( index ) {
+				if($(this).attr('rating')<=rate_val){
+					$(this).html('<i class=\"fa fa-star\"></i>');
+				}
+			});
+		});
+
+		deleteImage = function(el){
+			$($(el).parent()).remove();
+			$('#remove_image').val($('#remove_image').val()+'|'+jQuery(el).attr('image'));
+		}
+		
+        $('#imageUpload').fileupload({
+            sequentialUploads: false,
+            dataType: 'json',
+            formData: {task: 'new_image', id: '".$testimonial_id."'},
+            xhrFields: {
+                withCredentials: true
+            },
+            submit: function (e, data) {
+                $('#imageProgressContainer').css('display','block');
+            },
+            done: function (e, data) {
+                if(data.result.status == 'ok'){
+                    $('#uploadedImages').append('<a href=\"javascript:void(0)\" class=\"testim-img\"><img src=\"".JURI::root(true).'/images/testimonials/'."'+data.result.image+'\" alt=\"'+data.result.image+'\"/><span class=\"testim-del-img\" image=\"'+data.result.image+'\" onclick=\"deleteImage(this);\"></span></a>');
+                    $('#uploadedImages a:last-child > img').load(function(){
+                        if($('#uploadedImages a:last-child > img').height() < $('#uploadedImages a:last-child > img').width()){
+                            $('#uploadedImages a:last-child > img').css('height','100%');
+                            $('#uploadedImages a:last-child > img').css('width','auto');
+                        }
+                    });
+                    $('#jform_exist_images').val($('#jform_exist_images').val()+'|'+data.result.image);
+                    $('#imageProgressContainer').css('display','none');
+                }
+                if(data.result.status == 'bad' && data.result.message != ''){
+                    alert(data.result.message);
+                    $('#imageProgressContainer').css('display','none');
+                }
+            }
+        });
+		
+	});
+})(jQuery);
+";
+$document = JFactory::getDocument();
+$document->addScriptDeclaration($script);
+$document->addStyleSheet($this->baseurl.'/components/com_testimonials/assets/submit-form/css/template_testimonials.css');
+$document->addScript($this->baseurl.'/components/com_testimonials/assets/submit-form/js/main.js');
+$document->addScript($this->baseurl.'/components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
+$document->addScript($this->baseurl.'/components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
+$document->addScript($this->baseurl.'/components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
+?>
