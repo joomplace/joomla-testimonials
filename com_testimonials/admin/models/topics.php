@@ -60,7 +60,7 @@ class TestimonialsModelTopics extends JModelList
 				
 				if (!empty($search)) {
 						$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-						$query->where('('.$tagquery.' LIKE  '.$search.' )');
+						$query->where('('.$tagquery.' LIKE  '.$search.' OR '.$db->qn('t.testimonial').' LIKE '.$search.')');
 					}
                 $orderCol	= $this->state->get('list.ordering', 't_caption');
 		
