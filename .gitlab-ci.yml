@@ -2,34 +2,39 @@ before_script:
   - apt-get update -qq && apt-get install -y -qq zip
 
 stages:
-  - compile
+  - build
   - test
   - cs
 
-packaging:
-  stage: compile
+build:regular:
+  stage: build
   script:
     # check for BOM - not working
     - if grep -rn './' -e "\xEF\xBB\xBF"; then exit 1; fi
     - echo 'Packaging of 1 package script should be called here'
-    - mkdir tmp
-    - mkdir tmp/packages
+#    - mkdir tmp
+    - mkdir packages
     - mkdir built
-    - grep -E -o '<file.*>(.*?)</file>' ./pkg_testimonials.xml |  sed -E 's/<file[^>]+>|.zip<\/file>//g' | while read in; do if [ "$in" != 'plg_installer_joomplaceupdater' ]; then cd ./"$in"; zip -r ./../tmp/packages/"$in".zip ./*; cd ./../; fi; done
-    - cp ./pkg_testimonials.xml ./tmp/pkg_testimonials.xml
-    - cd ./tmp/
+    - grep -E -o '<file.*>(.*?)</file>' ./pkg_testimonials.xml |  sed -E 's/<file[^>]+>|.zip<\/file>//g' | while read in; do if [ "$in" != 'plg_installer_joomplaceupdater' ]; then cd ./"$in"; zip -r ./../packages/"$in".zip ./*; cd ./../; fi; done
+#    - cp ./pkg_testimonials.xml ./tmp/pkg_testimonials.xml
+#    - cd ./tmp/
 #    - zip -r ./../pkg_testimonials.zip ./*
 #    - cd ./built/
     - pwd
   artifacts:
     paths:
-    - tmp/
-    name: "pkg_testimonials_$CI_BUILD_NAME"
+    - packages/
+    - pkg_testimonials.xml
+    name: "pkg_testimonials_${CI_BUILD_REF_NAME}"
+    when: on_success
+    expire_in: 1 week
 
 test:
   stage: test
   script:
     - echo 'Tests go here'
+  dependencies:
+    - build:regular
 
 codestyle:
   stage: cs
