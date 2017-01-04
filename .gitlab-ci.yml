@@ -14,16 +14,17 @@ packaging:
     - echo 'Packaging of 1 package script should be called here'
     - mkdir tmp
     - mkdir tmp/packages
+    - mkdir built
     - grep -E -o '<file.*>(.*?)</file>' ./pkg_testimonials.xml |  sed -E 's/<file[^>]+>|.zip<\/file>//g' | while read in; do if [ "$in" != 'plg_installer_joomplaceupdater' ]; then cd ./"$in"; zip -r ./../tmp/packages/"$in".zip ./*; cd ./../; fi; done
-    - clear
     - cp ./pkg_testimonials.xml ./tmp/pkg_testimonials.xml
     - cd ./tmp/
-    - zip -r ./../pkg_testimonials.zip ./*
-    - clear
+#    - zip -r ./../pkg_testimonials.zip ./*
+#    - cd ./built/
     - pwd
   artifacts:
     paths:
-    - pkg_testimonials.zip
+    - tmp/
+    name: "pkg_testimonials_$CI_BUILD_NAME"
 
 test:
   stage: test
