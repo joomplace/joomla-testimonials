@@ -1,3 +1,22 @@
-dltest:
+stages:
+  - compile
+  - test
+  - cs
+
+packaging:
+  stage: compile
   script:
-    - ls -la
+    - echo 'Packaging of 1 package script should be called here'
+  artifacts:
+    paths:
+    - testimonials.zip
+
+test:
+  stage: test
+  script:
+    - echo 'Tests go here'
+
+codestyle:
+  stage: cs
+  script:
+    - echo 'Code style checks go here'
