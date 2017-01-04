@@ -11,6 +11,14 @@ packaging:
     paths:
     - testimonials.zip
 
+packaging-pro:
+  stage: compile
+  script:
+    - echo 'Packaging of 1 package script should be called here'
+  artifacts:
+    paths:
+    - testimonials_pro.zip
+
 test:
   stage: test
   script:
