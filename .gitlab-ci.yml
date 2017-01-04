@@ -1,6 +1,3 @@
-before_script:
-  - apt-get update -qq && apt-get install -y -qq zip
-
 stages:
   - build
   - test
@@ -8,6 +5,8 @@ stages:
 
 build:regular:
   stage: build
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq zip
   script:
     # check for BOM - not working
     - if grep -rn './' -e "\xEF\xBB\xBF"; then exit 1; fi
