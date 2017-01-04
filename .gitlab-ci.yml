@@ -1,5 +1,5 @@
-before_script:
-  - apt-get install zip
+#before_script:
+#  - apt-get install zip
 
 stages:
   - compile
