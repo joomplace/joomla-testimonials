@@ -1,3 +1,6 @@
+before_script:
+  - apt-get install zip
+
 stages:
   - compile
   - test
@@ -11,12 +14,15 @@ packaging:
     - echo 'Packaging of 1 package script should be called here'
     - mkdir tmp
     - mkdir tmp/packages
-    - sed -n 's:.*<file.*?>\(.*\)</file>.*:\1:p' pkg_testimonials.xml
+    - grep -E -o '<file.*>(.*?)</file>' ./pkg_testimonials.xml |  sed -E 's/<file[^>]+>|.zip<\/file>//g' | while read in; do if [ "$in" != 'plg_installer_joomplaceupdater' ]; then cd ./"$in"; zip -r ./../tmp/packages/"$in".zip ./*; cd ./../; fi; done
+    - cp ./pkg_testimonials.xml ./tmp/pkg_testimonials.xml
+    - cd ./tmp/
+    - zip -r ./pkg_testimonials.zip ./*
     - pwd
     - ls -la
   artifacts:
     paths:
-    - testimonials.zip
+    - tmp/pkg_testimonials.zip
 
 test:
   stage: test
