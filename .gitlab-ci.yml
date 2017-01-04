@@ -7,7 +7,7 @@ packaging:
   stage: compile
   script:
     # check for BOM - not working
-    # - find ./ -type f  -exec echo {} \;
+    - if grep -rn './' -e "\xEF\xBB\xBF"; then exit 1; fi
     - echo 'Packaging of 1 package script should be called here'
     - mkdir tmp
     - mkdir tmp/packages
