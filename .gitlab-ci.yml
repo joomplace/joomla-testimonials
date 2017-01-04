@@ -11,7 +11,7 @@ packaging:
     - echo 'Packaging of 1 package script should be called here'
     - mkdir tmp
     - mkdir tmp/packages
-    - sed -n 's:.*<id>\(.*\)</id>.*:\1:p' pkg_testimonials.xml -exec echo {} \;
+    - sed -n 's:.*<file.*?>\(.*\)</file>.*:\1:p' pkg_testimonials.xml
     - pwd
     - ls -la
   artifacts:
