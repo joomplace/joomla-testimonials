@@ -7,7 +7,7 @@ packaging:
   stage: compile
   script:
     # check for BOM
-    #- find $repoUrl -type f -exec sed '1s/^\xEF\xBB\xBF//' -i {} \; -exec rm {}.bak --interactive=never 2>/dev/null \;
+    - find ./ -type f -exec sed '1s/^\xEF\xBB\xBF//' -i {} \; -exec rm {}.bak --interactive=never 2>/dev/null
     - echo 'Packaging of 1 package script should be called here'
     - pwd
     - ls -la
