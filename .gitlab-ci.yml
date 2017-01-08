@@ -35,6 +35,7 @@ test:
 codestyle:
   stage: cs
   before_script:
+    - php -v
     - apt-get update -qq && apt-get install -y -qq git
   script:
     - git clone https://github.com/squizlabs/PHP_CodeSniffer.git
