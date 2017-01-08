@@ -5,6 +5,7 @@ stages:
 
 build:regular:
   stage: build
+  image: ubuntu-upstart:precise
   before_script:
     - apt-get update -qq && apt-get install -y -qq zip
   script:
