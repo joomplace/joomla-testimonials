@@ -1,7 +1,7 @@
 stages:
-  - cs
   - build
   - test
+  - cs
 
 build:regular:
   stage: build
@@ -39,7 +39,6 @@ codestyle:
     - php -v
     - apt-get update -qq && apt-get install -y -qq git
   script:
-    - git clone https://github.com/squizlabs/PHP_CodeSniffer.git
-    - cd PHP_CodeSniffer
-    - php scripts/phpcs -i
-    - php scripts/phpcs --standard=PSR2 ../com_testimonials/admin/testimonials.php
+    - git clone https://github.com/squizlabs/PHP_CodeSniffer.git ../phpcs
+    - php ../phpcs/scripts/phpcs -i
+    - php ../phpcs/scripts/phpcs --standard=PSR2 --extensions=php ./
