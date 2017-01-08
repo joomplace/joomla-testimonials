@@ -35,4 +35,7 @@ test:
 codestyle:
   stage: cs
   script:
-    - echo 'Code style checks go here'
+    - git clone https://github.com/squizlabs/PHP_CodeSniffer.git
+    - cd PHP_CodeSniffer
+    - php scripts/phpcs -i
+#    - php scripts/phpcbf -h
