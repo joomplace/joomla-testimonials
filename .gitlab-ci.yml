@@ -1,6 +1,3 @@
-before_script:
-  - apt-get update -qq && apt-get install -y -qq zip
-
 stages:
   - build
   - test
@@ -8,6 +5,8 @@ stages:
 
 build:regular:
   stage: build
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq zip
   script:
 # check BOM
     - if grep -rn './' -e "\xEF\xBB\xBF"; then exit 1; fi
@@ -35,6 +34,8 @@ test:
 
 codestyle:
   stage: cs
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq git
   script:
     - git clone https://github.com/squizlabs/PHP_CodeSniffer.git
     - cd PHP_CodeSniffer
