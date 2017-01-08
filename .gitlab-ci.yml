@@ -42,4 +42,4 @@ codestyle:
     - git clone https://github.com/squizlabs/PHP_CodeSniffer.git
     - cd PHP_CodeSniffer
     - php scripts/phpcs -i
-    - php scripts/phpcs --standard=PEAR ../com_testimonials/admin/testimonials.php
+    - php scripts/phpcs --standard=PSR2 ../com_testimonials/admin/testimonials.php
