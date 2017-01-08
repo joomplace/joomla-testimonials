@@ -43,4 +43,4 @@ codestyle:
   script:
     - git clone https://github.com/squizlabs/PHP_CodeSniffer.git ../phpcs
     - php ../phpcs/scripts/phpcs -i
-    - php ../phpcs/scripts/phpcs --standard=PSR2 --warning-severity=3 --extensions=php ./
+    - php ../phpcs/scripts/phpcs --standard=PSR2 --warning-severity=1 --extensions=php ./
