@@ -8,22 +8,27 @@ jimport('joomla.form.formfield');
 //В путях изображений закомментил JPATH_ADMINISTRATOR что бы работало на локалке
 //Можно расширить разрешенные форматы
 
-class JFormFieldUploads extends JFormField {
+class JFormFieldUploads extends JFormField
+{
 
     protected $type = 'Uploads';
 
     public function getInput()
     {
         //Check if ajax
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest'
+        ) {
             ob_clean();
             $max_file_size = 2000000;
-            $width = 150;
-            $height = 150;
+            $width         = 150;
+            $height        = 150;
             require_once JPATH_COMPONENT_SITE . '/helpers/html/thumbler.php';
 
             //Check file
-            if (isset($_FILES["file"]) && $_FILES["file"]["size"] < $max_file_size) {
+            if (isset($_FILES["file"])
+                && $_FILES["file"]["size"] < $max_file_size
+            ) {
                 $type = $_FILES['file']['type'];
                 $name = $_FILES['file']['name'];
                 $path = JPATH_SITE . '/tmp/' . $name;
@@ -32,49 +37,57 @@ class JFormFieldUploads extends JFormField {
                 switch ($type) {
                     case('image/jpg'):
                     case('image/jpeg'):
-                        $source = imagecreatefromjpeg($_FILES['file']['tmp_name']);
+                        $source
+                                 = imagecreatefromjpeg($_FILES['file']['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagejpeg($source, $newFile);
                         break;
                     case('image/bmp'):
-                        $source = imagecreatefromwbmp($_FILES['file']['tmp_name']);
+                        $source
+                                 = imagecreatefromwbmp($_FILES['file']['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagewbmp($source, $newFile);
                         break;
                     case('image/gif'):
-                        $source = imagecreatefromgif($_FILES['file']['tmp_name']);
+                        $source
+                                 = imagecreatefromgif($_FILES['file']['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagegif($source, $newFile);
                         break;
                     default:
-                        echo /*JPATH_ADMINISTRATOR.*/_pathToRelURLToRoot(getcwd()).'/assets/images/not_found.gif'; 
+                        echo /*JPATH_ADMINISTRATOR.*/
+                            _pathToRelURLToRoot(getcwd())
+                            . '/assets/images/not_found.gif';
                         die();
                 }
                 $settings = [
-                    'width' => $width ,
+                    'width'  => $width,
                     'height' => $height,
                     '',
                     '',
                     '',
                     ''
                 ];
-                $url = JHtmlThumbler::getThumb($path, $settings);
+                $url      = JHtmlThumbler::getThumb($path, $settings);
                 imagedestroy($source);
                 // FCLOSE ERROR ???
                 echo $url;//*JPATH_SITE.*/'/tmp/' . $name;
                 die();
             }
-            echo _pathToRelURLToRoot(getcwd()).'/assets/images/not_found.gif';
+            echo _pathToRelURLToRoot(getcwd()) . '/assets/images/not_found.gif';
             die();
         } else {
 
             $document = JFactory::getDocument();
-            $document->addStyleSheet(_pathToRelURLToRoot(getcwd()).'/assets/css/DaD.css');
-            $document->addScript(_pathToRelURLToRoot(getcwd()).'/assets/js/DaD.js');
+            $document->addStyleSheet(_pathToRelURLToRoot(getcwd())
+                . '/assets/css/DaD.css');
+            $document->addScript(_pathToRelURLToRoot(getcwd())
+                . '/assets/js/DaD.js');
 
             $text = '';
-            
-            $text .= '
+
+            $text
+                .= '
         <div class="col-md-6">
           <!-- D&D Zone-->
           <div class="tst_drop_field uploader">
@@ -93,13 +106,17 @@ class JFormFieldUploads extends JFormField {
           </div>
         </div>
         ';
+
             return $text;
         }
     }
-	
-	protected function _pathToRelURLToRoot($path){
-		$string = trim(str_replace(array(JPATH_SITE,'models','//'),array('/'.JUri::root(true),'','/'),$path),'/');
-		$string = substr($string, 0, strrpos($string, "/"));
-		return $string;
-	}
+
+    protected function _pathToRelURLToRoot($path)
+    {
+        $string = trim(str_replace(array(JPATH_SITE, 'models', '//'),
+            array('/' . JUri::root(true), '', '/'), $path), '/');
+        $string = substr($string, 0, strrpos($string, "/"));
+
+        return $string;
+    }
 }

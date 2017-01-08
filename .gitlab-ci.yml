@@ -8,6 +8,7 @@ build:regular:
   image: php:7.0-apache
   before_script:
     - apt-get update -qq && apt-get install -y -qq zip
+    - zip -v
   script:
 # check BOM
     - if grep -rn './' -e "\xEF\xBB\xBF"; then exit 1; fi
