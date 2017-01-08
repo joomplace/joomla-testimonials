@@ -1,6 +1,4 @@
 stages:
-  - build
-  - test
   - cs
 
 build:regular:
