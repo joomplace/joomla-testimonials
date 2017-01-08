@@ -5,7 +5,7 @@ stages:
 
 build:regular:
   stage: build
-  image: ubuntu-upstart:precise
+  image: php:7.0-apache
   before_script:
     - apt-get update -qq && apt-get install -y -qq zip
   script:
