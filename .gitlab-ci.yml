@@ -54,4 +54,4 @@ codestyle_content_plg:
   script:
     - git clone https://github.com/squizlabs/PHP_CodeSniffer.git ../phpcs
     - php ../phpcs/scripts/phpcs -i
-    - php ../phpcs/scripts/phpcs --standard=PSR2 --warning-severity=1 --extensions=php ./plg_content_testimonials/tags_testimonial.php
+    - php ../phpcs/scripts/phpcs --standard=PSR1 --warning-severity=1 --extensions=php ./plg_content_testimonials/tags_testimonial.php
