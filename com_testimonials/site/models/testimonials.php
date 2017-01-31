@@ -165,7 +165,11 @@ class TestimonialsModelTestimonials extends JModelList
 
         if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials'))
         {
-            $query->where('(t.`published`=1 OR t.`ip_addr`='.$db->q($_SERVER['REMOTE_ADDR']).')');
+            if(TestimonialsHelper::getParams()->get('track_by_ip',false)){
+                $query->where('(t.`published`=1 OR t.`ip_addr`='.$db->q($_SERVER['REMOTE_ADDR']).')');
+            }else{
+                $query->where('(t.`published`=1)');
+            }
         }
 
 		if(!$this->random){

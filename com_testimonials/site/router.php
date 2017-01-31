@@ -14,14 +14,16 @@ function TestimonialsBuildRoute( &$query ) {
 	
 	$app =& JFactory::getApplication();
 	$menu =& $app->getMenu();
-	
-	foreach($menu->getMenu() as $id => $item){
-		if(!array_diff_assoc($item->query,$query) && !empty($item->query)){
-			$query['Itemid'] = $id;
-			break;
-		}
+
+    if(!isset($query['Itemid']) || !$query['Itemid']){
+        foreach($menu->getMenu() as $id => $item){
+            if(!array_diff_assoc($item->query,$query) && !empty($item->query)){
+                $query['Itemid'] = $id;
+                break;
+            }
+        }
 	}
-	
+
 	$menu_item = $menu->getItem($query['Itemid']);
 	
 	foreach($query as $key => $val){

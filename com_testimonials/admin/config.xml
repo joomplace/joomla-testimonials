@@ -4,7 +4,13 @@
 	<fieldset name="settings"
 		label="COM_TESTIMONIALS_SETTINGS_GLOBAL"
 		>
-		
+		<field name="track_by_ip" type="radio" default="1"
+			   class="btn-group"
+			   label="Show unpublished by IP"
+			   description="Show not published testimonials if IP is same">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
         <field name="bootstrap" type="radio" default="1"
                class="btn-group"
                label="COM_USE_BOOTSTRAP"
