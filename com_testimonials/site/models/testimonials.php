@@ -192,7 +192,7 @@ class TestimonialsModelTestimonials extends JModelList
         $query->order('`f`.`ordering`');
         $db->setQuery($query);
 		
-        return $db->loadObjectList('system_name');
+        return $db->loadObjectList('name');
     }
 	
 	public function setListLimit($limit){
