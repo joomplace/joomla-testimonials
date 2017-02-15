@@ -115,16 +115,20 @@ class TestimonialsHelper
                 $mailer = JFactory::getMailer();
                 if($isEdited == true){
                     $body = 'Greetings! A testimonial ( "'.$caption.'" ) was edited on the site by user "'.$author.'". Please review the testimonial.';
-                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
+                    $body .= '<br />';
+                    $body .= '<a href="' . JUri::root() . 'administrator/index.php?option=com_testimonials&view=topic&layout=edit&id=' . $id . '">View Testimonial</a>';
+//                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
                 }else{
                     $body = 'Greetings! A new testimonial ( "'.$caption.'" ) was added on the site by user "'.$author.'". Please review the testimonial.';
-                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
+                    $body .= '<br />';
+                    $body .= '<a href="' . JUri::root() . 'administrator/index.php?option=com_testimonials&view=topic&layout=edit&id=' . $id . '">View Testimonial</a>';
+//                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
                 }
 				$body = str_replace(array('="/'),array('="'.JUri::root().JUri::root(true)),$body);
                 $subject = 'Administrator notification';
                 $mailer->setSubject($subject);
+                $mailer->isHTML(true);
                 $mailer->setBody($body);
-				$mailer->isHTML(true);
 				//$mailer->Encoding = 'base64';
                 $mailer->addRecipient($boxes);
                 $mailer->send();
