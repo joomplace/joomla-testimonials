@@ -55,21 +55,22 @@ function subfolding($r_url){
                             <a href="http://www.JoomPlace.com">JoomPlace</a>.
                         </th>
                     </tr>
-                    <tr>
-                        <td width="13%"  align="left">Installed version:</td>
-                        <td align="left">&nbsp;<b><?php echo TestimonialHelper::getVersion();?></b>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left">Latest version:</td>
-                        <td>
-                            <div id="tm_LatestVersion">
-                                <script type="text/javascript">
-                                    tm_CheckVersion();
-                                </script>
-                            </div>
-                        </td>
-                    </tr>
+                    <!-- Hide current and latest version since integrate Joomla update system -->
+<!--                    <tr>-->
+<!--                        <td width="13%"  align="left">Installed version:</td>-->
+<!--                        <td align="left">&nbsp;<b>--><?php //echo TestimonialHelper::getVersion();?><!--</b>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td align="left">Latest version:</td>-->
+<!--                        <td>-->
+<!--                            <div id="tm_LatestVersion">-->
+<!--                                <script type="text/javascript">-->
+<!--                                    tm_CheckVersion();-->
+<!--                                </script>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     <tr>
                         <td valign="top" align="left">About:</td>
                         <td align="left"><?php echo JText::_('COM_TESTIMONIALS_ABOUT_TEXT'); ?></td>
