@@ -8,7 +8,7 @@ defined('_JEXEC') or die;
 $content = file_get_contents(JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_testimonials' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
 eval(str_replace('<?php', '',str_replace('TestimonialsHelper', 'TestimonialsHelperBase', $content)));
 
-abstract class TestimonialsHelper
+abstract class TestimonialsHelper  extends TestimonialsHelperBase
 {
 	/**
 	 * Configure the Linkbar.
