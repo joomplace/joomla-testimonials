@@ -49,7 +49,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
 		$field_layout->setComponent('com_testimonials');
 		$html = $field_layout->sublayout($sublayout,$data);
 		if(!$html) $html = $field_layout->render($data);				
-		if(!$html) $html = $data->value;
+		//if(!$html) $html = $data->value;
 		
 		return $html;
 	}
