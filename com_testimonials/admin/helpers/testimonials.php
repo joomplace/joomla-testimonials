@@ -8,8 +8,20 @@ defined('_JEXEC') or die;
 $content = file_get_contents(JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_testimonials' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
 eval(str_replace('<?php', '',str_replace('TestimonialsHelper', 'TestimonialsHelperBase', $content)));
 
-abstract class TestimonialsHelper  extends TestimonialsHelperBase
+abstract class TestimonialsHelper
 {
+	public static function __callStatic($method, $arguments) {
+        if(method_exists('TestimonialsHelperBase', $method)) {
+            return TestimonialsHelperBase::$method($arguments);
+        }
+    }
+
+    public function __call($method, $arguments) {
+        if(method_exists('TestimonialsHelperBase', $method)) {
+            return TestimonialsHelperBase::$method($arguments);
+        }
+    }
+	
 	/**
 	 * Configure the Linkbar.
 	 */
