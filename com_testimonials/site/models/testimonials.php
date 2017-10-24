@@ -9,7 +9,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.modellist');
- 
+
 /**
  * Testimonials Model
  */
@@ -23,11 +23,11 @@ class TestimonialsModelTestimonials extends JModelList
 	public 		$avoidacl = false;
 	public 		$category='';
 	public 		$categories='';
-	
+
    /**
 	 * Method to build an SQL query to load the list data
 	 */
-	
+
 	public function getUserLayout(){
 		if($this->layout){
 			return $this->layout;
@@ -42,7 +42,7 @@ class TestimonialsModelTestimonials extends JModelList
 			return JFactory::getApplication()->input->get('layout', $layout);
 		}
 	}
-	
+
 	protected function populateState($ordering = null, $direction = null){
 		parent::populateState($ordering, $direction);
 		$app = JFactory::getApplication();
@@ -60,16 +60,16 @@ class TestimonialsModelTestimonials extends JModelList
 		}
 		if(!$this->anc)
 			$this->anc = JFactory::getApplication()->input->get('anc',0,'INT');
-		
+
 		$limit = $this->getListLimit();
 		//$app->setUserState('com_testimonials.list.limit', $limit);
 		$this->setState('list.limit', $limit);
 		$start = $app->input->get('start', $app->input->get('limitstart', 0, 'uint'), 'uint');
 		$this->setState('list.start', $start);
-		
+
 		$this->setState('catid', $category);
 	}
-	
+
 	protected function getListQuery()
 	{
         $params = TestimonialsHelper::getParams();
@@ -99,7 +99,7 @@ class TestimonialsModelTestimonials extends JModelList
 			}else{
 				$doc->_metaTags['standard']['robots'] = 'noindex, follow';
 			}
-		}		
+		}
         $query->select('t.*, t_author as `author`, t_caption as `caption`, author_description as `author_descr`, photo as `avatar`, u.name, u.email, GROUP_CONCAT(DISTINCT concat(tag.id, "::", tag.tag_name)) as tags'.$select_tapper)
             ->from('#__tm_testimonials as t')
             ->leftJoin('#__users as u ON t.user_id_t = u.id')
@@ -107,10 +107,13 @@ class TestimonialsModelTestimonials extends JModelList
             ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
             ->group('t.id');
 
-		$catid = $this->category->id;
+        if (isset($this->category->id))
+            $catid = $this->category->id;
+        else
+            $catid = NULL;
 
 		if($catid){
-		
+
 			jimport('joomla.application.categories');
 			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
 			$this->categories = $categories;
@@ -176,7 +179,7 @@ class TestimonialsModelTestimonials extends JModelList
 		}else{
 			$query->order($order_tapper.' RAND()');
 		}
-		
+
 		return $query;
 	}
 
@@ -191,18 +194,18 @@ class TestimonialsModelTestimonials extends JModelList
         $query->where('`f`.`published`=1');
         $query->order('`f`.`ordering`');
         $db->setQuery($query);
-		
+
         return $db->loadObjectList('system_name');
     }
-	
+
 	public function setListLimit($limit){
 		return $this->limit = $limit;
 	}
-	
+
 	public function setTag($tag){
 		return $this->tag = $tag;
 	}
-	
+
 	protected function getListLimit(){
 		if(!$this->limit){
 			$app = JFactory::getApplication();
@@ -211,11 +214,11 @@ class TestimonialsModelTestimonials extends JModelList
 		}
 		return $this->limit;
 	}
-	
+
 	public function getCategory(){
 		return $this->category;
 	}
-	
+
 	public function getCategories(){
 		return $this->categories;
 	}

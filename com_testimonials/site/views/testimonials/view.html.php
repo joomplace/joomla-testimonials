@@ -43,13 +43,13 @@ class TestimonialsViewTestimonials extends JViewLegacy
     }
 	
 	function renderLayout($layout, $data = null, $sublayout=''){
-		if(!$sublayout) $sublayout = ($this->getLayout()=='default')?'':$this->getLayout();
-		if(!$data) $data = (object)array('value'=>'');
-		$field_layout = new JLayoutFile($layout);
-		$field_layout->setComponent('com_testimonials');
-		$html = $field_layout->sublayout($sublayout,$data);
-		if(!$html) $html = $field_layout->render($data);				
-		if(!$html) $html = $data->value;
+        if(!$sublayout) $sublayout = ($this->getLayout()=='default')?'':$this->getLayout();
+        if(!$data) $data = (object)array('value'=>'');
+        $field_layout = new JLayoutFile($layout);
+        $field_layout->setComponent('com_testimonials');
+        $html = $field_layout->sublayout($sublayout,$data);
+        if(!$html) $html = $field_layout->render($data);
+        if ((!$html) && isset($data->value)) $html = $data->value;
 		
 		return $html;
 	}
