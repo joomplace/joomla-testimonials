@@ -10,7 +10,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.table');
-JLoader::register('TestimonialsHelper', JPATH_SITE . DIRECTORY_SEPARATOR . 'components/com_testimonials/helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
  
 /**
  * Testimonials Table class
@@ -29,6 +28,9 @@ class TestimonialsTableTestimonials extends JTable
         
        	public function store($updateNulls = false)
 		{
+            JLoader::register('TestimonialsHelper',
+                JPATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php'
+            );
 
 			if(!$this->catid){
 				$tag = JFactory::getLanguage()->getTag();

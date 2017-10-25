@@ -197,18 +197,24 @@ $testimonial_id= $this->item->id;
 <!--                                <div id="imageProgressContainer" class="imageProgressContainer"><div id="imageProgress" class="imageProgress"></div></div>-->
                                 <span id="uploadedImages" >
                                     <?php
-                                    foreach($images as $image){
-                                        if(!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
-                                            ?>
-                                            <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root().'/images/testimonials/'.$image;?>" alt="<?php echo $image?>"/><span class="testim-del-img" image="<?php echo $image?>" onclick="deleteImage(this);"></span></a>
-                                            <?php
+                                    if( is_array($images) && !empty($images)) {
+                                        foreach ($images as $image) {
+                                            if (!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) {
+                                                ?>
+                                                <a href="javascript:void(0)" class="testim-img"><img
+                                                            src="<?php echo JURI::root() . '/images/testimonials/' . $image; ?>"
+                                                            alt="<?php echo $image ?>"/><span class="testim-del-img"
+                                                                                              image="<?php echo $image ?>"
+                                                                                              onclick="deleteImage(this);"></span></a>
+                                                <?php
+                                            }
                                         }
                                     }
                                     ?>
                                 </span>
                                 <div class="testim-add-img2" onclick="document.getElementById('imageUpload').click();"><span class="testim-add-img-label"><?php echo JText::_('COM_TESTIMONIALS_ADD_IMAGE'); ?></span><input type="file" name="image" onclick="event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);" id="imageUpload" data-url="<?php echo JRoute::_('index.php?option=com_testimonials&task=new_image'); ?>" class="file-input-button"></div>
                                 <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images;?>" />
-                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo $form_data['remove_image'];?>" />
+                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo isset($form_data['remove_image']) ? $form_data['remove_image'] : ''; ?>" />
                             </div>
                         </div>
                     </div>
