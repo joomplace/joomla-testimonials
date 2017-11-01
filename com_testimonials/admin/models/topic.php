@@ -15,6 +15,8 @@ jimport('joomla.application.component.modeladmin');
  * Topic model.
  *
  */
+
+
 class TestimonialsModelTopic extends JModelAdmin
 {
     protected $text_prefix = 'COM_TESTIMONIALS';
@@ -98,7 +100,7 @@ class TestimonialsModelTopic extends JModelAdmin
         $data = JFactory::getApplication()
             ->getUserState('com_testimonials.edit.topic.data', array());
 
-        if (empty($data)) {
+        if (!empty($data)) {
             $id = $this->getState('topic.id');
 
             // Prime some default values.
@@ -106,6 +108,7 @@ class TestimonialsModelTopic extends JModelAdmin
                 $app = JFactory::getApplication();
                 $id  = $app->getUserState('com_testimonials.edit.topic.id');
                 if ($id) {
+                    //$data = JFactory::getApplication()->input->getInt('id', $id);
                     $data->set('id',
                         JFactory::getApplication()->input->getInt('id', $id));
                 }

@@ -212,48 +212,48 @@ class TestimonialsTableTestimonials extends JTable
 				$customFieldsTable->store();
 									
 				// Autoapprove
-				$params = TestimonialsHelper::getParams();
-				if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials'))
-				{
-					$this->publish($this->id, $state = 0);
-				}
-				if ($params->get('autoapprove')==0 && !JFactory::getUser()->authorise('core.admin', 'com_testimonials'))
-				{
-					$this->approve($this->id, $state = 0);
-				}
+                if (method_exists(TestimonialsHelper, 'getParams')) {
+                    $params = TestimonialsHelper::getParams();
+                    if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials')) {
+                        $this->publish($this->id, $state = 0);
+                    }
+                    if ($params->get('autoapprove') == 0 && !JFactory::getUser()->authorise('core.admin', 'com_testimonials')) {
+                        $this->approve($this->id, $state = 0);
+                    }
+                }
 				
 				//Send notifications
-				$emails = TestimonialsHelper::getNotifyUserEmails();
-				if (sizeof($emails))
-				{
-					$config	= JFactory::getConfig();
-					$fromname	= $config->get('fromname');
-					$mailfrom	= $config->get('mailfrom');
-					$sitename	= $config->get('sitename');
-					
-					$id = $this->id;
-					$subject = stripslashes(JText::_($id?'COM_TESTIMONIALS_MAIL_EDIT_SUBJECT':'COM_TESTIMONIALS_MAIL_NEW_SUBJECT'));
-					$message = nl2br(sprintf(stripslashes($id?JText::_('COM_TESTIMONIALS_MAIL_EDIT_MESSAGE'):JText::_('COM_TESTIMONIALS_MAIL_NEW_MESSAGE')), JURI::base(), $this->t_caption, $this->t_author, $this->testimonial));
-					
-					if (!$id) // ONLY NEW FE TESTIMONIALS 
-					{					
-						foreach ( $emails as $email ) 
-						{
-                            $mailer = JFactory::getMailer();
-                            $mailer->setSender(array($mailfrom,$fromname));
-                            $mailer->addRecipient($email);
-                            $mailer->setSubject($subject);
-                            $mailer->setBody(JHtml::_('content.prepare',str_replace('{testimonial}','{testimonials email|id:'.$id.'|1}',$message)));
-                            $send = $mailer->Send();
-                            if ( $send !== true ) {
-                                echo 'Error sending email: ' . $send->__toString();
-                            } else {
-                                //echo 'Mail sent';
+                if (method_exists(TestimonialsHelper, 'getNotifyUserEmails')) {
+                    $emails = TestimonialsHelper::getNotifyUserEmails();
+                    if (sizeof($emails)) {
+                        $config = JFactory::getConfig();
+                        $fromname = $config->get('fromname');
+                        $mailfrom = $config->get('mailfrom');
+                        $sitename = $config->get('sitename');
+
+                        $id = $this->id;
+                        $subject = stripslashes(JText::_($id ? 'COM_TESTIMONIALS_MAIL_EDIT_SUBJECT' : 'COM_TESTIMONIALS_MAIL_NEW_SUBJECT'));
+                        $message = nl2br(sprintf(stripslashes($id ? JText::_('COM_TESTIMONIALS_MAIL_EDIT_MESSAGE') : JText::_('COM_TESTIMONIALS_MAIL_NEW_MESSAGE')), JURI::base(), $this->t_caption, $this->t_author, $this->testimonial));
+
+                        if (!$id) // ONLY NEW FE TESTIMONIALS
+                        {
+                            foreach ($emails as $email) {
+                                $mailer = JFactory::getMailer();
+                                $mailer->setSender(array($mailfrom, $fromname));
+                                $mailer->addRecipient($email);
+                                $mailer->setSubject($subject);
+                                $mailer->setBody(JHtml::_('content.prepare', str_replace('{testimonial}', '{testimonials email|id:' . $id . '|1}', $message)));
+                                $send = $mailer->Send();
+                                if ($send !== true) {
+                                    echo 'Error sending email: ' . $send->__toString();
+                                } else {
+                                    //echo 'Mail sent';
+                                }
+                                //JUtility::sendMail($mailfrom, $fromname, $email, $subject, $message, 1);
                             }
-							//JUtility::sendMail($mailfrom, $fromname, $email, $subject, $message, 1);
-						}
-					}
-				}			
+                        }
+                    }
+                }
 			}
 			$currentTask = JFactory::getApplication()->input->getVar('task', '');
 			if($currentTask != 'saveOrderAjax') $this->reorder();
