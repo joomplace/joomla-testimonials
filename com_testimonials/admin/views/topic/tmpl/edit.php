@@ -77,99 +77,12 @@ $testimonial_id= $this->item->id;
                                 <?php echo $this->form->getLabel('t_author'); ?>
                             </div>
                             <div class="controls">
-                                <div style="display: inline-block; float: left; margin-right: 50px;">
+                                <div>
                                     <?php echo $this->form->getInput('t_author'); ?>
-                                </div>
-                                <div style="display: inline-block; position: relative;">
-                                    <div class="span12" style="padding-right: 15px;">
-                                        <!-- The loading indicator is shown during file processing -->
-                                        <div class="fileupload-loading"></div>
-
-                                        <div class="testim-field-group control-group form-group testim-images-container">
-                                            <div class="testim-add-image controls clearfix">
-                                                <!--                                <div id="imageProgressContainer" class="imageProgressContainer"><div id="imageProgress" class="imageProgress"></div></div>-->
-                                                <span id="uploadedImages" >
-                                                    <?php
-                                                    foreach($images as $image){
-                                                        if(!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
-                                                            ?>
-                                                            <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root().'/images/testimonials/'.$image;?>" alt="<?php echo $image?>"/><span class="testim-del-img" image="<?php echo $image?>" onclick="deleteImage(this);"></span></a>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </span>
-                                                <div class="testim-add-img2" onclick="document.getElementById('imageUpload').click();"><span class="testim-add-img-label"><?php echo JText::_('COM_TESTIMONIALS_ADD_IMAGE'); ?></span><input type="file" name="image" onclick="event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);" id="imageUpload" data-url="<?php echo JRoute::_('index.php?option=com_testimonials&task=new_image'); ?>" class="file-input-button"></div>
-                                                <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images;?>" />
-                                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo $form_data['remove_image'];?>" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- The template to display files available for upload -->
-                                    <script id="template-upload" type="text/x-tmpl">
-                                        {% for (var i=0, file; file=o.files[i]; i++) { %}
-                                        <tr class="template-upload fade">
-                                        <td class="preview"><span class="fade"></span></td>
-                                        <td class="name"><span>{%=file.name%}</span></td>
-                                        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-                                        {% if (file.error) { %}
-                                        <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
-                                        {% } else if (o.files.valid && !i) { %}
-                                        <td>
-                                        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
-                                        </td>
-                                        <td class="start">{% if (!o.options.autoUpload) { %}
-                                        <button class="btn btn-primary">
-                                        <i class="icon-upload icon-white"></i>
-                                        <span>Start</span>
-                                        </button>
-                                        {% } %}</td>
-                                        {% } else { %}
-                                        <td colspan="2"></td>
-                                        {% } %}
-                                        <td class="cancel">{% if (!i) { %}
-                                        <button class="btn btn-warning">
-                                        <i class="icon-ban-circle icon-white"></i>
-                                        <span>Cancel</span>
-                                        </button>
-                                        {% } %}</td>
-                                        </tr>
-                                        {% } %}
-                                    </script>
-                                    <!-- The template to display files available for download -->
-                                    <script id="template-download" type="text/x-tmpl">
-                                        {% for (var i=0, file; file=o.files[i]; i++) { %}
-                                        <tr class="template-download fade">
-                                        {% if (file.error) { %}
-                                        <td></td>
-                                        <td class="name"><span>{%=file.name%}</span></td>
-                                        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-                                        <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
-                                        {% } else { %}
-                                        <td class="preview">{% if (file.thumbnail_url) { %}
-                                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" class="modal" ><img src="{%=file.thumbnail_url%}"></a>
-                                        {% } %}</td>
-                                        <td class="name">
-                                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" class="modal">{%=file.name%}</a>
-                                        </td>
-                                        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-                                        <td colspan="2"></td>
-                                        {% } %}
-                                        <td class="delete">
-                                        <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                                        <i class="icon-trash icon-white"></i>
-                                        <span>Delete</span>
-                                        </button>
-                                        <input type="checkbox" name="delete" value="1">
-
-                                        </td>
-                                        </tr>
-                                        {% } %}
-                                    </script>
                                 </div>
                             </div>
                         </div>
-                        <div class="control-group" style="margin-top: -65px;">
+                        <div class="control-group">
                             <div class="control-label">
                                 <?php echo $this->form->getLabel('catid'); ?>
                             </div>
@@ -177,6 +90,99 @@ $testimonial_id= $this->item->id;
                                 <?php echo $this->form->getInput('catid'); ?>
                             </div>
                         </div>
+                        <div class="control-group">
+                            <div class="control-label">
+                                <?php echo $this->form->getLabel('t_images'); ?>
+                            </div>
+                            <div class="controls" style="display: inline-block;">
+                                <div class="span12" style="padding-right: 15px;">
+                                    <!-- The loading indicator is shown during file processing -->
+                                    <div class="fileupload-loading"></div>
+
+                                    <div class="testim-field-group control-group form-group testim-images-container">
+                                        <div class="testim-add-image controls clearfix">
+                                            <!--                                <div id="imageProgressContainer" class="imageProgressContainer"><div id="imageProgress" class="imageProgress"></div></div>-->
+                                            <span id="uploadedImages" >
+                                            <?php
+                                            foreach($images as $image){
+                                                if(!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
+                                                    ?>
+                                                    <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root().'/images/testimonials/'.$image;?>" alt="<?php echo $image?>"/><span class="testim-del-img" image="<?php echo $image?>" onclick="deleteImage(this);"></span></a>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </span>
+                                            <div class="testim-add-img2" onclick="document.getElementById('imageUpload').click();"><span class="testim-add-img-label"><?php echo JText::_('COM_TESTIMONIALS_ADD_IMAGE'); ?></span><input type="file" name="image" onclick="event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);" id="imageUpload" data-url="<?php echo JRoute::_('index.php?option=com_testimonials&task=new_image'); ?>" class="file-input-button"></div>
+                                            <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images;?>" />
+                                            <input type="hidden" name="remove_image" id="remove_image" value="<?php echo $form_data['remove_image'];?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- The template to display files available for upload -->
+                                <script id="template-upload" type="text/x-tmpl">
+                                    {% for (var i=0, file; file=o.files[i]; i++) { %}
+                                    <tr class="template-upload fade">
+                                    <td class="preview"><span class="fade"></span></td>
+                                    <td class="name"><span>{%=file.name%}</span></td>
+                                    <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                                    {% if (file.error) { %}
+                                    <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+                                    {% } else if (o.files.valid && !i) { %}
+                                    <td>
+                                    <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+                                    </td>
+                                    <td class="start">{% if (!o.options.autoUpload) { %}
+                                    <button class="btn btn-primary">
+                                    <i class="icon-upload icon-white"></i>
+                                    <span>Start</span>
+                                    </button>
+                                    {% } %}</td>
+                                    {% } else { %}
+                                    <td colspan="2"></td>
+                                    {% } %}
+                                    <td class="cancel">{% if (!i) { %}
+                                    <button class="btn btn-warning">
+                                    <i class="icon-ban-circle icon-white"></i>
+                                    <span>Cancel</span>
+                                    </button>
+                                    {% } %}</td>
+                                    </tr>
+                                    {% } %}
+                                </script>
+                                <!-- The template to display files available for download -->
+                                <script id="template-download" type="text/x-tmpl">
+                                    {% for (var i=0, file; file=o.files[i]; i++) { %}
+                                    <tr class="template-download fade">
+                                    {% if (file.error) { %}
+                                    <td></td>
+                                    <td class="name"><span>{%=file.name%}</span></td>
+                                    <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                                    <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+                                    {% } else { %}
+                                    <td class="preview">{% if (file.thumbnail_url) { %}
+                                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" class="modal" ><img src="{%=file.thumbnail_url%}"></a>
+                                    {% } %}</td>
+                                    <td class="name">
+                                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" class="modal">{%=file.name%}</a>
+                                    </td>
+                                    <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                                    <td colspan="2"></td>
+                                    {% } %}
+                                    <td class="delete">
+                                    <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                                    <i class="icon-trash icon-white"></i>
+                                    <span>Delete</span>
+                                    </button>
+                                    <input type="checkbox" name="delete" value="1">
+
+                                    </td>
+                                    </tr>
+                                    {% } %}
+                                </script>
+                            </div>
+                        </div>
+
                         <br style="clear:both;"/>
                         <div class="control-group">
                             <div class="control-label">

@@ -12,6 +12,10 @@
 			label="COM_TESTIMONIALS_TOPIC_AUTHOR"
 			required="true" labelclass="control-label" />
 
+        <field name="t_images" type="text" class="input-xlarge" size="30"
+            label="COM_TESTIMONIALS_TOPIC_IMAGES"
+            required="false" labelclass="control-label" />
+
 		<field name="catid" 
 			type="category" 
 			extension="com_testimonials"
