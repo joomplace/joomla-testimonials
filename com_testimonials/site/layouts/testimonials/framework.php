@@ -27,7 +27,7 @@ if($params->get('fontawesome',1)){
 /* fixing joomla squeezebox scrolling page to top issue */
 JFactory::getDocument()->addStyleDeclaration('
 	div#sbox-window {
-		top: 10%!important;
+		/*top: 10%!important;*/
 	}
 	.customs-table td, .customs-table tr td {
 		border-top: 0px solid #dddddd;
