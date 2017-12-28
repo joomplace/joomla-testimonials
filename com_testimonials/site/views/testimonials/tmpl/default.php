@@ -106,14 +106,16 @@ JFactory::getDocument()->addStyleDeclaration("
 	<?php
 	}
 ?>
-	<div class="text-right">
-		<fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
-			<input type="hidden" id="order" name="ordering" value="t_caption">
-			<label for="order" class="btn <?php echo $this->order['name'] ?>" onclick="document.adminForm.ordering.value='t_caption'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_NAME'); ?></label>
-			<label for="order" class="btn <?php echo $this->order['order'] ?>" onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
-		</fieldset>
-	</div>
-	
+    <?php if($params->get('show_testimonials_ordering', 0)){ ?>
+        <div class="text-right">
+            <fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
+                <input type="hidden" id="order" name="ordering" value="t_caption">
+                <label for="order" class="btn <?php echo $this->order['name'] ?>" onclick="document.adminForm.ordering.value='t_caption'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_NAME'); ?></label>
+                <label for="order" class="btn <?php echo $this->order['order'] ?>" onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
+            </fieldset>
+        </div>
+    <?php } ?>
+
 	<div class="testimonials-list">
 		<?php
 			echo $this->loadTemplate('items');

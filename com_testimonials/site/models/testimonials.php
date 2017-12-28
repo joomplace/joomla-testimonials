@@ -171,7 +171,7 @@ class TestimonialsModelTestimonials extends JModelList
             $query->where('t.`published`=1');
         }
 		if(!$this->random){
-			$orderBy = $input->get('ordering', 't_caption', 'WORD');
+			$orderBy = $params->get('testimonials_ordering', 't_caption');
 			if ($params->get('show_lasttofirst')==0)
 			{
 				$query->order($order_tapper.'t.'.$orderBy.' DESC');

@@ -81,6 +81,20 @@
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
+		<field name="testimonials_ordering" type="list" default="date_added"
+			   class="btn-group"
+			   label="COM_TESTIMONIALS_SETTINGS_TESTIMONIALS_ORDER"
+			   description="COM_TESTIMONIALS_SETTINGS_TESTIMONIALS_ORDER_DESC">
+			<option value="date_added">Date</option>
+			<option value="t_caption">Name</option>
+		</field>
+		<field name="show_testimonials_ordering" type="radio" default="0"
+			   class="btn-group"
+			   label="COM_TESTIMONIALS_SETTINGS_TESTIMONIALS_SHOW_ORDER"
+			   description="COM_TESTIMONIALS_SETTINGS_TESTIMONIALS_SHOW_ORDER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
 	</fieldset>
 	<fieldset name="formsettings" label="COM_TESTIMONIALS_SETTINGS_FORM">
 		
