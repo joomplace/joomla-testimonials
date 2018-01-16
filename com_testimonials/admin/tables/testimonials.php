@@ -30,6 +30,8 @@ class TestimonialsTableTestimonials extends JTable
        	public function store($updateNulls = false)
 		{
 
+            JLoader::load('TestimonialsHelper');
+
 			if(!$this->catid){
 				$tag = JFactory::getLanguage()->getTag();
 				$options = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$tag),'filter.access' =>array(1)));
