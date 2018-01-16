@@ -9,6 +9,7 @@
  
 defined('_JEXEC') or die;
 
+$Itemid = JFactory::getApplication()->input->getInt('Itemid', 0);
 $value = $displayData->value;
 
 $value = explode(',',$value);
@@ -16,7 +17,7 @@ if($value)
 	foreach($value as &$tg){
 		if($tg){
 			list($id,$text) = explode("::",$tg);
-			$tg = '<a href="'.JRoute::_('index.php?option=com_testimonials&tag='.$id.'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&tag='.$id)).'" class="label label-info">'.$text.'</a>';
+            $tg = '<a href="'.JRoute::_('index.php?option=com_testimonials&tag='.$id.'&Itemid='.$Itemid).'" class="label label-info">'.$text.'</a>';
 		}
 	}
 	

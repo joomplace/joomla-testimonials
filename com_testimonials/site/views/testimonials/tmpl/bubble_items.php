@@ -3,7 +3,7 @@
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<div class="block-text rel zmin">
 		<meta itemprop="itemreviewed" content="Services" />
-		<span class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></span>
+		<span id="anc_<?php echo $item->id; ?>" class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></span>
 		<?php if($item->custom_fields){ ?>
 			<table class="customs-table">
 			<?php foreach($item->custom_fields as $field){ ?>

@@ -100,11 +100,13 @@ class TestimonialsModelTestimonials extends JModelList
 				$doc->_metaTags['standard']['robots'] = 'noindex, follow';
 			}
 		}
+
         $query->select('t.*, t_author as `author`, t_caption as `caption`, author_description as `author_descr`, photo as `avatar`, u.name, u.email, GROUP_CONCAT(DISTINCT concat(tag.id, "::", tag.tag_name)) as tags'.$select_tapper)
             ->from('#__tm_testimonials as t')
             ->leftJoin('#__users as u ON t.user_id_t = u.id')
             ->leftJoin('#__tm_testimonials_conformity as tc ON t.id = tc.id_ti')
-            ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
+            ->leftJoin('(SELECT * FROM `#__tm_testimonials_conformity`) as tvt ON tvt.id_ti = t.id')
+            ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tag.id = tvt.id_tag')
             ->group('t.id');
 
         if (isset($this->category->id))
