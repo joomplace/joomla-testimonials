@@ -107,10 +107,7 @@ class TestimonialsModelTestimonials extends JModelList
             ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
             ->group('t.id');
 
-        if (isset($this->category->id))
-            $catid = $this->category->id;
-        else
-            $catid = NULL;
+        $catid = $menuitem ? $menuitem->params->get('testimonials_category', 0) : 0;
 
 		if($catid){
 
