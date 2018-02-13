@@ -109,7 +109,7 @@ class TestimonialsModelTestimonials extends JModelList
 
         $catid = $menuitem ? $menuitem->params->get('testimonials_category', 0) : 0;
 
-		if($catid){
+		if($catid && !JFactory::getApplication()->input->getInt('tag', 0)){
 
 			jimport('joomla.application.categories');
 			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
