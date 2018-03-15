@@ -73,12 +73,12 @@ JFactory::getDocument()->addStyleDeclaration("
             <div class="page-header">
                 <h1> <?php echo $this->escape($helper->getActiveItem()->params->get('page_heading')); ?> </h1>
             </div>
-            <?php } ?>
+        <?php } ?>
         <?php if ($helper->getActiveItem()->params->get('tm_intro_text')) { ?>
             <div class="testimonials-intro-text">
-            <?php echo $this->processText($helper->getActiveItem()->params->get('tm_intro_text')); ?>
+                <?php echo $this->processText($helper->getActiveItem()->params->get('tm_intro_text')); ?>
             </div>
-        <?php
+            <?php
         }
     }
 
@@ -89,7 +89,7 @@ JFactory::getDocument()->addStyleDeclaration("
         <h3><?php echo $this->escape($this->category->title); ?></h3>
         <?php if ($this->category->description) { ?>
             <p>
-            <?php echo $this->category->description; ?>
+                <?php echo $this->category->description; ?>
             </p>
         <?php } ?>
         <?php
@@ -104,23 +104,23 @@ JFactory::getDocument()->addStyleDeclaration("
 
         ?>
         <div class="text-right">
-            <a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form' . $tmpl . ($cat_id ? '&catid=' . $cat_id : '') . '&Itemid=' . TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form' . ($cat_id ? '&catid=' . $cat_id : ''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('main').width())?jQuery('main').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br /><br/>
+            <a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form' . $tmpl . ($cat_id ? '&catid=' . $cat_id : '') . '&Itemid=' . TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form' . ($cat_id ? '&catid=' . $cat_id : ''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('.testimonials-layout').width())?jQuery('.testimonials-layout').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br /><br/>
         </div>
-            <?php
-        }
+        <?php
+    }
+
+    ?>
+    <div class="testimonials-list">
+        <?php
+        echo $this->loadTemplate('items');
 
         ?>
-    <div class="testimonials-list">
-<?php
-echo $this->loadTemplate('items');
-
-?>
     </div>
 </article>
 <?php if ($this->pagination) { ?>
     <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
         <div class="pagination">
-    <?php echo $this->pagination->getListFooter(); ?>
+            <?php echo $this->pagination->getListFooter(); ?>
         </div>
     </form>
 <?php } ?>
