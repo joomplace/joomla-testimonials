@@ -9,8 +9,5 @@
 		<action name="core.comment" title="COM_TESTIMONIALS_COMMENT" description="COM_TESTIMONIALS_COMMENT_DESC" />
 		<action name="core.reply" title="COM_TESTIMONIALS_REPLY" description="COM_TESTIMONIALS_REPLY_DESC" />
 		<action name="core.deletecomments" title="COM_TESTIMONIALS_MANAGE_COMMENTS" description="COM_TESTIMONIALS_MANAGE_COMMENTS_DESC" />
-		<action name="core.edit" title="COM_TESTIMONIALS_CAT_EDIT" description="COM_TESTIMONIALS_CAT_EDIT_DESC" />
-		<action name="core.edit.state" title="COM_TESTIMONIALS_EDITSTATE" description="COM_TESTIMONIALS_EDITSTATE_DESC" />
-		<action name="core.edit.own" title="COM_TESTIMONIALS_EDITOWN" description="COM_TESTIMONIALS_EDITOWN_DESC" />
 	</section>
 </access>
