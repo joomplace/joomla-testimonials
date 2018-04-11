@@ -92,34 +92,23 @@ class TestimonialsModelTopic extends JModelAdmin
      * @return    mixed    The data for the form.
      * @since    1.6
      */
-    protected function loadFormData()
-    {
-        // Check the session for previously entered form data.
-        $data = JFactory::getApplication()
-            ->getUserState('com_testimonials.edit.topic.data', array());
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_testimonials.edit.topic.data', []);
+	
+		if (empty($data)) {
+			$id = $this->getState('topic.id');
+            if(!empty($id))
+                $data = $this->getItem($id);
+		}
+		
+		if(empty($data->photo) && !empty($data->user_id_t)){
+		    $data->photo = $this->getUserAvatar($data->user_id_t);
+		}
 
-        if (empty($data)) {
-            $id = $this->getState('topic.id');
-
-            // Prime some default values.
-            if ($id == 0) {
-                $app = JFactory::getApplication();
-                $id  = $app->getUserState('com_testimonials.edit.topic.id');
-                if ($id) {
-                    $data->set('id',
-                        JFactory::getApplication()->input->getInt('id', $id));
-                }
-            }
-
-            $data = $this->getItem($id);
-        }
-
-        if (empty($data->photo) && !empty($data->user_id_t)) {
-            $data->photo = $this->getUserAvatar($data->user_id_t);
-        }
-
-        return $data;
-    }
+		return $data;
+	}
 
     public function getItem($pk = null)
     {
