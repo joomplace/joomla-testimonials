@@ -92,7 +92,7 @@ class TestimonialsModelTopic extends JModelAdmin
     protected function loadFormData()
     {
         // Check the session for previously entered form data.
-        $data = JFactory::getApplication()->getUserState('com_testimonials.edit.topic.data', []);
+        $data = JFactory::getApplication()->getUserState('com_testimonials.edit.topic.data', array());
 
         if (empty($data)) {
             $id = $this->getState('topic.id');
