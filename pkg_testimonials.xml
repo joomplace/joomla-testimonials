@@ -17,4 +17,7 @@
     <file type="plugin" id="testimonial" group="editors-xtd">plg_editors_xsd_testimonials.zip</file>
     <file type="plugin" id="updater" group="installer">plg_installer_joomplaceupdater.zip</file>
   </files>
+  <updateservers>
+    <server type="collection" priority="1" name="Joomplace Update Site">http://www.joomplace.com/updates/collections.xml</server>
+  </updateservers>
 </extension>
