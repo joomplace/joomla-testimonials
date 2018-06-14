@@ -112,7 +112,7 @@ class TestimonialsModelTestimonials extends JModelList
 		if($catid && !JFactory::getApplication()->input->getInt('tag', 0)){
 
 			jimport('joomla.application.categories');
-			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
+			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true, 'table' => '#__tm_testimonials'));
 			$this->categories = $categories;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
