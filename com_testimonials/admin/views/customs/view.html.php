@@ -43,9 +43,9 @@ class TestimonialsViewCustoms extends JViewLegacy
               $this->items = $items;
               $this->pagination = $pagination;
  			  $this->state = $state;
- 			  
-			  
-			TestimonialsHelper::addSubmenu('customs');
+
+            TestimonialsAdminHelper::addSubmenu('customs');
+
 			$this->sidebar = JHtmlSidebar::render();
  			  
                 parent::display($tpl);
