@@ -11,7 +11,7 @@ foreach($this->items as $item){
 ?>
 	<div class="testimonial col-xs-12 col-sm-6" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 		<?php echo $this->renderLayout('testimonials.actions',$item); ?>
-		<div class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
+		<div id="anc_<?php echo $item->id; ?>" class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
 		<div class="row">
 			<div class="col-xs-12">
 			<?php if($item->avatar){ ?>
