@@ -190,7 +190,7 @@ class TestimonialsControllerTopic extends JControllerForm
 			}
 			else
 			{
-				$msg = JText::_('JLIB_APPLICATION_SUBMIT_SAVE_SUCCESS');
+				$msg = JText::_('COM_TESTIMONIALS_SUBMIT_SAVE_SUCCESS');
 			}
 
             TestimonialsHelper::notifyAdmin($caption, $author, $isEdited, $t_id);

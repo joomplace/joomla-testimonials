@@ -181,6 +181,14 @@ color: #B94A48;
   margin: 0 !important;
   padding: 0 !important;
 }
-.contentpane.modal{
-	margin: padding!important;
+
+/* override bootstrap's styles from Joomla-template */
+#testimonials-form .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+@media (max-width: 768px) {
+    #testimonials-form .form-horizontal .control-group .controls {
+        margin-left: 0;
+    }
 }

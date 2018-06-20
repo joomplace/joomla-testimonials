@@ -301,7 +301,7 @@ $script = implode("",$script);
 JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->addStyleDeclaration('.controls textarea#jform_testimonial{	width:100%!important;}');
 
 ?>
-<div class="item-page" style="padding-top: 20px;">
+<div class="item-page" id="testimonials-form" style="padding-top: 20px;">
 <form action="<?php echo JRoute::_('index.php?option=com_testimonials&view=form&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal"  enctype="multipart/form-data">
 		<?php
             $form = $this->form;
