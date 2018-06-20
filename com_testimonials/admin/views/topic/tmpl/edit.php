@@ -197,11 +197,13 @@ $testimonial_id= $this->item->id;
 <!--                                <div id="imageProgressContainer" class="imageProgressContainer"><div id="imageProgress" class="imageProgress"></div></div>-->
                                 <span id="uploadedImages" >
                                     <?php
-                                    foreach($images as $image){
-                                        if(!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
-                                            ?>
-                                            <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root().'/images/testimonials/'.$image;?>" alt="<?php echo $image?>"/><span class="testim-del-img" image="<?php echo $image?>" onclick="deleteImage(this);"></span></a>
-                                            <?php
+                                    if(is_array($images) && !empty($images)){
+                                        foreach ($images as $image) {
+                                            if (!empty($image) && file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) {
+                                                ?>
+                                                <a href="javascript:void(0)" class="testim-img"><img src="<?php echo JURI::root() . '/images/testimonials/' . $image; ?>" alt="<?php echo $image ?>"/><span class="testim-del-img" image="<?php echo $image ?>" onclick="deleteImage(this);"></span></a>
+                                                <?php
+                                            }
                                         }
                                     }
                                     ?>

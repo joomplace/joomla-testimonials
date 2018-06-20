@@ -4,7 +4,7 @@
 	<?php echo $this->renderLayout('testimonials.actions',$item); ?>
 	<div class="testimonial-body">
 		<meta itemprop="itemreviewed" content="Services" />
-		<div class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></div>
+		<div id="anc_<?php echo $item->id; ?>" class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></div>
 		<p itemprop="reviewBody">
 			<?php echo $item->testimonial; ?>
 		</p>
