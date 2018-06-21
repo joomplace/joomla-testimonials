@@ -35,6 +35,7 @@ The latest version of Snoopy can be obtained from:
 http://snoopy.sourceforge.net/
 
 *************************************************/
+defined('_JEXEC') or die('Restricted access');
 
 class Snoopy
 {
@@ -720,13 +721,13 @@ class Snoopy
 							chr(176),
 							chr(39),
 							chr(128),
-							"ä",
-							"ö",
-							"ü",
-							"Ä",
-							"Ö",
-							"Ü",
-							"ß",
+							"ï¿½",
+							"ï¿½",
+							"ï¿½",
+							"ï¿½",
+							"ï¿½",
+							"ï¿½",
+							"ï¿½",
 						);
 					
 		$text = preg_replace($search,$replace,$document);

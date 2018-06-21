@@ -1,4 +1,7 @@
-<?php $i = 0; ?>
+<?php 
+defined('_JEXEC') or die('Restricted access');
+
+$i = 0; ?>
 <div class="row">
 <?php 
 foreach($this->items as $item){ 

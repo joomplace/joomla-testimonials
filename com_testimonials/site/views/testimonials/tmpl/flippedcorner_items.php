@@ -1,5 +1,7 @@
+<?php
+defined('_JEXEC') or die('Restricted access');
 
-<?php foreach($this->items as $item){ ?>
+foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<?php echo $this->renderLayout('testimonials.actions',$item); ?>
 	<div class="testimonial-body">
