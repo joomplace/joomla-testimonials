@@ -35,11 +35,11 @@ class TestimonialHelper
  			
  			if ($settings->get('use_cb') || $settings->get('use_jsoc'))
  			{
- 				if (!file_exists(JPATH_SITE.DS.'administrator'.DS.'components'.DS.'com_comprofiler'.DS.'admin.comprofiler.php'))
+ 				if (!file_exists(JPATH_SITE.DIRECTORY_SEPARATOR.'administrator'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_comprofiler'.DIRECTORY_SEPARATOR.'admin.comprofiler.php'))
  				{
  					$settings->set('use_cb',0);
  				}
- 				if (!file_exists(JPATH_SITE.DS.'administrator'.DS.'components'.DS.'com_community'.DS.'admin.community.php'))
+ 				if (!file_exists(JPATH_SITE.DIRECTORY_SEPARATOR.'administrator'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_community'.DIRECTORY_SEPARATOR.'admin.community.php'))
  				{
  					$settings->set('use_jsoc',0);
  				}

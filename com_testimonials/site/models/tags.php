@@ -60,14 +60,14 @@ class TestimonialsModelTags extends JModelList
 				$search = $this->getState('filter.search');
 				
 				if (!empty($search)) {
-						$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+						$search = $db->Quote('%'.$db->escape($search, true).'%');
 						$query->where('(t.tag_name LIKE  '.$search.' )');
 					}
                 
                 $orderCol	= $this->state->get('list.ordering', 'tag_name');
 		$orderDirn	= $this->state->get('list.direction', 'ASC');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
-            //$query->order($db->getEscaped($this->getState('list.ordering', 'tag_name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+            //$query->order($db->escape($this->getState('list.ordering', 'tag_name')).' '.$db->escape($this->getState('list.direction', 'ASC')));
                 return $query;
         }
 }

@@ -70,7 +70,7 @@ class TestimonialsModelTags extends JModelList
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            $search = $db->Quote('%' . $db->getEscaped($search, true) . '%');
+            $search = $db->Quote('%' . $db->escape($search, true) . '%');
             $query->where('(t.tag_name LIKE  ' . $search . ' )');
         }
 

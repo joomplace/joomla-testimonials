@@ -187,7 +187,6 @@ class TestimonialsModelTopics extends JModelList
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            //$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
             $search = $db->Quote('%' . $search . '%');
             $query->where('(' . $tagquery . ' LIKE  ' . $search
                 . ' OR t.`t_caption` LIKE  ' . $search
@@ -199,7 +198,7 @@ class TestimonialsModelTopics extends JModelList
         $query->order($db->escape($orderCol . ' ' . $orderDirn));
 
         /*if($this->getState('list.ordering', 't_caption')){
-            $query->order($db->getEscaped($this->getState('list.ordering', 't_caption')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+            $query->order($db->escape($this->getState('list.ordering', 't_caption')).' '.$db->escape($this->getState('list.direction', 'ASC')));
         }*/
 
         return $query;

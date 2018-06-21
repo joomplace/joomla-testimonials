@@ -53,7 +53,7 @@ class TestimonialsControllerTopic extends JControllerForm
     public function showpicture()
     {
         $settings =  TestimonialHelper::getSettings();
-        require_once(JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'Timg.php');
+        require_once(JPATH_COMPONENT_ADMINISTRATOR.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'Timg.php');
         $image = JFactory::getApplication()->input->getString('image');
         $tid = JFactory::getApplication()->input->getInt('tid',0);
         $width = JFactory::getApplication()->input->getInt('width',300);

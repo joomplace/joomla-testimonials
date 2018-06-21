@@ -42,7 +42,6 @@ class TestimonialsModelTemplates extends JModelList
         $orderDirn = $this->state->get('list.direction', 'ASC');
         $query->order($db->escape($orderCol . ' ' . $orderDirn));
 
-        //$query->order($db->getEscaped($this->getState('list.ordering', 'temp_name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
         return $query;
     }
 }
