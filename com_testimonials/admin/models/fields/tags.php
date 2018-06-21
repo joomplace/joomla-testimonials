@@ -94,7 +94,7 @@ class JFormFieldTags extends JFormFieldList
 
         // Check for a database error.
         if ($db->getErrorNum()) {
-            JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'error');
+            JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'warning');
         }
 
         return $options;
