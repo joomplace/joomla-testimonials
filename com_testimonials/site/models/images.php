@@ -19,7 +19,8 @@ class TestimonialsModelImages extends JModelList
 	public function uploadImage(){
 	    $rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 	    $return = array(array('image'=>'', 'status'=>'bad', 'message'=>''));
-	    if(!empty($_FILES['files']['tmp_name'])) {
+        $files = JFactory::getApplication()->input->files->get('files');
+	    if (!empty($files[0]['tmp_name'])) {
 		$id = JFactory::getApplication()->input->getInt('id');
 		$user = JFactory::getUser();
 		if(!$user->authorise('core.create', 'com_testimonials') && !$user->authorise('core.edit', 'com_testimonials')){
@@ -33,13 +34,13 @@ class TestimonialsModelImages extends JModelList
 		    die();
 		}
 		jimport( 'joomla.filesystem.file' );
-		$totalFiles = count($_FILES['files']['tmp_name']);
+		$totalFiles = count($files);
 		for($i=0;$i<$totalFiles;$i++){
-		    $ext = JFile::getExt($_FILES['files']['name'][$i]);
-		    $new_name = md5(time() . $_FILES['files']['name'][$i]) . '.' . $ext;
+		    $ext = JFile::getExt($files[$i]['name']);
+		    $new_name = md5(time() . $files[$i]['name']) . '.' . $ext;
 		    if (preg_match($rEFileTypes, strrchr($new_name, '.'))) {
 			$image_path = JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR;
-			if(JFile::upload($_FILES['files']['tmp_name'][$i], $image_path . $new_name)){
+			if(JFile::upload($files[$i]['tmp_name'], $image_path . $new_name)){
 			    if(JFile::exists($image_path . $new_name)){
 				$TimgHelper = new TimgHelper();
 				$params = JComponentHelper::getParams('com_testimonials');
