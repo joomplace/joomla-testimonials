@@ -129,7 +129,7 @@ class TestimonialsTableAssign extends JTable
 		$asset->name		= $name;
 		$asset->title		= $title;
 
-		if ($this->_rules instanceof JRules) {
+		if ($this->_rules instanceof JAccessRules) {
 			$asset->rules = (string) $this->_rules;
 		}
 

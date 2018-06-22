@@ -121,39 +121,6 @@ class TestimonialHelper
         public static function getCSSJS()  
          {
          	$document = JFactory::getDocument();
-         	/*$view = JFactory::getApplication()->input->getCmd('view');
-         	$task = JFactory::getApplication()->input->getCmd('task');
-         	$task = $view?$view:$task;
-         	switch ( $task ) 
-         	{
-         		case 'tags': 	case 'tag':		
-         		case 'topics': 	case 'topic':
-         		case 'customs': case 'custom':
-         		case 'templates': case 'template':
-         		$show = 1;
-         		break;
-
-         		case 'settings':	case 'editcss':	case 'add_lang':
-				case 'menu_man':
-         		case 'mod_man':	case 'moder_man':	case 'add_mod':
-         		$show = 2;
-         		break;
-         		
-         		case 'help': case 'support':
-         		$show = 4;
-         		break;
-         		default: $show = 0; break;
-         	}
-         	//JS 
-         	ob_start();
-               	?>
-			    // <!--
-			          window.addEvent('domready', function(){ new Accordion($$('.panel h3.jpane-toggler'), $$('.panel div.jpane-slider'), {show:<?php echo $show;?> ,onActive: function(toggler, i) { toggler.addClass('jpane-toggler-down'); toggler.removeClass('jpane-toggler'); },onBackground: function(toggler, i) { toggler.addClass('jpane-toggler'); toggler.removeClass('jpane-toggler-down'); },duration: 300,opacity: false}); });
-			    // -->
-               	<?php
-				$js = ob_get_contents();
-				ob_get_clean();
-             $document->addScriptDeclaration($js);*/
              
              //CSS
              $document->addStyleSheet(JURI::root(true).'/administrator/components/com_testimonials/assets/css/testimonials.css');

@@ -249,10 +249,7 @@ class TestimonialsTableTestimonials extends JTable
                             $send = $mailer->Send();
                             if ( $send !== true ) {
                                 echo 'Error sending email: ' . $send->__toString();
-                            } else {
-                                //echo 'Mail sent';
                             }
-							//JUtility::sendMail($mailfrom, $fromname, $email, $subject, $message, 1);
 						}
 					}
 				}			
