@@ -241,7 +241,7 @@ class TestimonialsController extends JControllerLegacy
     public function new_image(){
         $rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
         $return = array('image'=>'', 'status'=>'bad', 'message'=>'');
-        if(!empty($_FILES['image']['tmp_name'])) {
+        if(!empty(JFactory::getApplication()->input->files->get('image')['tmp_name'])) {
             $id = (int)JFactory::getApplication()->input->getInt('id');
             $user = JFactory::getUser();
             $return['create'] = $user->authorise('core.create', 'com_testimonials');
@@ -257,10 +257,11 @@ class TestimonialsController extends JControllerLegacy
                 die();
             }
             jimport( 'joomla.filesystem.file' );
-            $ext = JFile::getExt($_FILES['image']['name']);
-            $new_name = md5(time() . $_FILES['image']['name']) . '.' . $ext;
+            $imageFile = JFactory::getApplication()->input->files->get('image');
+            $ext = JFile::getExt($imageFile['name']);
+            $new_name = md5(time() . $imageFile['name']) . '.' . $ext;
             if (preg_match($rEFileTypes, strrchr($new_name, '.'))) {
-                if(JFile::upload($_FILES['image']['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
+                if(JFile::upload($imageFile['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
                     if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
                         $return['image'] = $new_name;
                         $return['status'] = 'ok';
