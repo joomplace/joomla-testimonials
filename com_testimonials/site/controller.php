@@ -107,14 +107,13 @@ class TestimonialsController extends JControllerLegacy
 	}
 	
 		function check_captcha() {
-		session_start();
-	
+        $sessions = JFactory::getSession();
 		if (defined('_JEXEC')) {
-			$captcha = $_SESSION["__default"]["captcha"];
+			$captcha = $sessions->get("__default")["captcha"];
 		}else {
-			$captcha = $_SESSION["captcha"];
+			$captcha = $sessions->get("captcha");
 		}
-		$usr_captcha = $_REQUEST['captcha'];
+		$usr_captcha = JFactory::getApplication()->input->get('captcha');
 		
 		if ($captcha != $usr_captcha) {
 			@ob_end_clean();
@@ -368,8 +367,9 @@ class TestimonialsController extends JControllerLegacy
     public function new_image(){
 	$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 	$return = array('image'=>'', 'status'=>'bad', 'message'=>'');
-	if(!empty($_FILES['image']['tmp_name'])) {
-	    $id = (int)JFactory::getApplication()->input->getInt('id');
+    $imageFile = JFactory::getApplication()->input->files->get('image');
+	if(!empty($imageFile['tmp_name'])) {
+	    $id = JFactory::getApplication()->input->getInt('id');
 	    $user = JFactory::getUser();
 	    $return['create'] = $user->authorise('core.create', 'com_testimonials');
 	    $return['edit'] = $user->authorise('core.edit', 'com_testimonials');
@@ -384,10 +384,10 @@ class TestimonialsController extends JControllerLegacy
 		die();
 	    }
 	    jimport( 'joomla.filesystem.file' );
-	    $ext = JFile::getExt($_FILES['image']['name']);
-	    $new_name = md5(time() . $_FILES['image']['name']) . '.' . $ext;
+	    $ext = JFile::getExt($imageFile['name']);
+	    $new_name = md5(time() . $imageFile['name']) . '.' . $ext;
 	    if (preg_match($rEFileTypes, strrchr($new_name, '.'))) {
-		if(JFile::upload($_FILES['image']['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
+		if(JFile::upload($imageFile['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
 		    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
 			$return['image'] = $new_name;
 			$return['status'] = 'ok';
@@ -408,7 +408,8 @@ class TestimonialsController extends JControllerLegacy
     public function new_avatar(){
 	$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 	$return = array('image'=>'', 'status'=>'bad', 'message'=>'');
-	if(!empty($_FILES['avatar']['tmp_name'])) {
+    $avatarFile = JFactory::getApplication()->input->files->get('avatar');
+	if(!empty($avatarFile['tmp_name'])) {
 	    $id = (int)JFactory::getApplication()->input->getInt('id');
 	    $user = JFactory::getUser();
 	    $return['create'] = $user->authorise('core.create', 'com_testimonials');
@@ -424,10 +425,10 @@ class TestimonialsController extends JControllerLegacy
 		die();
 	    }
 	    jimport( 'joomla.filesystem.file' );
-	    $ext = JFile::getExt($_FILES['avatar']['name']);
-	    $new_name = md5(time() . $_FILES['avatar']['name']) . '.' . $ext;
+	    $ext = JFile::getExt($avatarFile['name']);
+	    $new_name = md5(time() . $avatarFile['name']) . '.' . $ext;
 	    if (preg_match($rEFileTypes, strrchr($new_name, '.'))) {
-		if(JFile::upload($_FILES['avatar']['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
+		if(JFile::upload($avatarFile['tmp_name'], JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
 		    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $new_name)){
 			$return['image'] = $new_name;
 			$return['status'] = 'ok';
