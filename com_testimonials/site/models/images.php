@@ -20,7 +20,7 @@ class TestimonialsModelImages extends JModelList
 	    $rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 	    $return = array(array('image'=>'', 'status'=>'bad', 'message'=>''));
 	    if(!empty($_FILES['files']['tmp_name'])) {
-		$id = (int)JRequest::getInt('id');
+		$id = JFactory::getApplication()->input->getInt('id');
 		$user = JFactory::getUser();
 		if(!$user->authorise('core.create', 'com_testimonials') && !$user->authorise('core.edit', 'com_testimonials')){
 		    $return[0]['message'] = JText::_('COM_TESTIMONIALS_ERROR_UPLOADING');
@@ -73,7 +73,7 @@ class TestimonialsModelImages extends JModelList
 	
 	public function deleteImage(){
 	    $return = array(array('image'=>'', 'status'=>'bad', 'message'=>''));
-	    $return[0]['image'] = JRequest::getString('image');
+	    $return[0]['image'] = JFactory::getApplication()->input->getString('image');
 	    $return[0]['status'] = 'ok';
 	    echo(json_encode($return));
 	    die();

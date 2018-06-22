@@ -78,7 +78,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
 
 		// check for DB errors
         if (count($errors = $this->get('Errors'))) { 
-			JError::raiseWarning(500, implode("\n", $errors));	
+            JFactory::getApplication()->enqueueMessage($this->get('Errors'), 'warning');
+            
 			return false;
 		}
 		$layout = $this->get('UserLayout');

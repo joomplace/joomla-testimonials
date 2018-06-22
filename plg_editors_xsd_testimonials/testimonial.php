@@ -45,7 +45,6 @@ class plgButtonTestimonial extends JPlugin
 		$button->onclick = 'return false;';
 		$button->set('options', "{handler: 'iframe', size: {x: 570, y: 400}}");
 		//$button->set('options', "{handler: 'iframe', size: {x: 770, y: 400}}");
-		//if (JRequest::getVar('option')=='com_content')
 		return $button; 
 		//else return null;
 	}
