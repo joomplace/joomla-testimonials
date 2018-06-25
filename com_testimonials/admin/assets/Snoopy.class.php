@@ -677,9 +677,6 @@ class Snoopy
 	function _striptext($document)
 	{
 		
-		// I didn't use preg eval (//e) since that is only available in PHP 4.0.
-		// so, list your entities one by one here. I included some of the
-		// more common ones.
 								
 		$search = array("'<script[^>]*?>.*?</script>'si",	// strip out javascript
 						"'<[\/\!]*?[^<>]*?>'si",			// strip out html tags
