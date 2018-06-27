@@ -96,15 +96,6 @@ input:focus,select:focus,textarea:focus
 	border:1px solid #ccc;
 }
 
-.control-label{
-    width: 250px !important;
-    padding-top: 0px !important;
-}
-
-.form-horizontal .controls{
-    margin-left: 0 !important;
-}
-
 .form-horizontal .controls textarea {
     width: 90% !important;
 }
