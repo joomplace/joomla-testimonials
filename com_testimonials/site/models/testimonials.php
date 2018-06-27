@@ -117,9 +117,9 @@ class TestimonialsModelTestimonials extends JModelList
 			$this->categories = $categories;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
-			$rel_level = $cur_cat->level;
-			$ids = array($cur_cat->id);
+			//$rel_level = $cur_cat->level;
 			if($cur_cat){
+                $ids = array($cur_cat->id);
 				$subs = $cur_cat->getChildren(true);
 				foreach($subs as $s){
 					$ids[] = $s->id;
