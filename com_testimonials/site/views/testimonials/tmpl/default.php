@@ -65,9 +65,9 @@ JFactory::getDocument()->addStyleDeclaration("
 ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 <article class="testimonials-layout tl<?php echo $uid; ?>">
-    <?php 
-	
-	$cat_id = $this->category->id;
+    <?php
+	$cat_id = !empty($this->category) ? $this->category->id : 0;
+
 	if($cat_id){
 		?>
 		<h3><?php echo $this->escape($this->category->title); ?></h3>

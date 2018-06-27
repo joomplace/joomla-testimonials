@@ -76,15 +76,16 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 	
 	protected function loadFormData(){
 	    $data = parent::loadFormData();
+
 	    $error = JFactory::getApplication()->input->getBool('error', false);
 	    if($error){
 			$posted_data = JFactory::getApplication()->getUserState('com_testimonials.edit.form.data', array());
 			foreach($posted_data as $id=>$value){
-				$data->$id = $value;
+				$data[$id] = $value;
 			}
 	    }
-		
-		$data->catid = $this->getState('catid');
+
+		$data['catid'] = $this->getState('catid');
 		
 	    return $data;
 	}

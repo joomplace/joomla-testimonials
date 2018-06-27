@@ -78,8 +78,8 @@ JFactory::getDocument()->addStyleDeclaration("
         </div>
     <?php }
     }
-	
-	$cat_id = $this->category->id;
+
+    $cat_id = !empty($this->category) ? $this->category->id : 0;
 	if($cat_id){
 		?>
 		<h3><?php echo $this->escape($this->category->title); ?></h3>
