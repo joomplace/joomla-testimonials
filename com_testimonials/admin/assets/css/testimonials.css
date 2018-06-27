@@ -611,3 +611,13 @@ margin-left: 24px;
 #tm-navbar {
 	margin-bottom: 18px !important;
 }
+#system-message-container{
+    padding-left: 0 !important;
+}
+#system-message-container.j-toggle-main {
+    float: none !important;
+    width: 100% !important;
+}
+.j-sidebar-container{
+    margin: 0 !important;
+}
