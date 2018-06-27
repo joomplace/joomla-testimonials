@@ -15,8 +15,9 @@
 				extension="com_testimonials"
 				label="JCATEGORY"
 				labelclass="control-label"
-				required="true" 
-				/>
+				required="true">
+				<option value="0">COM_TESTIMONIALS_ALL_CATEGORIES_SELECTION</option>
+			</field>
 			<field
 				name="tm_intro_text"
 				type="editor"
