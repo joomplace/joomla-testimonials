@@ -82,7 +82,7 @@ class com_testimonialsInstallerScript
             //echo '<font style="font-size:2em; color:#55AA55;" >' . JText::_('COM_TESTIMONIAL_UPDATE_TEXT') . '</font><br/><br/>';
             // $this->greetingText();
         } else {
-            JError::raiseError(500, implode('<br />', $errors));
+            JFactory::getApplication()->enqueueMessage($errors, 'error');
 
             return false;
         }
@@ -328,12 +328,12 @@ class com_testimonialsInstallerScript
 
         $category->setLocation($parent_id, 'last-child');
         if (!$category->check()) {
-            JError::raiseNotice(500, $category->getError());
+            JFactory::getApplication()->enqueueMessage($category->getError(), 'notice');
 
             return false;
         }
         if (!$category->store(true)) {
-            JError::raiseNotice(500, $category->getError());
+            JFactory::getApplication()->enqueueMessage($category->getError(), 'notice');
 
             return false;
         }

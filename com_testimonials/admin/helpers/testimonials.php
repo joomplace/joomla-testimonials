@@ -1,8 +1,17 @@
 <?php
+/**
+ * Testimonials Component for Joomla 3
+ *
+ * @package   Testimonials
+ * @author    JoomPlace Team
+ * @Copyright Copyright (C) JoomPlace, www.joomplace.com
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
 // No direct access to this file
 defined('_JEXEC') or die;
 
-abstract class TestimonialsAdminHelper
+abstract class TestimonialsHelper
 {
     /**
      * Configure the Linkbar.

@@ -1,4 +1,16 @@
-<?php foreach($this->items as $item){ ?>
+<?php 
+/**
+ * Testimonials Component for Joomla 3
+ *
+ * @package   Testimonials
+ * @author    JoomPlace Team
+ * @Copyright Copyright (C) JoomPlace, www.joomplace.com
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
+defined('_JEXEC') or die('Restricted access');
+
+foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<div class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
 	<div class="row row-fluid">

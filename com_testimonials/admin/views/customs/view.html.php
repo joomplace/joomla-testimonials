@@ -35,7 +35,7 @@ class TestimonialsViewCustoms extends JViewLegacy
                 
                 if (count($errors = $this->get('Errors'))) 
                 {
-                        JError::raiseError(500, implode('<br />', $errors));
+                        JFactory::getApplication()->enqueueMessage($this->get('Errors'), 'error');
                         return false;
                 }
               
@@ -44,7 +44,7 @@ class TestimonialsViewCustoms extends JViewLegacy
               $this->pagination = $pagination;
  			  $this->state = $state;
 
-            TestimonialsAdminHelper::addSubmenu('customs');
+            TestimonialsHelper::addSubmenu('customs');
 
 			$this->sidebar = JHtmlSidebar::render();
  			  

@@ -25,7 +25,7 @@ class TestimonialsViewDashboard_item extends JViewLegacy
         $this->item = $this->get('Item');
         $this->state = $this->get('State');
         if (count($errors = $this->get('Errors'))) {
-            JError::raiseError(500, implode('<br />', $errors));
+            JFactory::getApplication()->enqueueMessage($this->get('Errors'), 'error');
             return false;
         }
 

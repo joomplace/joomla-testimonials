@@ -45,7 +45,7 @@ class TestimonialsModelCustom extends JModelAdmin
 			if ($this->getState('topic.id') == 0) {
 				$app = JFactory::getApplication();
 				$id = $app->getUserState('com_testimonials.edit.custom.id');
-				if ($id) $data->set('id', JRequest::getInt('id', $id));
+				if ($id) $data->set('id', JFactory::getApplication()->input->getInt('id', $id));
 			}
 		}
 

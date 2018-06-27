@@ -38,10 +38,10 @@ class TestimonialsControllerImages extends JControllerAdmin
     
     public function imageThumb(){
 	$TimgHelper = new TimgHelper();
-	$image = JRequest::getString('image');
+	$image = JFactory::getApplication()->input->getString('image');
 	$image = basename($image);
-	$width = JRequest::getInt('width',80);
-	$height = JRequest::getInt('height',80);
+	$width = JFactory::getApplication()->input->getString('width', 80);
+	$height = JFactory::getApplication()->input->getString('height', 80);
 	if(file_exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)){
 	    echo $TimgHelper->show($TimgHelper->resize(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image, $width, $height));
 	}else{

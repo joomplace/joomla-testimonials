@@ -15,7 +15,7 @@ $saveOrder	= $ordering = $listOrder == 'ordering';
 $user		= JFactory::getUser();
 $userId		= $user->get('id');
 $extension  = 'com_testimonials';
-$function	= JRequest::getCmd('function', 'jSelectTestimonial');
+$function	= JFactory::getApplication()->input->getCmd('function','jSelectTestimonial');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_testimonials&view=tags'); ?>" method="post" name="adminForm" class="form-inline">
 

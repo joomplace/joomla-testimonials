@@ -113,8 +113,7 @@ class JFormFieldCategoryTag extends JFormFieldList
                     JHtml::_('select.option', '0', JText::_('JGLOBAL_ROOT')));
             }
         } else {
-            JError::raiseWarning(500,
-                JText::_('JLIB_FORM_ERROR_FIELDS_CATEGORY_ERROR_EXTENSION_EMPTY'));
+            JFactory::getApplication()->enqueueMessage(JText::_('JLIB_FORM_ERROR_FIELDS_CATEGORY_ERROR_EXTENSION_EMPTY'), 'warning');
         }
 
         // Merge any additional options in the XML definition.

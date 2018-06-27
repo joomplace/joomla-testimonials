@@ -63,7 +63,7 @@ class JFormFieldCategoryTag extends JFormFieldList
 	
 	protected function getSelected()
 	{
-		$id = JRequest::getInt('id');
+		$id = JFactory::getApplication()->input->getInt('id');
 		$selected = array();
 		if ($id)
 		{
@@ -122,7 +122,7 @@ class JFormFieldCategoryTag extends JFormFieldList
 			}
 		}
 		else {
-			JError::raiseWarning(500, JText::_('JLIB_FORM_ERROR_FIELDS_CATEGORY_ERROR_EXTENSION_EMPTY'));
+            JFactory::getApplication()->enqueueMessage(JText::_('JLIB_FORM_ERROR_FIELDS_CATEGORY_ERROR_EXTENSION_EMPTY'), 'warning');
 		}
 
 		// Merge any additional options in the XML definition.

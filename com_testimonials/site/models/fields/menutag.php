@@ -61,7 +61,7 @@ class JFormFieldMenuTag extends JFormFieldGroupedList
 	
 	protected function getSelected()
 	{
-		$id = JRequest::getInt('id');
+		$id = JFactory::getApplication()->input->getInt('id');
 		$selected = array();
 		if ($id)
 		{

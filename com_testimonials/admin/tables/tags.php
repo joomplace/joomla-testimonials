@@ -35,9 +35,10 @@ class TestimonialsTableTags extends JTable
 				$this->setError(JText::_('COM_TESTIMONIALS_ERROR_UNIQUE_TAG_NAME'));
 				return false;
 			    }
-        	if (isset($_POST['jform']['menu']))
+                $jform = JFactory::getApplication()->input->post->getAssoc('jform');
+        	if (isset($jform['menu']))
 			{
-				$menus = $_POST['jform']['menu'];
+				$menus = $jform['menu'];
 				if (is_array($menus))
 				{
 					if(sizeof($menus)>0)
@@ -66,9 +67,9 @@ class TestimonialsTableTags extends JTable
 							}
 					}
 				}
-			if (isset($_POST['jform']['categories']))
+			if (isset($jform['categories']))
 			{
-				$categories = $_POST['jform']['categories'];
+				$categories = $jform['categories'];
 				if (is_array($categories))
 				{
 					if(sizeof($categories)>0)
@@ -97,9 +98,9 @@ class TestimonialsTableTags extends JTable
 							}
 					}
 				}
-			if (isset($_POST['jform']['articles']))
+			if (isset($jform['articles']))
 			{
-				$articles = $_POST['jform']['articles'];
+				$articles = $jform['articles'];
 				if (is_array($articles))
 				{
 					if(sizeof($articles)>0)

@@ -46,7 +46,7 @@ class TestimonialsModelTag extends JModelAdmin
 			// Prime some default values.
 			if ($this->getState('tag.id') == 0) {
 				$app = JFactory::getApplication();
-				$data->set('id', JRequest::getInt('id', $app->getUserState('com_testimonials.edit.tag.id')));
+				$data->set('id', JFactory::getApplication()->input->getint('id',$app->getUserState('com_testimonials.edit.tag.id')));
 			}
 		}
 
