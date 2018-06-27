@@ -88,7 +88,7 @@ if ($saveOrder)
 				?>
 				<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
-					<?php if ($item->id!=1) echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td>
 				    <div class="nowrap pull-left">
