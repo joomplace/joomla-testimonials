@@ -107,10 +107,7 @@ JFactory::getDocument()->addStyleDeclaration("
     <?php }
     }
 
-    if (isset($this->category->id))
-        $cat_id = $this->category->id;
-    else
-        $cat_id = NULL;
+    $cat_id = !empty($this->category) ? $this->category->id : 0;
 
 	if($cat_id){
 		?>
