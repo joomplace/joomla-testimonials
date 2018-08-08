@@ -153,6 +153,12 @@ class TestimonialsControllerTopic extends JControllerForm
                 $t_id = $id;
             }
 
+            if(!$data['catid']){
+                $sql = "SELECT `catid` FROM `#__tm_testimonials` WHERE `id`='".(int)$id."'";
+                $db->setQuery($sql);
+                $data['catid'] = $db->loadResult();
+            }
+
 			$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 
 			$exist = JFactory::getApplication()->input->getVar('jform');
