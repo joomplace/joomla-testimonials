@@ -29,7 +29,7 @@ class TestimonialsViewTags extends JViewLegacy
                 
                 if (count($errors = $this->get('Errors'))) 
                 {
-                        JError::raiseError(500, implode('<br />', $errors));
+                        JFactory::getApplication()->enqueueMessage($this->get('Errors'), 'error');
                         return false;
                 }
 		$this->items = $items;

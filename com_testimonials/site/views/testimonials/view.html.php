@@ -43,14 +43,16 @@ class TestimonialsViewTestimonials extends JViewLegacy
     }
 	
 	function renderLayout($layout, $data = null, $sublayout=''){
+        $html = '';
         if(!$sublayout) $sublayout = ($this->getLayout()=='default')?'':$this->getLayout();
         if(!$data) $data = (object)array('value'=>'');
         $field_layout = new JLayoutFile($layout);
         $field_layout->setComponent('com_testimonials');
         $html = $field_layout->sublayout($sublayout,$data);
         if(!$html) $html = $field_layout->render($data);
-        if ((!$html) && isset($data->value)) $html = $data->value;
-		
+        if(!$html && is_object($data) && isset($data->value)){
+            $html = $data->value;
+        }
 		return $html;
 	}
 	
@@ -76,7 +78,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
 
 		// check for DB errors
         if (count($errors = $this->get('Errors'))) { 
-			JError::raiseWarning(500, implode("\n", $errors));	
+            JFactory::getApplication()->enqueueMessage($this->get('Errors'), 'warning');
+            
 			return false;
 		}
 		$layout = $this->get('UserLayout');

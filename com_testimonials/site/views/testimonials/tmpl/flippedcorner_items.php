@@ -1,10 +1,21 @@
+<?php
+/**
+ * Testimonials Component for Joomla 3
+ *
+ * @package   Testimonials
+ * @author    JoomPlace Team
+ * @Copyright Copyright (C) JoomPlace, www.joomplace.com
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
 
-<?php foreach($this->items as $item){ ?>
+defined('_JEXEC') or die('Restricted access');
+
+foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<?php echo $this->renderLayout('testimonials.actions',$item); ?>
 	<div class="testimonial-body">
 		<meta itemprop="itemreviewed" content="Services" />
-		<div class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></div>
+		<div id="anc_<?php echo $item->id; ?>" class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></div>
 		<p itemprop="reviewBody">
 			<?php echo $item->testimonial; ?>
 		</p>

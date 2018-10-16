@@ -26,7 +26,7 @@ class TestimonialsControllerTopic extends JControllerForm
 		$id = JFactory::getApplication()->input->getInt('id');
 		if (!$this->allowPublish() || !$id)
 		{
-			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+            return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 		}
 		
 		$model		= $this->getModel();
@@ -37,7 +37,7 @@ class TestimonialsControllerTopic extends JControllerForm
 			if(JFactory::getApplication()->input->getVar('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
                 $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully '.($table->published?'Published':'Unpublished'));
 		}else
-		return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+        return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 		
 	}
 
@@ -47,7 +47,7 @@ class TestimonialsControllerTopic extends JControllerForm
         $user = JFactory::getUser();
 		if (!$user->authorise('core.admin', 'com_testimonials') || !$id)
 		{
-			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+            return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 		}
 
 		$model		= $this->getModel();
@@ -59,7 +59,7 @@ class TestimonialsControllerTopic extends JControllerForm
                         $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully '.($table->published?'Approved':'Disapproved'));
 			//$this->setRedirect(JRoute::_('index.php?option=com_testimonials'.$tmpl, false), 'Successfully '.($table->published?'Published':'Unpublished'));
 		}else
-		return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+        return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 
 	}
 	
@@ -69,7 +69,7 @@ class TestimonialsControllerTopic extends JControllerForm
 		$id = JFactory::getApplication()->input->getInt('id');
 		if (!$this->allowDelete() || !$id)
 		{
-			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+            return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 		}
 		
 		$model		= $this->getModel();
@@ -80,7 +80,7 @@ class TestimonialsControllerTopic extends JControllerForm
                         $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully deleted');
 			//$this->setRedirect(JRoute::_('index.php?option=com_testimonials'.$tmpl, false), 'Successfully deleted');
 		}else
-		return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+        return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
 		
 	}
 	
@@ -153,6 +153,12 @@ class TestimonialsControllerTopic extends JControllerForm
                 $t_id = $id;
             }
 
+            if(!$data['catid']){
+                $sql = "SELECT `catid` FROM `#__tm_testimonials` WHERE `id`='".(int)$id."'";
+                $db->setQuery($sql);
+                $data['catid'] = $db->loadResult();
+            }
+
 			$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 
 			$exist = JFactory::getApplication()->input->getVar('jform');
@@ -190,7 +196,7 @@ class TestimonialsControllerTopic extends JControllerForm
 			}
 			else
 			{
-				$msg = JText::_('JLIB_APPLICATION_SUBMIT_SAVE_SUCCESS');
+				$msg = JText::_('COM_TESTIMONIALS_SUBMIT_SAVE_SUCCESS');
 			}
 
             TestimonialsHelper::notifyAdmin($caption, $author, $isEdited, $t_id);

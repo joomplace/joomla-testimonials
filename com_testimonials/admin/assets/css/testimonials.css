@@ -96,15 +96,6 @@ input:focus,select:focus,textarea:focus
 	border:1px solid #ccc;
 }
 
-.control-label{
-    width: 250px !important;
-    padding-top: 0px !important;
-}
-
-.form-horizontal .controls{
-    margin-left: 0 !important;
-}
-
 .form-horizontal .controls textarea {
     width: 90% !important;
 }
@@ -619,4 +610,14 @@ margin-left: 24px;
 
 #tm-navbar {
 	margin-bottom: 18px !important;
+}
+#system-message-container{
+    padding-left: 0 !important;
+}
+#system-message-container.j-toggle-main {
+    float: none !important;
+    width: 100% !important;
+}
+.j-sidebar-container{
+    margin: 0 !important;
 }

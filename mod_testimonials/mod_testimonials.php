@@ -18,7 +18,7 @@ $helper = new modTestimonialsHelper();
 $user = JFactory::getUser();
 $document = JFactory::getDocument();
 $app = JFactory::getApplication();
-$option = JRequest::getVar('option');
+$option = JFactory::getApplication()->input->getVar('option');
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 $iCan = new stdClass();

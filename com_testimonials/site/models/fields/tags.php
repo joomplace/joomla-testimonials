@@ -27,7 +27,7 @@ class JFormFieldTags extends JFormFieldList
 
 	protected function getInput()
 	{
-		$option = JRequest::getVar('option');
+		$option = JFactory::getApplication()->input->getVar('option');
 		
 		// Initialize variables.
 		$html = array();
@@ -64,7 +64,7 @@ class JFormFieldTags extends JFormFieldList
 	
 	protected function getSelected()
 	{
-		$id = JRequest::getInt('id');
+		$id = JFactory::getApplication()->input->getInt('id');
 		$selected =  $menuselected = array();
 		
 		if (sizeof($this->value)>0 && is_array($this->value))
@@ -118,7 +118,7 @@ class JFormFieldTags extends JFormFieldList
 
 		// Check for a database error.
 		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
+            JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'warning');
 		}
 
 		return $options;

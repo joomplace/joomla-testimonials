@@ -35,6 +35,7 @@ The latest version of Snoopy can be obtained from:
 http://snoopy.sourceforge.net/
 
 *************************************************/
+defined('_JEXEC') or die('Restricted access');
 
 class Snoopy
 {
@@ -676,9 +677,6 @@ class Snoopy
 	function _striptext($document)
 	{
 		
-		// I didn't use preg eval (//e) since that is only available in PHP 4.0.
-		// so, list your entities one by one here. I included some of the
-		// more common ones.
 								
 		$search = array("'<script[^>]*?>.*?</script>'si",	// strip out javascript
 						"'<[\/\!]*?[^<>]*?>'si",			// strip out html tags
@@ -720,13 +718,13 @@ class Snoopy
 							chr(176),
 							chr(39),
 							chr(128),
-							"ä",
-							"ö",
-							"ü",
-							"Ä",
-							"Ö",
-							"Ü",
-							"ß",
+							"Ã¤",
+							"Ã¶",
+							"Ã¼",
+							"Ã„",
+							"Ã–",
+							"Ãœ",
+							"ÃŸ",
 						);
 					
 		$text = preg_replace($search,$replace,$document);

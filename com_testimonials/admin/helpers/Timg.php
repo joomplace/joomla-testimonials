@@ -426,7 +426,6 @@ class TimgHelper
 	function show($main_img_obj, $type=2, $file='', $quality='75')
 	{
 		$main_img_obj= $this->getImage($main_img_obj);
-        //var_dump($type); echo "<br/>"; var_dump($main_img_obj); echo "<br/>"; var_dump($file); echo "<br/>"; die;
         switch($type)
                   {
                     case 1: 

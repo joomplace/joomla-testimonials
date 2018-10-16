@@ -78,8 +78,8 @@ JFactory::getDocument()->addStyleDeclaration("
         </div>
     <?php }
     }
-	
-	$cat_id = $this->category->id;
+
+    $cat_id = !empty($this->category) ? $this->category->id : 0;
 	if($cat_id){
 		?>
 		<h3><?php echo $this->escape($this->category->title); ?></h3>
@@ -100,11 +100,15 @@ JFactory::getDocument()->addStyleDeclaration("
 		}
 		?>
 		<div class="text-right">
-			<a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.($cat_id?'&catid='.$cat_id:'').'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form'.($cat_id?'&catid='.$cat_id:''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('main').width())?jQuery('main').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br /><br/>
+            <a href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form' . $tmpl . ($cat_id ? '&catid=' . $cat_id : '') . '&Itemid=' . TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form' . ($cat_id ? '&catid=' . $cat_id : ''))); ?>" class="modal_com_testim btn btn-success" rel="{handler:'iframe',size:{x: (0.8*((jQuery('.testimonials-layout').width())?jQuery('.testimonials-layout').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}"><?php echo (JText::_('COM_TESTIMONIALS_ADD')); ?></a><br /><br/>
 		</div>
 	<?php
 	}
-?>
+
+    $menuitem = JFactory::getApplication()->getMenu()->getActive();
+    $no_save_ordering = ($menuitem->params->get('show_ordering') === null) ? true : false;
+    if($menuitem && ((int)$menuitem->params->get('show_ordering') == 1 || $no_save_ordering)){
+    ?>
 	<div class="text-right">
 		<fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
 			<input type="hidden" id="order" name="ordering" value="t_caption">
@@ -112,6 +116,7 @@ JFactory::getDocument()->addStyleDeclaration("
 			<label for="order" class="btn <?php echo $this->order['order'] ?>" onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
 		</fieldset>
 	</div>
+    <?php } ?>
 	
 	<div class="testimonials-list">
 		<?php

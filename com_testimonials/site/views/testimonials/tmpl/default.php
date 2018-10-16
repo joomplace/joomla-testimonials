@@ -65,9 +65,9 @@ JFactory::getDocument()->addStyleDeclaration("
 ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 <article class="testimonials-layout tl<?php echo $uid; ?>">
-    <?php 
-	
-	$cat_id = $this->category->id;
+    <?php
+	$cat_id = !empty($this->category) ? $this->category->id : 0;
+
 	if($cat_id){
 		?>
 		<h3><?php echo $this->escape($this->category->title); ?></h3>
@@ -105,7 +105,11 @@ JFactory::getDocument()->addStyleDeclaration("
 		</div>
 	<?php
 	}
-?>
+
+    $menuitem = JFactory::getApplication()->getMenu()->getActive();
+    $no_save_ordering = ($menuitem->params->get('show_ordering') === null) ? true : false;
+    if($menuitem && ((int)$menuitem->params->get('show_ordering') == 1 || $no_save_ordering)){
+    ?>
 	<div class="text-right">
 		<fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
 			<input type="hidden" id="order" name="ordering" value="t_caption">
@@ -113,6 +117,7 @@ JFactory::getDocument()->addStyleDeclaration("
 			<label for="order" class="btn <?php echo $this->order['order'] ?>" onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
 		</fieldset>
 	</div>
+    <?php } ?>
 	
 	<div class="testimonials-list">
 		<?php

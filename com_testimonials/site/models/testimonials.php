@@ -104,7 +104,8 @@ class TestimonialsModelTestimonials extends JModelList
             ->from('#__tm_testimonials as t')
             ->leftJoin('#__users as u ON t.user_id_t = u.id')
             ->leftJoin('#__tm_testimonials_conformity as tc ON t.id = tc.id_ti')
-            ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tc.id_tag = tag.id')
+            ->leftJoin('(SELECT * FROM `#__tm_testimonials_conformity`) as tvt ON tvt.id_ti = t.id')
+            ->leftJoin('(SELECT * FROM `#__tm_testimonials_tags` WHERE `published` = "1") as tag ON tag.id = tvt.id_tag')
             ->group('t.id');
 
         $catid = $menuitem ? $menuitem->params->get('testimonials_category', 0) : 0;
@@ -112,13 +113,13 @@ class TestimonialsModelTestimonials extends JModelList
 		if($catid && !JFactory::getApplication()->input->getInt('tag', 0)){
 
 			jimport('joomla.application.categories');
-			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
+			$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true, 'table' => '#__tm_testimonials'));
 			$this->categories = $categories;
 			$cur_cat = $categories->get($catid);
 			$this->category = $cur_cat;
-			$rel_level = $cur_cat->level;
-			$ids = array($cur_cat->id);
+			//$rel_level = $cur_cat->level;
 			if($cur_cat){
+                $ids = array($cur_cat->id);
 				$subs = $cur_cat->getChildren(true);
 				foreach($subs as $s){
 					$ids[] = $s->id;
@@ -168,7 +169,7 @@ class TestimonialsModelTestimonials extends JModelList
             $query->where('t.`published`=1');
         }
 		if(!$this->random){
-			$orderBy = $input->get('ordering', 't_caption', 'WORD');
+            $orderBy = $input->get('ordering', 'ordering', 'WORD');
 			if ($params->get('show_lasttofirst')==0)
 			{
 				$query->order($order_tapper.'t.'.$orderBy.' DESC');

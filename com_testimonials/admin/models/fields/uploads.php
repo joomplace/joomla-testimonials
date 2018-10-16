@@ -1,4 +1,13 @@
 <?php
+/**
+ * Testimonials Component for Joomla 3
+ *
+ * @package   Testimonials
+ * @author    JoomPlace Team
+ * @Copyright Copyright (C) JoomPlace, www.joomplace.com
+ * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
 
@@ -26,11 +35,12 @@ class JFormFieldUploads extends JFormField
             require_once JPATH_COMPONENT_SITE . '/helpers/html/thumbler.php';
 
             //Check file
-            if (isset($_FILES["file"])
-                && $_FILES["file"]["size"] < $max_file_size
+            $file = JFactory::getApplication()->input->files->get('file');
+            if ($file
+                && $file["size"] < $max_file_size
             ) {
-                $type = $_FILES['file']['type'];
-                $name = $_FILES['file']['name'];
+                $type = $file['type'];
+                $name = $file['name'];
                 $path = JPATH_SITE . '/tmp/' . $name;
 
                 //Access file type
@@ -38,19 +48,19 @@ class JFormFieldUploads extends JFormField
                     case('image/jpg'):
                     case('image/jpeg'):
                         $source
-                                 = imagecreatefromjpeg($_FILES['file']['tmp_name']);
+                                 = imagecreatefromjpeg($file['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagejpeg($source, $newFile);
                         break;
                     case('image/bmp'):
                         $source
-                                 = imagecreatefromwbmp($_FILES['file']['tmp_name']);
+                                 = imagecreatefromwbmp($file['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagewbmp($source, $newFile);
                         break;
                     case('image/gif'):
                         $source
-                                 = imagecreatefromgif($_FILES['file']['tmp_name']);
+                                 = imagecreatefromgif($file['tmp_name']);
                         $newFile = fopen($path, "w");
                         imagegif($source, $newFile);
                         break;

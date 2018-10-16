@@ -10,8 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.database.table');
-JLoader::register('TestimonialsHelper', JPATH_SITE . DIRECTORY_SEPARATOR . 'components/com_testimonials/helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
-JLoader::load('TestimonialsHelper');
+
 /**
  * Testimonials Table class
  */
@@ -29,6 +28,10 @@ class TestimonialsTableTestimonials extends JTable
         
        	public function store($updateNulls = false)
 		{
+            JLoader::register('TestimonialsHelper',
+                JPATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php'
+            );
+
 			if(!$this->catid){
 				$tag = JFactory::getLanguage()->getTag();
 				$options = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$tag),'filter.access' =>array(1)));
@@ -53,7 +56,8 @@ class TestimonialsTableTestimonials extends JTable
 				}
 			}
 			jimport( 'joomla.filesystem.file' );
-			if (isset($_FILES['jform']['name']))
+            $files_jform = JFactory::getApplication()->input->files->get('jform');
+			if (!empty($files_jform['name']))
 				{
 					//  5MB maximum file size
 					$MAXIMUM_FILESIZE = 5 * 1024 * 1024;
@@ -61,16 +65,16 @@ class TestimonialsTableTestimonials extends JTable
 					$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 					$dir_base = JPATH_BASE."/images/testimonials/";
 					
-					$isFile = is_uploaded_file($_FILES['jform']['tmp_name']['photofile']);
+					$isFile = is_uploaded_file($files_jform['tmp_name']['photofile']);
 					if ($isFile)    //  do we have a file?
 					   {$safe_filename = substr(md5(uniqid(rand(), true)),-5)."_".preg_replace(
 					                     array("/\s+/", "/[^-\.\w]+/"),
 					                     array("_", ""),
-					                     trim($_FILES['jform']['name']['photofile']));
-					    if ($_FILES['jform']['size']['photofile'] <= $MAXIMUM_FILESIZE &&
+					                     trim($files_jform['name']['photofile']));
+					    if ($files_jform['size']['photofile'] <= $MAXIMUM_FILESIZE &&
 					        preg_match($rEFileTypes, strrchr($safe_filename, '.')))
 					      {$isMove = JFile::upload(
-					                 $_FILES['jform']['tmp_name']['photofile'],
+					                 $files_jform['tmp_name']['photofile'],
 					                 $dir_base.$safe_filename);}
 					      }
 					   if ($isMove) 
@@ -87,7 +91,8 @@ class TestimonialsTableTestimonials extends JTable
 						   		$this->photo = 'images/testimonials/'.$safe_filename;
 						   }
 				}
-				if (empty($_POST['jform']['user_id_t']) && empty($_POST['jform']['id'])) {
+                $post_jform = JFactory::getApplication()->input->post->getAssoc('jform');
+				if (empty($post_jform['user_id_t']) && empty($post_jform['id'])) {
 					$user = JFactory::getUser();
 					$this->user_id_t = $user->id;
 				}
@@ -140,8 +145,8 @@ class TestimonialsTableTestimonials extends JTable
 			//}
 			if ($this->id && $res)
 			{
-				if (isset($_POST['jform']['tags']))
-				{	$tags = $_POST['jform']['tags'];}
+				if (isset($post_jform['tags']))
+				{	$tags = $post_jform['tags'];}
 				else
 				{
 					$tags=array(1);
@@ -246,10 +251,7 @@ class TestimonialsTableTestimonials extends JTable
                             $send = $mailer->Send();
                             if ( $send !== true ) {
                                 echo 'Error sending email: ' . $send->__toString();
-                            } else {
-                                //echo 'Mail sent';
                             }
-							//JUtility::sendMail($mailfrom, $fromname, $email, $subject, $message, 1);
 						}
 					}
 				}			

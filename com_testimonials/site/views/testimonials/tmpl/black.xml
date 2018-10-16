@@ -15,16 +15,22 @@
 				extension="com_testimonials"
 				label="JCATEGORY"
 				labelclass="control-label"
-				required="true" 
-				/>
+				required="true">
+				<option value="0">COM_TESTIMONIALS_ALL_CATEGORIES_SELECTION</option>
+			</field>
 			<field
-					name="tm_intro_text"
-					type="editor"
-			width="80%"
-					label="COM_TESTIMONIALS_INTRO_TEXT_LABEL"
-					description="COM_TESTIMONIALS_INTRO_TEXT_DESC"
-					filter="safehtml"
-					/>
+				name="tm_intro_text"
+				type="editor"
+				width="80%"
+				label="COM_TESTIMONIALS_INTRO_TEXT_LABEL"
+				description="COM_TESTIMONIALS_INTRO_TEXT_DESC"
+				filter="safehtml" />
+			<field name="show_ordering" type="radio" default="1"
+				   label="COM_TESTIMONIALS_CATEGORY_SHOW_ORDERING_LABEL"
+				   description="COM_TESTIMONIALS_CATEGORY_SHOW_ORDERING_DESC">
+				<option	value="1">JYES</option>
+				<option	value="0">JNO</option>
+			</field>
 			<field name="all_tags" type="radio" default="1"
 				label="COM_TESTIMONIALS_ADMINISTRATION_TAGS" 
 				description="COM_TESTIMONIALS_ADMINISTRATION_TAGS">

@@ -37,7 +37,8 @@ class TestimonialsControllerDashboard_items extends JControllerAdmin
         if ($tmpl == 'component') $tmpl = '&tmpl=component'; else $tmpl = '';
 
         if (!is_array($cid) || count($cid) < 1) {
-            JError::raiseWarning(500, JText::_($this->text_prefix . '_NO_ITEM_SELECTED'));
+            JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'warning');
+
         } else {
             // Get the model.
             $model = $this->getModel();

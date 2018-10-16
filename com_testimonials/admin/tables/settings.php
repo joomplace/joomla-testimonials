@@ -70,7 +70,7 @@ class TestimonialsTableSettings extends JTable
  			  $id?$this->id=$id:'';
  			  
  			  if (isset($data['params']['rules'])) {
-					$rules	= new JRules($data['params']['rules']);
+					$rules	= new JAccessRules($data['params']['rules']);
 					$this->setRules($rules);
 					unset ($data['params']['rules']);
 			}
