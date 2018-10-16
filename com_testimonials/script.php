@@ -506,9 +506,8 @@ class com_testimonialsInstallerScript
         if(!$db->setQuery($query,0,1)->loadResult()){
             $query->clear();
 
-            $columns = array('type_id', 'type_title', 'type_alias', 'table', 'rules', 'field_mappings', 'router', 'content_history_options');
+            $columns = array('type_title', 'type_alias', 'table', 'rules', 'field_mappings', 'router', 'content_history_options');
             $values = array(
-                null,
                 $db->q('Testimonials Category'),
                 $db->q('com_testimonials.category'),
                 $db->q('{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":   {"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'),
