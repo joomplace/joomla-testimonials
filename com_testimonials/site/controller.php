@@ -39,16 +39,16 @@ class TestimonialsController extends JControllerLegacy
 		$query = $database->getQuery(true);
 		if ($tid)
 		{
-			if ($settings->get('use_cb') == 1) 
+			if ($settings->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php'))
 			{
 				 $query->select('CONCAT("images/comprofiler/",compr.avatar)');
-				  $query->join('LEFT','`#__comprofiler` AS `compr` ON compr.user_id = t.user_id_t');
+				 $query->join('LEFT','`#__comprofiler` AS `compr` ON compr.user_id = t.user_id_t');
 			       
 			}
-			if ($settings->get('use_jsoc') == 1) 
+			if ($settings->get('use_jsoc') == 1 && file_exists(JPATH_SITE.'/components/com_community/community.php'))
 			{
 				 $query->select('jsoc.thumb as `avatar`');
-				  $query->join('LEFT','`#__community_users` AS `jsoc` ON jsoc.userid = t.user_id_t');
+				 $query->join('LEFT','`#__community_users` AS `jsoc` ON jsoc.userid = t.user_id_t');
 			       
 			}
 			else
@@ -158,13 +158,13 @@ class TestimonialsController extends JControllerLegacy
 		
 		$query->select('t.*');
  		$query->from('`#__tm_testimonials` AS `t`');
-		if ($settings->get('use_cb') == 1) 
+		if ($settings->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php'))
 		{
 			 $query->select('compr.avatar');
 			  $query->join('LEFT','`#__comprofiler` AS `compr` ON compr.user_id = t.user_id_t');
 		       
 		}
-		if ($settings->get('use_jsoc'))
+		if ($settings->get('use_jsoc') && file_exists(JPATH_SITE.'/components/com_community/community.php'))
 		        {
 			        $query->select('jsoc.thumb AS avatar');
 			        $query->join('LEFT','`#__community_users` AS `jsoc` ON jsoc.userid = t.user_id_t');
@@ -179,13 +179,13 @@ class TestimonialsController extends JControllerLegacy
 			$query = $database->getQuery(true);
 			$query->select('t.*');
 	 		$query->from('`#__tm_testimonials` AS `t`');
-			if ($settings->get('use_cb') == 1) 
+			if ($settings->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php'))
 			{
 				 $query->select('compr.avatar');
 				  $query->join('LEFT','`#__comprofiler` AS `compr` ON compr.user_id = t.user_id_t');
 			       
 			}
-			if ($settings->get('use_jsoc'))
+			if ($settings->get('use_jsoc') && file_exists(JPATH_SITE.'/components/com_community/community.php'))
 		        {
 			        $query->select('jsoc.thumb AS avatar');
 			        $query->join('LEFT','`#__community_users` AS `jsoc` ON jsoc.userid = t.user_id_t');
@@ -293,7 +293,7 @@ class TestimonialsController extends JControllerLegacy
 						}
 					}
 		}else{
-			if ($settings->get('use_cb') == 1) {
+			if ($settings->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php')) {
 				$check = explode('/',@$quoter->avatar);
 				$check = $check[0];
 				if (isset($quoter->avatar) && $check != 'gallery') {
@@ -312,7 +312,7 @@ class TestimonialsController extends JControllerLegacy
 					$avatar = JURI::base()."/components/com_testimonials/templates/black/images/tnnophoto.jpg";
 				}
 			}
-			 if ($settings->get('use_jsoc') == 1) {
+			 if ($settings->get('use_jsoc') == 1 && file_exists(JPATH_SITE.'/components/com_community/community.php')) {
 				if (isset($quoter->avatar)) {
 					if (file_exists(JPATH_BASE."/".$quoter->avatar)) {
 						$avatar = JURI::base()."/".$quoter->avatar;

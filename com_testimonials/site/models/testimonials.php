@@ -150,12 +150,12 @@ class TestimonialsModelTestimonials extends JModelList
 			}
         }
 
-        if ($params->get('use_cb'))
+        if ($params->get('use_cb') && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php'))
         {
             $query->select('compr.avatar as avatar');
             $query->join('LEFT', '#__comprofiler AS compr ON compr.user_id = t.user_id_t');
         }
-        if ($params->get('use_jsoc'))
+        if ($params->get('use_jsoc') && file_exists(JPATH_SITE.'/components/com_community/community.php'))
         {
             $query->select('jsoc.thumb as avatar');
             $query->join('LEFT', '#__community_users AS jsoc ON jsoc.userid = t.user_id_t');
