@@ -641,14 +641,10 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
 
         ?>
 		<input type="hidden" name="task" value="" />
-		<?php
-			if(JFactory::getApplication()->input->getVar('tmpl')=='component')
-			{
-				?>
-				<input type="hidden" name="tmpl" value="component" />
-				<?php
-			}
-		?>
+
+		<?php if(JFactory::getApplication()->input->get('tmpl', '') == 'component'){ ?>
+			<input type="hidden" name="tmpl" value="component" />
+        <?php } ?>
 		
     <div class="testim-buttoms testim-field-group testim-field-group control-group form-group">
 		<div class="controls">

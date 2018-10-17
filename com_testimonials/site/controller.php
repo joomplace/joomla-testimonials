@@ -77,7 +77,7 @@ class TestimonialsController extends JControllerLegacy
 	{
         $helper = new TestimonialsHelper();
 		$params = $helper->getParams();
-		if($params->get('modal_on_new')){
+		if($params->get('modal_on_new') && JFactory::getApplication()->input->get('tmpl', '') == 'component'){
 			?>
 			<script type="text/javascript">
 				setTimeout(function(){ parent.location.href=parent.location.href; }, 3000);
