@@ -120,11 +120,16 @@ class TestimonialsControllerTopic extends JControllerForm
 	
 		$helper = new TestimonialsHelper();
 		$params = $helper->getParams();
-		$urlAppends = '';
-		if($params->get('modal_on_new')){
-			$urlAppends = '&tmpl=component';
+        $Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
+
+        $urlAppends = '';
+        if($params->get('modal_on_new')){
+		    if(JFactory::getApplication()->input->get('tmpl', '') == 'component'){
+                $urlAppends = '&tmpl=component';
+            } else {
+                $urlAppends = '&Itemid='.$Itemid;
+            }
 		}else{
-			$Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
 			$urlAppends = '&Itemid='.$Itemid;
 		}
 	
