@@ -11,7 +11,7 @@
 // No direct access to this file
 defined('_JEXEC') or die;
 
-abstract class TestimonialsHelper
+abstract class TestimonialsBEHelper
 {
     /**
      * Configure the Linkbar.

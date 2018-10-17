@@ -44,7 +44,7 @@ class TestimonialsViewTopics extends JViewLegacy
               $this->pagination = $pagination;
  			  $this->state = $state;
 
-            TestimonialsHelper::addSubmenu('topics');
+            TestimonialsBEHelper::addSubmenu('topics');
 			$this->sidebar = JHtmlSidebar::render();
  			  
                 parent::display($tpl);
