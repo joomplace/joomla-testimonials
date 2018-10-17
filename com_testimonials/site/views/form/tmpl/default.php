@@ -327,11 +327,17 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                 }
             } else $form_data['remove_image'] = '';
 
-            if (($params->get('use_cb') == 1 || $params->get('use_jsoc') == 1 ) && ($user->id || $item->id) && empty($item->avatar)){
-                if($item->id) $item->avatar = $helper->getUserAvatar($item->user_id_t);
-                else $item->avatar = $helper-getUserAvatar($user->id);
-            }else $item->avatar = '';
-
+            if ((($params->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php'))
+                    || ($params->get('use_jsoc') == 1 && file_exists(JPATH_SITE.'/components/com_community/community.php')) )
+                        && ($user->id || $item->id) && empty($item->avatar)){
+                if($item->id){
+                    $item->avatar = $helper->getUserAvatar($item->user_id_t);
+                } else {
+                    $item->avatar = $helper-getUserAvatar($user->id);
+                }
+            } else {
+                $item->avatar = '';
+            }
             ?>
             <input type="hidden" name="jform[date_added]" value="<?php echo date('Y-m-d H:i:s', time());?>" />
             <?php if($item->id) : ?>
