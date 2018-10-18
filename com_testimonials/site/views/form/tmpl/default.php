@@ -358,7 +358,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                     <div class="testim-field-group control-group form-group">
                         <label class="testim-label testim-required control-label" for="jform_t_caption" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('t_caption', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('t_caption', 'label')); ?>:</label>
                         <div class="controls">
-                            <?php echo $form->getInput('t_caption'); ?>
+                            <?php echo $form->getInput('t_caption', null, !empty($item->t_caption) ? $item->t_caption : ''); ?>
                         </div>
                     </div>
                 <?php else : ?>
@@ -390,7 +390,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                                 </div>
                             </div>
                         </div>
-                        <?php echo $form->getInput('testimonial'); ?>
+                        <?php echo $form->getInput('testimonial', null, !empty($item->testimonial) ? $item->testimonial : ''); ?>
                     </div>
                 </div>
 
@@ -481,7 +481,8 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                     <div class="testim-field-group control-group form-group">
                         <label class="testim-label control-label testim-required" for="jform_t_author" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('t_author', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('t_author', 'label')); ?>:</label>
                         <div class="controls">
-                            <?php echo $form->getInput('t_author'); ?>
+                            <?php echo $form->getInput('t_author', null, !empty($item->t_author) ? $item->t_author : '');?>
+
                         </div>
                     </div>
                 <?php endif; ?>
