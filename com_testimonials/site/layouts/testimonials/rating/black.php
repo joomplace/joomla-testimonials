@@ -20,4 +20,4 @@ $value = $displayData->value;
 <?php
 	}
 ?>
-</span>
+</span><br />
