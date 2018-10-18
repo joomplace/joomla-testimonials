@@ -37,7 +37,7 @@ foreach($this->items as $item){
 				<?php echo $item->t_author; ?>
 				</p>
 				<?php if($item->custom_fields) foreach($item->custom_fields as $field){ ?>
-					<p><?php echo $field; ?></p>
+					<p class="testimonial_custom-fields"><?php echo $field; ?></p>
 				<?php } ?>
 				<small class="testimonial_author" itemprop="author"><?php echo $item->author; ?></small>
 			</blockquote>

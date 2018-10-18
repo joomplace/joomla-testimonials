@@ -624,3 +624,15 @@ margin-left: 24px;
 article.testimonials-layout img{
 	width:auto!important;
 }
+
+.testimonial_custom-fields{
+    display: flex;
+}
+.tm_stars{
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+}
+.icon-star{
+    margin-right: 0.25rem;
+}
