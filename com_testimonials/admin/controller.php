@@ -102,7 +102,7 @@ class TestimonialsController extends JControllerLegacy
 				$db->setQuery($query);
 
 				if (!$db->loadResult()){
-					$query = "INSERT INTO `#__tm_testimonials_custom` (`name`, `published`, `ordering`, `type`, `required`, `descr`) VALUES ('Website', 1, 2, 'url', 0, ''),('Email', 1, 3, 'textemail', 0, ''),('Efforts', 1, 1, 'text', 1, '');";
+					$query = "INSERT INTO `#__tm_testimonials_custom` (`system_name`,`name`, `published`, `ordering`, `type`, `required`, `descr`) VALUES ('website','Website', 1, 2, 'url', 0, ''),('email','Email', 1, 3, 'textemail', 0, ''),('efforts','Efforts', 1, 1, 'text', 1, '');";
 					$db->setQuery($query);
 					$db->execute();
 					$msg .= JText::_('COM_TESTIMONIALS_MSG_SAMPLE_ADSCF');
