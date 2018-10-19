@@ -83,7 +83,7 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view='.$this->view_list, false));
 	}
 	
-	public function display(){
+	public function display($cachable = false, $urlparams = array()){
 		$input = JFactory::getApplication()->input;
 		$table = $this->getModel()->getTable();
 		
