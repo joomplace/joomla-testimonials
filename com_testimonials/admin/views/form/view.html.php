@@ -26,14 +26,14 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->form			= $this->get('Form');
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
-        $this->helper       = new TestimonialsHelper();
+        $this->helper       = new TestimonialsFEHelper();
 		$this->params		= $params =  $this->helper->getParams();
 		
 		$Gparams = JFactory::getApplication()->getParams();
 		
 		if($params->get('show_captcha') && !$params->get('show_recaptcha'))
 		{
-			TestimonialsHelper::enableCaptcha();
+			TestimonialsFEHelper::enableCaptcha();
 		}
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -50,7 +50,7 @@ class TestimonialsViewForm extends JViewLegacy
 		
 		if ($authorised !== true) {
 			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
-			$helper = new TestimonialsHelper();
+			$helper = new TestimonialsFEHelper();
 			$params = $helper->getParams();
 			if($params->get('modal_on_new')){
 				?>

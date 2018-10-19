@@ -75,7 +75,7 @@ class TestimonialsController extends JControllerLegacy
 	
 	public function succesfully()
 	{
-        $helper = new TestimonialsHelper();
+        $helper = new TestimonialsFEHelper();
 		$params = $helper->getParams();
 		if($params->get('modal_on_new') && JFactory::getApplication()->input->get('tmpl', '') == 'component'){
 			?>

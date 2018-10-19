@@ -30,12 +30,12 @@ if($user->authorise('core.publish', 'com_testimonials') || $user->authorise('cor
 
 		<?php
 
-		$params = TestimonialsHelper::getParams();
+		$params = TestimonialsFEHelper::getParams();
 		$tmpl = $params->get('modal_on_new')?'&tmpl=component':'';
 		if($params->get('modal_on_new')) JHtml::_('behavior.modal', 'a.modal_com_testim');
 		
 		if ($user->authorise('core.create', 'com_testimonials')){ ?>
-			<a class="modal_com_testim btn btn-xs btn-default"  href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.'&id='.$displayData->id.'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form')); ?>" rel="{handler:'iframe',size:{x: (0.8*((jQuery('main').width())?jQuery('main').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}" title="<?php echo JText::_('COM_TESTIMONIALS_EDIT'); ?>">
+			<a class="modal_com_testim btn btn-xs btn-default"  href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.'&id='.$displayData->id.'&Itemid='.TestimonialsFEHelper::getClosesItemId('index.php?option=com_testimonials&view=form')); ?>" rel="{handler:'iframe',size:{x: (0.8*((jQuery('main').width())?jQuery('main').width():jQuery('.container').width())), y: (0.8*jQuery(window).height())}}" title="<?php echo JText::_('COM_TESTIMONIALS_EDIT'); ?>">
 				<i class="icon-pencil-2 fa fa-pencil" alt="<?php echo JText::_('COM_TESTIMONIALS_EDIT'); ?>"></i>
 			</a>
 		<?php } ?>

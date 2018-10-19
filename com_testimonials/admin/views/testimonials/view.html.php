@@ -24,7 +24,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
         	$document->addScript(JURI::root(true).'/administrator/components/com_testimonials/assets/js/js.js');
         	$this->version = TestimonialHelper::getVersion();
 			$this->addToolbar();
-            TestimonialsBEHelper::addSubmenu('topics');
+            TestimonialsHelper::addSubmenu('topics');
         	
              parent::display($tpl);
         }

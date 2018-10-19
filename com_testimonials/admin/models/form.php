@@ -68,7 +68,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
         if (empty($form)) {
             return false;
         }
-        $params = TestimonialsHelper::getParams();
+        $params = TestimonialsFEHelper::getParams();
         if ($params->get('show_authorname') == 0) {
             $form->setFieldAttribute('t_author', 'required', 'false');
         }

@@ -84,7 +84,7 @@ class TestimonialsModelTestimonials extends JModelList
             }
         }
 
-        $params = TestimonialsHelper::getParams();
+        $params = TestimonialsFEHelper::getParams();
 
         $limit = $app->getUserStateFromRequest('com_testimonials.list.limit',
             'limit', $params->get('list_limit'), 'uint');

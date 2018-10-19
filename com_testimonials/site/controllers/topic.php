@@ -118,7 +118,7 @@ class TestimonialsControllerTopic extends JControllerForm
 	      
 	public function save($key = null, $urlVar = null) {
 	
-		$helper = new TestimonialsHelper();
+		$helper = new TestimonialsFEHelper();
 		$params = $helper->getParams();
         $Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
 
@@ -133,7 +133,7 @@ class TestimonialsControllerTopic extends JControllerForm
 			$urlAppends = '&Itemid='.$Itemid;
 		}
 	
-		$params = TestimonialsHelper::getParams();
+		$params = TestimonialsFEHelper::getParams();
 		$db = JFactory::getDBO();
 
         $data = $_REQUEST['jform'];
@@ -188,7 +188,7 @@ class TestimonialsControllerTopic extends JControllerForm
 
 			if ($params->get('autoapprove')== 0)
 			{
-                if(!TestimonialsHelper::can('manage')){
+                if(!TestimonialsFEHelper::can('manage')){
                     $msg = JText::_('COM_TESTIMONIALS_MSG_APPROVE');
 					$query = "UPDATE `#__tm_testimonials` SET `is_approved`='0' WHERE `id`=".$t_id;
 					$db->setQuery($query);
@@ -204,10 +204,10 @@ class TestimonialsControllerTopic extends JControllerForm
 				$msg = JText::_('COM_TESTIMONIALS_SUBMIT_SAVE_SUCCESS');
 			}
 
-            TestimonialsHelper::notifyAdmin($caption, $author, $isEdited, $t_id);
+            TestimonialsFEHelper::notifyAdmin($caption, $author, $isEdited, $t_id);
 
 			/*
-			$help = new TestimonialsHelper();
+			$help = new TestimonialsFEHelper();
 			
 			$item = $help->getActiveItem();
 			if($item->id) $this->setRedirect(JRoute::_('index.php?option=com_testimonials&itemid='.$item->id, false),$msg);	
