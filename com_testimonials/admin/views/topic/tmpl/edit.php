@@ -210,7 +210,7 @@ $testimonial_id= $this->item->id;
                                 </span>
                                 <div class="testim-add-img2" onclick="document.getElementById('imageUpload').click();"><span class="testim-add-img-label"><?php echo JText::_('COM_TESTIMONIALS_ADD_IMAGE'); ?></span><input type="file" name="image" onclick="event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);" id="imageUpload" data-url="<?php echo JRoute::_('index.php?option=com_testimonials&task=new_image'); ?>" class="file-input-button"></div>
                                 <input type="hidden" name="jform[exist_images]" id="jform_exist_images" value="<?php echo $this->item->images;?>" />
-                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo $form_data['remove_image'];?>" />
+                                <input type="hidden" name="remove_image" id="remove_image" value="<?php echo (empty($form_data['remove_image']))?'':$form_data['remove_image'];?>" />
                             </div>
                         </div>
                     </div>
