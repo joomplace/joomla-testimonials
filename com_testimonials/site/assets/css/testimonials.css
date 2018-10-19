@@ -636,3 +636,6 @@ article.testimonials-layout img{
 .icon-star{
     margin-right: 0.25rem;
 }
+.ratingWrap-black{
+    display: flex;
+}
