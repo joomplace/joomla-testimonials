@@ -10,13 +10,14 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+$settings = $this->params;
 foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<meta itemprop="itemreviewed" content="Services" />
 	<div id="anc_<?php echo $item->id; ?>" class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
 	<div class="row row-fluid">
 		<div class="col-xs-12 col-sm-3">
-		<?php if($item->avatar){ ?>
+		<?php if($item->avatar && $settings->get('show_avatar')){ ?>
 			<div class="testimonial_image" itemprop="image"><a href="javascript:void(0);" class="thumbnail"><?php echo $item->avatar; ?></a></div>
 		<?php } ?>
 		</div>

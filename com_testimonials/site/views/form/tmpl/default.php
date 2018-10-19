@@ -455,7 +455,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                 }
                 ?>
 
-                <?php if($settings->get('allow_photo')) : ?>
+                <?php if($settings->get('allow_photo') && $settings->get('show_avatar')) : ?>
                     <!--Block .testim-field-group is for avatar.-->
                     <div class="testim-field-group control-group form-group testim-images-container">
                         <div class="testim-label control-label">&nbsp;</div>

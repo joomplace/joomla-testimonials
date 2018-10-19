@@ -9,7 +9,7 @@
  */
 
 defined('_JEXEC') or die('Restricted access');
-
+$settings = $this->params;
 foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<div id="anc_<?php echo $item->id; ?>" class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
@@ -37,7 +37,7 @@ foreach($this->items as $item){ ?>
 					</table>
 				<?php } ?>
 			</div>
-		<?php if($item->avatar){ ?>
+		<?php if($item->avatar && $settings->get('show_avatar')){ ?>
 			<div class="col-xs-12 col-sm-3 text-right">
 		<?php }else{ ?>
 			<div class="col-xs-12 col-sm-6 text-right">

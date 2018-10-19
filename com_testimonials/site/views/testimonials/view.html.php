@@ -31,6 +31,8 @@ class TestimonialsViewTestimonials extends JViewLegacy
    {
 	   $this->assignData();
 	   $jinput = JFactory::getApplication()->input;
+       $this->helper       = new TestimonialsHelper();
+       $this->params		= $params =  $this->helper->getParams();
 
 		
 	   // retrieving pagination
