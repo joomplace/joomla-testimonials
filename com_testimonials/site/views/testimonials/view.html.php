@@ -31,17 +31,15 @@ class TestimonialsViewTestimonials extends JViewLegacy
    {
 	   $this->assignData();
 	   $jinput = JFactory::getApplication()->input;
-       $this->helper       = new TestimonialsHelper();
-       $this->params		= $params =  $this->helper->getParams();
+       $this->helper = new TestimonialsFEHelper();
+       $this->params = $params =  $this->helper->getParams();
 
-		
 	   // retrieving pagination
 	   if(!$jinput->get('embed','')) $this->pagination	= $this->get('Pagination');
 	   $order = $jinput->get('ordering', '');
 	   $this->SelectedOrder($order, 'btn-success');
 		
-        parent::display($tpl);
-		
+	   parent::display($tpl);
     }
 	
 	function renderLayout($layout, $data = null, $sublayout=''){
@@ -62,7 +60,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
 		// get state variables, filter, etc.
         $this->state		= $this->get('State');
 		// assign helper class
-        $this->helper       = new TestimonialsHelper();
+        $this->helper       = new TestimonialsFEHelper();
 		// get items data list
         $this->items	    = $this->get('Items');
 		
@@ -245,7 +243,7 @@ class TestimonialsViewTestimonials extends JViewLegacy
 			
 			if ($this->helper->can('edit'))
 			{ ?>
-			<a class="modal_com_testim btn btn-primary"  href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.'&Itemid='.TestimonialsHelper::getClosesItemId('index.php?option=com_testimonials&view=form')).'&id='.$id; ?>" rel="{handler:'iframe',size:{x: (0.8*jQuery('#t3-mainbody').width()), y: (0.8*jQuery(window).height())}}" title="<?php echo Jtext::_('COM_TESTIMONIALS_EDIT'); ?>">
+			<a class="modal_com_testim btn btn-primary"  href="<?php echo JRoute::_('index.php?option=com_testimonials&view=form'.$tmpl.'&Itemid='.TestimonialsFEHelper::getClosesItemId('index.php?option=com_testimonials&view=form')).'&id='.$id; ?>" rel="{handler:'iframe',size:{x: (0.8*jQuery('#t3-mainbody').width()), y: (0.8*jQuery(window).height())}}" title="<?php echo Jtext::_('COM_TESTIMONIALS_EDIT'); ?>">
 				<i class="icon-pencil-2 fa fa-pencil" alt="<?php echo Jtext::_('COM_TESTIMONIALS_EDIT'); ?>"></i>
 			</a>
 			<?php 

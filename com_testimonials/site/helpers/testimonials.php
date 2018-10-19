@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 // Component Helper
 jimport('joomla.application.component.helper');
 
-class TestimonialsHelper
+class TestimonialsFEHelper
 {
 	protected $document;
 	protected $template;

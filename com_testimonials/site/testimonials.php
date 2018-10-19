@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-JLoader::register('TestimonialsHelper', JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
+JLoader::register('TestimonialsFEHelper', JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php');
 
 $controller = JControllerLegacy::getInstance('Testimonials');
 $controller->execute(JFactory::getApplication()->input->getCmd('task'));

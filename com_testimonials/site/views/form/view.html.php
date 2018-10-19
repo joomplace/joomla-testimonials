@@ -41,7 +41,7 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->form			= $this->get('Form');
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
-        $this->helper       = new TestimonialsHelper();
+        $this->helper       = new TestimonialsFEHelper();
 		$this->params		= $params =  $this->helper->getParams();
 		
 		$Gparams = JFactory::getApplication()->getParams();

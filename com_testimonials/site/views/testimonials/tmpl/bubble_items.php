@@ -37,8 +37,6 @@ foreach($this->items as $item){ ?>
 		    if($item->avatar && $settings->get('show_avatar')) {
                 echo $item->avatar;
             }
-
-
 		?>
 		<span class="testimonial_author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo $item->author; ?></span></span>
 		<i><?php echo $item->author_description; ?></i>

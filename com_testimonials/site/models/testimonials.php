@@ -72,7 +72,7 @@ class TestimonialsModelTestimonials extends JModelList
 
 	protected function getListQuery()
 	{
-        $params = TestimonialsHelper::getParams();
+        $params = TestimonialsFEHelper::getParams();
         $menuitem = JFactory::getApplication()->getMenu()->getActive();
 		$input = JFactory::getApplication()->input;
         $tags = "";
@@ -207,7 +207,7 @@ class TestimonialsModelTestimonials extends JModelList
 	protected function getListLimit(){
 		if(!$this->limit){
 			$app = JFactory::getApplication();
-			$params = TestimonialsHelper::getParams();
+			$params = TestimonialsFEHelper::getParams();
 			$this->limit = $app->getUserStateFromRequest('com_testimonials.list.limit', 'limit', $params->get('list_limit'), 'uint');
 		}
 		return $this->limit;

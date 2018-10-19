@@ -51,7 +51,7 @@ class TestimonialsViewTags extends JViewLegacy
                   $this->pagination = $pagination;
                   $this->state = $state;
 
-                TestimonialsBEHelper::addSubmenu('tags');
+                TestimonialsHelper::addSubmenu('tags');
 
                 $this->sidebar = JHtmlSidebar::render();
             }

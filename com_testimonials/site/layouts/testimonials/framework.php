@@ -9,7 +9,7 @@
  
 defined('_JEXEC') or die;
 
-$params = TestimonialsHelper::getParams();
+$params = TestimonialsFEHelper::getParams();
 $document = JFactory::getDocument();
 
 JHtml::_('jquery.framework');

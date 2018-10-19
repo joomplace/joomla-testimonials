@@ -28,10 +28,6 @@ class TestimonialsTableTestimonials extends JTable
         
        	public function store($updateNulls = false)
 		{
-            JLoader::register('TestimonialsHelper',
-                JPATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php'
-            );
-
 			if(!$this->catid){
 				$tag = JFactory::getLanguage()->getTag();
 				$options = JHtml::_('category.options','com_testimonials',$config = array('filter.published' => array(1), 'filter.language' => array('*',$tag),'filter.access' =>array(1)));
@@ -216,7 +212,7 @@ class TestimonialsTableTestimonials extends JTable
 				$customFieldsTable->store();
 									
 				// Autoapprove
-				$params = TestimonialsHelper::getParams();
+				$params = TestimonialsFEHelper::getParams();
 				if (!JFactory::getUser()->authorise('core.publish', 'com_testimonials'))
 				{
 					$this->publish($this->id, $state = 0);
@@ -227,7 +223,7 @@ class TestimonialsTableTestimonials extends JTable
 				}
 				
 				//Send notifications
-				$emails = TestimonialsHelper::getNotifyUserEmails();
+				$emails = TestimonialsFEHelper::getNotifyUserEmails();
 				if (sizeof($emails))
 				{
 					$config	= JFactory::getConfig();

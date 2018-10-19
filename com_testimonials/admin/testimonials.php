@@ -10,10 +10,11 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JLoader::register('TestimonialsHelper',
-    JPATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'testimonials.php'
+JLoader::register('TestimonialsFEHelper',
+    JPATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers'
+    . DIRECTORY_SEPARATOR . 'testimonials.php'
 );
-JLoader::register('TestimonialsBEHelper',
+JLoader::register('TestimonialsHelper',
     JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'helpers'
     . DIRECTORY_SEPARATOR . 'testimonials.php'
 );
