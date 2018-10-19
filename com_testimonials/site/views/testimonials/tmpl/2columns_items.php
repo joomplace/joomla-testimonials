@@ -8,7 +8,7 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
-
+$settings = $this->params;
 $i = 0; ?>
 <div class="row">
 <?php 
@@ -25,7 +25,7 @@ foreach($this->items as $item){
 		<div id="anc_<?php echo $item->id; ?>" class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
 		<div class="row">
 			<div class="col-xs-12">
-			<?php if($item->avatar){ ?>
+			<?php if($item->avatar && $settings->get('show_avatar')){ ?>
 				<div class="testimonial_image" itemprop="image"><a href="javascript:void(0);" class="thumbnail"><?php echo $item->avatar; ?></a></div>
 			<?php } ?>
 			</div>

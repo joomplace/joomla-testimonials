@@ -66,7 +66,7 @@ class TestimonialsViewForm extends JViewLegacy
 			JHTML::stylesheet('components/com_testimonials/assets/submit-form/css/template_testimonials.css');
 			JHtml::_('jquery.framework');
 			$document->addScript('components/com_testimonials/assets/submit-form/js/main.js');
-			if($params->get('allow_photo') || $params->get('show_addimage')){
+			if(($params->get('allow_photo') || $params->get('show_addimage')) && $params->get('show_avatar')){
 				$document->addScript('components/com_testimonials/assets/file-upload/js/vendor/jquery.ui.widget.js');
 				$document->addScript('components/com_testimonials/assets/file-upload/js/jquery.iframe-transport.js');
 				$document->addScript('components/com_testimonials/assets/file-upload/js/jquery.fileupload.js');
