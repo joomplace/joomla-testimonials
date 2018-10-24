@@ -15,14 +15,14 @@ class TestimonialsController extends JControllerLegacy
 {
 	public function display($cachable = false, $urlparams = array())
 	{
-		
 		$user = JFactory::getUser();
 		$v = JFactory::getApplication()->input->getCmd('view', 'Testimonials');
 		$id		= JFactory::getApplication()->input->getInt('id');
 		if(!JFactory::getApplication()->input->get('temp') && ($v == 'testimonials' || $v=='topics')) JFactory::getApplication()->input->set('temp',  'default');
         if ($v=='topics') JFactory::getApplication()->input->set('view',  'Testimonials');
         if ($v=='topic') JFactory::getApplication()->input->set('view',  'form');
-             parent::display();
+
+        parent::display();
 	}
 	public function _showpicture()
 	{
@@ -78,9 +78,13 @@ class TestimonialsController extends JControllerLegacy
         $helper = new TestimonialsFEHelper();
 		$params = $helper->getParams();
 		if($params->get('modal_on_new') && JFactory::getApplication()->input->get('tmpl', '') == 'component'){
-			?>
+		    ?>
 			<script type="text/javascript">
-				setTimeout(function(){ parent.location.href=parent.location.href; }, 3000);
+                var msgsDiv = document.getElementById('system-message-container'),
+                    msgs = msgsDiv.innerHTML;
+                msgsDiv.innerHTML = '';
+                parent.document.getElementById('system-message-container').innerHTML = msgs;
+                parent.document.getElementById('sbox-btn-close').click();
 			</script>
 			<?php
 		}else{

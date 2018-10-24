@@ -639,3 +639,19 @@ article.testimonials-layout img{
 .ratingWrap-black{
     display: flex;
 }
+
+.testimonial-reviewRating td{
+    height: 0;
+}
+.testimonial-reviewRating:first-of-type td{
+    height: 0.5rem;
+}
+.testimonial-reviewRating:last-of-type td{
+    height: 0.5rem;
+}
+.ratingWrap-black:first-of-type {
+    margin-top: 0.5rem;
+}
+.ratingWrap-black:last-of-type {
+    margin-bottom: 0.5rem;
+}
