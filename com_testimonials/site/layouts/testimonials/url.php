@@ -15,6 +15,6 @@ $url = explode("|", $value);
 if(!empty($url[0])){
 	if(!preg_match('|^https?://|i', $url[0])) $url[0] = 'http://'.$url[0];
 }
-$value = '<a href="'.(isset($url[0])?$url[0]:(isset($url[1])?$url[1]:'java:void(0)')).'" name="testimonial_link" target="_blank">'.(isset($url[1])?$url[1]:(isset($url[0])?$url[0]:'')).'</a>'.'&nbsp;';
+$value = '<br/><a href="'.(isset($url[0])?$url[0]:(isset($url[1])?$url[1]:'java:void(0)')).'" name="testimonial_link" target="_blank">'.(isset($url[1])?$url[1]:(isset($url[0])?$url[0]:'')).'</a>';
 
 echo JHTML::_( 'content.prepare', $value );
