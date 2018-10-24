@@ -31,10 +31,7 @@ foreach($this->items as $item){
 			</div>
 			<blockquote class="col-xs-12">
 				<p class="testimonial_text" itemprop="reviewBody">
-				<?php echo $item->testimonial; ?>
-				</p>
-				<p class="testimonial_text" itemprop="reviewBody">
-				<?php echo $item->t_author; ?>
+				    <?php echo $item->testimonial; ?>
 				</p>
 				<?php if($item->custom_fields) foreach($item->custom_fields as $field){ ?>
 					<p class="testimonial_custom-fields"><?php echo $field; ?></p>

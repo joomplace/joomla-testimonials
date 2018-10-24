@@ -22,14 +22,16 @@ if($params->get('use_editor') == 1){
          $(document).ready(function () {
          var editor = new wysihtml5.Editor(\"jform_testimonial\", {
             toolbar:      \"jform_testimonial_toolbar\",
-            parserRules:  wysihtml5ParserRules
+            parserRules:  wysihtml5ParserRules,
+            stylesheets: ['/components/com_testimonials/assets/css/testimonials_form.css']
          });
          ";
     if($params->get('show_authordesc') == 1 && $params->get('show_testimmore') == 1){
         $script[] = "
          var editor2 = new wysihtml5.Editor(\"jform_author_description\", {
             toolbar:      \"jform_author_description_toolbar\",
-            parserRules:  wysihtml5ParserRules
+            parserRules:  wysihtml5ParserRules,
+            stylesheets: ['/components/com_testimonials/assets/css/testimonials_form.css']
          });
          ";
     }
