@@ -80,11 +80,15 @@ class TestimonialsController extends JControllerLegacy
 		if($params->get('modal_on_new') && JFactory::getApplication()->input->get('tmpl', '') == 'component'){
 		    ?>
 			<script type="text/javascript">
-                var msgsDiv = document.getElementById('system-message-container'),
-                    msgs = msgsDiv.innerHTML;
-                msgsDiv.innerHTML = '';
-                parent.document.getElementById('system-message-container').innerHTML = msgs;
-                parent.document.getElementById('sbox-btn-close').click();
+                if(document.getElementById('system-message-container') && parent.document.getElementById('system-message-container')){
+                    var msgsDiv = document.getElementById('system-message-container'),
+                        msgs = msgsDiv.innerHTML;
+                    msgsDiv.innerHTML = '';
+                    parent.document.getElementById('system-message-container').innerHTML = msgs;
+                    parent.document.getElementById('sbox-btn-close').click();
+                } else {
+                    setTimeout(function(){ parent.location.href=parent.location.href; }, 3000);
+                }
 			</script>
 			<?php
 		}else{
