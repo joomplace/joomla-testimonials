@@ -112,9 +112,9 @@ JFactory::getDocument()->addStyleDeclaration("
             <div class="text-right">
                 <fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">
                     <input type="hidden" id="order" name="ordering" value="t_caption">
-                    <label for="order" class="btn <?php echo $this->order['name'] ?>"
+                    <label for="order" class="btn <?php echo empty($this->order['name'])?'':$this->order['name'] ?>"
                            onclick="document.adminForm.ordering.value='t_caption'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_NAME'); ?></label>
-                    <label for="order" class="btn <?php echo $this->order['order'] ?>"
+                    <label for="order" class="btn <?php echo empty($this->order['order'])?'':$this->order['order']?>"
                            onclick="document.adminForm.ordering.value='ordering'; document.adminForm.submit();"><?php echo JTEXT::_('COM_TESTIMONIALS_TOPIC_BY_ORDER'); ?></label>
                 </fieldset>
             </div>
