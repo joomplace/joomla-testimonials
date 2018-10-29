@@ -61,6 +61,9 @@ JFactory::getDocument()->addStyleDeclaration("
 .tl".$uid." .testimonial blockquote p:after {
   content: '';
 }
+.autor_discription :only-child{
+  color: #777;
+}
 ");
 ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">

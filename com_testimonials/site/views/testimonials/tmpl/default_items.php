@@ -25,9 +25,6 @@ foreach($this->items as $item){ ?>
 			<p class="testimonial_text" itemprop="reviewBody">
 			<?php echo $item->testimonial; ?>
 			</p>
-			<p class="testimonial_text">
-			<?php echo $item->author_description; ?>
-			</p>
 			<?php if(isset($item->custom_fields) && $item->custom_fields){ ?>
 				<table class="customs-table">
 				<?php foreach($item->custom_fields as $field){ ?>
@@ -36,6 +33,13 @@ foreach($this->items as $item){ ?>
 				</table>
 			<?php } ?>
 			<small class="testimonial_author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo $item->author; ?></span></small>
+            <?php if (!empty($item->author_description)): ?>
+                <p class="testimonial_text" itemprop="reviewBody">
+                    <div class="autor_discription">
+                        <?php echo $item->author_description; ?>
+                    </div>
+                </p>
+            <?php endif; ?>
 		</blockquote>
 	</div>
 	<?php if($item->images){ ?>
