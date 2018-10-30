@@ -591,6 +591,8 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                                 foreach ($custom_fields as $id => $custom_field) {
                                     if(!$custom_field->required) {
                                         switch ($custom_field->type){
+
+
                                             case 'url':
                                                 $url = array();
                                                 $url = explode('|', $custom_field->value);
@@ -599,6 +601,12 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                                                     <label class="testim-label control-label" for="customs_link_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name." ";?><?php echo JText::_('COM_TESTIMONIALS_CUSTOMS_URL_LINK');?>:</label>
                                                     <div class="controls">
                                                         <input type="text" class="inputbox form-control" id="customs_link_<?php echo $custom_field->id?>" name="customs_link[<?php echo $custom_field->id?>]" value="<?php echo htmlspecialchars(isset($url[0])?$url[0]:'');?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="testim-field-group control-group form-group">
+                                                    <label class="testim-label control-label" for="customs_name_<?php echo $custom_field->id?>" rel="tooltip" title="<?php echo $custom_field->descr; ?>" ><?php echo $custom_field->name." ";?><?php echo JText::_('COM_TESTIMONIALS_CUSTOMS_URL_NAME');?>:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="inputbox form-control" id="customs_name_<?php echo $custom_field->id?>" name="customs_name[<?php echo $custom_field->id?>]" value="<?php echo htmlspecialchars(isset($url[1])?$url[1]:'');?>" />
                                                     </div>
                                                 </div>
                                                 <?php
