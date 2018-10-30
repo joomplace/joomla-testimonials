@@ -488,7 +488,37 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                         </div>
                     </div>
                 <?php endif; ?>
-
+                <?php if ($settings->get('show_authordesc')) : ?>
+                    <div class="testim-field-group control-group form-group">
+                        <label class="testim-label control-label testim-required" for="jform_author_description" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('author_description', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('author_description', 'label')); ?>:</label>
+                        <div class="testim-texeditor-container controls">
+                            <div id="jform_author_description_toolbar" style="display: none;" class="texteditor-toolbar">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" data-wysihtml5-command="bold" title="CTRL+B"><i class="fa fa-bold"></i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="italic" title="CTRL+I"><i class="fa fa-italic"></i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="underline" title="CTRL+U"><i class="fa fa-underline"></i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="createLink"><i class="fa fa-link"></i></a>
+                                </div>
+                                <!--
+                                <div class="btn-group">
+                                    <a class="btn btn-default" data-wysihtml5-command="bold" title="CTRL+B"><i class="icon-bold" style="font-weight:bold;">B</i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="italic" title="CTRL+I"><i class="icon-italic" style="font-style:italic;">I</i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="underline" title="CTRL+U"><i class="icon-underline" style="text-decoration:underline;">U</i></a>
+                                    <a class="btn btn-default" data-wysihtml5-command="createLink"><i class="icon-link fa fa-link"></i></a>
+                                </div>
+                                -->
+                                <div data-wysihtml5-dialog="createLink" style="display: none; padding-top: 5px">
+                                    <div class="input-append">
+                                        <input type="text" class="input-large" data-wysihtml5-dialog-field="href" value="http://">
+                                        <a class="btn btn-default" data-wysihtml5-dialog-action="save"><?php echo JText::_('COM_TESTIMONIALS_SAVE'); ?></a>
+                                        <a class="btn btn-default" data-wysihtml5-dialog-action="cancel"><?php echo JText::_('COM_TESTIMONIALS_CANCEL'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php echo $form->getInput('author_description', null, !empty($item->author_description) ? $item->author_description : ''); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </fieldset>
             <?php if($settings->get('show_tags') && !empty($tags->tags)) : ?>
                 <fieldset>
@@ -530,37 +560,6 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                         </div>
                         <fieldset>
                             <div class="testim-notrequired testim-hide" style="display: none;">
-                                <?php if ($settings->get('show_authordesc')) : ?>
-                                    <div class="testim-field-group control-group form-group">
-                                        <label class="testim-label control-label testim-required" for="jform_author_description" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('author_description', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('author_description', 'label')); ?>:</label>
-                                        <div class="testim-texeditor-container controls">
-                                            <div id="jform_author_description_toolbar" style="display: none;" class="texteditor-toolbar">
-												<div class="btn-group">
-													<a class="btn btn-default" data-wysihtml5-command="bold" title="CTRL+B"><i class="fa fa-bold"></i></a>
-													<a class="btn btn-default" data-wysihtml5-command="italic" title="CTRL+I"><i class="fa fa-italic"></i></a>
-													<a class="btn btn-default" data-wysihtml5-command="underline" title="CTRL+U"><i class="fa fa-underline"></i></a>
-													<a class="btn btn-default" data-wysihtml5-command="createLink"><i class="fa fa-link"></i></a>
-												</div>
-												<!-- 
-												<div class="btn-group">
-													<a class="btn btn-default" data-wysihtml5-command="bold" title="CTRL+B"><i class="icon-bold" style="font-weight:bold;">B</i></a>
-													<a class="btn btn-default" data-wysihtml5-command="italic" title="CTRL+I"><i class="icon-italic" style="font-style:italic;">I</i></a>
-													<a class="btn btn-default" data-wysihtml5-command="underline" title="CTRL+U"><i class="icon-underline" style="text-decoration:underline;">U</i></a>
-													<a class="btn btn-default" data-wysihtml5-command="createLink"><i class="icon-link fa fa-link"></i></a>
-												</div>
-												-->
-                                                <div data-wysihtml5-dialog="createLink" style="display: none; padding-top: 5px">
-                                                    <div class="input-append">
-                                                        <input type="text" class="input-large" data-wysihtml5-dialog-field="href" value="http://">
-                                                        <a class="btn btn-default" data-wysihtml5-dialog-action="save"><?php echo JText::_('COM_TESTIMONIALS_SAVE'); ?></a>
-                                                        <a class="btn btn-default" data-wysihtml5-dialog-action="cancel"><?php echo JText::_('COM_TESTIMONIALS_CANCEL'); ?></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php echo $form->getInput('author_description'); ?>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
                                 <?php if($settings->get('show_addimage')) : ?>
                                     <!--Block .testim-field-group is for images. When images are added into .for-images .testim-field-group is display:block-->
                                     <div class="testim-field-group control-group form-group testim-images-container">

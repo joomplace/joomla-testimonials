@@ -37,6 +37,13 @@ foreach($this->items as $item){
 					<p class="testimonial_custom-fields"><?php echo $field; ?></p>
 				<?php } ?>
 				<small class="testimonial_author" itemprop="author"><?php echo $item->author; ?></small>
+                <?php if (!empty($item->author_description)): ?>
+                <p class="testimonial_text" itemprop="reviewBody">
+                    <div class="autor_discription">
+                        <?php echo $item->author_description; ?>
+                    </div>
+                </p>
+                <?php endif; ?>
 			</blockquote>
 		</div>
 		<?php if($item->images){ ?>
