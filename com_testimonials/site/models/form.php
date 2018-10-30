@@ -39,7 +39,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		$query->join('LEFT', '#__tm_testimonials_items_fields AS eif ON eif.field_id = c.id AND eif.item_id='.$id);
 		$query->where('c.published=1');	
 		$query->group('c.id');		
-		$query->order('c.ordering');	
+		$query->order('c.ordering DESC');
 		$db->setQuery($query->__toString());			
 		$fields = $db->loadObjectList();
 		$error = JFactory::getApplication()->input->getBool('error', false);
