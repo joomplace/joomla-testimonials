@@ -447,11 +447,12 @@ class com_testimonialsInstallerScript
         }
 
         $query
-            = 'SELECT `params` FROM `#__tm_testimonials_settings` WHERE `id`=1 LIMIT 1';
+            = 'SELECT `params` FROM `#__extensions` WHERE `element`="com_testimonials" LIMIT 1';
         $db->setQuery($query);
         $params = $db->loadResult();
-        if ($params) {
-            $query = 'UPDATE `#__extensions` SET `params`=\'' . $params
+        if (empty($params)) {
+            $data_json = '{"bootstrap":"1","fontawesome":"1","modal_on_new":"1","autoapprove":"0","enable_email":"0","admin_email":"","list_limit":20,"show_lasttofirst":"1","show_tags":"1","show_testimmore":"0","use_editor":"1","allow_photo":"1","show_addimage":"1","show_caption":"1","show_avatar":"1","use_cb":"0","use_jsoc":"0","show_authorname":"1","show_authordesc":"1","thmbl_noimage":"","thmbl_title":"","thmbl_alt":"","thmbl_square":"1","thmbl_width":"","thmbl_height":"","thmbl_sizing":"full","thmbl_fill_color":"#ffffff","thmbl_compression":"85"}';
+            $query = 'UPDATE `#__extensions` SET `params`=\'' . $data_json
                 . '\' WHERE `name`="com_testimonials"';
             $db->setQuery($query);
             $db->execute();
