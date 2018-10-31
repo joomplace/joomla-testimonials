@@ -557,7 +557,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php echo $form->getInput('author_description'); ?>
+                                            <?php echo $form->getInput('author_description', null, !empty($item->author_description) ? $item->author_description : ''); ?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
