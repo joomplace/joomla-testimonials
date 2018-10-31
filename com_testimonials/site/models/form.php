@@ -25,7 +25,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 				$layout = $menuitem->params->get('testimonials_category',0);
 			}
 		}
-		$this->setState('catid', $app->input->get('catid', $app->input->get('testimonials_category', $layout)));
+		//$this->setState('catid', $app->input->get('catid', $app->input->get('testimonials_category', $layout)));
 	}
 	
 	public function getCustomFields()
@@ -60,22 +60,33 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		return $fields;
 	}
 	
-	public function getForm($data = array(), $loadData = true){
+	public function getForm($data = array(), $loadData = true)
+    {
 	    $form = $this->loadForm('com_testimonials.form', 'topic',
 				    array('control' => 'jform', 'load_data' => $loadData));
-	    if (empty($form)) 
-	    {
-		return false;
+	    if(empty($form)){
+		    return false;
 	    }
 	    $params =  TestimonialsFEHelper::getParams();
 	    if($params->get('show_authorname') == 0){
-		$form->setFieldAttribute('t_author', 'required', 'false');
+		    $form->setFieldAttribute('t_author', 'required', 'false');
 	    }
 	    return $form;
-        }
+    }
 	
-	protected function loadFormData(){
-	    $data = parent::loadFormData();
+	protected function loadFormData()
+    {
+        $data = JFactory::getApplication()->getUserState('com_testimonials.edit.form.data', array());
+
+        if (empty($data)) {
+            $id = JFactory::getApplication()->input->getInt('id', 0);
+            if (!empty($id)) {
+                $data = $this->getItem($id);
+            }
+        }
+        if (empty($data->photo) && !empty($data->user_id_t)) {
+            $data->photo = $this->getUserAvatar($data->user_id_t);
+        }
 
 	    $error = JFactory::getApplication()->input->getBool('error', false);
 	    if($error){
@@ -84,9 +95,6 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 				$data[$id] = $value;
 			}
 	    }
-
-		$data['catid'] = $this->getState('catid');
-		
 	    return $data;
 	}
 	
