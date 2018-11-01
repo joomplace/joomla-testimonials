@@ -64,6 +64,10 @@ JFactory::getDocument()->addStyleDeclaration("
 .autor_discription :only-child{
   color: #777;
 }
+.autor_discription{
+  color: #777;
+  font-size: 15.5px;
+}
 ");
 ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
