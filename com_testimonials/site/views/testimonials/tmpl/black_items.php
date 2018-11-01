@@ -43,9 +43,13 @@ foreach($this->items as $item){ ?>
 			<div class="col-xs-12 col-sm-6 text-right">
 		<?php } ?>
 				<div class="testimonial_author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo $item->author; ?></span></div>
-				<small class="testimonial_text" itemprop="reviewBody">
-				<?php echo $item->author_description; ?>
-				</small>
+                <?php if (!empty($item->author_description)): ?>
+                    <p class="testimonial_text" itemprop="reviewBody">
+                        <div class="autor_discription">
+                            <?php echo $item->author_description; ?>
+                        </div>
+                    </p>
+                <?php endif; ?>
 			</div>
 			<?php if($item->avatar){ ?>
 			<div class="col-xs-12 col-sm-3">
