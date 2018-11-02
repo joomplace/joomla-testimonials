@@ -255,13 +255,13 @@ class modTestimonialsHelper {
             }
         }
     }
-	
-	function generateTestimModuleLink($type,$url, $text, $modal = true, $suf_class=' btn btn-default'){
-        if ($type == 1) {
-            return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" >'.$text.'</a>';
-        } else {
-            return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" rel="{handler:\'iframe\',size:{x: (0.8*((jQuery(\'main\').width())?jQuery(\'main\').width():jQuery(\'.container\').width())), y: (0.8*jQuery(window).height())}}">'.$text.'</a>';
-        }
+
+    function generateTestimModuleLinkReed($url, $text, $modal = true, $suf_class=' btn btn-default'){
+        return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" >'.$text.'</a>';
+    }
+
+	function generateTestimModuleLink($url, $text, $modal = true, $suf_class=' btn btn-default'){
+        return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" rel="{handler:\'iframe\',size:{x: (0.8*((jQuery(\'main\').width())?jQuery(\'main\').width():jQuery(\'.container\').width())), y: (0.8*jQuery(window).height())}}">'.$text.'</a>';
 	}
 
 }

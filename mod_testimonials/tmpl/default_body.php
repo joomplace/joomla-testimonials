@@ -12,17 +12,19 @@ defined('_JEXEC') or die('Restricted access');
 /* generating 'read more' link */
 $link = '';
 $addnew = '';
+
+$jinput = JFactory::getApplication()->input;
+if ($jinput->get('view', '') == 'testimonials') {
+    $tm_itemid = $jinput->get('Itemid', 0, 'int');
+}
+
 if ($params->get('show_readmore') == 1) {
-    $jinput = JFactory::getApplication()->input;
-    if ($jinput->get('view', '') == 'testimonials') {
-        $tm_itemid = $jinput->get('Itemid', 0, 'int');
-    }
-	$link 	= $helper->generateTestimModuleLink(1, JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'),false);
+	$link = $helper->generateTestimModuleLinkReed(JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'),false);
 }
 
 /* generating 'add new' link */
 if ($show_add_new && JFactory::getUser()->authorise('core.create', 'com_testimonials')) {
-	$addnew = $helper->generateTestimModuleLink(2, JRoute::_("index.php?option=com_testimonials&view=form&".(($modal)?'tmpl=component':'')."&Itemid=$tm_itemid"), JText::_('MOD_TESTIMONIALS_NEW'), $modal);
+	$addnew = $helper->generateTestimModuleLink(JRoute::_("index.php?option=com_testimonials&view=form&".(($modal)?'tmpl=component':'')."&Itemid=$tm_itemid"), JText::_('MOD_TESTIMONIALS_NEW'), $modal);
 }
 
 /* generating testimonial output */
