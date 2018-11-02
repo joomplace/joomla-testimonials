@@ -8,7 +8,8 @@
  * @license   GNU/GPL http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die('Restricted access');
-$settings = $this->params;
+//$settings = $this->params;
+$settings = JComponentHelper::getParams('com_testimonials');
 $i = 0; ?>
 <div class="row">
 <?php 
