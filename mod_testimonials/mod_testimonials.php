@@ -41,16 +41,13 @@ if (empty($list)) {
     return;
 }
 
-
-if ($params->get('autoItemid')) {
-    if (!isset($tm_itemid)) {
-        $tm_itemid = $helper->tmItemId();
-        if (!isset($tm_itemid)) {
-            $tm_itemid = 0;
-        }
-    }
+if (!$params->get('autoItemid') && trim((int)$params->get('Itemid', 0))) {
+    $tm_itemid = trim((int)$params->get('Itemid', 0));
 } else {
-    $tm_itemid = $params->get('Itemid', 0);
+    $tm_itemid = $helper->tmItemId();
+    if (!(int)$tm_itemid) {
+        $tm_itemid = 0;
+    }
 }
 $isStatic = $params->get('isstatic');
 
