@@ -52,7 +52,7 @@ class modTestimonialsHelper {
         $query->where('t.`published`=1 ');
         $query->where('t.`is_approved`=1 ');
         $query->join('LEFT', '`#__tm_testimonials_conformity` AS `c` ON t.id = c.id_ti');
-        if ($settings->get('use_cb')) {
+        if ($settings->get('use_cb') && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php')) {
             $db->setQuery("SELECT COUNT(id) FROM #__comprofiler");
             $comprofiler_exists = $db->loadResult();
 
@@ -61,7 +61,7 @@ class modTestimonialsHelper {
                 $query->join('LEFT', '`#__comprofiler` AS `compr` ON compr.user_id = t.user_id_t');
             }
         }
-        if ($settings->get('use_jsoc')) {
+        if ($settings->get('use_jsoc') && file_exists(JPATH_SITE.'/components/com_community/community.php')) {
             $db->setQuery("SELECT COUNT(userid) FROM `#__community_users`");
             $jomsocial_exists = $db->loadResult();
 
@@ -255,9 +255,14 @@ class modTestimonialsHelper {
             }
         }
     }
-	
+
+    function generateTestimModuleLinkReadMore($url, $text, $modal = true, $suf_class=' btn btn-default'){
+        return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" >'.$text.'</a>';
+    }
+
 	function generateTestimModuleLink($url, $text, $modal = true, $suf_class=' btn btn-default'){
-		return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'">'.$text.'</a>';
+        $rel = $modal ? ' rel="{handler:\'iframe\',size:{x: (0.8*((jQuery(\'main\').width())?jQuery(\'main\').width():jQuery(\'.container\').width())), y: (0.8*jQuery(window).height())}}"':'';
+        return '<a href="'.$url.'" class="'.($modal?'modtm_modal ':'').'modtm_iframe'.$suf_class.'" '.$rel.'>'.$text.'</a>';
 	}
 
 }
