@@ -19,7 +19,7 @@ if ($jinput->get('view', '') == 'testimonials') {
 }
 
 if ($params->get('show_readmore') == 1) {
-	$link = $helper->generateTestimModuleLinkReed(JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'),false);
+	$link = $helper->generateTestimModuleLinkReadMore(JRoute::_("index.php?option=com_testimonials&view=testimonials&Itemid=$tm_itemid".'#anc_'.$value->id), JText::_('MOD_TESTIMONIALS_READ'),false);
 }
 
 /* generating 'add new' link */
