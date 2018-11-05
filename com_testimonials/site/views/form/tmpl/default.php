@@ -335,7 +335,7 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                 if($item->id){
                     $item->avatar = $helper->getUserAvatar($item->user_id_t);
                 } else {
-                    $item->avatar = $helper-getUserAvatar($user->id);
+                    $item->avatar = $helper->getUserAvatar($user->id);
                 }
             } else {
                 $item->avatar = '';

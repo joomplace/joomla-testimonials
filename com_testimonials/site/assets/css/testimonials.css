@@ -655,3 +655,7 @@ article.testimonials-layout img{
 .ratingWrap-black:last-of-type {
     margin-bottom: 0.5rem;
 }
+#sbox-content iframe{
+    max-height: 100%;
+    max-width: 100%;
+}
