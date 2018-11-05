@@ -146,27 +146,25 @@ class TestimonialsModelTopic extends JModelAdmin
 
     function getUserAvatar($uId)
     {
-
         $settings = JComponentHelper::getParams("com_testimonials");
         $avatar = '';
-        if ($uId > 0 && ($settings->get('use_cb') == 1 || $settings->get('use_jsoc') == 1)
-        ) {
+        if ($uId > 0 && ($settings->get('use_cb') == 1 || $settings->get('use_jsoc') == 1))
+        {
             $db = JFactory::getDBO();
             $query = $db->getQuery(true);
-            if ($settings->get('use_cb') == 1) {
+            if ($settings->get('use_cb') == 1 && file_exists(JPATH_SITE.'/components/com_comprofiler/comprofiler.php')) {
                 $query->select('CONCAT("images/comprofiler/",compr.avatar) as `avatar`');
                 $query->from('`#__comprofiler` AS `compr`');
                 $query->where('compr.user_id = ' . $uId);
             }
-            if ($settings->get('use_jsoc') == 1) {
+            else if ($settings->get('use_jsoc') == 1 && file_exists(JPATH_SITE.'/components/com_community/community.php')) {
                 $query->select('jsoc.thumb as `avatar`');
                 $query->from('`#__community_users` AS `jsoc`');
                 $query->where('jsoc.userid = ' . $uId);
             }
             $db->setQuery($query);
             $data = $db->loadObject();
-            if (!empty($data->avatar) && file_exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $data->avatar)
-            ) {
+            if (!empty($data->avatar) && file_exists(JPATH_ROOT . DIRECTORY_SEPARATOR . $data->avatar)) {
                 $avatar = $data->avatar;
             }
         }
