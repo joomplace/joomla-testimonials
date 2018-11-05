@@ -8,6 +8,10 @@
 */
  defined('_JEXEC') or die('Restricted access');
 
+JLoader::register('TestimonialsModelTopic',
+    JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'topic.php'
+);
+
 /**
  * HTML View class for the Testimonials Component
  */
@@ -27,6 +31,7 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsFEHelper();
+        $this->modelTopic   = new TestimonialsModelTopic();
 		$this->params		= $params =  $this->helper->getParams();
 		
 		$Gparams = JFactory::getApplication()->getParams();

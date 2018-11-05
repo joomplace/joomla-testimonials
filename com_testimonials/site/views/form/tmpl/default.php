@@ -333,9 +333,9 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                     || ($params->get('use_jsoc') == 1 && file_exists(JPATH_SITE.'/components/com_community/community.php')) )
                 && ($user->id || $item->id) && empty($item->avatar)){
                 if($item->id){
-                    $item->avatar = $helper->getUserAvatar($item->user_id_t);
+                    $item->avatar = $this->modelTopic->getUserAvatar($item->user_id_t);
                 } else {
-                    $item->avatar = $helper->getUserAvatar($user->id);
+                    $item->avatar = $this->modelTopic->getUserAvatar($user->id);
                 }
             } else {
                 $item->avatar = '';
