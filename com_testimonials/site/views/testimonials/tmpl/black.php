@@ -39,6 +39,7 @@ JFactory::getDocument()->addStyleDeclaration("
     font-size: 16.25px;
     font-weight: 300;
     line-height: 1.25;
+    word-break: break-word;
 }
 .tl".$uid." .testimonial_body small{
 	display: block;
