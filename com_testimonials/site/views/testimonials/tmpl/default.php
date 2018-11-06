@@ -33,6 +33,7 @@ JFactory::getDocument()->addStyleDeclaration("
 .tl".$uid." .testimonial blockquote {
   border-left: 5px solid #eee;
   padding-left: 20px;
+  word-break: break-word;
 }
 .tl".$uid." .testimonial blockquote p {
 	font-size: 15.5px;
