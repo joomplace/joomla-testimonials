@@ -114,8 +114,8 @@ JFactory::getDocument()->addStyleDeclaration("
 
     if(JFactory::getApplication()->input->get('option', '') == 'com_testimonials') {
         $menuitem = JFactory::getApplication()->getMenu()->getActive();
-        $no_save_ordering = ($menuitem->params->get('show_ordering') === null) ? true : false;
-        if ($menuitem && ((int)$menuitem->params->get('show_ordering') == 1 || $no_save_ordering)) {
+        if(!empty($menuitem) && !empty($menuitem->params)
+            && !empty($menuitem->params->get('show_ordering')) && (int)$menuitem->params->get('show_ordering') == 1){
             ?>
             <div class="text-right">
                 <fieldset id="jform_MetaAuthor" class="btn-group btn-group-yesno radio">

@@ -2,7 +2,7 @@
 <extension type="package" version="3.x" method="upgrade">
   <name>Testimonials Package</name>
   <author>Joomplace Team</author>
-  <creationDate>January 2016</creationDate>
+  <creationDate>November 2018</creationDate>
   <packagename>testimonials</packagename>
   <authorEmail>support@joomplace.com</authorEmail>
   <authorUrl>www.joomplace.com</authorUrl>

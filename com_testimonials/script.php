@@ -52,29 +52,17 @@ class com_testimonialsInstallerScript
         if ($db->getNumRows() === 0) {
             $query
                 = "INSERT INTO `#__tm_testimonials_dashboard_items` (`id`, `title`, `url`, `icon`, `published`) VALUES
-                (1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '"
-                . JURI::base() . "components/com_testimonials/assets/images/management48.png', 1),
-                (2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '"
-                . JURI::base() . "components/com_testimonials/assets/images/settings48.png', 1),
-                (3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '"
-                . JURI::base() . "components/com_testimonials/assets/images/help48.png', 1);
-                ";
+                (1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '/components/com_testimonials/assets/images/management48.png', 1),
+                (2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '/components/com_testimonials/assets/images/settings48.png', 1),
+                (3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1);";
             $db->setQuery($query);
             $errors = $db->execute();
         } else {
-            $query
-                = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_testimonials&view=topics' , `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/management48.png' WHERE `title` = 'Testimonials Management';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_testimonials&view=topics' , `icon`='/components/com_testimonials/assets/images/management48.png' WHERE `title` = 'Testimonials Management';";
             $db->setQuery($query);
-            $query
-                = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_config&view=component&component=com_testimonials' , `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/settings48.png' WHERE `title` = 'Testimonials Settings';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_config&view=component&component=com_testimonials' , `icon`='/components/com_testimonials/assets/images/settings48.png' WHERE `title` = 'Testimonials Settings';";
             $db->setQuery($query);
-            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/help48.png' WHERE `title` = 'Help';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `icon`='/components/com_testimonials/assets/images/help48.png' WHERE `title` = 'Help';";
             $db->setQuery($query);
             $db->execute();
         }
@@ -84,7 +72,6 @@ class com_testimonialsInstallerScript
             // $this->greetingText();
         } else {
             JFactory::getApplication()->enqueueMessage($errors, 'error');
-
             return false;
         }
 
@@ -93,13 +80,9 @@ class com_testimonialsInstallerScript
 
     function preflight($type, $parent)
     {
-
-        if (file_exists(JPATH_ADMINISTRATOR
-            . '/components/com_testimonials/testimonials.xml')) {
-            $xml = JFactory::getXML(JPATH_ADMINISTRATOR
-                . '/components/com_testimonials/testimonials.xml');
-            $this->version_from
-                 = $version = preg_split('/(\s|\.)/', $xml->version);
+        if (file_exists(JPATH_ADMINISTRATOR . '/components/com_testimonials/testimonials.xml')) {
+            $xml = JFactory::getXML(JPATH_ADMINISTRATOR . '/components/com_testimonials/testimonials.xml');
+            $this->version_from = $version = preg_split('/(\s|\.)/', $xml->version);
             if ($version[0]) {
                 if ($version[2] < 2) {
                     // update default template
@@ -114,20 +97,15 @@ class com_testimonialsInstallerScript
                     );
 
                     $db = JFactory::getDbo();
-                    $query
-                        = 'DELETE FROM `#__tm_testimonials_templates` WHERE `temp_name` = "default";';
+                    $query = 'DELETE FROM `#__tm_testimonials_templates` WHERE `temp_name` = "default";';
                     $db->setQuery($query);
                     $errors = $db->execute();
 
                     foreach ($templates as $temp_name => $temp_html) {
-                        $query
-                            = 'SELECT id FROM `#__tm_testimonials_templates` WHERE `temp_name` = "'
-                            . $temp_name . '";';
+                        $query = 'SELECT id FROM `#__tm_testimonials_templates` WHERE `temp_name` = "' . $temp_name . '";';
                         $db->setQuery($query);
                         if (!$db->loadResult()) {
-                            $query
-                                = 'INSERT INTO `#__tm_testimonials_templates` (`temp_name`, `html`) VALUES (\''
-                                . $temp_name . '\',\'' . $temp_html . '\')';
+                            $query = 'INSERT INTO `#__tm_testimonials_templates` (`temp_name`, `html`) VALUES (\'' . $temp_name . '\',\'' . $temp_html . '\')';
                             $db->setQuery($query);
                             $errors = $db->execute();
                         }
@@ -140,15 +118,12 @@ class com_testimonialsInstallerScript
                     $query->select('*')
                         ->from('`#__tm_testimonials_templates`');
                     $db->setQuery($query);
-                    $tmpls          = $db->loadObjectList();
-                    $main_tmpl_file = file_get_contents(JPATH_SITE
-                        . '/components/com_testimonials/views/testimonials/tmpl/default.php');
+                    $tmpls = $db->loadObjectList();
+                    $main_tmpl_file = file_get_contents(JPATH_SITE . '/components/com_testimonials/views/testimonials/tmpl/default.php');
                     foreach ($tmpls as $tmpl) {
                         if (!strpos(trim($tmpl->temp_name), ' ')) {
-                            $template   = trim($tmpl->temp_name);
-                            $css        = file_get_contents(JPATH_SITE
-                                . '/components/com_testimonials/templates/'
-                                . $template . '/css/style.css');
+                            $template = trim($tmpl->temp_name);
+                            $css  = file_get_contents(JPATH_SITE . '/components/com_testimonials/templates/' . $template . '/css/style.css');
                             $css_declaration
                                         = '<?php JFactory::getDocument()->addStyleDeclaration("'
                                 . addcslashes($css, '\'"') . '"); ?>';
@@ -347,7 +322,6 @@ class com_testimonialsInstallerScript
 
     function postflight($type, $parent)
     {
-
         $this->version_from;
 
         $db = JFactory::getDBO();
@@ -365,39 +339,25 @@ class com_testimonialsInstallerScript
             $db->execute();
         }
 
-        $return
-               = urlencode(base64_encode((string)JUri::getInstance('index.php?option=com_testimonials')));
+        $return = urlencode(base64_encode((string)JUri::getInstance('index.php?option=com_testimonials')));
         $query = 'SELECT * FROM `#__tm_testimonials_dashboard_items`;';
         $db->setQuery($query);
         $db->execute();
         if ($db->getNumRows() === 0) {
-            $query
-                = "INSERT INTO `#__tm_testimonials_dashboard_items` (`id`, `title`, `url`, `icon`, `published`) VALUES
-					(1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '"
-                . JURI::base() . "components/com_testimonials/assets/images/management48.png', 1),
-					(2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '"
-                . JURI::base() . "components/com_testimonials/assets/images/settings48.png', 1),
-					(3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/help48.png', 1)";
+            $query = "INSERT INTO `#__tm_testimonials_dashboard_items` (`id`, `title`, `url`, `icon`, `published`) VALUES
+					(1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '/components/com_testimonials/assets/images/management48.png', 1),
+					(2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '/components/com_testimonials/assets/images/settings48.png', 1),
+					(3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1)";
             $db->setQuery($query);
             $db->execute();
         } else {
-            $query
-                = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_testimonials&view=topics' , `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/management48.png' WHERE `title` = 'Testimonials Management';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_testimonials&view=topics' , `icon`='/components/com_testimonials/assets/images/management48.png' WHERE `title` = 'Testimonials Management';";
             $db->setQuery($query);
             $db->execute();
-            $query
-                = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_config&view=component&component=com_testimonials' , `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/settings48.png' WHERE `title` = 'Testimonials Settings';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `url`='index.php?option=com_config&view=component&component=com_testimonials' , `icon`='/components/com_testimonials/assets/images/settings48.png' WHERE `title` = 'Testimonials Settings';";
             $db->setQuery($query);
             $db->execute();
-            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `icon`='"
-                . JURI::base()
-                . "components/com_testimonials/assets/images/help48.png' WHERE `title` = 'Help';";
+            $query = "UPDATE `#__tm_testimonials_dashboard_items` SET `icon`='/components/com_testimonials/assets/images/help48.png' WHERE `title` = 'Help';";
             $db->setQuery($query);
             $db->execute();
         }

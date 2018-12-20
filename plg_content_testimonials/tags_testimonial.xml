@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="content" method="upgrade">
 	<name>plg_content_tags_testimonials</name>
-	<creationDate>January 2011</creationDate>
+	<creationDate>November 2018</creationDate>
     <author>JoomPlace Team</author>
     <authorEmail>support@joomplace.com</authorEmail>
     <authorUrl>www.joomplace.com</authorUrl>
@@ -22,7 +22,6 @@
 		<language tag="de-DE">en-GB/de-DE.plg_content_tags_testimonial.sys.ini</language>
 		<language tag="de-DE">en-GB/de-DE.plg_content_tags_testimonial.ini</language>
 	</languages>
-
 	<config>
 		<fields name="params">
 			<!-- 
