@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <extension type="component" version="3.0" method="upgrade">
   <name>COM_TESTIMONIALS</name>
-  <creationDate>January 2012</creationDate>
+  <creationDate>November 2018</creationDate>
   <author>Joomplace Team</author>
   <authorEmail>support@joomplace.com</authorEmail>
   <authorUrl>www.joomplace.com</authorUrl>
