@@ -43,7 +43,7 @@ class TestimonialsFEHelper
     }
 
     public static function getCustomFileds(){
-        if(!isset($this)){
+        if(!isset($self)){
             $db = JFactory::getDbo();
             $query	= $db->getQuery(true);
             $query->select('CONCAT("[",c.name,"]") AS `key`');
@@ -54,11 +54,11 @@ class TestimonialsFEHelper
             $data = $db->loadAssocList('key');
             return array_keys($data);
         }else{
-            return $this->cust_fields;
+            return $self->cust_fields;
         }
     }
 
-    public function getNotifyUserEmails()
+    public static function getNotifyUserEmails()
     {
         $access = JAccess::getAssetRules('com_testimonials')->getData();
         if (!sizeof($access) || !sizeof($access['core.notify'])) return array();

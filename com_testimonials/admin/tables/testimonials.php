@@ -101,6 +101,8 @@ class TestimonialsTableTestimonials extends JTable
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
+
+			if(isset($exist['exist_images']) && !empty($exist['exist_images'])){
 			$images = explode("|", $exist['exist_images']);
 
 			foreach ($images as $key => $image) {
@@ -113,7 +115,6 @@ class TestimonialsTableTestimonials extends JTable
 				}
 				if(!empty($images[$key]) && !JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) unset($images[$key]);
 			}
-
 			$tmp = $images;
 
 			if (count($images) == 1 && strlen(trim(array_shift($tmp))) == 0) {
@@ -124,6 +125,8 @@ class TestimonialsTableTestimonials extends JTable
 			}elseif (empty($res_names) && !empty($images)) {
 				$res_names = $images;
 			}
+
+            }
 
 			//if (count($res_names) > 0) {
 				$db = JFactory::getDBO();

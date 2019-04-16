@@ -170,6 +170,8 @@ class TestimonialsControllerTopic extends JControllerForm
 			$remove_image = JFactory::getApplication()->input->getVar('remove_image');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
+
+			if (isset($exist['exist_images']) && !empty($exist['exist_images'])){
 			$images = explode("|", $exist['exist_images']);
 			foreach ($images as $id => $image) {
 				jimport( 'joomla.filesystem.file' );
@@ -185,6 +187,8 @@ class TestimonialsControllerTopic extends JControllerForm
 				$db->setQuery($sql);
 				$db->execute();
 			}
+            }
+
 
 			if ($params->get('autoapprove')== 0)
 			{
