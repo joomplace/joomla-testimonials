@@ -43,7 +43,7 @@ class TestimonialsFEHelper
     }
 
     public static function getCustomFileds(){
-        if(self::$cust_fields){
+        if(empty(self::$cust_fields)){
             $db = JFactory::getDbo();
             $query	= $db->getQuery(true);
             $query->select('CONCAT("[",c.name,"]") AS `key`');
