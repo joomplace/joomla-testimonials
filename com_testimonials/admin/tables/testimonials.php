@@ -96,14 +96,15 @@ class TestimonialsTableTestimonials extends JTable
 						
 			$res = parent::store($updateNulls);
 			$res_names = array();
-			$exist = JFactory::getApplication()->input->getVar('jform');
-			$remove_image = JFactory::getApplication()->input->getVar('remove_image');
+            $jform = JFactory::getApplication()->input->get('jform', 'array', 'ARRAY');
+
+            $remove_image = JFactory::getApplication()->input->get('remove_image', '', 'STRING');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
 
-			if(isset($exist['exist_images']) && !empty($exist['exist_images'])){
-			$images = explode("|", $exist['exist_images']);
+			if(!empty($jform['exist_images'])){
+                $images = explode("|", $jform['exist_images']);
 
 			foreach ($images as $key => $image) {
 				jimport( 'joomla.filesystem.file' );
@@ -125,8 +126,7 @@ class TestimonialsTableTestimonials extends JTable
 			}elseif (empty($res_names) && !empty($images)) {
 				$res_names = $images;
 			}
-
-            }
+			}
 
 			//if (count($res_names) > 0) {
 				$db = JFactory::getDBO();
@@ -255,7 +255,8 @@ class TestimonialsTableTestimonials extends JTable
 					}
 				}			
 			}
-			$currentTask = JFactory::getApplication()->input->getVar('task', '');
+			$currentTask = JFactory::getApplication()->input->get('task', '');
+
 			if($currentTask != 'saveOrderAjax') $this->reorder();
 			
 			return $res;

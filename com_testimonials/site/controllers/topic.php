@@ -166,13 +166,13 @@ class TestimonialsControllerTopic extends JControllerForm
 
 			$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
 
-			$exist = JFactory::getApplication()->input->getVar('jform');
-			$remove_image = JFactory::getApplication()->input->getVar('remove_image');
+			$jform = JFactory::getApplication()->input->get('jform','array','ARRAY');
+			$remove_image = JFactory::getApplication()->input->get('remove_image','','STRING');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
-			if (isset($exist['exist_images']) && !empty($exist['exist_images'])){
-			$images = explode("|", $exist['exist_images']);
+			if (!empty($jform['exist_images'])){
+                $images = explode("|", $jform['exist_images']);
 			foreach ($images as $id => $image) {
 				jimport( 'joomla.filesystem.file' );
 				if (is_array($remove_image) && in_array($image, $remove_image)) {
@@ -182,7 +182,7 @@ class TestimonialsControllerTopic extends JControllerForm
 				if(!empty($images[$id]) && !JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) unset($images[$id]);
 			}
 
-			if (count($images) > 0) {
+                if (!empty($images)) {
 				$sql = "UPDATE #__tm_testimonials SET images='".implode('|', $images)."' WHERE id='".$t_id."'";
 				$db->setQuery($sql);
 				$db->execute();

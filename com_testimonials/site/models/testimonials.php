@@ -94,7 +94,7 @@ class TestimonialsModelTestimonials extends JModelList
 			$doc = JFactory::getDocument();
 			$doc->addHeadLink(JURI::root(true).JUri::getInstance()->getPath(), 'canonical');
 
-			if (!isset ($doc->_metaTags['standard']['robots']))
+			if (empty ($doc->_metaTags['standard']['robots']))
 			{
 				$doc->setMetadata('robots', 'noindex, follow');
 			}else{
