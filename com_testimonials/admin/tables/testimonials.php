@@ -96,15 +96,17 @@ class TestimonialsTableTestimonials extends JTable
 						
 			$res = parent::store($updateNulls);
 			$res_names = array();
-			$exist = JFactory::getApplication()->input->getVar('jform');
-			$remove_image = JFactory::getApplication()->input->getVar('remove_image');
+            $jform = JFactory::getApplication()->input->get('jform', 'array', 'ARRAY');
+
+            $remove_image = JFactory::getApplication()->input->get('remove_image', '', 'STRING');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
-			$images = explode("|", $exist['exist_images']);
 
+			if(!empty($jform['exist_images'])){
+                $images = explode("|", $jform['exist_images']);
+                jimport( 'joomla.filesystem.file' );
 			foreach ($images as $key => $image) {
-				jimport( 'joomla.filesystem.file' );
 				if (is_array($remove_image) && in_array($image, $remove_image)) {
 				    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) JFile::delete(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image);
 				    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . "th_" . $image)) JFile::delete(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . "th_" . $image);
@@ -113,7 +115,6 @@ class TestimonialsTableTestimonials extends JTable
 				}
 				if(!empty($images[$key]) && !JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) unset($images[$key]);
 			}
-
 			$tmp = $images;
 
 			if (count($images) == 1 && strlen(trim(array_shift($tmp))) == 0) {
@@ -123,6 +124,7 @@ class TestimonialsTableTestimonials extends JTable
 				$res_names = array_merge($res_names, $images);
 			}elseif (empty($res_names) && !empty($images)) {
 				$res_names = $images;
+			}
 			}
 
 			//if (count($res_names) > 0) {
@@ -252,7 +254,8 @@ class TestimonialsTableTestimonials extends JTable
 					}
 				}			
 			}
-			$currentTask = JFactory::getApplication()->input->getVar('task', '');
+			$currentTask = JFactory::getApplication()->input->get('task', '');
+
 			if($currentTask != 'saveOrderAjax') $this->reorder();
 			
 			return $res;

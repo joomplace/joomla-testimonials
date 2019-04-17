@@ -93,7 +93,8 @@ class TestimonialsModelTestimonials extends JModelList
 			/* SEO prevent duplicates */
 			$doc = JFactory::getDocument();
 			$doc->addHeadLink(JURI::root(true).JUri::getInstance()->getPath(), 'canonical');
-			if (!$doc->_metaTags['standard']['robots'])
+
+			if (empty ($doc->_metaTags['standard']['robots']))
 			{
 				$doc->setMetadata('robots', 'noindex, follow');
 			}else{

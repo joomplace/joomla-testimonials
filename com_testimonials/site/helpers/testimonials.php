@@ -43,7 +43,7 @@ class TestimonialsFEHelper
     }
 
     public static function getCustomFileds(){
-        if(!isset($this)){
+        if(empty(self::$cust_fields)){
             $db = JFactory::getDbo();
             $query	= $db->getQuery(true);
             $query->select('CONCAT("[",c.name,"]") AS `key`');
@@ -54,11 +54,11 @@ class TestimonialsFEHelper
             $data = $db->loadAssocList('key');
             return array_keys($data);
         }else{
-            return $this->cust_fields;
+            return self::$cust_fields;
         }
     }
 
-    public function getNotifyUserEmails()
+    public static function getNotifyUserEmails()
     {
         $access = JAccess::getAssetRules('com_testimonials')->getData();
         if (!sizeof($access) || !sizeof($access['core.notify'])) return array();
@@ -113,14 +113,17 @@ class TestimonialsFEHelper
             case '1':
                 $boxes = explode(',', $params->get('admin_email'));
                 $mailer = JFactory::getMailer();
+
                 if($isEdited == true){
                     $body = 'Greetings! A testimonial ( "'.$caption.'" ) was edited on the site by user "'.$author.'". Please review the testimonial.';
-                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
+                    $link_file = JUri::root().'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id;
+                    $body .= file_get_contents($link_file);
                 }else{
                     $body = 'Greetings! A new testimonial ( "'.$caption.'" ) was added on the site by user "'.$author.'". Please review the testimonial.';
-                    $body = file_get_contents(JUri::root().JUri::root(true).'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id);
+                    $link_file = JUri::root().'index.php?option=com_testimonials&layout=black&avoidacl=1&tmpl=component&limit=1&embed=1&anc='.$id;
+                    $body .= file_get_contents($link_file);
                 }
-				$body = str_replace(array('="/'),array('="'.JUri::root().JUri::root(true)),$body);
+				$body = str_replace(array('="/'),array('="'.JUri::root()),$body);
                 $subject = 'Administrator notification';
                 $mailer->setSubject($subject);
                 $mailer->setBody($body);
