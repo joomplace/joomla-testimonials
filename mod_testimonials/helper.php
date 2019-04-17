@@ -39,7 +39,7 @@ class modTestimonialsHelper {
     
      public function getItemsByTags($settings = 0, $tags_id) {
         $Itemid = JFactory::getApplication()->input->getInt('Itemid', 0);
-        $option = JFactory::getApplication()->input->getVar('option', '');
+        $option = JFactory::getApplication()->input->get('option', '');
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
         if ($tags_id) {

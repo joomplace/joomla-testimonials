@@ -34,7 +34,7 @@ class TestimonialsControllerTopic extends JControllerForm
 		$table->load($id);
 		if ($table->publish(array($id),$table->published?0:1))
 		{
-			if(JFactory::getApplication()->input->getVar('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
+			if(JFactory::getApplication()->input->get('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
                 $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully '.($table->published?'Published':'Unpublished'));
 		}else
         return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
@@ -43,7 +43,8 @@ class TestimonialsControllerTopic extends JControllerForm
 
 	public function approve()
 	{
-		$id = JFactory::getApplication()->input->getInt('id');
+        $jinput = JFactory::getApplication()->input;
+		$id = $jinput->getInt('id', 0);
         $user = JFactory::getUser();
 		if (!$user->authorise('core.admin', 'com_testimonials') || !$id)
 		{
@@ -55,7 +56,7 @@ class TestimonialsControllerTopic extends JControllerForm
 		$table->load($id);
 		if ($table->approve(array($id),$table->is_approved?0:1))
 		{
-			if(JFactory::getApplication()->input->getVar('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
+			if($jinput->get('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
                         $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully '.($table->published?'Approved':'Disapproved'));
 			//$this->setRedirect(JRoute::_('index.php?option=com_testimonials'.$tmpl, false), 'Successfully '.($table->published?'Published':'Unpublished'));
 		}else
@@ -66,7 +67,8 @@ class TestimonialsControllerTopic extends JControllerForm
 	
 	public function delete() 
 	{
-		$id = JFactory::getApplication()->input->getInt('id');
+        $jinput = JFactory::getApplication()->input;
+	    $id = $jinput->getInt('id', 0);
 		if (!$this->allowDelete() || !$id)
 		{
             return JFactory::getApplication()->enqueueMessage(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 'error');
@@ -76,7 +78,7 @@ class TestimonialsControllerTopic extends JControllerForm
 		$table		= $model->getTable();
 		if ($table->delete($id))
 		{
-			if(JFactory::getApplication()->input->getVar('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
+			if($jinput->get('tmpl')=='component') $tmpl="&tmpl=component"; else $tmpl='';
                         $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false), 'Successfully deleted');
 			//$this->setRedirect(JRoute::_('index.php?option=com_testimonials'.$tmpl, false), 'Successfully deleted');
 		}else
@@ -221,26 +223,28 @@ class TestimonialsControllerTopic extends JControllerForm
 		}		
 	}
 	
-	public function saveInputFields(){
-	    $data  = JFactory::getApplication()->input->getVar('jform', array(), 'post', 'array');
-	    $data['remove_image'] = JFactory::getApplication()->input->getVar('remove_image', '');
-	    $customs = JFactory::getApplication()->input->getVar('customs_name', array(), 'post', 'array');
+	public function saveInputFields()
+    {
+        $jinput = JFactory::getApplication()->input;
+	    $data  = $jinput->get('jform', array(), 'ARRAY');
+	    $data['remove_image'] = $jinput->get('remove_image', '', 'STRING');
+	    $customs = $jinput->get('customs_name', array(), 'ARRAY');
 	    if(count($customs)>0){
-		foreach($customs as $id=>$value){
-		    $data['customs_name'][$id] = $value;
-		}
+            foreach($customs as $id=>$value){
+                $data['customs_name'][$id] = $value;
+            }
 	    }
-	    $customs = JFactory::getApplication()->input->getVar('customs_link', array(), 'post', 'array');
+	    $customs = $jinput->get('customs_link', array(), 'ARRAY');
 	    if(count($customs)>0){
-		foreach($customs as $id=>$value){
-		    $data['customs_link'][$id] = $value;
-		}
+            foreach($customs as $id=>$value){
+                $data['customs_link'][$id] = $value;
+            }
 	    }
-	    $customs = JFactory::getApplication()->input->getVar('customs', array(), 'post', 'array');
+	    $customs = $jinput->get('customs', array(), 'ARRAY');
 	    if(count($customs)>0){
-		foreach($customs as $id=>$value){
-		    $data['customs'][$id] = $value;
-		}
+            foreach($customs as $id=>$value){
+                $data['customs'][$id] = $value;
+            }
 	    }
 	    JFactory::getApplication()->setUserState('com_testimonials.edit.form.data', $data);
 	}

@@ -18,8 +18,8 @@ $helper = new modTestimonialsHelper();
 $user = JFactory::getUser();
 $document = JFactory::getDocument();
 $app = JFactory::getApplication();
-$option = JFactory::getApplication()->input->getVar('option');
-$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+$option = JFactory::getApplication()->input->get('option', '');
+$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
 $iCan = new stdClass();
 $iCan->manage = ($user->authorise('core.manage', 'com_testimonials'));

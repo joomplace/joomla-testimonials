@@ -27,8 +27,6 @@ class JFormFieldTags extends JFormFieldList
 
 	protected function getInput()
 	{
-		$option = JFactory::getApplication()->input->getVar('option');
-		
 		// Initialize variables.
 		$html = array();
 		$attr = '';

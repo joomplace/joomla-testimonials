@@ -64,21 +64,20 @@ class TestimonialsControllerSettings extends JControllerForm
 	function csssave()
 	{
 		jimport('joomla.filesystem.file');
-		
 		$file_path = JPATH_SITE.'/modules/mod_testimonials/tmpl/style.css';
-       		if (is_writeable($file_path)) 
-				{
-					$content = JFactory::getApplication()->input->getVar('css');
-					if (JFile::write($file_path,$content))
-						{
-							$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_SAVESUCCESS'));
-						}
-						else {
-							$this->setMessage('Failed to open file for writing!');
-						}
-					
-				}
-		else {$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_UNWRITEABLE'));}
-	$this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false));
+       	if (is_writeable($file_path))
+		{
+			$content = JFactory::getApplication()->input->get('css', '', 'STRING');
+			if (JFile::write($file_path,$content))
+			{
+				$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_SAVESUCCESS'));
+			}
+			else {
+				$this->setMessage('Failed to open file for writing!');
+			}
+		} else {
+       	    $this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_UNWRITEABLE'));
+       	}
+	    $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false));
 	}      
 }

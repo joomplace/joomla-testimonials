@@ -13,16 +13,17 @@ jimport('joomla.application.component.controllerform');
 /**
  * Rating Controller
  */
-class TestimonialsControllerRating extends JControllerForm {
-
-	function addVote() {
+class TestimonialsControllerRating extends JControllerForm
+{
+	function addVote()
+    {
 		$user = JFactory::getUser();
 		$db = JFactory::getDBO();
+		$jinput = JFactory::getApplication()->input;
+        $voteval = $jinput->getInt('voteval', 0);
+        $id = $jinput->getInt('testimonial', 0);
 
 		if ($user->get('id')) {
-			$voteval = JFactory::getApplication()->input->getVar('voteval');
-			$id = JFactory::getApplication()->input->getVar('testimonial');
-
 			$sql = "SELECT COUNT(*) FROM #__tm_rating WHERE user_id='".$user->get('id')."' AND tm_id = '".$id."'";
 			$db->setQuery($sql);
 			$result = $db->loadResult();
@@ -36,10 +37,7 @@ class TestimonialsControllerRating extends JControllerForm {
 				$db->setQuery($sql);
 				$db->query();
 			}
-		}else {
-			$voteval = JFactory::getApplication()->input->getVar('voteval');
-			$id = JFactory::getApplication()->input->getVar('testimonial');
-
+		} else {
 			$sql = "SELECT COUNT(*) FROM #__tm_rating WHERE user_id='".$_SERVER['REMOTE_ADDR']."' AND tm_id = '".$id."'";
 			$db->setQuery($sql);
 			$result = $db->loadResult();
@@ -61,9 +59,11 @@ class TestimonialsControllerRating extends JControllerForm {
 		die;
 	}
 
-	function addcomment() {
-		$id = JFactory::getApplication()->input->getVar('id');
-		$text = JFactory::getApplication()->input->getVar('text');
+	function addcomment()
+    {
+        $jinput = JFactory::getApplication()->input;
+		$id = $jinput->getInt('id', 0);
+		$text = $jinput->get('text', '', 'STRING');
 		$db = JFactory::getDBO();
 		$user = JFactory::getUser();
 		$text = nl2br(strip_tags($text, "<p><br><a><b>"));
@@ -96,8 +96,9 @@ class TestimonialsControllerRating extends JControllerForm {
 		die;
 	}
 	
-	function deletecomment(){
-		$id = JFactory::getApplication()->input->getVar('id');
+	function deletecomment()
+    {
+		$id = JFactory::getApplication()->input->getInt('id', 0);
 		$db = JFactory::getDBO();
 			
 		$sql = "UPDATE #__tm_testimonials SET comment='' WHERE id='".$id."'";
