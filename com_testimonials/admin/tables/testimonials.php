@@ -105,9 +105,8 @@ class TestimonialsTableTestimonials extends JTable
 
 			if(!empty($jform['exist_images'])){
                 $images = explode("|", $jform['exist_images']);
-
+                jimport( 'joomla.filesystem.file' );
 			foreach ($images as $key => $image) {
-				jimport( 'joomla.filesystem.file' );
 				if (is_array($remove_image) && in_array($image, $remove_image)) {
 				    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) JFile::delete(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image);
 				    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . "th_" . $image)) JFile::delete(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . "th_" . $image);
