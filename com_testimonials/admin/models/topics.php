@@ -51,16 +51,16 @@ class TestimonialsModelTopics extends JModelList
 
     public function getItemsByItemId($settings = 0)
     {
-        $Itemid = JFactory::getApplication()->input->getInt('Itemid', 0);
-        $option = JFactory::getApplication()->input->getVar('option', '');
+        $jinput = JFactory::getApplication()->input;
+        $Itemid = $jinput->getInt('Itemid', 0);
+        $option = $jinput->get('option', '');
         $db     = JFactory::getDBO();
         $query  = $db->getQuery(true);
 
         $tags_menu_ids = $tags_articles_ids = $tags_category_ids = array();
 
         if ($option == 'com_content') {
-            $content_id = (int)JFactory::getApplication()->input->getInt('id',
-                0);
+            $content_id = $jinput->getInt('id', 0);
             if ($content_id) {
                 $query->select('tag_id');
                 $query->from('`#__tm_testimonials_tag_assign` AS `t`');

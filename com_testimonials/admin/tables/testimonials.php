@@ -181,16 +181,21 @@ class TestimonialsTableTestimonials extends JTable
 				
 				$flag = 0;
 				$customFieldsTable = JTable::getInstance('Customfields', 'TestimonialsTable');
-				$custom = array(JFactory::getApplication()->input->getVar('customs', array()));
-				$custom_link = array(JFactory::getApplication()->input->getVar('customs_link', array()));
-				$custom_name = array(JFactory::getApplication()->input->getVar('customs_name', array()));
+				$custom = array(JFactory::getApplication()->input->get('customs', 'array', 'ARRAY'));
+				$custom_link = array(JFactory::getApplication()->input->get('customs_link', 'array', 'ARRAY'));
+				$custom_name = array(JFactory::getApplication()->input->get('customs_name', 'array', 'ARRAY'));
 				$url_array = array();
+
 				foreach($custom_link[0] as $key=>$val){
-						
-						$url_array[$key] = $val.'|'.$custom_name[0][$key];
-						if ($url_array[$key] == '|') unset($url_array[$key]);
+				    $url_array[$key] = $val.'|'.$custom_name[0][$key];
+					if ($url_array[$key] == '|'){
+                        unset($url_array[$key]);
+                    }
 				}
-				if (is_array($custom[0]) && is_array($url_array)) $custom[0] = $custom[0] + $url_array;
+
+				if (is_array($custom[0]) && is_array($url_array)) {
+				    $custom[0] = $custom[0] + $url_array;
+                }
 
                 if (empty($custom[0]) && $this->id)
                 {

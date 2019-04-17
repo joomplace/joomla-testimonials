@@ -45,7 +45,7 @@ foreach($setting_form as $setting)
 <form action="<?php echo JRoute::_('index.php?option=com_testimonials&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="settings-form" class="form-validate">
 	<table class="admin" width="100%">
 	<tr>
-		<?php if (JFactory::getApplication()->input->getVar('tmpl')!='component') { ?>
+		<?php if (JFactory::getApplication()->input->get('tmpl')!='component') { ?>
 			<td valign="top" class="lefmenutd">	<div> <?php echo $this->leftmenu;?>	</div> </td>
 		<?php } else 
 			{

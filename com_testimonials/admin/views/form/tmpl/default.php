@@ -687,7 +687,7 @@ JFactory::getDocument()->addScriptDeclaration($script);
 		<?php echo $form->getInput('catid'); ?>
 		<input type="hidden" name="task" value="" />
 		<?php
-			if(JFactory::getApplication()->input->getVar('tmpl')=='component')
+			if(JFactory::getApplication()->input->get('tmpl')=='component')
 			{
 				?>
 				<input type="hidden" name="tmpl" value="component" />

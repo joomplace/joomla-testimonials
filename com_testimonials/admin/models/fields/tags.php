@@ -25,19 +25,15 @@ class JFormFieldTags extends JFormFieldList
      */
     protected $type = 'Tags';
 
-
     protected function getInput()
     {
-        $option = JFactory::getApplication()->input->getVar('option');
-
         // Initialize variables.
         $html           = array();
         $attr           = '';
         $this->multiple = true;
 
         // Initialize some field attributes.
-        $attr .= $this->element['class'] ? ' class="'
-            . (string)$this->element['class'] . '"' : '';
+        $attr .= $this->element['class'] ? ' class="' . (string)$this->element['class'] . '"' : '';
 
         // To avoid user's confusion, readonly="true" should imply disabled="true".
         if ((string)$this->element['readonly'] == 'true'
@@ -46,8 +42,7 @@ class JFormFieldTags extends JFormFieldList
             $attr .= ' disabled="disabled"';
         }
 
-        $attr .= $this->element['size'] ? ' size="'
-            . (int)$this->element['size'] . '"' : '';
+        $attr .= $this->element['size'] ? ' size="' . (int)$this->element['size'] . '"' : '';
         $attr .= $this->multiple ? ' multiple="multiple"' : '';
 
         // Get the field options.
@@ -57,14 +52,11 @@ class JFormFieldTags extends JFormFieldList
         $selected = (array)$this->getSelected();
         // Create a read-only list (no name) with a hidden input to store the value.
         if ((string)$this->element['readonly'] == 'true') {
-            $html[] = JHtml::_('select.genericlist', $options, '', trim($attr),
-                'value', 'text', $this->value, $this->id);
-            $html[] = '<input type="hidden" name="' . $this->name . '" value="'
-                . $this->value . '"/>';
+            $html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
+            $html[] = '<input type="hidden" name="' . $this->name . '" value="' . $this->value . '"/>';
         } // Create a regular list.
         else {
-            $html[] = JHtml::_('select.genericlist', $options, $this->name,
-                trim($attr), 'value', 'text', $selected, $this->id);
+            $html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $selected, $this->id);
         }
 
         return implode($html);

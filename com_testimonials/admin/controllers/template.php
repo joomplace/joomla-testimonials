@@ -126,22 +126,21 @@ class TestimonialsControllerTemplate extends JControllerForm
 	function csssave()
 	{
 		jimport('joomla.filesystem.file');
-		$template_name = JFactory::getApplication()->input->getVar('template');
+        $jinput = JFactory::getApplication()->input;
+		$template_name = $jinput->get('template', '', 'STRING');
 		$file_path = JPATH_COMPONENT_SITE.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR.$template_name.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'style.css';
 		if (is_writeable($file_path))
-				{
-					$content = JFactory::getApplication()->input->getVar('css');
-					if (JFile::write($file_path,$content))
-						{
-							$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_SAVESUCCESS'));
-						}
-						else {
-							$this->setMessage('Failed to open file for writing!');
-						}
-					
-
-				}
-		else {$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_UNWRITEABLE'));}
-	$this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false));
+		{
+			$content = $jinput->get('css', '', 'STRING');
+			if (JFile::write($file_path,$content))
+			{
+				$this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_SAVESUCCESS'));
+			} else {
+				$this->setMessage('Failed to open file for writing!');
+			}
+		} else {
+		    $this->setMessage(JText::_('COM_TESTIMONIALS_TEMPLATE_UNWRITEABLE'));
+		}
+	    $this->setRedirect(JRoute::_($_SERVER['HTTP_REFERER'], false));
 	}
 }
