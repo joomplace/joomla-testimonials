@@ -120,13 +120,14 @@ class TestimonialsControllerTopic extends JControllerForm
 	      
 	public function save($key = null, $urlVar = null) {
 	
+  	    $app = JFactory::getApplication();
 		$helper = new TestimonialsFEHelper();
 		$params = $helper->getParams();
         $Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
 
         $urlAppends = '';
         if($params->get('modal_on_new')){
-		    if(JFactory::getApplication()->input->get('tmpl', '') == 'component'){
+		    if($app->input->get('tmpl', '') == 'component'){
                 $urlAppends = '&tmpl=component';
             } else {
                 $urlAppends = '&Itemid='.$Itemid;
@@ -134,22 +135,17 @@ class TestimonialsControllerTopic extends JControllerForm
 		}else{
 			$urlAppends = '&Itemid='.$Itemid;
 		}
-	
-		$params = TestimonialsFEHelper::getParams();
-		$db = JFactory::getDBO();
 
         $data = $_REQUEST['jform'];
         $caption = $data['t_caption'];
         $author = $data['t_author'];
         $isEdited = array_key_exists('user_id_t',$data);
 
-		if (parent::save()) {
-			JFactory::getApplication()->setUserState('com_testimonials.edit.form.data', array());
-			$id	= JFactory::getApplication()->input->getInt('id');
+		if (parent::save($key, $urlVar)) {
+			$app->setUserState('com_testimonials.edit.form.data', array());
+			$id	= $app->input->getInt('id');
 
-			$model		= $this->getModel();
-			$table		= $model->getTable();
-			//$params = TestimonialHelper::getSettings();
+            $db = JFactory::getDBO();
 
             if ($id == 0) {
                 $sql = "SELECT id FROM #__tm_testimonials ORDER BY id DESC LIMIT 1";
@@ -166,17 +162,15 @@ class TestimonialsControllerTopic extends JControllerForm
                 $data['catid'] = $db->loadResult();
             }
 
-			$rEFileTypes =  "/^\.(jpg|jpeg|gif|png|bmp|xcf|odg){1}$/i";
-
-			$jform = JFactory::getApplication()->input->get('jform','array','ARRAY');
-			$remove_image = JFactory::getApplication()->input->get('remove_image','','STRING');
+			$jform = $app->input->get('jform','array','ARRAY');
+			$remove_image = $app->input->get('remove_image','','STRING');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
 			if (!empty($jform['exist_images'])){
                 $images = explode("|", $jform['exist_images']);
+                jimport( 'joomla.filesystem.file' );
 			foreach ($images as $id => $image) {
-				jimport( 'joomla.filesystem.file' );
 				if (is_array($remove_image) && in_array($image, $remove_image)) {
 				    if(JFile::exists(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image)) JFile::delete(JPATH_SITE . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'testimonials' . DIRECTORY_SEPARATOR . $image);
 				    unset($images[$id]);
