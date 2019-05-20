@@ -40,23 +40,6 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->renderLayout('testimonials.framework');
 		
 		$user		= JFactory::getUser();
-		
-		$catid = $app->input->get('catid',0, 'INT');
-
-		if(!$catid){ //Editing
-		    $id = $app->input->getInt('id',0);
-            $db = JFactory::getDBO();
-            $sql = "SELECT `catid` FROM `#__tm_testimonials` WHERE `id`='".(int)$id."'";
-            $db->setQuery($sql);
-
-            try{
-                $catid = $db->loadResult();
-            }
-            catch (RuntimeException $e)
-            {
-                $app->enqueueMessage($e->getMessage(),'error');
-            }
-        }
 
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
@@ -64,8 +47,28 @@ class TestimonialsViewForm extends JViewLegacy
 
 		if(empty($this->item->catid))
         {
-		$this->form->setValue('catid',null,$catid);
+            $catid = $app->input->get('catid', 0, 'INT');
+
+		    if(!$catid){
+		        $id = $app->input->getInt('id', 0);
+                $db = JFactory::getDBO();
+                $sql = "SELECT `catid` FROM `#__tm_testimonials` WHERE `id`='".(int)$id."'";
+                $db->setQuery($sql);
+
+                try{
+                    $catid = $db->loadResult();
+                }
+                catch (RuntimeException $e)
+                {
+                    $app->enqueueMessage($e->getMessage(),'error');
+                }
+            }
+            
+            if(!empty($catid)){
+		        $this->form->setValue('catid',null,$catid);
+            }
         }
+        
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsFEHelper();
