@@ -673,7 +673,6 @@ JFactory::getDocument()->addScriptDeclaration($script);JFactory::getDocument()->
                 </a>
             </div>
         </div>
-        <input type="hidden" name="jform[catid]" value="<?php echo $this->catid;?>" />
         <?php echo JHTML::_( 'form.token' ); ?>
     </form>
 </div>

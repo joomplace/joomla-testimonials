@@ -21,7 +21,6 @@ class TestimonialsViewForm extends JViewLegacy
 	protected $item;
 	protected $return_page;
 	protected $state;
-	protected $catid;
 
 	function renderLayout($layout, $data = null, $sublayout=''){
 		if(!$sublayout) $sublayout = ($this->getLayout()=='default')?'':$this->getLayout();
@@ -42,7 +41,7 @@ class TestimonialsViewForm extends JViewLegacy
 		
 		$user		= JFactory::getUser();
 		
-		$catid = $app->input->get('catid',0);
+		$catid = $app->input->get('catid',0, 'INT');
 
 		if(!$catid){ //Editing
 		    $id = $app->input->getInt('id',0);
@@ -58,10 +57,11 @@ class TestimonialsViewForm extends JViewLegacy
                 $app->enqueueMessage($e->getMessage(),'error');
             }
         }
-		$this->catid = $catid;
+
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
 		$this->form			= $this->get('Form');
+		$this->form->setValue('catid',null,$catid);
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsFEHelper();

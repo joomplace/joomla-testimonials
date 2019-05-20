@@ -123,7 +123,7 @@ class TestimonialsControllerTopic extends JControllerForm
   	    $app = JFactory::getApplication();
 		$helper = new TestimonialsFEHelper();
 		$params = $helper->getParams();
-        $Itemid=(int) JFactory::getApplication()->input->getInt('Itemid',0);
+        $Itemid = $app->input->getInt('Itemid',0);
 
         $urlAppends = '';
         if($params->get('modal_on_new')){
@@ -136,12 +136,13 @@ class TestimonialsControllerTopic extends JControllerForm
 			$urlAppends = '&Itemid='.$Itemid;
 		}
 
-        $data = $_REQUEST['jform'];
+        $data = $app->input->get('jform',array(),'ARRAY');
+
         $caption = $data['t_caption'];
         $author = $data['t_author'];
         $isEdited = array_key_exists('user_id_t',$data);
 
-		if (parent::save($key, $urlVar)) {
+		if (parent::save()) {
 			$app->setUserState('com_testimonials.edit.form.data', array());
 			$id	= $app->input->getInt('id');
 
