@@ -21,7 +21,7 @@ class TestimonialsViewForm extends JViewLegacy
 	protected $item;
 	protected $return_page;
 	protected $state;
-	
+
 	function renderLayout($layout, $data = null, $sublayout=''){
 		if(!$sublayout) $sublayout = ($this->getLayout()=='default')?'':$this->getLayout();
 		if(!$data) $data = (object)array('value'=>'');
@@ -35,14 +35,40 @@ class TestimonialsViewForm extends JViewLegacy
 	}
 	
 	public function display($tpl = null) {
-		
+	    $app = JFactory::getApplication();
+
 		$this->renderLayout('testimonials.framework');
 		
 		$user		= JFactory::getUser();
-		
+
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
 		$this->form			= $this->get('Form');
+
+		if(empty($this->item->catid))
+        {
+            $catid = $app->input->get('catid', 0, 'INT');
+
+		    if(!$catid){
+		        $id = $app->input->getInt('id', 0);
+                $db = JFactory::getDBO();
+                $sql = "SELECT `catid` FROM `#__tm_testimonials` WHERE `id`='".(int)$id."'";
+                $db->setQuery($sql);
+
+                try{
+                    $catid = $db->loadResult();
+                }
+                catch (RuntimeException $e)
+                {
+                    $app->enqueueMessage($e->getMessage(),'error');
+                }
+            }
+            
+            if(!empty($catid)){
+		        $this->form->setValue('catid',null,$catid);
+            }
+        }
+        
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsFEHelper();
