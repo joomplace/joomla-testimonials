@@ -163,13 +163,12 @@ class TestimonialsControllerTopic extends JControllerForm
                 $data['catid'] = $db->loadResult();
             }
 
-			$jform = $app->input->get('jform','array','ARRAY');
 			$remove_image = $app->input->get('remove_image','','STRING');
 			$remove_image = trim($remove_image, '|');
 			$remove_image = explode('|', $remove_image);
 
-			if (!empty($jform['exist_images'])){
-                $images = explode("|", $jform['exist_images']);
+			if (!empty($data['exist_images'])){
+                $images = explode("|", $data['exist_images']);
                 jimport( 'joomla.filesystem.file' );
 			foreach ($images as $id => $image) {
 				if (is_array($remove_image) && in_array($image, $remove_image)) {

@@ -61,7 +61,11 @@ class TestimonialsViewForm extends JViewLegacy
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
 		$this->form			= $this->get('Form');
+
+		if(empty($this->item->catid))
+        {
 		$this->form->setValue('catid',null,$catid);
+        }
 		$this->tags			= $this->get('Tags');
 		$this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsFEHelper();
