@@ -41,6 +41,12 @@ foreach($this->items as $item){ ?>
                     </div>
                 </p>
             <?php endif; ?>
+            <?php if (!empty($item->date_added)): ?>
+                <meta itemprop="datePublished" content="<?php echo explode(' ', $item->date_added)[0]; ?>">
+                <p class="testimonial_date">
+                    <?php echo $item->date_added; ?>
+                </p>
+            <?php endif; ?>
 		</blockquote>
 	</div>
 	<?php if($item->images){ ?>

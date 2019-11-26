@@ -676,3 +676,9 @@ article.testimonials-layout img{
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 0 !important;
 }
+
+.testimonial_date{
+    color: #777;
+    font-size: 80% !important;
+    margin: 0.5rem 0 0 0 !important;
+}

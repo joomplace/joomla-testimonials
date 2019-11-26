@@ -51,6 +51,12 @@ foreach($this->items as $item){ ?>
                         </div>
                     </p>
                 <?php endif; ?>
+                <?php if (!empty($item->date_added)): ?>
+                    <meta itemprop="datePublished" content="<?php echo explode(' ', $item->date_added)[0]; ?>">
+                    <p class="testimonial_date">
+                        <?php echo $item->date_added; ?>
+                    </p>
+                <?php endif; ?>
 			</div>
 			<?php if($item->avatar){ ?>
 			<div class="col-xs-12 col-sm-3">

@@ -44,6 +44,12 @@ foreach($this->items as $item){ ?>
 		<div class="pull-left">
 			<span class="testimonial_author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo $item->author; ?></span></span>
 			<span class="testimonials-post"><?php echo $item->author_description; ?></span>
+            <?php if (!empty($item->date_added)): ?>
+                <meta itemprop="datePublished" content="<?php echo explode(' ', $item->date_added)[0]; ?>">
+                <p class="testimonial_date">
+                    <?php echo $item->date_added; ?>
+                </p>
+            <?php endif; ?>
 		</div>
 	</div>
 	<?php echo $this->renderLayout('testimonials.comments',$item); ?>
