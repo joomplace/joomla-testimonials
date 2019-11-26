@@ -26,6 +26,12 @@ foreach($this->items as $item){ ?>
 		<p itemprop="reviewBody">
 			<?php echo $item->testimonial; ?>
 		</p>
+        <?php if (!empty($item->date_added)): ?>
+            <meta itemprop="datePublished" content="<?php echo explode(' ', $item->date_added)[0]; ?>">
+            <p class="testimonial_date">
+                <?php echo $item->date_added; ?>
+            </p>
+        <?php endif; ?>
 		<?php if($item->images){ ?>
 			<div class="row row-fluid image-list">
 				<?php echo $item->images; ?>
