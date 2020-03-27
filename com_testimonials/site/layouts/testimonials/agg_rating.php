@@ -30,5 +30,5 @@ $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayDat
         <meta itemprop="worstRating" content="0"/>
 		by <span class="clients" itemprop="ratingCount"><?php echo $count ?></span> clients
 	</span>
-	<meta itemprop="itemreviewed" content="Services" />
+	<meta itemprop="itemreviewed" content="Product" />
 </span>

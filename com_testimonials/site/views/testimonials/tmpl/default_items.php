@@ -1,6 +1,6 @@
 <?php foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
-	<meta itemprop="itemreviewed" content="Services" />
+	<meta itemprop="itemreviewed" content="Product" />
 	<div class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
 	<div class="row row-fluid">
 		<div class="col-xs-12 col-sm-3">

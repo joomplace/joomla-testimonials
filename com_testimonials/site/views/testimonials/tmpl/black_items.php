@@ -1,7 +1,7 @@
 <?php foreach($this->items as $item){ ?>
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<div class="testimonial_caption"><p class="h3" itemprop="name"><?php echo $item->caption; ?></p></div>
-	<meta itemprop="itemreviewed" content="Services" />
+	<meta itemprop="itemreviewed" content="Product" />
 	<div class="testimonial_body">
 		<?php if($item->images){ ?>
 			<div class="row row-fluid image-list">

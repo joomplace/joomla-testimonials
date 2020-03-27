@@ -3,7 +3,7 @@
 <div class="testimonial" itemprop="reviews" itemscope itemtype="http://schema.org/Review">
 	<?php echo $this->renderLayout('testimonials.actions',$item); ?>
 	<div class="testimonial-body">
-		<meta itemprop="itemreviewed" content="Services" />
+		<meta itemprop="itemreviewed" content="Product" />
 		<div class="testim-title" title="" itemprop="name"><?php echo $item->caption; ?></div>
 		<p itemprop="reviewBody">
 			<?php echo $item->testimonial; ?>
