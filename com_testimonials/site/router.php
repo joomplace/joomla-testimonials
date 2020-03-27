@@ -22,8 +22,8 @@ function TestimonialsBuildRoute( &$query ) {
                 break;
             }
         }
-	}
-
+    }
+	
 	$menu_item = $menu->getItem($query['Itemid']);
 	
 	foreach($query as $key => $val){
@@ -35,22 +35,29 @@ function TestimonialsBuildRoute( &$query ) {
 		}
 	}
 	$query = array_filter($query);
+
 	
 	if(isset($query['catid'])){
 		jimport('joomla.application.categories');
 		$categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
 		$cat = $categories->get($query['catid']);
-		/* 
-		 * removing root from path path
-		 * only needed of there only one root 
-		 */
-		 /*
-			$path = explode('/',$cat->path);
-			unset($path[0]);
-		*/
-		$segments[] = $cat->alias;
-		unset($query['catid']);
-	}
+		if($query['Itemid']){
+            if(JFactory::getApplication()->getParams()->get('testimonials_category',0)!=$query['catid']){
+                $segments[] = $cat->alias;
+            }
+        }else{
+            /*
+             * removing root from path path
+             * only needed of there only one root
+             */
+            /*
+               $path = explode('/',$cat->path);
+               unset($path[0]);
+           */
+            $segments[] = $cat->alias;
+        }
+        unset($query['catid']);
+    }
 	
 	/* will terminate duplicating links */
 	if (isset($query['start'])) {
@@ -78,7 +85,7 @@ function TestimonialsParseRoute($segments) {
 		->where($db->qn('extension').' = '.$db->q('com_testimonials'))
 		->where($db->qn('alias').' = '.$db->q($segment));
 	$db->setQuery($query,0,1);
-	if($vars['catid']=$db->loadResult()){
+	if($vars['catid']==$db->loadResult()){
 		unset($segments[0]);
 	}
 

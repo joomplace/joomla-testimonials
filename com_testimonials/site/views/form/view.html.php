@@ -24,21 +24,23 @@ class TestimonialsViewForm extends JViewLegacy
 		$field_layout = new JLayoutFile($layout);
 		$field_layout->setComponent('com_testimonials');
 		$html = $field_layout->sublayout($sublayout,$data);
-		if(!$html) $html = $field_layout->render($data);				
-		if(!$html) $html = $data->value;
-		
+		if(!$html) $html = $field_layout->render($data);
+
+        if(!$html) $html = $data->value;
+
 		return $html;
 	}
 	
 	public function display($tpl = null) {
 
-		$this->renderLayout('testimonials.framework');
-		
-		$user		= JFactory::getUser();
+        $this->renderLayout('testimonials.framework');
+
+        $user		= JFactory::getUser();
 		
 		$this->state		= $this->get('State');
 		$this->item			= $this->get('Item');
 		$this->form			= $this->get('Form');
+
         $this->tags			= $this->get('Tags');
         $this->custom_fields = $this->get('CustomFields');
         $this->helper       = new TestimonialsHelper();
@@ -52,7 +54,7 @@ class TestimonialsViewForm extends JViewLegacy
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-		
+
 		if (empty($this->item->id)) {
 		    $authorised = ($user->authorise('core.create', 'com_testimonials'));
 		}
@@ -82,5 +84,66 @@ class TestimonialsViewForm extends JViewLegacy
 			parent::display($tpl);
 		}
 	}
+
+    public function processText($text){
+        if(preg_match_all('|\[([^\]]+)_summary\]|i', $text, $matches)){
+            $tags = $this->helper->getActiveItem()->params->get('tags');
+
+            $db = JFactory::getDbo();
+            foreach($matches[1] as $fieldTag){
+                $query	= $db->getQuery(true);
+                $query->select('tf.value, tf.item_id');
+                $query->from('#__tm_testimonials_items_fields tf');
+                $query->join('INNER', '#__tm_testimonials_custom tc ON tc.id = tf.field_id');
+                $query->join('INNER', '#__tm_testimonials t ON t.id = tf.item_id');
+                $query->where('t.published = "1"');
+                $query->where('t.is_approved = "1"');
+                if (sizeof($tags)>0 && !$this->helper->getActiveItem()->params->get('all_tags')){
+                    $query->join('INNER', '#__tm_testimonials_conformity AS tcon ON tf.item_id = tcon.id_ti');
+                    $query->where('tcon.`id_tag` IN ('.implode(',',$tags).')');
+                }
+                /* adding categories selection */
+                $catid = $this->helper->getActiveItem()->params->get('testimonials_category');
+                if($catid){
+
+                    jimport('joomla.application.categories');
+                    $categories = new JCategories(array('extension'=>'com_testimonials','access'=>true));
+                    $this->categories = $categories;
+                    $cur_cat = $categories->get($catid);
+                    $this->category = $cur_cat;
+                    $subs = $cur_cat->getChildren(true);
+                    $rel_level = $cur_cat->level;
+
+                    $ids = array($cur_cat->id);
+                    foreach($subs as $s){
+                        $ids[] = $s->id;
+                    }
+
+                    $query->where('`t`.`catid` IN('.implode(',',$ids).')')
+                        ->select('`c`.`title`')
+                        ->leftJoin('`#__categories` as `c` ON `t`.`catid` = `c`.`id`');
+                }
+
+                $query->where('tc.name='.$db->quote(trim($fieldTag)));
+                $query->where('tc.published=1');
+                $query->where('t.published=1');
+                $query->group('t.id');
+                $query2 = $db->getQuery(true);
+                $query2->select('SUM( value ) AS votes_summary, COUNT( item_id ) AS total_votes');
+                $query2->from("($query) AS tt");
+                $db->setQuery($query2);
+                $data = $db->loadObject();
+                if($data->total_votes>0){
+                    $rating = round($data->votes_summary/$data->total_votes,1);
+                    $replace = $this->renderLayout('testimonials.agg_rating',(object)array('value' => $rating, 'count' => $data->total_votes));
+                    $text = str_ireplace('['.$fieldTag.'_summary]', $replace, $text);
+                }else{
+                    $text = str_ireplace('['.$fieldTag.'_summary]', '', $text);
+                }
+            }
+        }
+        $text = JHTML::_( 'content.prepare', $text );
+
+        return $text;
+    }
 }
-?>

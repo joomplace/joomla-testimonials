@@ -28,6 +28,80 @@ class TestimonialsController extends JControllerLegacy
                 parent::display($cachable);
         }
 
+    public function import(){
+        $db = JFactory::getDbo();
+//        $db->setQuery('DELETE FROM `#__tm_testimonials`');
+//        $db->execute();
+//        $db->setQuery('DELETE FROM `#__tm_testimonials_items_fields`');
+//        $db->execute();
+//        $db->setQuery('
+//            SELECT *
+//            FROM `#__jetestimonial_testimonials`
+//	        WHERE `published` = "1"
+//        ');
+//        echo "<pre>";
+//        print_r($db->loadObjectList());
+//        echo "</pre>";
+        $db->setQuery('
+        	INSERT INTO `#__tm_testimonials` (`id`,`t_caption`,`testimonial`,`t_author`,`catid`,`ip_addr`,`date_added`,`photo`)
+	        SELECT
+	        `id`,
+	        `title` AS `t_caption`,
+	        `description` AS `testimonial`,
+	        `name` AS `t_author`,
+	        IF(`catid`="251",292,IF(`catid`="252",293,IF(`catid`="253",294,IF(`catid`="254",295,IF(`catid`="255",296,IF(`catid`="256",297, 291)))))) AS `catid`,
+	        `ip_address` AS `ip_addr`,
+	        `posted_date` AS `date_added`,
+	        CONCAT("/images/jeavatar/",`avatar_image`) AS `photo`
+	        FROM `#__jetestimonial_testimonials`
+	        WHERE `published` = "1"
+        	');
+        $db->execute();
+        $db->setQuery('
+        	INSERT INTO `#__tm_testimonials_items_fields` (`item_id`,`value`,`field_id`)
+	        SELECT
+	        `id` AS `item_id`,
+	        `email` AS `value`,
+	        (SELECT `id` FROM `#__tm_testimonials_custom` WHERE `system_name` = "email") AS `field_id`
+	        FROM `#__jetestimonial_testimonials`
+	        WHERE `published` = "1"
+        	');
+        $db->execute();
+        $db->setQuery('
+        	INSERT INTO `#__tm_testimonials_items_fields` (`item_id`,`value`,`field_id`)
+	        SELECT
+	        `id` AS `item_id`,
+	        `companyname` AS `value`,
+	        (SELECT `id` FROM `#__tm_testimonials_custom` WHERE `system_name` = "company") AS `field_id`
+	        FROM `#__jetestimonial_testimonials`
+	        WHERE `published` = "1"
+        	');
+        $db->execute();
+        $db->setQuery('
+	        INSERT INTO `#__tm_testimonials_items_fields` (`item_id`,`value`,`field_id`)
+	        SELECT
+	        `id` AS `item_id`,
+	        `country` AS `value`,
+	        (SELECT `id` FROM `#__tm_testimonials_custom` WHERE `system_name` = "country") AS `field_id`
+	        FROM `#__jetestimonial_testimonials`
+	        WHERE `published` = "1"
+        	');
+        $db->execute();
+        $db->setQuery('
+	        INSERT INTO `#__tm_testimonials_items_fields` (`item_id`,`value`,`field_id`)
+	        SELECT
+	        `id` AS `item_id`,
+	        "5" AS `value`,
+	        (SELECT `id` FROM `#__tm_testimonials_custom` WHERE `system_name` = "rating") AS `field_id`
+	        FROM `#__jetestimonial_testimonials`
+	        WHERE `published` = "1"
+        	');
+        $db->execute();
+
+        echo "done";
+        return true;
+    }
+
         public function showpicture()
         {
         	$settings =  TestimonialHelper::getSettings();

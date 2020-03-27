@@ -75,6 +75,9 @@ abstract class JHtmlThumbler
 	**
 	**/
 	static function getThumb($image, $settings = array()){
+        
+
+		ini_set('memory_limit', '1024M');
         // avoid strict
         $keys = array('width', 'height', 'sizing' , 'square' , 'fill_color' , 'compression');
 		
@@ -99,6 +102,7 @@ abstract class JHtmlThumbler
 		}else{
 			$image = JPATH_SITE.$noimage;
 		}
+
 		$image_name = basename($image);
 		if(!$image_name){
 			return $noimage;
@@ -200,6 +204,8 @@ abstract class JHtmlThumbler
 					$file = imagecreatefromwbmp($image);
 					break;
 			}
+
+			imagedestroy($image);
 			
 			// sizing and saving
 			$thumb = imagecreatetruecolor($width, $height);
@@ -223,7 +229,8 @@ abstract class JHtmlThumbler
 					@imagegif($thumb, $thumb_path.$image_name);
 					break;
 			}
-			
+
+			imagedestroy($thumb);
 			return trim($thumb_rel_url.$image_name,'\\');
 		}
 	}

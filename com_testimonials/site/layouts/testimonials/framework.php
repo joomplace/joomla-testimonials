@@ -24,6 +24,7 @@ if($params->get('fontawesome',1)){
 	// include font-awesome
 	$document->addStyleSheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 }
+
 /* fixing joomla squeezebox scrolling page to top issue */
 JFactory::getDocument()->addStyleDeclaration('
 	div#sbox-window {

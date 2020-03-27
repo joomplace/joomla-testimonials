@@ -85,7 +85,7 @@ class TestimonialsController extends JControllerLegacy
 			<?php
 		}else{
 			$Itemid= JFactory::getApplication()->input->getInt('Itemid',0);
-			$catid= JFactory::getApplication()->input->getInt('catid',JFactory::getApplication()->input->getInt('catid',JFactory::getApplication()->getMenu()->getItem($Itemid)->params->get('testimonials_category',0)));
+			$catid= JFactory::getApplication()->input->getInt('catid',JFactory::getApplication()->getMenu()->getItem($Itemid)->params->get('testimonials_category',0));
 			JFactory::getApplication()->redirect(JRoute::_('index.php?option=com_testimonials&view=testimonials&catid='.$catid.'&Itemid='.$Itemid));
 		}
 	}

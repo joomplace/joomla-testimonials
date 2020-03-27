@@ -19,8 +19,9 @@ $title = (strtoupper($displayData->system_name)!=JText::_(strtoupper($displayDat
 		<?php
 			for($a=1;$a<6;$a++){
 				$marked = (isset($value) && $value >= $a)?true:false;
+                $mod = (($a - $value) < 1 && ($a - $value)*10 <= 5)?'-half':'';
 		?>
-			<i class="icon-star<?php echo ($marked ? '' : '-empty'); ?> fa fa-star<?php echo ($marked ? '' : '-o'); ?> ">&nbsp;&nbsp;</i>
+			<i class="fa fa-star<?php echo ($marked ? '' : $mod.'-o'); ?> ">&nbsp;&nbsp;</i>
 		<?php
 			}
 		?>

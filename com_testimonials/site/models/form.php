@@ -40,7 +40,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		$query->where('c.published=1');	
 		$query->group('c.id');		
 		$query->order('c.ordering');	
-		$db->setQuery($query->__toString());			
+		$db->setQuery($query);
 		$fields = $db->loadObjectList();
 		$error = JFactory::getApplication()->input->getBool('error', false);
 		if($error){
@@ -62,7 +62,7 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 		foreach($fields as &$field){
 			if($field->type != 'url'){
 				$property = $field->system_name;
-				if(!$field->value) $field->value = $user->$property;
+				if(!$field->value && isset($user->$property)) $field->value = $user->$property;
 			}
 		}
 		return $fields;
@@ -77,10 +77,10 @@ class TestimonialsModelForm extends TestimonialsModelTopic
 	    }
 	    $params =  TestimonialsHelper::getParams();
 	    if($params->get('show_authorname') == 0){
-		$form->setFieldAttribute('t_author', 'required', 'false');
+		    $form->setFieldAttribute('t_author', 'required', 'false');
 	    }
 	    return $form;
-        }
+    }
 	
 	protected function loadFormData(){
 	    $data = parent::loadFormData();

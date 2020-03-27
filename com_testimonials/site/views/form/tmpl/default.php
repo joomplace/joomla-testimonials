@@ -14,6 +14,15 @@ $custom_fields = $this->custom_fields;
 $testimonial_id= $this->item->id;
 $script = array();
 
+/** @var JForm $form */
+$form = $this->form;
+$catid = $form->getField('catid')->value;
+$table = JTable::getInstance('Category');
+$table->load($catid);
+?>
+<h3>Add your testimonial for <?= $table->title ?></h3>
+<?php
+
 /*
  * wysihtml5 add
  */
@@ -311,7 +320,6 @@ iframe.wysihtml5-sandbox{
 <div class="item-page" style="padding-top: 20px;">
 <form action="<?php echo JRoute::_('index.php?option=com_testimonials&view=form&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal"  enctype="multipart/form-data">
 		<?php
-            $form = $this->form;
             $item = $this->item;
             $custom_fields = $this->custom_fields;
             $tags = $this->tags;
@@ -351,12 +359,6 @@ iframe.wysihtml5-sandbox{
 				<div class="testim-field-group control-group form-group">
 					<label class="testim-label testim-required control-label" for="jform_t_caption" rel="tooltip" title="<?php echo JText::_($form->getFieldAttribute ('catid', 'description')); ?>" ><?php echo JText::_($form->getFieldAttribute ('catid', 'label')); ?> * :</label>
 					<div class="controls">
-                        <?php
-                        /** @var JForm $form */
-                        $catid = $form->getField('catid')->value;
-                        $table = JTable::getInstance('Category');
-                        $table->load($catid);
-                        ?>
                         <input type="text" class="inputbox form-control" readonly="true" value="<?= $table->title ?>" />
                     </div>
 				</div>

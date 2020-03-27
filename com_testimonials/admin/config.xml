@@ -4,6 +4,7 @@
 	<fieldset name="settings"
 		label="COM_TESTIMONIALS_SETTINGS_GLOBAL"
 		>
+
 		<field name="track_by_ip" type="radio" default="1"
 			   class="btn-group"
 			   label="Show unpublished by IP"
