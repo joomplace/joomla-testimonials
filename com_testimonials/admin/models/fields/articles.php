@@ -113,7 +113,7 @@ class JFormFieldArticles extends JFormFieldList
             $query->where('tag_id=' . (int)$id);
             $db->setQuery($query);
 
-            $selected = $db->loadResultArray();
+            $selected = $db->loadColumn();
         }
 
         return $selected;
