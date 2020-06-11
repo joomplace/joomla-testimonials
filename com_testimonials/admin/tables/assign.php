@@ -61,7 +61,7 @@ class TestimonialsTableAssign extends JTable
 			}
 	
 			$this->_db->setQuery($query);
-			$row = $this->_db->loadResultArray();
+			$row = $this->_db->loadColumn();
 			// Check for a database error.
 			if ($this->_db->getErrorNum()) {
 				$e = new JException($this->_db->getErrorMsg());

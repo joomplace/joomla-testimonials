@@ -67,7 +67,7 @@ class TestimonialsModelTopics extends JModelList
                 $query->where('t.`aid`=' . $content_id
                     . ' AND t.`type`="article" ');
                 $db->setQuery($query);
-                $tags_articles_ids = $db->loadResultArray();
+                $tags_articles_ids = $db->loadColumn();
 
                 $query = $db->getQuery(true);
                 $query->select('catid');
@@ -83,7 +83,7 @@ class TestimonialsModelTopics extends JModelList
                     $query->where('t.`aid`=' . $content_id
                         . ' AND t.`type`="category" ');
                     $db->setQuery($query);
-                    $tags_category_ids = $db->loadResultArray();
+                    $tags_category_ids = $db->loadColumn();
                 }
             }
         }
@@ -94,11 +94,10 @@ class TestimonialsModelTopics extends JModelList
             $query->from('`#__tm_testimonials_tag_assign` AS `t`');
             $query->where('t.`aid`=' . $Itemid . ' AND t.`type`="menu" ');
             $db->setQuery($query);
-            $tags_menu_ids = $db->loadResultArray();
+            $tags_menu_ids = $db->loadColumn();
         }
 
-        $tags = @array_merge($tags_menu_ids, $tags_articles_ids,
-            $tags_category_ids);
+        $tags = @array_merge($tags_menu_ids, $tags_articles_ids, $tags_category_ids);
 
         if ($tags) {
             $assign = true;
