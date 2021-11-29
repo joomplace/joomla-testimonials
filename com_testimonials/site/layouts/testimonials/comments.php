@@ -47,7 +47,7 @@ ob_start();
 <?php
 $js_templ = ob_get_contents();
 ob_end_clean();
-$document->addScriptDeclaration('var template_default = "'.addcslashes(str_replace(array("\r","\n"),'',$js_templ),'"').'"');
+$document->addScriptDeclaration('var template_default = "'.addcslashes(str_replace(array("\r","\n"),'',$js_templ),'"').'";');
 $GLOBALS['testimonials']['comments']['template_default'] = 1;
 }
 
