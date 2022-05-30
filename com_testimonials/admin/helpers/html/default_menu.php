@@ -15,7 +15,9 @@ $document->addStyleSheet(JURI::root(true).'/administrator/components/com_testimo
 <div id="tm-navbar" class="navbar navbar-static navbar-inverse">
     <div class="navbar-inner">
         <div class="container" style="width: auto;">
-            <a class="brand" href="<?php JRoute::_('index.php?option=com_testimonials') ?>"><img class="tm-panel-logo" src="<?php echo JURI::root(true) ?>/administrator/components/com_testimonials/assets/images/joomplace-logo.png" /> <?php echo JText::_('COM_TESTIMONIALS_JOOMPLACE')?></a>
+            <a class="brand" href="https://www.joomplace.com/" target="_blank" rel="noopener noreferrer">
+                <img class="tm-panel-logo" src="<?php echo JURI::root(true) ?>/administrator/components/com_testimonials/assets/images/joomplace-logo.png" /> <?php echo JText::_('COM_TESTIMONIALS_JOOMPLACE')?>
+            </a>
             <ul class="nav" role="navigation">
                 <li class="dropdown">
                     <a id="control-panel" href="index.php?option=com_testimonials&view=dashboard" role="button" class="dropdown-toggle"><?php echo JText::_('COM_TESTIMONIALS_CONTROL_PANEL')?></a>
@@ -53,10 +55,9 @@ $document->addStyleSheet(JURI::root(true).'/administrator/components/com_testimo
                 <li id="fat-menu" class="dropdown">
                     <a href="#" id="help" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo JText::_('COM_TESTIMONIALS_MENU_HELP') ?><b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="help">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm" target="_blank"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_HELP') ?></a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.joomplace.com/forum/testimonials-component/page-1.html" target="_blank"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_SUPPORT_FORUM') ?></a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.joomplace.com/support/helpdesk" target="_blank"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_SUPPORT_DESC') ?></a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.joomplace.com/support/helpdesk/department/presale-questions" target="_blank"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_SUPPORT_REQUEST') ?></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm" target="_blank" rel="noopener noreferrer"><?php echo JText::_('COM_TESTIMONIALS_SUBMENU_HELP') ?></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.joomplace.com/support/helpdesk.html" target="_blank" rel="noopener noreferrer"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_SUPPORT_DESC') ?></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.joomplace.com/support/helpdesk/post-purchase-questions/ticket/create.html" target="_blank" rel="noopener noreferrer"><?php echo JText::_('COM_TESTIMONIALS_ADMINISTRATION_SUPPORT_REQUEST') ?></a></li>
                     </ul>
                 </li>
             </ul>

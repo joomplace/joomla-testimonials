@@ -11,10 +11,10 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 
 function subfolding($r_url){
-	$r_url = '/'.trim(str_replace(JUri::root(),'',$r_url),'/');
+	$r_url = trim(str_replace(JUri::root(),'',$r_url),'/');
 	$subfold = JUri::root(true);
 	if($subfold){
-		if(strpos('/'.$ditem->icon,$subfold)===false){
+		if(strpos('/'.$r_url, $subfold)===false){
 			return $subfold.$r_url;
 		}else{
 			return $r_url;
@@ -52,7 +52,7 @@ function subfolding($r_url){
                     <tr>
                         <th colspan="2" class="a_comptitle">
                             <strong><?php echo JText::_('COM_TESTIMONIALS'); ?></strong> component for Joomla! 3.0 Developed by
-                            <a href="http://www.JoomPlace.com">JoomPlace</a>.
+                            <a href="https://www.joomplace.com">JoomPlace</a>.
                         </th>
                     </tr>
                     <tr>
@@ -61,26 +61,12 @@ function subfolding($r_url){
                         </td>
                     </tr>
                     <tr>
-                        <td align="left">Latest version:</td>
-                        <td>
-                            <div id="tm_LatestVersion">
-                                <script type="text/javascript">
-                                    tm_CheckVersion();
-                                </script>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td valign="top" align="left">About:</td>
                         <td align="left"><?php echo JText::_('COM_TESTIMONIALS_ABOUT_TEXT'); ?></td>
                     </tr>
                     <tr>
-                        <td align="left">Community Forum:</td>
-                        <td align="left"><a target="_blank" href="http://www.joomplace.com/forum/joomla-components/testimonials-component.html">http://www.joomplace.com/forum/joomla-components/testimonials-component.html</a></td>
-                    </tr>
-                    <tr>
                         <td align="left">Support Helpdesk:</td>
-                        <td align="left"><a target="_blank" href="http://www.joomplace.com/support/helpdesk/post-purchase-questions/ticket/create">http://www.joomplace.com/support/helpdesk/post-purchase-questions/ticket/create</a></td>
+                        <td align="left"><a target="_blank" rel="noopener noreferrer" href="https://www.joomplace.com/support/helpdesk/post-purchase-questions/ticket/create">https://www.joomplace.com/support/helpdesk/post-purchase-questions/ticket/create</a></td>
                     </tr>
                     </table>
             </div>
@@ -96,12 +82,12 @@ function subfolding($r_url){
             <div class="accordion-inner">
                 <div class="thank_fdiv" style="font-size:12px;margin-left: 4px;">
                     <?php echo JText::_("COM_TESTIMONIALS_ABOUT_SAYTHANKS1"); ?>
-                    <a href="http://extensions.joomla.org/extensions/vertical-markets/education-a-culture/quiz/11302" target="_blank">http://extensions.joomla.org/</a>
+                    <a href="https://extensions.joomla.org/extension/contacts-and-feedback/testimonials-a-suggestions/testimonials/" target="_blank" rel="noopener noreferrer">http://extensions.joomla.org/</a>
                     <?php echo JText::_("COM_TESTIMONIALS_ABOUT_SAYTHANKS2"); ?>
                 </div>
                 <div style="float:right; margin:3px 5px 5px 5px;">
-                    <a href="http://extensions.joomla.org/extensions/vertical-markets/education-a-culture/quiz/11302" target="_blank">
-                        <img src="http://www.joomplace.com/components/com_jparea/assets/images/rate-2.png" />
+                    <a href="https://extensions.joomla.org/extension/contacts-and-feedback/testimonials-a-suggestions/testimonials/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://www.joomplace.com/components/com_jparea/assets/images/rate-2.png" />
                     </a>
                 </div>
             </div>
@@ -109,10 +95,22 @@ function subfolding($r_url){
     </div>
 </div>
 </div>
+<div class="admin_banners">
+    <div class="admin_banner admin_banner_support"><div><?php echo JText::_("COM_TESTIMONIALS_ADMIN_BANNER_SUPPORT"); ?><i class="icon-remove"></i></div></div>
+    <div class="admin_banner admin_banner_dev"><div><?php echo JText::_("COM_TESTIMONIALS_ADMIN_BANNER_DEVELOPMENT"); ?><i class="icon-remove"></i></div></div>
+    <div class="admin_banner admin_banner_free"><div><?php echo JText::_("COM_TESTIMONIALS_ADMIN_BANNER_FREE_EXTENSION"); ?><i class="icon-remove"></i></div></div>
+</div>
 <?php if ($this->messageTrigger) { ?>
 <div id="notification" class="jqd-survey-wrap clearfix" style="clear: both">
-    <div class="jqd-survey">
-        <span><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES1"); ?><a onclick="tm_dateAjaxRef()" style="cursor: pointer" rel="nofollow" target="_blank"><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES2"); ?></a><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES3"); ?><i id="close-icon" class="icon-remove" onclick="tm_dateAjaxIcon()"></i></span>
+    <div class="jqd-survey jqd-survey-dashboard">
+        <span><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES1"); ?><a onclick="tm_dateAjaxRef()" style="cursor: pointer" rel="nofollow noopener noreferrer" target="_blank"><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES2"); ?></a><?php echo JText::_("COM_TESTIMONIALS_NOTIFICMES3"); ?><i id="close-icon" class="icon-remove" onclick="tm_dateAjaxIcon()"></i></span>
     </div>
 </div>
 <?php } ?>
+<script>
+    jQuery(function($){
+        $('.admin_banner .icon-remove').on('click', function(){
+            $(this).closest('.admin_banner').remove();
+        });
+    });
+</script>
