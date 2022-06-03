@@ -67,7 +67,7 @@ JFactory::getDocument()->addStyleDeclaration("
 }
 
 .tl".$uid." .person-text {
-    padding: 10px 0 0;
+    padding: 40px 0 0;
     text-align: center;
     z-index: 2;
 }
