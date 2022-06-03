@@ -83,7 +83,7 @@ function subfolding($r_url){
 							</tr>
 						</tfoot>
 						<tbody>
-						<?php if (sizeof($this->items)) {foreach($this->items as $i => $item) {
+						<?php if (!empty($this->items)) {foreach($this->items as $i => $item) {
                             $canEdit	= $user->authorise('core.edit', $extension.'.questions.'.$item->id);
                             $canCheckin	= $user->authorise('core.admin', 'com_checkin');
                             $canChange	= $user->authorise('core.edit.state', $extension.'.dashboard_items.'.$item->id) && $canCheckin;
