@@ -66,15 +66,16 @@ $menuTypes = $menuTypes->getMenuLinks();
 				?>					
 				<ul class="menu-links">
 					<?php
+                    $checked = '';
 					foreach ($type->links as $link) :
-						if (trim($this->item->assignment) == '-'):
+						if (!empty($this->item->assignment) && trim($this->item->assignment) == '-'):
 							$checked = '';
-						elseif ($this->item->assignment == 0):
+						elseif (!empty($this->item->assignment) && $this->item->assignment == 0):
 							//$checked = ' checked="checked"';
-							'';
-						elseif ($this->item->assignment < 0):
+                            $checked = '';
+						elseif (!empty($this->item->assignment) && $this->item->assignment < 0):
 							$checked = in_array(-$link->value, $this->item->assigned) ? ' checked="checked"' : '';
-						elseif ($this->item->assignment > 0) :
+						elseif (!empty($this->item->assignment) && $this->item->assignment > 0) :
 							$checked = in_array($link->value, $this->item->assigned) ? ' checked="checked"' : '';
 						endif;
 					?>

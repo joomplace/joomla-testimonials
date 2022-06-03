@@ -97,7 +97,7 @@ class JFormFieldTags extends JFormFieldList
         $id       = JFactory::getApplication()->input->getInt('id');
         $selected = $menuselected = array();
 
-        if (sizeof($this->value) > 0 && is_array($this->value)) {
+        if (is_array($this->value) && sizeof($this->value) > 0) {
             foreach ($this->value as $val) {
                 $menuselected[] = $val;
             }

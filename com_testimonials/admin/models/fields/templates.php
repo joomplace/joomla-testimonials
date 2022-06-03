@@ -36,7 +36,7 @@ class JFormFieldTemplates extends JFormFieldList
         $templates = array();
         $folders   = @scandir(JPATH_SITE
             . '/components/com_testimonials/templates');
-        if (sizeof($folders)) {
+        if (!empty($folders)) {
             foreach ($folders AS $folder) {
                 if (!in_array($folder, array('.', '..', 'index.html'))) {
                     $templates[$folder] = $folder;
