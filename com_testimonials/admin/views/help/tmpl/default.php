@@ -24,7 +24,7 @@ JHtml::_('behavior.tooltip');
                 <div style="padding-left:10px ">
                     <h4><b>Help</b></h4>
                     <div style="padding-left:10px ">
-                        <p>	This manual outlines key features. For detailed documentation, see the <a target="_blank" href="http://www.joomplace.com/video-tutorials-and-documentation.html">Video Tutorials and Documentation section</a>.
+                        <p>	This manual outlines key features. For detailed documentation, see the <a target="_blank" href="https://www.joomplace.com/video-tutorials-and-documentation.html">Video Tutorials and Documentation section</a>.
                         </p>
                     </div>
                 </div>

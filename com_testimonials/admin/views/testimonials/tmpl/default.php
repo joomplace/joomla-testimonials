@@ -14,7 +14,7 @@ JHtml::_('behavior.tooltip');
 <div id="j-main-container" class="span10">
 					<table width="100%" style="background-color: #F7F8F9; border: solid 1px #d5d5d5; width: 100%; padding: 10px; border-collapse: collapse;">
 						<tr>
-							<td style="text-align:left; font-size:14px; font-weight:400; line-height:18px " colspan="2"><strong><?php echo JText::_('COM_JOOMLAQUIZ')?></strong> <?php echo JText::_('COM_JOOMLAQUIZ_COMPONENT_FOR_JOOMLA');?><?php echo JText::_('COM_JOOMLAQUIZ')?>  <a href="http://www.JoomPlace.com"></strong> <?php echo JText::_('COM_JOOMLAQUIZ_JOOMOLACE');?></a>.</td>
+							<td style="text-align:left; font-size:14px; font-weight:400; line-height:18px " colspan="2"><strong><?php echo JText::_('COM_JOOMLAQUIZ')?></strong> <?php echo JText::_('COM_JOOMLAQUIZ_COMPONENT_FOR_JOOMLA');?><?php echo JText::_('COM_JOOMLAQUIZ')?>  <a href="https://www.JoomPlace.com"></strong> <?php echo JText::_('COM_JOOMLAQUIZ_JOOMOLACE');?></a>.</td>
 						</tr>
 						<tr>
 							<td width="120" bgcolor="#FFFFFF" align="left" style="border: solid 1px #d5d5d5;"><?php echo JText::_('COM_JOOMLAQUIZ_INSTALLED_VERSION');?></td>
@@ -39,13 +39,13 @@ JHtml::_('behavior.tooltip');
 						<tr>
 							<td bgcolor="#FFFFFF" align="left" style="border: solid 1px #d5d5d5;">Support forum:</td>
 							<td bgcolor="#FFFFFF" align="left" style="border: solid 1px #d5d5d5;">
-							<a target="_blank" href="http://www.joomplace.com/support">http://www.JoomPlace.com/support</a>
+							<a target="_blank" href="https://www.joomplace.com/support">https://www.JoomPlace.com/support</a>
 							</td>
 						</tr>
 						<tr>
 							<td bgcolor="#FFFFFF" align="left" style="border: solid 1px #d5d5d5;">Disclaimer/License:</td>
 							<td bgcolor="#FFFFFF" align="left" style="border: solid 1px #d5d5d5;">
-							<a target="_blank" href="http://www.joomplace.com/disclaimer.html">http://www.JoomPlace.com/disclaimer.html</a>
+							<a target="_blank" href="https://www.joomplace.com/disclaimer.html">https://www.JoomPlace.com/disclaimer.html</a>
 							</td>
 						</tr>
 					</table> 
@@ -97,7 +97,7 @@ JHtml::_('behavior.tooltip');
 			<tr>
 				<th colspan="2" style="font-size:16px !important;">
 					<strong>Testimonials</strong> component for Joomla! 3 Developed by  
-						<a href="http://www.JoomPlace.com">JoomPlace</a>.
+						<a href="https://www.JoomPlace.com">JoomPlace</a>.
 				</th>
 			</tr>
 			<tr>
@@ -125,7 +125,7 @@ JHtml::_('behavior.tooltip');
 			<tr>
 				<td align="left">Support forum:</td>
 				<td align="left">
-					<a target="_blank" href="http://www.JoomPlace.com/support">http://www.JoomPlace.com/support</a>
+					<a target="_blank" href="https://www.JoomPlace.com/support">https://www.JoomPlace.com/support</a>
 				</td>
 			</tr>
 		  	<tr>
@@ -149,7 +149,7 @@ JHtml::_('behavior.tooltip');
 								</div>
 								<div style="float:left;margin:5px">
 									<a href="http://extensions.joomla.org/extensions/contacts-and-feedback/testimonials-a-suggestions/11304" target="_blank">
-										<img src="http://www.joomplace.com/components/com_jparea/assets/images/rate-2.png">
+										<img src="https://www.joomplace.com/components/com_jparea/assets/images/rate-2.png">
 									</a>
 								</div>
 								<div style="clear:both"><!--x--></div>

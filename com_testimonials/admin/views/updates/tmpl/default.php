@@ -36,7 +36,7 @@ $updatefolder = JFactory::getApplication()->getUserState('com_testimonials.updat
 	function callOtherDomain() {
 		var order_id = document.checkJPUser.order.value;
 		if (order_id) {
-			var url = "http://www.joomplace.com/index.php?option=com_jparea&task=checkjpuser&tmpl=component&order="+order_id;
+			var url = "https://www.joomplace.com/index.php?option=com_jparea&task=checkjpuser&tmpl=component&order="+order_id;
 			if (invocation) {
 				if(isIE8) {
 					invocation.onload = outputResult;

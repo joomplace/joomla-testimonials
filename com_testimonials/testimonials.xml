@@ -69,7 +69,4 @@
       <folder>views</folder>
     </files>
   </administration>
-  <updateservers>
-    <server type="extension" priority="1" name="Testimonials Update Site">http://www.joomplace.com/updates/updates.xml</server>
-  </updateservers>
 </extension>

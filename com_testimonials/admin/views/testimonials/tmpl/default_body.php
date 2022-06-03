@@ -20,7 +20,7 @@ $imgpath = JURI::root(true).'/administrator/components/com_testimonials/assets/i
 			<tr>
 				<th colspan="2" style="font-size:16px !important;">
 					<strong>Testimonials</strong> component for Joomla! 3 Developed by  
-						<a href="http://www.JoomPlace.com">JoomPlace</a>.
+						<a href="https://www.JoomPlace.com">JoomPlace</a>.
 				</th>
 			</tr>
 			<tr>
@@ -48,7 +48,7 @@ $imgpath = JURI::root(true).'/administrator/components/com_testimonials/assets/i
 			<tr>
 				<td align="left">Support forum:</td>
 				<td align="left">
-					<a target="_blank" href="http://www.JoomPlace.com/support">http://www.JoomPlace.com/support</a>
+					<a target="_blank" href="https://www.JoomPlace.com/support">https://www.JoomPlace.com/support</a>
 				</td>
 			</tr>
 		  	<tr>
@@ -72,7 +72,7 @@ $imgpath = JURI::root(true).'/administrator/components/com_testimonials/assets/i
 								</div>
 								<div style="float:left;margin:5px">
 									<a href="http://extensions.joomla.org/extensions/contacts-and-feedback/testimonials-a-suggestions/11304" target="_blank">
-										<img src="http://www.joomplace.com/components/com_jparea/assets/images/rate-2.png">
+										<img src="https://www.joomplace.com/components/com_jparea/assets/images/rate-2.png">
 									</a>
 								</div>
 								<div style="clear:both;margin:5px;padding-top:5px;">

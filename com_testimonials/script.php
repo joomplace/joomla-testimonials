@@ -54,7 +54,7 @@ class com_testimonialsInstallerScript
                 = "INSERT INTO `#__tm_testimonials_dashboard_items` (`id`, `title`, `url`, `icon`, `published`) VALUES
                 (1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '/components/com_testimonials/assets/images/management48.png', 1),
                 (2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '/components/com_testimonials/assets/images/settings48.png', 1),
-                (3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1);";
+                (3, 'Help', 'https://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1);";
             $db->setQuery($query);
             $errors = $db->execute();
         } else {
@@ -347,7 +347,7 @@ class com_testimonialsInstallerScript
             $query = "INSERT INTO `#__tm_testimonials_dashboard_items` (`id`, `title`, `url`, `icon`, `published`) VALUES
 					(1, 'Testimonials Management', 'index.php?option=com_testimonials&view=topics', '/components/com_testimonials/assets/images/management48.png', 1),
 					(2, 'Testimonials Settings', 'index.php?option=com_config&view=component&component=com_testimonials', '/components/com_testimonials/assets/images/settings48.png', 1),
-					(3, 'Help', 'http://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1)";
+					(3, 'Help', 'https://www.joomplace.com/video-tutorials-and-documentation/joomla-testimonials/index.html?description.htm', '/components/com_testimonials/assets/images/help48.png', 1)";
             $db->setQuery($query);
             $db->execute();
         } else {
