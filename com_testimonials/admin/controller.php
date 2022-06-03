@@ -200,7 +200,7 @@ class TestimonialsController extends JControllerLegacy
 			$s = new Snoopy();
 			$s->read_timeout = 90;
 			$s->referer = JURI::root();
-			@$s->fetch('http://www.joomplace.com/version_check/componentVersionCheck.php?component=testimonial&current_version='.urlencode($tm_version));
+			@$s->fetch('https://www.joomplace.com/version_check/componentVersionCheck.php?component=testimonial&current_version='.urlencode($tm_version));
 			$version_info = $s->results;
 			$version_info_pos = strpos($version_info, ":");
 			if ($version_info_pos === false) {
@@ -215,7 +215,7 @@ class TestimonialsController extends JControllerLegacy
 		    } else if($version == $tm_version){
 		    	echo '<font color="green">' . $version . '</font>' . $info;
 		    } else {
-		    	echo '<font color="red">' . $version . '</font>&nbsp;<a href="http://www.joomplace.com/members-area.html" target="_blank">(Upgrade to the latest version)</a>' ;
+		    	echo '<font color="red">' . $version . '</font>&nbsp;<a href="https://www.joomplace.com/members-area.html" target="_blank">(Upgrade to the latest version)</a>' ;
 		    }
 		    exit();
         }
@@ -227,7 +227,7 @@ class TestimonialsController extends JControllerLegacy
 			$s = new Snoopy();
 			$s->read_timeout = 10;
 			$s->referer = JURI::root();
-			@$s->fetch('http://www.joomplace.com/news_check/componentNewsCheck.php?component=testimonial');
+			@$s->fetch('https://www.joomplace.com/news_check/componentNewsCheck.php?component=testimonial');
 			$news_info = $s->results;
 
 			if($s->error || $s->status != 200){
