@@ -76,7 +76,7 @@
             type: "POST",
             url: "index.php?option=com_testimonials&task=datedb&no_html=1"
         });
-        window.open("http://www.joomplace.com/support/product-improvement-survey?utm_source=Testimonials&utm_medium=Survey&utm_campaign=Product%2BImprovement", "_blank");
+        window.open("https://www.joomplace.com/support/product-improvement-survey?utm_source=Testimonials&utm_medium=Survey&utm_campaign=Product%2BImprovement", "_blank");
     }
 
     function tm_dateAjaxIcon()
