@@ -33,11 +33,11 @@ class modTestimonialsHelper {
     }
     
     public function getListByTags($params, $tags_id){
-        $items = $this->getItemsByTags($params, $tags_id);
+        $items = $this->getItemsByTags($tags_id, $params);
         return $items;
     }
     
-     public function getItemsByTags($settings = 0, $tags_id) {
+     public function getItemsByTags($tags_id, $settings = 0) {
         $Itemid = JFactory::getApplication()->input->getInt('Itemid', 0);
         $option = JFactory::getApplication()->input->get('option', '');
         $db = JFactory::getDBO();
