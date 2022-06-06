@@ -1,4 +1,13 @@
 <?php
+/**
+ * Testimonials Component for Joomla 3
+ * @package Testimonials
+ * @author JoomPlace Team
+ * @Copyright Copyright (C) JoomPlace, www.joomplace.com
+ * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+defined('_JEXEC') or die;
+
 /*
  * This is a PHP library that handles calling reCAPTCHA.
  *    - Documentation and latest version
@@ -31,7 +40,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-defined('_JEXEC') or die('Restricted access');
+
 /**
  * The reCAPTCHA server URL's
  */

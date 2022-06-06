@@ -7,8 +7,8 @@
 * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
 */
 defined('_JEXEC') or die('Restricted access');
- 
-jimport('joomla.application.component.controlleradmin');
+
+use Joomla\Utilities\ArrayHelper;
  
 /**
  * Custom fields Controller
@@ -23,8 +23,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 	 */
 	public function getModel($name = 'Custom', $prefix = 'TestimonialsModel', $config = array('ignore_request' => true)) 
 	{
-			$model = parent::getModel($name, $prefix, $config);
-			return $model;
+        $model = parent::getModel($name, $prefix, $config);
+        return $model;
 	}
            
 	public function saveOrderAjax()
@@ -32,9 +32,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		$pks = $this->input->post->get('cid', array(), 'array');
 		$order = $this->input->post->get('order', array(), 'array');
 
-		// Sanitize the input
-		JArrayHelper::toInteger($pks);
-		JArrayHelper::toInteger($order);
+        $pks = ArrayHelper::toInteger($pks);
+        $order = ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -42,8 +41,7 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		// Save the ordering
 		$return = $model->saveorder($pks, $order);
 
-		if ($return)
-		{
+		if ($return) {
 			echo "1";
 		}
 
@@ -51,7 +49,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		JFactory::getApplication()->close();
 	}
 	
-	public function setrequire(){
+	public function setrequire()
+    {
 		$input = JFactory::getApplication()->input;
 		$table = $this->getModel()->getTable();
 		
@@ -67,7 +66,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view='.$this->view_list, false));
 	}
 	
-	public function unsetrequire(){
+	public function unsetrequire()
+    {
 		$input = JFactory::getApplication()->input;
 		$table = $this->getModel()->getTable();
 		
@@ -83,7 +83,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view='.$this->view_list, false));
 	}
 	
-	public function display($cachable = false, $urlparams = array()){
+	public function display($cachable = false, $urlparams = array())
+    {
 		$input = JFactory::getApplication()->input;
 		$table = $this->getModel()->getTable();
 		
@@ -99,7 +100,8 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		$this->setRedirect(JRoute::_('index.php?option=com_testimonials&view='.$this->view_list, false));
 	}
 	
-	public function undisplay(){
+	public function undisplay()
+    {
 		$input = JFactory::getApplication()->input;
 		$table = $this->getModel()->getTable();
 		
