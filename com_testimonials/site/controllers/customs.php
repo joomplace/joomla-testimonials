@@ -7,32 +7,31 @@
 * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
 */
 defined('_JEXEC') or die('Restricted access');
- 
-jimport('joomla.application.component.controlleradmin');
+
+use Joomla\Utilities\ArrayHelper;
  
 /**
  * Custom fields Controller
  */
 class TestimonialsControllerCustoms extends JControllerAdmin
 {
-        /**
-         * Proxy for getModel.
-         * @since       1.6
-         */
-        public function getModel($name = 'Custom', $prefix = 'TestimonialsModel', $config = array('ignore_request' => true)) 
-        {
-                $model = parent::getModel($name, $prefix, $config);
-                return $model;
-        }
+    /**
+     * Proxy for getModel.
+     * @since       1.6
+     */
+    public function getModel($name = 'Custom', $prefix = 'TestimonialsModel', $config = array('ignore_request' => true))
+    {
+        $model = parent::getModel($name, $prefix, $config);
+        return $model;
+    }
            
-        public function saveOrderAjax()
+    public function saveOrderAjax()
 	{
 		$pks = $this->input->post->get('cid', array(), 'array');
 		$order = $this->input->post->get('order', array(), 'array');
 
-		// Sanitize the input
-		JArrayHelper::toInteger($pks);
-		JArrayHelper::toInteger($order);
+        $pks = ArrayHelper::toInteger($pks);
+        $order = ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -40,8 +39,7 @@ class TestimonialsControllerCustoms extends JControllerAdmin
 		// Save the ordering
 		$return = $model->saveorder($pks, $order);
 
-		if ($return)
-		{
+		if ($return) {
 			echo "1";
 		}
 

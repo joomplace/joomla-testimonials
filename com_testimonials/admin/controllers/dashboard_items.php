@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-jimport('joomla.application.component.controlleradmin');
+use Joomla\Utilities\ArrayHelper;
 
 class TestimonialsControllerDashboard_items extends JControllerAdmin
 {
@@ -32,20 +32,17 @@ class TestimonialsControllerDashboard_items extends JControllerAdmin
     public function delete()
     {
         // Get items to remove from the request.
-        $cid = JFactory::getApplication()->input->get('cid',array(), '', 'array');
+        $cid = JFactory::getApplication()->input->get('cid', array(), 'array');
         $tmpl = JFactory::getApplication()->input->get('tmpl');
         if ($tmpl == 'component') $tmpl = '&tmpl=component'; else $tmpl = '';
 
         if (!is_array($cid) || count($cid) < 1) {
             JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'warning');
-
         } else {
             // Get the model.
             $model = $this->getModel();
 
-            // Make sure the item ids are integers
-            jimport('joomla.utilities.arrayhelper');
-            JArrayHelper::toInteger($cid);
+            $cid = ArrayHelper::toInteger($cid);
 
             // Remove the items.
             if ($model->delete($cid)) {
@@ -64,6 +61,5 @@ class TestimonialsControllerDashboard_items extends JControllerAdmin
         $item_id = $cid['0'];
         $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&task=dashboard_item.edit&id='. $item_id, false));
     }
-
 
 }

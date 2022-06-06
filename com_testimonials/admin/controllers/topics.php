@@ -7,33 +7,31 @@
 * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
 */
 defined('_JEXEC') or die('Restricted access');
- 
-jimport('joomla.application.component.controlleradmin');
+
+use Joomla\Utilities\ArrayHelper;
  
 /**
  * Topics Controller
  */
 class TestimonialsControllerTopics extends JControllerAdmin
 {
-        /**
-         * Proxy for getModel.
-         * @since       1.6
-         */
-        public function getModel($name = 'Topic', $prefix = 'TestimonialsModel', $config = array('ignore_request' => true)) 
-        {
-                $model = parent::getModel($name, $prefix, $config);
-                return $model;
-        }
+    /**
+     * Proxy for getModel.
+     * @since       1.6
+     */
+    public function getModel($name = 'Topic', $prefix = 'TestimonialsModel', $config = array('ignore_request' => true))
+    {
+        $model = parent::getModel($name, $prefix, $config);
+        return $model;
+    }
 
-        public function saveOrderAjax()
+    public function saveOrderAjax()
 	{
-
 		$pks = $this->input->get('cid', array(), 'array');
 		$order = $this->input->get('order', array(), 'array');
 
-		// Sanitize the input
-		JArrayHelper::toInteger($pks);
-		JArrayHelper::toInteger($order);
+        $pks = ArrayHelper::toInteger($pks);
+        $order = ArrayHelper::toInteger($order);
 
 		// Get the model
 		$model = $this->getModel();
@@ -41,8 +39,7 @@ class TestimonialsControllerTopics extends JControllerAdmin
 		// Save the ordering
 		$return = $model->saveorder($pks, $order);
 
-		if ($return)
-		{
+		if ($return) {
 			echo "1";
 		}
 
@@ -57,16 +54,15 @@ class TestimonialsControllerTopics extends JControllerAdmin
         $db = JFactory::getDbo();
         $query = "UPDATE `#__tm_testimonials` SET `is_approved`='1' WHERE `id` IN (".implode(',', $ids).")";
         $db->setQuery($query);
-        if($db->execute()){
+
+        if($db->execute()) {
             $msg = 'Selected items were succesfully approved.';
             $this->setMessage($msg, 'message');
             $this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=topics', false));
-            return;
-        }else{
+        } else {
             $msg = '';
             $this->setMessage($msg, 'error');
             $this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=topics', false));
-            return;
         }
     }
 
@@ -77,16 +73,15 @@ class TestimonialsControllerTopics extends JControllerAdmin
         $db = JFactory::getDbo();
         $query = "UPDATE `#__tm_testimonials` SET `is_approved`='0' WHERE `id` IN (".implode(',', $ids).")";
         $db->setQuery($query);
-        if($db->execute()){
+
+        if($db->execute()) {
             $msg = 'Selected items were succesfully disapproved.';
             $this->setMessage($msg, 'message');
             $this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=topics', false));
-            return;
-        }else{
+        } else {
             $msg = '';
             $this->setMessage($msg, 'error');
             $this->setRedirect(JRoute::_('index.php?option=com_testimonials&view=topics', false));
-            return;
         }
     }
 }
