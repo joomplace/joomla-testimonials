@@ -15,14 +15,8 @@ class TestimonialHelper
 {
         public static function getVersion() 
         {
-			// deprecated method
-        	// return TestimonialHelper::getSetting('tm_version');
-			
-			/* new version is */
-			
-			$xml = JFactory::getXML(JPATH_COMPONENT_ADMINISTRATOR .'/testimonials.xml');
+            $xml = simplexml_load_file(JPATH_COMPONENT_ADMINISTRATOR .'/testimonials.xml');
 			return (string)$xml->version;
-				
         }
         
         public static function getSettings()

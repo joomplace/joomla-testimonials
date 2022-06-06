@@ -22,7 +22,7 @@ class TestimonialsControllerSettings extends JControllerForm
        	if (file_exists($file_path))
 				if (is_writeable($file_path)) 
 				{
-					$editor = & JFactory::getEditor('codemirror');
+                    $editor = JEditor::getInstance('codemirror');
 					$params = array( 'smilies'=> '0' ,
 					                 'style'  => '0' ,  
 					                 'layer'  => '0' , 

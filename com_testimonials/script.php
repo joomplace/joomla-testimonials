@@ -81,7 +81,7 @@ class com_testimonialsInstallerScript
     function preflight($type, $parent)
     {
         if (file_exists(JPATH_ADMINISTRATOR . '/components/com_testimonials/testimonials.xml')) {
-            $xml = JFactory::getXML(JPATH_ADMINISTRATOR . '/components/com_testimonials/testimonials.xml');
+            $xml = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_testimonials/testimonials.xml');
             $this->version_from = $version = preg_split('/(\s|\.)/', $xml->version);
             if ($version[0]) {
                 if ($version[2] < 2) {
