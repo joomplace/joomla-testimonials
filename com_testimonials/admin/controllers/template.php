@@ -81,7 +81,7 @@ class TestimonialsControllerTemplate extends JControllerForm
 	   			$file_path = JPATH_COMPONENT_SITE.'/templates/'.$template_name.'/css/style.css';
 				if (is_writeable($file_path))
 				{
-					$editor = JFactory::getEditor('codemirror');
+                    $editor = JEditor::getInstance('codemirror');
 					$params = array( 'smilies'=> '0' ,
 					                 'style'  => '0' ,
 					                 'layer'  => '0' ,
