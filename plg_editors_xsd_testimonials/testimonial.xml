@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="plugin" group="editors-xtd" method="upgrade">
 	<name>plg_editors-xtd_testimonial</name>
-	<creationDate>November 2018</creationDate>
+	<creationDate>June 2022</creationDate>
 	<author>Joomplace Team</author>
     <authorEmail>support@joomplace.com</authorEmail>
     <authorUrl>www.joomplace.com</authorUrl>
     <copyright>(C) JoomPlace, www.joomplace.com</copyright>
     <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-    <version>1.7.8</version>
+    <version>1.7.9</version>
 	<description>PLG_TESTIMONIAL_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="testimonial">testimonial.php</filename>
