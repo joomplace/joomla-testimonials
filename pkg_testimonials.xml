@@ -2,13 +2,13 @@
 <extension type="package" version="3.x" method="upgrade">
   <name>Testimonials Package</name>
   <author>Joomplace Team</author>
-  <creationDate>November 2018</creationDate>
+  <creationDate>June 2022</creationDate>
   <packagename>testimonials</packagename>
   <authorEmail>support@joomplace.com</authorEmail>
   <authorUrl>www.joomplace.com</authorUrl>
   <copyright>(C) JoomPlace, www.joomplace.com</copyright>
   <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
-  <version>1.7.8</version>
+  <version>1.7.9</version>
   <description>Testimonials</description>
   <files folder="packages">
     <file type="component" id="com_testimonials">com_testimonials.zip</file>
